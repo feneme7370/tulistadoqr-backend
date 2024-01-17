@@ -20,7 +20,7 @@ class MembershipIndex extends Component
     // propiedades para el modal
     public $showActionModal = false;
     public $showDeleteModal = false;
-
+ 
     // propiedades del form
     public $name;
     public $slug;

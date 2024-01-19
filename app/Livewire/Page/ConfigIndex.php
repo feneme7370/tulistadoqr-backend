@@ -138,10 +138,10 @@ class ConfigIndex extends Component
     public function uploadImage(){
     
         // Verificar si la carpeta existe, si no, crearla
-        $storagePath = 'public/images/hero/';
-        if (!Storage::exists($storagePath)) {
-            Storage::makeDirectory($storagePath);
-        }
+        // $storagePath = public_path('archives/images/hero/');
+        // if (!Storage::exists($storagePath)) {
+        //     Storage::makeDirectory($storagePath);
+        // }
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
@@ -151,7 +151,7 @@ class ConfigIndex extends Component
             $image_hero->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $image_hero->save(public_path('storage/images/hero/'.$name));
+            $image_hero->save(public_path('archives/images/hero/'.$name));
             $this->image_hero = $name;
         }
     }
@@ -160,10 +160,10 @@ class ConfigIndex extends Component
     public function uploadImageLogo(){
     
         // Verificar si la carpeta existe, si no, crearla
-        $storagePath = 'public/images/logo/';
-        if (!Storage::exists($storagePath)) {
-            Storage::makeDirectory($storagePath);
-        }
+        // $storagePath = 'public/images/logo/';
+        // if (!Storage::exists($storagePath)) {
+        //     Storage::makeDirectory($storagePath);
+        // }
 
         // crear o reemplazar imagen
         if($this->image_logo_new){
@@ -173,7 +173,7 @@ class ConfigIndex extends Component
             $image_logo->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $image_logo->save(public_path('storage/images/logo/'.$name));
+            $image_logo->save(public_path('archives/images/logo/'.$name));
             $this->image_logo = $name;
         }
     }

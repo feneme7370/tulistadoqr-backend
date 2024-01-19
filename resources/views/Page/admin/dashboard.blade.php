@@ -7,9 +7,9 @@
 
     <div class="w-full md:w-96 h-64 mx-auto mb-5 bg-gray-200 relative">
         @if (auth()->user()->company->image_hero)
-            <img src="{{asset('storage/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+            <img src="{{asset('archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
         @else
-            <img class="w-full h-full object-cover rounded-sm" src="{{asset('storage/sistem/img/withoutImage.jpg')}}">
+            <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
         @endif
         <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada</p>
     </div>

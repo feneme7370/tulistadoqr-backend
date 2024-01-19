@@ -58,10 +58,10 @@
             <div class="w-64 h-64 relative">
                 <p class="mb-2">Imagen de portada actual:</p>
                 @if ($this->image_hero && $this->image_hero != '')
-                    <img src="{{asset('storage/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-sm" />
+                    <img src="{{asset('archives/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-sm" />
                     <button wire:click='deleteImageEdit' type="button" class="absolute top-7 right-2 p-2 bg-red-600 rounded-lg text-white">Eliminar</button>
                 @else
-                    <img class="w-64 h-64 object-cover rounded-sm" src="{{asset('storage/sistem/img/withoutImage.jpg')}}">
+                    <img class="w-64 h-64 object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
                 @endif
             </div>
             <div class="w-64 h-64 relative">
@@ -84,10 +84,10 @@
             <div class="w-64 h-64 relative">
                 <p class="mb-2">Imagen de logo actual:</p>
                 @if ($this->image_logo && $this->image_logo != '')
-                    <img src="{{asset('storage/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-sm" />
+                    <img src="{{asset('archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-sm" />
                     <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-7 right-2 p-2 bg-red-600 rounded-lg text-white">Eliminar</button>
                 @else
-                    <img class="w-64 h-64 object-cover rounded-sm" src="{{asset('storage/sistem/img/withoutImage.jpg')}}">
+                    <img class="w-64 h-64 object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
                 @endif
             </div>
             <div class="w-64 h-64 relative">

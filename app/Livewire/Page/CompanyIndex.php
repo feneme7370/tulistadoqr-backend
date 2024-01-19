@@ -82,6 +82,7 @@ class CompanyIndex extends Component
     
     // eliminar desde el modal de confirmacion
     public function deleteCompany() {
+        $this->resetErrorBag();
         $company = Company::findOrFail($this->company->id);
 
         if($company->id == 1){
@@ -98,6 +99,7 @@ class CompanyIndex extends Component
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
+        $this->resetErrorBag();
         $this->reset(['company']);
         $this->reset(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'description', 'image_logo', 'image_hero', 'status', 'membership_id']);
         $this->status = true;
@@ -106,6 +108,7 @@ class CompanyIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Company $company) {
+        $this->resetErrorBag();
         $this->company = $company;
         $this->name = $company['name'];
         $this->slug = $company['slug'];

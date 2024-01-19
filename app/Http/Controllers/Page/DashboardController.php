@@ -9,6 +9,8 @@ use App\Models\Page\Category;
 use App\Models\Page\Membership;
 use App\Http\Controllers\Controller;
 use App\Models\Page\Level;
+use App\Models\Page\Product;
+use App\Models\Page\Suggestion;
 
 class DashboardController extends Controller
 {
@@ -24,7 +26,9 @@ class DashboardController extends Controller
 
         $categories = Category::where('company_id', auth()->user()->company_id)->count();   
         $levels = Level::where('company_id', auth()->user()->company_id)->count();   
+        $products = Product::where('company_id', auth()->user()->company_id)->count();   
+        $suggestions = Suggestion::where('company_id', auth()->user()->company_id)->count();   
 
-        return view('Page.admin.dashboard', compact('companies', 'users', 'memberships', 'categories', 'levels'));
+        return view('Page.admin.dashboard', compact('companies', 'users', 'memberships', 'categories', 'levels', 'products', 'suggestions'));
     }
 }

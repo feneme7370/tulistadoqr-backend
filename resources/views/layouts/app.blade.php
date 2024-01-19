@@ -43,7 +43,7 @@
     @stack('modals')
     
     @livewireScripts
-    {{-- <script src="{{asset('public/assets/js/focus-trap.js')}}"></script>
-    <script src="{{asset('public/assets/js/init-alpine.js')}}"></script> --}}
+    {{-- <script src="{{asset('public/lib/windmill/js/focus-trap.js')}}"></script>
+    <script src="{{asset('public/lib/windmill/js/init-alpine.js')}}"></script> --}}
     </body>
 </html>

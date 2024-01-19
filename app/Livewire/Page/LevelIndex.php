@@ -15,7 +15,7 @@ class LevelIndex extends Component
         public function updatingSearch() {$this->resetPage();}
     
         // propiedades de busqueda
-        public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+        public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
     
         // propiedades para el modal
         public $showActionModal = false;
@@ -73,16 +73,19 @@ class LevelIndex extends Component
         
         // eliminar desde el modal de confirmacion
         public function deleteLevel() {
+            $this->resetErrorBag();
             $level = Level::findOrFail($this->level->id);
     
-            // if($level->companies->count() > 0){
-            //     session()->flash('messageError', 'No se puede eliminar, tiene empresas asignadas');
-            //     $this->reset();
-            // }else{
-            //     $level->delete();
-            //     session()->flash('messageSuccess', 'Registro eliminado');
-            //     $this->reset();
-            // }
+            // comprobar si tiene productos asignados
+            if($level->products->count() > 0){
+                session()->flash('messageError', 'No se puede eliminar, tiene productos asignados');
+                $this->reset();
+            }else{
+                $level->delete();
+                session()->flash('messageSuccess', 'Registro eliminado');
+                $this->reset();
+            }
+
             $level->delete();
             session()->flash('messageSuccess', 'Registro eliminado');
             $this->reset();
@@ -93,6 +96,7 @@ class LevelIndex extends Component
         // mostrar modal para confirmar crear
         public function createActionModal() {
             if($this->countLevels()){return;}
+            $this->resetErrorBag();
             $this->reset(['level']);
             $this->reset(['name', 'slug', 'description', 'status', 'user_id', 'company_id']);
             $this->status = true;
@@ -101,6 +105,7 @@ class LevelIndex extends Component
     
         // // mostrar modal para confirmar editar
         public function editActionModal(Level $level) {
+            $this->resetErrorBag();
             $this->level = $level;
             $this->name = $level['name'];
             $this->slug = $level['slug'];

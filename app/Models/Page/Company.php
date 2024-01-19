@@ -3,6 +3,7 @@
 namespace App\Models\Page;
 
 use App\Models\User;
+use App\Models\Page\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -42,5 +43,21 @@ class Company extends Model
     public function levels()
     {
         return $this->hasMany(Level::class, 'company_id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'company_id', 'id');
+    }
+    public function suggestions()
+    {
+        return $this->hasMany(Suggestion::class, 'company_id', 'id');
+    }
+
+    public function socialMedia()
+    {
+        return $this->belongsToMany(SocialMedia::class, 'company_social_media')
+                    ->withPivot('url')
+                    ->withTimestamps();
     }
 }

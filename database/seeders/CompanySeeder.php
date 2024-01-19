@@ -40,7 +40,7 @@ class CompanySeeder extends Seeder
             'status' => '1',
             'image_logo' => '',
             'image_hero' => '',
-            'membership_id' => '1',
+            'membership_id' => '2',
         ]);
         Company::create([
             'name' => 'Viterra',
@@ -54,7 +54,7 @@ class CompanySeeder extends Seeder
             'status' => '1',
             'image_logo' => '',
             'image_hero' => '',
-            'membership_id' => '2',
+            'membership_id' => '1',
         ]);
         Company::create([
             'name' => 'LDC',

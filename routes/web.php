@@ -5,9 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Page\GuestController;
 use App\Http\Controllers\Page\DashboardController;
 use App\Http\Controllers\Page\CompanyController;
+use App\Http\Controllers\Page\ConfigController;
 use App\Http\Controllers\Page\LevelController;
 use App\Http\Controllers\Page\MembershipController;
 use App\Http\Controllers\Page\UserController;
+use App\Http\Controllers\Page\ProductController;
+use App\Http\Controllers\Page\SocialMediaController;
+use App\Http\Controllers\Page\SuggestionController;
+use App\Http\Controllers\Page\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +38,9 @@ Route::middleware([
     Route::get('/users', [UserController::class, 'index'])->middleware('can:users.index')->name('users.index');
     Route::get('/categories', [CategoryController::class, 'index'])->middleware('can:categories.index')->name('categories.index');
     Route::get('/levels', [LevelController::class, 'index'])->middleware('can:levels.index')->name('levels.index');
+    Route::get('/products', [ProductController::class, 'index'])->middleware('can:products.index')->name('products.index');
+    Route::get('/config/{company}', [ConfigController::class, 'index'])->middleware('can:config.index')->name('config.index');
+    Route::get('/suggestions', [SuggestionController::class, 'index'])->middleware('can:suggestions.index')->name('suggestions.index');
+    Route::get('/tags', [TagController::class, 'index'])->middleware('can:tags.index')->name('tags.index');
+    Route::get('/social_medias', [SocialMediaController::class, 'index'])->middleware('can:social_medias.index')->name('social_medias.index');
 });

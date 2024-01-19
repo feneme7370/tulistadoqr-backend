@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
 
             LevelSeeder::class,
             CategorySeeder::class,
+            ProductSeeder::class,
+
+            TagSeeder::class,
+            SocialMediaSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

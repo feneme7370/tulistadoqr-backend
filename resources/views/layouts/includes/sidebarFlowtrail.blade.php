@@ -33,6 +33,16 @@
                             <x-sistem.icons.hi-home/>
                         </x-sistem.navlinks.navlink-sidebar-flowtrail>
 
+                        @can('config.index')
+                            <x-sistem.navlinks.navlink-sidebar-flowtrail
+                                href="{{ route('config.index', auth()->user()->company_id) }}"
+                                :active="request()->routeIs('config.index')"
+                                title="Configuracion"
+                                >
+                                <x-sistem.icons.hi-cog-8-tooth/>
+                            </x-sistem.navlinks.navlink-sidebar-flowtrail>
+                        @endcan
+
                         @can('memberships.index')
                             <x-sistem.navlinks.navlink-sidebar-flowtrail
                                 href="{{ route('memberships.index') }}"
@@ -63,6 +73,16 @@
                             </x-sistem.navlinks.navlink-sidebar-flowtrail>
                         @endcan
 
+                        @can('social_medias.index')
+                            <x-sistem.navlinks.navlink-sidebar-flowtrail
+                                href="{{ route('social_medias.index') }}"
+                                :active="request()->routeIs('social_medias.index')"
+                                title="Redes Sociales"
+                                >
+                                <x-sistem.icons.hi-globe-alt/>
+                            </x-sistem.navlinks.navlink-sidebar-flowtrail>
+                        @endcan
+
                         @can('levels.index')
                             <x-sistem.navlinks.navlink-sidebar-flowtrail
                                 href="{{ route('levels.index') }}"
@@ -80,6 +100,36 @@
                                 title="Categorias"
                                 >
                                 <x-sistem.icons.hi-queue-list/>
+                            </x-sistem.navlinks.navlink-sidebar-flowtrail>
+                        @endcan
+
+                        @can('products.index')
+                            <x-sistem.navlinks.navlink-sidebar-flowtrail
+                                href="{{ route('products.index') }}"
+                                :active="request()->routeIs('products.index')"
+                                title="Productos"
+                                >
+                                <x-sistem.icons.hi-briefcase/>
+                            </x-sistem.navlinks.navlink-sidebar-flowtrail>
+                        @endcan
+
+                        @can('tags.index')
+                            <x-sistem.navlinks.navlink-sidebar-flowtrail
+                                href="{{ route('tags.index') }}"
+                                :active="request()->routeIs('tags.index')"
+                                title="Etiquetas"
+                                >
+                                <x-sistem.icons.hi-tag/>
+                            </x-sistem.navlinks.navlink-sidebar-flowtrail>
+                        @endcan
+
+                        @can('suggestions.index')
+                            <x-sistem.navlinks.navlink-sidebar-flowtrail
+                                href="{{ route('suggestions.index') }}"
+                                :active="request()->routeIs('suggestions.index')"
+                                title="Sugerencias"
+                                >
+                                <x-sistem.icons.hi-star/>
                             </x-sistem.navlinks.navlink-sidebar-flowtrail>
                         @endcan
 

@@ -28,4 +28,8 @@ class Level extends Model
     {
         return $this->belongsTo(Company::class, 'company_id', 'id');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'company_id', 'id');
+    }
 }

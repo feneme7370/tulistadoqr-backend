@@ -6,8 +6,8 @@
     </x-sistem.menus.title-and-btn>
 
     <div class="w-full md:w-96 h-64 mx-auto mb-5 bg-gray-200 relative">
-        @if (auth()->user()->company->image)
-            <img src="{{asset('storage/portada/'.auth()->user()->company->image)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+        @if (auth()->user()->company->image_hero)
+            <img src="{{asset('storage/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
         @else
             <img class="w-full h-full object-cover rounded-sm" src="{{asset('storage/sistem/img/withoutImage.jpg')}}">
         @endif
@@ -16,16 +16,7 @@
       
     <div class="grid gap-3 mb-8 md:grid-cols-2 xl:grid-cols-4">
 
-
         {{-- <x-sistem.cards.mini-date 
-            href="{{route('products.index')}}" 
-            title="Productos" 
-            :date_total="auth()->user()->company->membership->product" 
-            :date="$products"
-            >
-            <x-sistem.icons.hi-briefcase/>
-        </x-sistem.cards.mini-date>
-        <x-sistem.cards.mini-date 
             href="{{route('suggesteds.index')}}" 
             title="Destacados" 
             :date_total="auth()->user()->company->membership->suggested" 
@@ -84,6 +75,28 @@
                 :date="$categories"
                 >
                 <x-sistem.icons.hi-queue-list/>
+            </x-sistem.cards.mini-date>
+        @endcan
+
+        @can('products.index')
+            <x-sistem.cards.mini-date 
+                href="{{route('products.index')}}" 
+                title="Productos" 
+                :date_total="auth()->user()->company->membership->product" 
+                :date="$products"
+                >
+                <x-sistem.icons.hi-briefcase/>
+            </x-sistem.cards.mini-date>
+        @endcan
+
+        @can('suggestions.index')
+            <x-sistem.cards.mini-date 
+                href="{{route('suggestions.index')}}" 
+                title="Sugerencias" 
+                :date_total="auth()->user()->company->membership->suggestion" 
+                :date="$suggestions"
+                >
+                <x-sistem.icons.hi-star/>
             </x-sistem.cards.mini-date>
         @endcan
  

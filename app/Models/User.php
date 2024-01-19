@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Page\Company;
-use App\Models\Page\Category;
 use App\Models\Page\Level;
+use App\Models\Page\Company;
+use App\Models\Page\Product;
+use App\Models\Page\Category;
+use App\Models\Page\Suggestion;
+use App\Models\Page\SocialMedia;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
@@ -88,4 +91,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Level::class, 'user_id', 'id');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id', 'id');
+    }
+
+    public function suggestions()
+    {
+        return $this->hasMany(Suggestion::class, 'user_id', 'id');
+    }
+    
+
 }

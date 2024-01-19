@@ -83,9 +83,14 @@ class SpatieSeeder extends Seeder
         Permission::create(['name' => 'dashboard.index'])->syncRoles([$adminRole, $employeeRole]);
         Permission::create(['name' => 'categories.index'])->syncRoles([$adminRole, $employeeRole]);
         Permission::create(['name' => 'levels.index'])->syncRoles([$adminRole, $employeeRole]);
+        Permission::create(['name' => 'products.index'])->syncRoles([$adminRole, $employeeRole]);
+        Permission::create(['name' => 'config.index'])->syncRoles([$adminRole, $employeeRole]);
+        Permission::create(['name' => 'suggestions.index'])->syncRoles([$adminRole, $employeeRole]);
+        Permission::create(['name' => 'tags.index'])->syncRoles([$adminRole, $employeeRole]);
         
         Permission::create(['name' => 'companies.index'])->syncRoles([$adminRole]);
         Permission::create(['name' => 'memberships.index'])->syncRoles([$adminRole]);
         Permission::create(['name' => 'users.index'])->syncRoles([$adminRole]);
+        Permission::create(['name' => 'social_medias.index'])->syncRoles([$adminRole]);
     }
 }

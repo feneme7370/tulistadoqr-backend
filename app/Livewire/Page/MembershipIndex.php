@@ -69,6 +69,7 @@ class MembershipIndex extends Component
     
     // eliminar desde el modal de confirmacion
     public function deleteMembership() {
+        $this->resetErrorBag();
         $membership = Membership::findOrFail($this->membership->id);
 
         if($membership->companies->count() > 0){
@@ -85,6 +86,7 @@ class MembershipIndex extends Component
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
+        $this->resetErrorBag();
         $this->reset(['membership']);
         $this->reset(['name', 'slug', 'category', 'level', 'product', 'user', 'suggestion', 'status']);
         $this->status = true;
@@ -93,6 +95,7 @@ class MembershipIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Membership $membership) {
+        $this->resetErrorBag();
         $this->membership = $membership;
         $this->name = $membership['name'];
         $this->slug = $membership['slug'];

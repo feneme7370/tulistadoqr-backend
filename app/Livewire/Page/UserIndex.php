@@ -89,6 +89,7 @@ class UserIndex extends Component
     
     // eliminar desde el modal de confirmacion
     public function deleteUser() {
+        $this->resetErrorBag();
         $user = User::findOrFail($this->user->id);
 
         if($user->id == 1){
@@ -105,6 +106,7 @@ class UserIndex extends Component
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
+        $this->resetErrorBag();
         $this->reset(['user']);
         $this->reset(['name', 'slug', 'email', 'password', 'password_confirmation', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id']);
         $this->status = true;
@@ -113,6 +115,7 @@ class UserIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(User $user) {
+        $this->resetErrorBag();
         $this->reset(['user']);
         $this->reset(['name', 'slug', 'email', 'password', 'password_confirmation', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id']);
 

@@ -25,28 +25,29 @@
 
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
                 <div class="w-full overflow-x-auto">
-                  <table class="w-full whitespace-no-wrap">
+                  <table class="t_table">
                     <thead>
-                      <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">ID</th>
-                        <th class="px-4 py-3">Nombre</th>
-                        <th class="px-4 py-3">Acciones</th>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
-                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                    <tbody>
             
                         @foreach ($social_medias as $item)
                         <tr class="text-gray-700 dark:text-gray-400">
 
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->id}}
+                          <td class="text-center">
+                            <p>{{$item->id}}</p>
                           </td>
 
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->name}}
+                          <td>
+                            <p>{{$item->name}}</p>
                           </td>
-                          <td class="px-4 py-3">
-                            <div class="flex items-center space-x-4 text-sm">
+
+                          <td>
+                            <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
                               <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
                                 wire:loading.attr="disabled" />
@@ -65,7 +66,7 @@
     </div>
 
     {{-- Paginacion --}}
-    <div class="mt-4">
+    <div class="mt-2">
         {{ $social_medias->onEachSide(1)->links() }}
     </div>
 
@@ -82,7 +83,7 @@
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
 
-            <x-sistem.buttons.delete-btn class="ml-3" wire:click="deleteSocialMedia()" wire:loading.attr="disabled"
+            <x-sistem.buttons.delete-btn wire:click="deleteSocialMedia()" wire:loading.attr="disabled"
             title="Borrar" autofocus/>
         </x-slot>
     </x-sistem.modal.dialog-modal>
@@ -94,14 +95,14 @@
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Agregar un registro') }}
+            <form {{-- method="POST" --}} class="grid gap-2 mt-2">
 
-            <form {{-- method="POST" --}} class="grid gap-3 mt-5">
-
+              <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
                 <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
                     autofocus />
                 <x-sistem.forms.input-error for="name" />
+              </div>
 
             </form>
 
@@ -109,7 +110,7 @@
 
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-            <x-sistem.buttons.primary-btn wire:click="save" class="ml-3" wire:loading.attr="disabled" title="Guardar"  />
+            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="Guardar"  />
         </x-slot>
     </x-sistem.modal.dialog-modal>
 

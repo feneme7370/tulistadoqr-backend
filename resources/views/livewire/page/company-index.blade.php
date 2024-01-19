@@ -25,29 +25,28 @@
 
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
                 <div class="w-full overflow-x-auto">
-                  <table class="w-full whitespace-no-wrap">
+                  <table class="t_table">
                     <thead>
-                      <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">ID</th>
-                        <th class="px-4 py-3">Logo</th>
-                        <th class="px-4 py-3">Empresa</th>
-                        <th class="px-4 py-3">Email</th>
-                        <th class="px-4 py-3">Estado</th>
-                        <th class="px-4 py-3">Acciones</th>
+                      <tr >
+                        <th>ID</th>
+                        <th>Logo</th>
+                        <th>Empresa</th>
+                        <th>Email</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
-                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                    <tbody>
             
                         @foreach ($companies as $item)
-                        <tr class="text-gray-700 dark:text-gray-400">
+                        <tr>
 
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->id}}
+                          <td class="text-center">
+                            <p>{{$item->id}}</p>
                           </td>
 
-                          <td class="px-4 py-3">
-                            <div class="flex items-center text-sm">
-            
+                          <td>
+                            <div class="flex justify-center items-center text-sm">
                               <!-- Avatar with inset shadow -->
                               <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                                 <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy">
@@ -55,19 +54,19 @@
                               </div>
                             </div>
                           </td>
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->name}}
+                          <td>
+                            <p>{{$item->name}}</p>
                           </td>
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->email}}
+                          <td>
+                            <p>{{$item->email}}</p>
                           </td>
-                          <td class="px-4 py-3 text-xs">
+                          <td class="text-center">
                             <span class="px-2 py-1 font-semibold leading-tight {{$item->status == '1' ? 'text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700' : 'text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700'}}   rounded-full  ">
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>
                           </td>
-                          <td class="px-4 py-3">
-                            <div class="flex items-center space-x-4 text-sm">
+                          <td>
+                            <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
                               <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
                                 wire:loading.attr="disabled" />
@@ -86,7 +85,7 @@
     </div>
 
     {{-- Paginacion --}}
-    <div class="mt-4">
+    <div class="mt-2">
         {{ $companies->onEachSide(1)->links() }}
     </div>
 
@@ -103,7 +102,7 @@
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
 
-            <x-sistem.buttons.delete-btn class="ml-3" wire:click="deleteCompany()" wire:loading.attr="disabled"
+            <x-sistem.buttons.delete-btn wire:click="deleteCompany()" wire:loading.attr="disabled"
             title="Borrar" autofocus/>
         </x-slot>
     </x-sistem.modal.dialog-modal>
@@ -115,40 +114,51 @@
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Agregar un registro') }}
+          <form {{-- method="POST" --}} class="grid gap-2 mt-2">
 
-            <form {{-- method="POST" --}} class="grid gap-3 mt-5">
-
+              <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre de empresa') }}" />
                 <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
                     autofocus />
                 <x-sistem.forms.input-error for="name" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="email" value="{{ __('Email de empresa') }}" />
                 <x-sistem.forms.input-form id="email" type="email" placeholder="{{ __('Email') }}" wire:model="email"
                      />
                 <x-sistem.forms.input-error for="email" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="phone" value="{{ __('Telefono de empresa') }}" />
                 <x-sistem.forms.input-form id="phone" type="text" placeholder="{{ __('Telefono') }}" wire:model="phone"
                      />
                 <x-sistem.forms.input-error for="phone" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="adress" value="{{ __('Direccion de empresa') }}" />
                 <x-sistem.forms.input-form id="adress" type="text" placeholder="{{ __('Direccion') }}" wire:model="adress"
                      />
                 <x-sistem.forms.input-error for="adress" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="city" value="{{ __('Localidad de empresa') }}" />
                 <x-sistem.forms.input-form id="city" type="text" placeholder="{{ __('Localidad') }}" wire:model="city"
                      />
                 <x-sistem.forms.input-error for="city" />
+              </div>
 
+              <div>
                 <x-sistem.forms.label-form for="social" value="{{ __('Redes sociales de empresa') }}" />
                 <x-sistem.forms.input-form id="social" type="text" placeholder="{{ __('Redes Sociales') }}" wire:model="social"
                      />
                 <x-sistem.forms.input-error for="social" />
+              </div>
 
+              <div>
                 <x-sistem.forms.label-form for="membership_id" value="{{ __('Membresia') }}" />
                 <x-sistem.forms.select-form wire:model="membership_id">
                     @foreach ($memberships as $membership)
@@ -156,19 +166,23 @@
                     @endforeach
                 </x-sistem.forms.select-form>
                 <x-sistem.forms.input-error for="membership_id" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="description" value="{{ __('Descripcion de empresa') }}" />
                 <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Descripcion') }}"
                     wire:model="description" />
                 <x-sistem.forms.input-error for="description" />
+              </div>
 
+              <div>
                 <label for="status" class="flex items-center">
                     <x-sistem.forms.checkbox-form id="status" wire:model="status" />
                     <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
                 </label>
+              </div>
 
             </form>
-
         </x-slot>
 
         <x-slot name="footer">
@@ -176,6 +190,5 @@
             <x-sistem.buttons.primary-btn wire:click="save" class="ml-3" wire:loading.attr="disabled" title="Guardar"  />
         </x-slot>
     </x-sistem.modal.dialog-modal>
-
 
 </div>

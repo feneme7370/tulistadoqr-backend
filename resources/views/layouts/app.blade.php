@@ -23,8 +23,8 @@
 
         <div class="w-full">
             <div class="max-w-7xl mx-auto p-1 sm:px-6 lg:px-8">
-                <div class="bg-white mt-12 overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                <div class="bg-white mt-2 sm:mt-8 overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="sm:p-6 lg:p-8 bg-white border-b border-t border-gray-200">
 
                         <!-- Page Content -->
                         <main>

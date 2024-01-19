@@ -25,46 +25,47 @@
 
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
                 <div class="w-full overflow-x-auto">
-                  <table class="w-full whitespace-no-wrap">
+                  <table class="t_table">
                     <thead>
-                      <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">ID</th>
-                        <th class="px-4 py-3">Nombre</th>
-                        <th class="px-4 py-3">Empresa</th>
-                        <th class="px-4 py-3">Email</th>
-                        <th class="px-4 py-3">Estado</th>
-                        <th class="px-4 py-3">Acciones</th>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
-                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                    <tbody>
             
                         @foreach ($users as $item)
-                        <tr class="text-gray-700 dark:text-gray-400">
+                        <tr>
 
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->id}}
+                          <td class="text-center">
+                            <p>{{$item->id}}</p>
                           </td>
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->lastname}}, {{$item->name}}
+
+                          <td>
+                            <p class="font-bold">{{$item->lastname}}, {{$item->name}}</p>
+                            <p>{{$item->company->name}}</p>
                           </td>
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->company->name}}
+
+                          <td>
+                            <p>{{$item->email}}</p>
                           </td>
-                          <td class="px-4 py-3 text-sm">
-                            {{$item->email}}
-                          </td>
-                          <td class="px-4 py-3 text-xs">
+
+                          <td class="text-center">
                             <span class="px-2 py-1 font-semibold leading-tight {{$item->status == '1' ? 'text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700' : 'text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700'}}   rounded-full  ">
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>
                           </td>
-                          <td class="px-4 py-3">
-                            <div class="flex items-center space-x-4 text-sm">
+
+                          <td>
+                            <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
                               <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
                                 wire:loading.attr="disabled" />
                             </div>
-                          </td>
+                          </td>   
                         </tr>
                         @endforeach
             
@@ -78,7 +79,7 @@
     </div>
 
     {{-- Paginacion --}}
-    <div class="mt-4">
+    <div class="mt-2">
         {{ $users->onEachSide(1)->links() }}
     </div>
 
@@ -95,7 +96,7 @@
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
 
-            <x-sistem.buttons.delete-btn class="ml-3" wire:click="deleteUser()" wire:loading.attr="disabled"
+            <x-sistem.buttons.delete-btn wire:click="deleteUser()" wire:loading.attr="disabled"
             title="Borrar" autofocus/>
         </x-slot>
     </x-sistem.modal.dialog-modal>
@@ -107,50 +108,66 @@
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Agregar un registro') }}
 
-            <form {{-- method="POST" --}} class="grid gap-3 mt-5">
+            <form {{-- method="POST" --}} class="grid gap-2 mt-2">
 
+              <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
                 <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
                     autofocus />
                 <x-sistem.forms.input-error for="name" />
+              </div>
 
+              <div>
                 <x-sistem.forms.label-form for="lastname" value="{{ __('Apellido') }}" />
                 <x-sistem.forms.input-form id="lastname" type="text" placeholder="{{ __('Apellido') }}" wire:model="lastname"
                     autofocus />
                 <x-sistem.forms.input-error for="lastname" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="email" value="{{ __('Email') }}" />
                 <x-sistem.forms.input-form id="email" type="email" placeholder="{{ __('Email') }}" wire:model="email"
                      />
                 <x-sistem.forms.input-error for="email" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="phone" value="{{ __('Telefono') }}" />
                 <x-sistem.forms.input-form id="phone" type="text" placeholder="{{ __('Telefono') }}" wire:model="phone"
                      />
                 <x-sistem.forms.input-error for="phone" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="adress" value="{{ __('Direccion') }}" />
                 <x-sistem.forms.input-form id="adress" type="text" placeholder="{{ __('Direccion') }}" wire:model="adress"
                      />
                 <x-sistem.forms.input-error for="adress" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="birthday" value="{{ __('Fecha de nacimiento') }}" />
                 <x-sistem.forms.input-form id="birthday" type="date" placeholder="{{ __('Fecha de nacimiento') }}" wire:model="birthday"
                      />
                 <x-sistem.forms.input-error for="birthday" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="city" value="{{ __('Localidad') }}" />
                 <x-sistem.forms.input-form id="city" type="text" placeholder="{{ __('Localidad') }}" wire:model="city"
                      />
                 <x-sistem.forms.input-error for="city" />
+              </div>
 
+              <div>
                 <x-sistem.forms.label-form for="social" value="{{ __('Redes sociales') }}" />
                 <x-sistem.forms.input-form id="social" type="text" placeholder="{{ __('Redes Sociales') }}" wire:model="social"
                      />
                 <x-sistem.forms.input-error for="social" />
+              </div>
 
+              <div>
                 <x-sistem.forms.label-form for="company_id" value="{{ __('Empresa') }}" />
                 <x-sistem.forms.select-form wire:model="company_id">
                     @foreach ($companies as $company)
@@ -158,26 +175,35 @@
                     @endforeach
                 </x-sistem.forms.select-form>
                 <x-sistem.forms.input-error for="company_id" />
+              </div>
                 
+              <div>
                 <x-sistem.forms.label-form for="description" value="{{ __('Descripcion de empresa') }}" />
                 <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Descripcion') }}"
                     wire:model="description" />
                 <x-sistem.forms.input-error for="description" />
+              </div>
 
+              <div>
                 <label for="status" class="flex items-center">
                     <x-sistem.forms.checkbox-form id="status" wire:model="status" />
                     <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
                 </label>
+              </div>
 
+              <div>
                 <x-sistem.forms.label-form for="password" value="{{ __('Clave') }}" />
                 <x-sistem.forms.input-form id="password" type="password" placeholder="{{ __('Clave') }}" wire:model="password"
                      />
                 <x-sistem.forms.input-error for="password" />
+              </div>
 
+              <div>
                 <x-sistem.forms.label-form for="password_confirmation" value="{{ __('Repetir clave') }}" />
                 <x-sistem.forms.input-form id="password_confirmation" type="password" placeholder="{{ __('Repetir clave') }}" wire:model="password_confirmation"
                      />
                 <x-sistem.forms.input-error for="password_confirmation" />
+              </div>
 
             </form>
 
@@ -185,7 +211,7 @@
 
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-            <x-sistem.buttons.primary-btn wire:click="save" class="ml-3" wire:loading.attr="disabled" title="Guardar"  />
+            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="Guardar"  />
         </x-slot>
     </x-sistem.modal.dialog-modal>
 

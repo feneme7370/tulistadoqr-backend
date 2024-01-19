@@ -106,13 +106,14 @@
             <x-sistem.forms.input-error for="description" />
         </div>
 
-        @foreach($socialMedia as $social)
-            <x-sistem.forms.label-form for="socialMediaData.{{$social->id }}" value=" {{ $social->name }} - {{ __('URL:') }}" />
-            <x-sistem.forms.input-form id="socialMediaData.{{$social->id }}" type="text" placeholder="Red Social de {{ $social->name }}" wire:model="socialMediaData.{{$social->id }}" 
-            />
-            <x-sistem.forms.input-error for="socialMediaData.{{$social->id }}" />
-
-        @endforeach
+        <div>
+            @foreach($socialMedia as $social)
+                <x-sistem.forms.label-form for="socialMediaData.{{$social->id }}" value=" {{ $social->name }} - {{ __('URL:') }}" />
+                <x-sistem.forms.input-form id="socialMediaData.{{$social->id }}" type="text" placeholder="Red Social de {{ $social->name }}" wire:model="socialMediaData.{{$social->id }}" 
+                />
+                <x-sistem.forms.input-error for="socialMediaData.{{$social->id }}" />
+            @endforeach
+        </div>
 
 
         <x-sistem.buttons.primary-btn wire:click="save" class="ml-3 mx-auto" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Actualizar"/>

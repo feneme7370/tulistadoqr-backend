@@ -5,3 +5,37 @@
 [x-cloak] {
     display: none;
 }
+
+@layer utilities{
+
+    .t_table {
+        @apply w-full;
+    }
+    .t_table thead{
+        /* @apply; */
+    }
+    .t_table thead {
+        @apply uppercase;
+    }
+    .t_table thead tr{
+        @apply text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800;
+    }
+    .t_table thead tr th{
+        @apply py-3 px-2 text-center;
+    }
+    .t_table tbody {
+        @apply bg-white divide-y dark:divide-gray-700 dark:bg-gray-800;
+    }
+    .t_table tbody tr{
+        @apply text-gray-700 dark:text-gray-400;
+    }
+    .t_table tbody tr td{
+        @apply py-3 px-2 text-sm;
+    }
+    .t_table tbody tr td p{
+        @apply line-clamp-2;
+    }
+    .t_table tbody tr td .actions{
+        @apply flex justify-evenly items-center space-x-4 text-sm;
+    }
+}

@@ -1,7 +1,7 @@
 @props(['disabled' => false])
 
 <select {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => '
-block w-full 
+block w-full text-center
 text-sm form-input text-gray-900  bg-white rounded-lg shadow-md
 my-1 p-2 
 

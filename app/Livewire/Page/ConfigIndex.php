@@ -111,6 +111,7 @@ class ConfigIndex extends Component
         if($this->image_hero != ''){
             $path = public_path('archives/images/hero/'.$this->image_hero);
             if(file_exists($path)){
+                chmod($path, 777);
                 unlink($path);
             }
         }
@@ -128,7 +129,8 @@ class ConfigIndex extends Component
         if($this->image_logo != ''){
             $path = public_path('archives/images/logo/'.$this->image_logo);
             if(file_exists($path)){
-                unlink($path);
+                chmod($path, 777);
+                unlink($path, );
             }
         }
     }
@@ -146,8 +148,9 @@ class ConfigIndex extends Component
         // Verificar si la carpeta existe, si no, crearla
 
         $path = public_path('archives/images/hero/');
-        if (!file_exists($path)) {
-            mkdir($path, 0777, true);
+        if (!file_exists($path) && is_dir($path)) {
+            chmod($path, 777);
+            mkdir($path, 777, true);
         }
 
         // crear o reemplazar imagen
@@ -169,8 +172,9 @@ class ConfigIndex extends Component
         // Verificar si la carpeta existe, si no, crearla
 
         $path = public_path('archives/images/logo/');
-        if (!file_exists($path)) {
-            mkdir($path, 0777, true);
+        if (!file_exists($path) && is_dir($path)) {
+            chmod($path, 777);
+            mkdir($path, 777, true);
         }
 
         // crear o reemplazar imagen

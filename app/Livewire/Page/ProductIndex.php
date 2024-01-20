@@ -104,7 +104,7 @@ class ProductIndex extends Component
 
     // eliminar solo imagen del producto en editar
     public function deleteImageEdit() {
-        $this->deleteImage();
+        // $this->deleteImage();
         $this->image_hero = '';
         $this->product->update(
             $this->only(['image_hero'])

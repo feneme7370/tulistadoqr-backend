@@ -116,9 +116,9 @@ class ProductIndex extends Component
 
         // Verificar si la carpeta existe, si no, crearla
         $path = public_path('archives/images/product_hero/');
-        if (!file_exists($path)) {
-            mkdir($path, 0777, true);
-        }
+        // if (!file_exists($path)) {
+        //     mkdir($path, 0777, true);
+        // }
 
         // crear o reemplazar imagen
         if($this->image_hero_nueva){

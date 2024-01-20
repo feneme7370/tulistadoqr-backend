@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Page\Company;
 use App\Models\Page\SocialMedia;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -110,9 +111,11 @@ class ConfigIndex extends Component
     public function deleteImage(){
         if($this->image_hero != ''){
             $path = public_path('archives/images/hero/'.$this->image_hero);
-            if(file_exists($path)){
-                chmod($path, 777);
-                unlink($path);
+            // if(file_exists($path)){
+            //     unlink($path);
+            // }
+            if(File::exists($path)){
+                File::delete($path);
             }
         }
     }
@@ -128,9 +131,8 @@ class ConfigIndex extends Component
     public function deleteImageLogo(){
         if($this->image_logo != ''){
             $path = public_path('archives/images/logo/'.$this->image_logo);
-            if(file_exists($path)){
-                chmod($path, 777);
-                unlink($path, );
+            if(File::exists($path)){
+                unlink($path);
             }
         }
     }
@@ -147,11 +149,15 @@ class ConfigIndex extends Component
     
         // Verificar si la carpeta existe, si no, crearla
 
-        $path = public_path('archives/images/hero/');
-        if (!file_exists($path) && is_dir($path)) {
-            chmod($path, 777);
-            mkdir($path, 777, true);
-        }
+        // $path = public_path('archives/images/hero');
+        
+        // if (!storage::directoryExists($path)) {
+        //     Storage::createDirectory($path);
+        // }
+        // if (!file_exists($path) && is_dir($path)) {
+        //     chmod($path, 777);
+        //     mkdir($path, 777, true);
+        // }
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
@@ -171,11 +177,10 @@ class ConfigIndex extends Component
     
         // Verificar si la carpeta existe, si no, crearla
 
-        $path = public_path('archives/images/logo/');
-        if (!file_exists($path) && is_dir($path)) {
-            chmod($path, 777);
-            mkdir($path, 777, true);
-        }
+        // $path = public_path('archives/images/logo/');
+        // if (!storage::directoryExists($path)) {
+        //     Storage::createDirectory($path);
+        // }
 
         // crear o reemplazar imagen
         if($this->image_logo_new){

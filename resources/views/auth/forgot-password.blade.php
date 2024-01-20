@@ -8,7 +8,7 @@
               <img
                 aria-hidden="true"
                 class="object-cover w-full h-full dark:hidden"
-                src="{{asset('storage/sistem/img/forgot-password-office.jpeg')}}"
+                src="{{asset('lib/windmill/img/forgot-password-office.jpeg')}}"
                 alt="Office"
               />
             </div>

@@ -108,8 +108,11 @@ class ConfigIndex extends Component
 
     // eliminar imagen de portada
     public function deleteImage(){
-        if(Storage::exists('public/images/hero/'.$this->image_hero)){
-            Storage::delete('public/images/hero/'.$this->image_hero);
+        if($this->image_hero != ''){
+            $path = public_path('archives/images/hero/'.$this->image_hero);
+            if(file_exists($path)){
+                unlink($path);
+            }
         }
     }
     public function deleteImageEdit() {
@@ -122,8 +125,11 @@ class ConfigIndex extends Component
 
     // eliminar imagen del logo
     public function deleteImageLogo(){
-        if(Storage::exists('public/images/logo/'.$this->image_logo)){
-            Storage::delete('public/images/logo/'.$this->image_logo);
+        if($this->image_logo != ''){
+            $path = public_path('archives/images/logo/'.$this->image_logo);
+            if(file_exists($path)){
+                unlink($path);
+            }
         }
     }
     public function deleteImageLogoEdit() {
@@ -138,10 +144,11 @@ class ConfigIndex extends Component
     public function uploadImage(){
     
         // Verificar si la carpeta existe, si no, crearla
-        // $storagePath = public_path('archives/images/hero/');
-        // if (!Storage::exists($storagePath)) {
-        //     Storage::makeDirectory($storagePath);
-        // }
+
+        $path = public_path('archives/images/hero/');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
@@ -160,10 +167,11 @@ class ConfigIndex extends Component
     public function uploadImageLogo(){
     
         // Verificar si la carpeta existe, si no, crearla
-        // $storagePath = 'public/images/logo/';
-        // if (!Storage::exists($storagePath)) {
-        //     Storage::makeDirectory($storagePath);
-        // }
+
+        $path = public_path('archives/images/logo/');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
 
         // crear o reemplazar imagen
         if($this->image_logo_new){

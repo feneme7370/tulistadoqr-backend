@@ -197,7 +197,7 @@
                     <div class="w-64 h-64 relative">
                         <p class="mb-2">Imagen actual:</p>
                         @if ($this->image_hero && $this->image_hero != '')
-                        <img src="{{asset('storage/images/product/'.$this->image_hero)}}" alt="imagen"
+                        <img src="{{asset('archives/images/product_hero/'.$this->image_hero)}}" alt="imagen"
                             class="w-64 h-64 object-cover rounded-sm" />
                         <button wire:click='deleteImageEdit' type="button"
                             class="absolute top-7 right-2 p-2 bg-red-600 rounded-lg text-white">Eliminar</button>

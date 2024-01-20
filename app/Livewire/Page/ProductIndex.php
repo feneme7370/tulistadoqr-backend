@@ -94,8 +94,11 @@ class ProductIndex extends Component
 
     // eliminar imagen al reemplazarla
     public function deleteImage(){
-        if(Storage::exists('public/images/product/'.$this->image_hero)){
-            Storage::delete('public/images/product/'.$this->image_hero);
+        if($this->image_hero != ''){
+            $path = public_path('archives/images/product_hero/'.$this->image_hero);
+            if(file_exists($path)){
+                unlink($path);
+            }
         }
     }
 
@@ -112,9 +115,9 @@ class ProductIndex extends Component
     public function uploadImage(){
 
         // Verificar si la carpeta existe, si no, crearla
-        $storagePath = 'public/images/product/';
-        if (!Storage::exists($storagePath)) {
-            Storage::makeDirectory($storagePath);
+        $path = public_path('archives/images/product_hero/');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
         }
 
         // crear o reemplazar imagen
@@ -125,7 +128,7 @@ class ProductIndex extends Component
             $image_hero->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $image_hero->save(public_path('storage/images/product/'.$name));
+            $image_hero->save(public_path('archives/images/product_hero/'.$name));
             $this->image_hero = $name;
         }
     }

@@ -56,6 +56,20 @@ class ConfigIndex extends Component
         ];
     }
 
+    protected $messages = [
+
+        'image_hero_new.nullable' => 'error en nullable',
+        'image_logo_new.nullable' => 'error en nullable',
+        'image_hero_new.image' => 'error en image',
+        'image_logo_new.image' => 'error en image',
+        'image_hero_new.mimes:jpeg,png,jpg,gif' => 'error en mimes:jpeg,png,jpg,gif',
+        'image_logo_new.mimes:jpeg,png,jpg,gif' => 'error en mimes:jpeg,png,jpg,gif',
+        'image_hero_new.max:3096' => 'error en max:3096',
+        'image_logo_new.max:3096' => 'error en max:3096',
+        
+
+    ];
+
     // renombrar variables a castellano
     protected $validationAttributes = [
         'name' => 'nombre',
@@ -110,9 +124,9 @@ class ConfigIndex extends Component
     // eliminar imagen de portada
     public function deleteImage(){
         if($this->image_hero != ''){
-            $path = 'public/archives/images/hero/'.$this->image_hero;
-            if(Storage::disk('local')->exists($path)){
-                Storage::disk('local')->delete($path);
+            $path = 'archives/images/hero/'.$this->image_hero;
+            if(Storage::disk('public')->exists($path)){
+                Storage::disk('public')->delete($path);
             }
         }
     }
@@ -162,7 +176,7 @@ class ConfigIndex extends Component
                 $constraint->aspectRatio();
             });
 
-            Storage::disk('local')->put('public/archives/images/hero/' . $filename, $image_hero->encode());
+            Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
             
             $this->image_hero = $filename;
         }

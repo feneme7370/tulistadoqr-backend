@@ -110,13 +110,9 @@ class ConfigIndex extends Component
     // eliminar imagen de portada
     public function deleteImage(){
         if($this->image_hero != ''){
-            // $path = public_path('archives/images/hero/'.$this->image_hero);
-            $path = 'archives/images/hero/'.$this->image_hero;
-            // if(file_exists($path)){
-            //     unlink($path);
-            // }
+            $path = public_path('archives/images/hero/'.$this->image_hero);
             if(File::exists($path)){
-                File::delete($path);
+                unlink($path);
             }
         }
     }
@@ -162,15 +158,14 @@ class ConfigIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
-            // $this->deleteImage();
+            $this->deleteImage();
             $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id.'.jpg';
-            // $image_hero = Image::make($this->image_hero_new);
-            // $image_hero->resize(600, null, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // });
-            // $image_hero->save(public_path('archives/images/hero/'.$name));
-            // $this->image_hero = $name;
-            $this->image_hero_new->store('archives/img/hero/'.$name);
+            $image_hero = Image::make($this->image_hero_new);
+            $image_hero->resize(600, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image_hero->save(public_path('archives/images/hero/'.$name));
+            $this->image_hero = $name;
         }
     }
 

@@ -1,7 +1,8 @@
 <div>
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
-        :messageError="session('messageError')" />
+        :messageError="session('messageError')" 
+    />
 
     {{-- titulo y boton --}}
     <x-sistem.menus.title-and-btn title="Sugerencias">
@@ -11,6 +12,7 @@
     {{-- input buscador y filtro de activos --}}
     <div class="p-2 mb-1 flex justify-between items-center flex-col md:flex-row bg-white rounded-lg shadow-md gap-1 dark:bg-gray-800">
       
+      {{-- barra de select --}}
       <div class="w-full">
           <x-sistem.forms.select-form wire:model="product_id">
               @foreach ($products as $product)
@@ -20,6 +22,7 @@
           <x-sistem.forms.input-error for="product_id" />
       </div>
 
+      {{-- boton de agregar --}}
       <div class="mr-2 flex gap-2 justify-center items-end md:justify-end w-full">
         <x-sistem.buttons.primary-btn
             title="Agregar"
@@ -41,36 +44,25 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Producto</th>
-                <th>Creado por</th>
                 <th>Acciones</th>
+                <th>Producto</th>
               </tr>
             </thead>
             <tbody>
     
                 @foreach ($suggesteds as $item)
                 <tr>
-                  <td class="text-center">
-                    <p>{{$item->id}}</p>
-                  </td>
-
-                  <td>
-                    <div class="flex items-center text-sm">
-     
-                        <p class="font-semibold">{{$item->product->name}}</p>
-
-                    </div>
-                  </td>
-
-                  <td>
-                    <p>{{$item->user->lastname}}, {{$item->user->name}}</p>
-                  </td>
+                  <td class="text-center"><p>{{$item->id}}</p></td>
+                  
                   <td>
                     <div class="actions">
                       <x-sistem.buttons.delete-text wire:click="deleteSuggestion({{$item->id}})"
                         wire:loading.attr="disabled" />
                     </div>
                   </td>
+                  
+                  <td class="text-center"><p>{{$item->product->name}}</p></td>
+
                 </tr>
                 @endforeach
     

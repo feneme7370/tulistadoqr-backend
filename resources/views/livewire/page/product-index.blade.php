@@ -1,7 +1,8 @@
 <div>
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
-        :messageError="session('messageError')" />
+        :messageError="session('messageError')" 
+    />
 
     {{-- titulo y boton --}}
     <x-sistem.menus.title-and-btn title="Productos">
@@ -16,7 +17,6 @@
     <x-sistem.filter.search-active />
 
     {{-- listado --}}
-
     <div class="mx-auto">
         <!-- Ejemplo de una tarjeta -->
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -25,40 +25,19 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Acciones</th>
                             <th>Productos</th>
+                            <th>Nivel/Categoria</th>
                             <th>Precio</th>
                             <th>Estado</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($products as $item)
                         <tr>
-                            <td class="text-center">
-                                {{$item->id}}
-                            </td>
-
-                            <td>
-                                <div class="flex items-center text-sm">
-                                    <p class="font-semibold">{{$item->name}}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                        {{$item->level->name}} / {{$item->category->name}}
-                                    </p>
-                                </div>
-                            </td>
-
-                            <td class="text-center">
-                                ${{ number_format($item->price_original, 2,",",".") }}
-                            </td>
-
-                            <td class="text-center">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight {{$item->status == '1' ? 'text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700' : 'text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700'}}   rounded-full  ">
-                                    {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
-                                </span>
-                            </td>
-
+                            <td class="text-center"><p>{{$item->id}}</p></td>
+                            
                             <td>
                                 <div class="actions">
                                     <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
@@ -67,6 +46,18 @@
                                         wire:loading.attr="disabled" />
                                 </div>
                             </td>
+
+                            <td class="text-center"><p>{{$item->name}}</p></td>
+                            <td><p>{{$item->level->name}} / {{$item->category->name}}</p></td>
+                            <td class="text-center"><p>${{ number_format($item->price_original, 2,",",".") }}</p></td>
+
+                            <td class="text-center">
+                                <span
+                                    class="px-2 py-1 font-semibold leading-tight {{$item->status == '1' ? 'text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700' : 'text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700'}}   rounded-full  ">
+                                    {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
+                                </span>
+                            </td>
+
 
                         </tr>
                         @endforeach
@@ -113,40 +104,44 @@
 
             <x-sistem.forms.validation-errors class="mb-4" />
 
-            <form {{-- method="POST" --}} class="grid gap-2 mt-2">
+            <form class="grid grid-cols-1 gap-2 mt-2">
+
+                {{-- datos del producto --}}
+                <h2 class="text-center font-bold text-xl">Datos del producto</h2>
+        
                 <div class="grid md:grid-cols-2 gap-3">
                     <div>
                         <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
                         <x-sistem.forms.input-form id="name" type="name"
-                            placeholder="{{ __('Pizza napolitana, Coca Cola 750ml') }}" wire:model="name" autofocus />
+                            placeholder="{{ __('Nombre') }}" wire:model="name" autofocus />
                         <x-sistem.forms.input-error for="name" />
                     </div>
 
                     <div>
                         <x-sistem.forms.label-form for="price_original" value="{{ __('Precio original') }}" />
                         <x-sistem.forms.input-form id="price_original" type="number"
-                            placeholder="{{ __('Ingresar el precio') }}" wire:model="price_original" autofocus />
+                            placeholder="{{ __('Precio') }}" wire:model="price_original" />
                         <x-sistem.forms.input-error for="price_original" />
                     </div>
 
                     <div>
                         <x-sistem.forms.label-form for="price_seller" value="{{ __('Precio de oferta') }}" />
                         <x-sistem.forms.input-form id="price_seller" type="number"
-                            placeholder="{{ __('Ingresar el precio') }}" wire:model="price_seller" autofocus />
+                            placeholder="{{ __('Precio de oferta') }}" wire:model="price_seller" />
                         <x-sistem.forms.input-error for="price_seller" />
                     </div>
 
                     <div>
                         <x-sistem.forms.label-form for="quantity" value="{{ __('Cantidad') }}" />
                         <x-sistem.forms.input-form id="quantity" type="number"
-                            placeholder="{{ __('Ingresar la cantidad') }}" wire:model="quantity" autofocus />
+                            placeholder="{{ __('Cantidad') }}" wire:model="quantity" />
                         <x-sistem.forms.input-error for="quantity" />
                     </div>
 
                     <div>
                         <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
                         <x-sistem.forms.textarea-form id="description"
-                            placeholder="{{ __('Incluye tomate, ajo, perejil y salsa') }}" wire:model="description" />
+                            placeholder="{{ __('Ingresar una breve descripcion') }}" wire:model="description" />
                         <x-sistem.forms.input-error for="description" />
                     </div>
 
@@ -159,7 +154,7 @@
                         <x-sistem.forms.label-form for="level_id" value="{{ __('Nivel') }}" />
                         <x-sistem.forms.select-form wire:model="level_id" id="level_id">
                             @foreach ($levels as $level)
-                            <option value="{{$level->id}}">{{$level->name}}</option>
+                                <option value="{{$level->id}}">{{$level->name}}</option>
                             @endforeach
                         </x-sistem.forms.select-form>
                         <x-sistem.forms.input-error for="level_id" />
@@ -169,49 +164,65 @@
                         <x-sistem.forms.label-form for="category_id" value="{{ __('Categoria') }}" />
                         <x-sistem.forms.select-form wire:model="category_id" id="category_id">
                             @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </x-sistem.forms.select-form>
                         <x-sistem.forms.input-error for="category_id" />
                     </div>
 
                     <div>
-                        <x-sistem.forms.label-form for="product_tags" value="{{ __('Nivel') }}" />
+                        <x-sistem.forms.label-form for="product_tags" value="{{ __('Etiquetas') }}" />
                         <x-sistem.forms.select-form multiple wire:model="product_tags" id="product_tags">
                             @foreach ($tags as $tag)
-                            <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                <option value="{{$tag->id}}">{{$tag->name}}</option>
                             @endforeach
                         </x-sistem.forms.select-form>
                         <x-sistem.forms.input-error for="product_tags" />
                     </div>
 
-                    <div>
-                        <x-sistem.forms.label-form for="image_hero_nueva" value="{{ __('Imagen') }}" />
-                        <x-sistem.forms.input-form id="image_hero_nueva" type="file" wire:model="image_hero_nueva"
-                            accept="image/*" />
-                        <x-sistem.forms.input-error for="image_hero_nueva" />
-                    </div>
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-evenly mb-4">
-                    <div class="w-64 h-64 relative">
-                        <p class="mb-2">Imagen actual:</p>
-                        @if ($this->image_hero && $this->image_hero != '')
-                        <img src="{{asset('archives/images/product_hero/'.$this->image_hero)}}" alt="imagen"
-                            class="w-64 h-64 object-cover rounded-sm" />
-                        <button wire:click='deleteImageEdit' type="button"
-                            class="absolute top-7 right-2 p-2 bg-red-600 rounded-lg text-white">Eliminar</button>
-                        @else
-                        <img class="w-64 h-64 object-cover rounded-sm"
-                            src="{{asset('storage/sistem/img/withoutImage.jpg')}}">
-                        @endif
+
+                {{-- imagen de portada empresa --}}
+                <div>
+                    <h2 class="text-center font-bold text-xl">Imagen principal del producto</h2>
+            
+                    <div>
+                        <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen del producto') }}" />
+                        <x-sistem.forms.input-form id="image_hero_new" type="file" wire:model="image_hero_new" accept="image/*"
+                            />
+                        <x-sistem.forms.input-error for="image_hero_new" />
                     </div>
-                    <div class="w-64 h-64 relative">
-                        <p wire:loading>Cargando</p>
-                        <p class="mb-2">Imagen nueva:</p>
-                        @if ($image_hero_nueva)
-                        <img class="w-64 h-64 object-cover rounded-sm" src="{{ $image_hero_nueva->temporaryUrl() }}">
-                        @endif
+            
+                    <div class="grid grid-cols-1 gap-3">
+            
+                        <div class="">
+                            <p class="mb-1">Imagen del producto actual:</p>
+                            <div class="w-64 h-64 mx-auto relative">
+                                @if ($this->image_hero && $this->image_hero != '')
+                                    <img src="{{asset('archives/images/product_hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                                    <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                                @else
+                                    <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <div class="">
+            
+                            <div wire:loading wire:target="image_hero_new">
+                                <x-sistem.spinners.loading-spinner/>
+                            </div>
+            
+                            <p class="mb-1">Imagen del producto nueva:</p>
+                            @if ($image_hero_new) 
+                                <div class="w-64 h-64 mx-auto relative">
+                                    <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_hero_new->temporaryUrl() }}">
+                                </div>
+                            @else
+                                <p class="text-center italic">No se ha agregado una imagen nueva</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
 

@@ -1,10 +1,12 @@
 <div>
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
-        :messageError="session('messageError')" />
+        :messageError="session('messageError')" 
+    />
 
     {{-- titulo y boton --}}
     <x-sistem.menus.title-and-btn title="Niveles">
+
         <x-sistem.buttons.primary-btn 
             title="Agregar" 
             wire:click="createActionModal" 
@@ -29,11 +31,11 @@
                     <thead>
                       <tr>
                         <th>ID</th>
+                        <th>Acciones</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
                         <th>Creado por</th>
                         <th>Estado</th>
-                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -41,27 +43,7 @@
                         @foreach ($levels as $item)
                         <tr>
 
-                          <td class="text-center">
-                            <p>{{$item->id}}</p>
-                          </td>
-
-                          <td>
-                            <p>{{$item->name}}</p>
-                          </td>
-
-                          <td>
-                            <p>{{$item->description}}</p>
-                          </td>
-
-                          <td>
-                            <p>{{$item->user->lastname}}, {{$item->user->name}}</p>
-                          </td>
-
-                          <td class="text-center">
-                            <span class="line-clamp-2 px-2 py-1 font-semibold leading-tight {{$item->status == '1' ? 'text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700' : 'text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700'}}   rounded-full  ">
-                              {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
-                            </span>
-                          </td>
+                          <td class="text-center"><p>{{$item->id}}</p></td>
                           <td>
                             <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
@@ -69,6 +51,16 @@
                                 wire:loading.attr="disabled" />
                             </div>
                           </td>
+                          <td><p>{{$item->name}}</p></td>
+                          <td><p>{{$item->description}}</p></td>
+                          <td><p>{{$item->user->lastname}}, {{$item->user->name}}</p></td>
+
+                          <td class="text-center">
+                            <span class="line-clamp-2 px-2 py-1 font-semibold leading-tight {{$item->status == '1' ? 'text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700' : 'text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700'}}   rounded-full  ">
+                              {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
+                            </span>
+                          </td>
+                          
                         </tr>
                         @endforeach
             
@@ -107,11 +99,11 @@
     <!-- Modal para crear y editar -->
     <x-sistem.modal.dialog-modal wire:model="showActionModal">
         <x-slot name="title">
-            {{ __('Agregar') }}
+            {{ __($level ? 'Editar' : 'Agregar') }}
         </x-slot>
 
         <x-slot name="content">
-            <form {{-- method="POST" --}} class="grid gap-2 mt-2">
+            <form class="grid gap-2 mt-2">
 
               <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
@@ -121,8 +113,8 @@
               </div>
                 
               <div>
-                <x-sistem.forms.label-form for="description" value="{{ __('Descripcion de empresa') }}" />
-                <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Descripcion') }}"
+                <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
+                <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Ingresar una breve descripcion') }}"
                     wire:model="description" />
                 <x-sistem.forms.input-error for="description" />
               </div>
@@ -140,7 +132,7 @@
 
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="Guardar"  />
+            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="{{$level ? 'Actualizar' : 'Guardar'}}"  />
         </x-slot>
     </x-sistem.modal.dialog-modal>
 

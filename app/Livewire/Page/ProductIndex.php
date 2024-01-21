@@ -46,7 +46,7 @@ class ProductIndex extends Component
     public $company_id;
 
     // cargar imagen para guardar y almacenar string en image_hero
-    public $image_hero_nueva;
+    public $image_hero_new;
 
     // propiedades para editar
     public $product;
@@ -70,7 +70,7 @@ class ProductIndex extends Component
             'user_id' => ['required', 'numeric'],
             'company_id' => ['required', 'numeric'],
 
-            'image_hero_nueva' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
+            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
         ];
     }
 
@@ -89,7 +89,7 @@ class ProductIndex extends Component
         'user_id' => 'usuario',
         'company_id' => 'empresa',
 
-        'image_hero_nueva' => 'archivo de imagen',
+        'image_hero_new' => 'archivo de imagen',
     ];
 
     // eliminar imagen al reemplazarla
@@ -104,7 +104,7 @@ class ProductIndex extends Component
 
     // eliminar solo imagen del producto en editar
     public function deleteImageEdit() {
-        // $this->deleteImage();
+        $this->deleteImage();
         $this->image_hero = '';
         $this->product->update(
             $this->only(['image_hero'])
@@ -121,10 +121,10 @@ class ProductIndex extends Component
         // }
 
         // crear o reemplazar imagen
-        if($this->image_hero_nueva){
+        if($this->image_hero_new){
             $this->deleteImage();
             $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id.'.jpg';
-            $image_hero = Image::make($this->image_hero_nueva);
+            $image_hero = Image::make($this->image_hero_new);
             $image_hero->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
@@ -169,7 +169,7 @@ class ProductIndex extends Component
         if($this->countProducts()){return;}
         $this->resetErrorBag();
         $this->reset(['product']);
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_nueva', 'category_id', 'level_id', 'user_id', 'company_id']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
         $this->status = true;
         $this->showActionModal = true;
     }
@@ -178,7 +178,7 @@ class ProductIndex extends Component
     public function editActionModal(Product $product) {
         $this->resetErrorBag();
         $this->reset(['product']);
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_nueva', 'category_id', 'level_id', 'user_id', 'company_id']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
 
         $this->product = $product;
         $this->name = $product['name'];
@@ -221,7 +221,7 @@ class ProductIndex extends Component
             $this->product->tags()->sync($this->product_tags);
 
             $this->reset(['product']);
-            $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_nueva', 'category_id', 'level_id', 'user_id', 'company_id']);
+            $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
 
             session()->flash('messageSuccess', 'Actualizado');
 

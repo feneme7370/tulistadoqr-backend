@@ -181,9 +181,9 @@ class ConfigIndex extends Component
             });
 
             Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
-            File::chmod('archives/images/hero/'. $filename, 0777);
+            // File::chmod('archives/images/hero/'. $filename, 0777);
             File::chmod('archives/images/hero/', 0777);
-            File::chmod('archives/images/hero', 0777);
+            // File::chmod('archives/images/hero', 0777);
             $image_hero->save('archives/images/hero/'. $filename);
             $this->image_hero = $filename;
         }

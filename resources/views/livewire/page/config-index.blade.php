@@ -68,7 +68,7 @@
                     <p class="mb-1">Imagen de portada actual:</p>
                     <div class="w-64 h-64 mx-auto relative">
                         @if ($this->image_hero && $this->image_hero != '')
-                            <img src="{{asset('archives/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                            <img src="{{asset('storage/archives/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
                             <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                         @else
                             <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
@@ -110,7 +110,7 @@
                     <p class="mb-1">Imagen del logo actual:</p>
                     <div class="w-64 h-64 mx-auto relative">
                         @if ($this->image_logo && $this->image_logo != '')
-                            <img src="{{asset('archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                            <img src="{{asset('storage/archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
                             <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
                         @else
                             <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
@@ -120,7 +120,7 @@
                 
                 <div class="">
                     
-                    <div wire:loading wire:target="image_hero_new">
+                    <div wire:loading wire:target="image_hero_logo">
                         <x-sistem.spinners.loading-spinner/>
                     </div>
     

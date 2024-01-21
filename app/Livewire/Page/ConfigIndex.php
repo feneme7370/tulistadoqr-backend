@@ -110,12 +110,23 @@ class ConfigIndex extends Component
     // eliminar imagen de portada
     public function deleteImage(){
         if($this->image_hero != ''){
-            $path = public_path('archives/images/hero/'.$this->image_hero);
-            if(File::exists($path)){
-                unlink($path);
+            $path = 'public/archives/images/hero/'.$this->image_hero;
+            if(Storage::disk('local')->exists($path)){
+                Storage::disk('local')->delete($path);
             }
         }
     }
+    // eliminar imagen del logo
+    public function deleteImageLogo(){
+        if($this->image_logo != ''){
+            $path = 'public/archives/images/logo/'.$this->image_logo;
+            if(Storage::disk('local')->exists($path)){
+                Storage::disk('local')->delete($path);
+            }
+        }
+    }
+
+
     public function deleteImageEdit() {
         $this->deleteImage();
         $this->image_hero = '';
@@ -124,15 +135,7 @@ class ConfigIndex extends Component
         );
     }
 
-    // eliminar imagen del logo
-    public function deleteImageLogo(){
-        if($this->image_logo != ''){
-            $path = public_path('archives/images/logo/'.$this->image_logo);
-            if(File::exists($path)){
-                unlink($path);
-            }
-        }
-    }
+
     public function deleteImageLogoEdit() {
         $this->deleteImageLogo();
         $this->image_logo = '';
@@ -146,26 +149,22 @@ class ConfigIndex extends Component
     
         // Verificar si la carpeta existe, si no, crearla
 
-        // $path = public_path('archives/images/hero');
-        
-        // if (!storage::directoryExists($path)) {
-        //     Storage::createDirectory($path);
-        // }
-        // if (!file_exists($path) && is_dir($path)) {
-        //     chmod($path, 777);
-        //     mkdir($path, 777, true);
-        // }
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
             $this->deleteImage();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id.'.jpg';
+            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
+            $extension = '.jpg';
+            $filename = $name.$extension;
+
             $image_hero = Image::make($this->image_hero_new);
             $image_hero->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $image_hero->save(public_path('archives/images/hero/'.$name));
-            $this->image_hero = $name;
+
+            Storage::disk('local')->put('public/archives/images/hero/' . $filename, $image_hero->encode());
+            
+            $this->image_hero = $filename;
         }
     }
 
@@ -174,21 +173,21 @@ class ConfigIndex extends Component
     
         // Verificar si la carpeta existe, si no, crearla
 
-        // $path = public_path('archives/images/logo/');
-        // if (!storage::directoryExists($path)) {
-        //     Storage::createDirectory($path);
-        // }
-
         // crear o reemplazar imagen
         if($this->image_logo_new){
             $this->deleteImageLogo();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id.'.jpg';
+            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
+            $extension = '.jpg';
+            $filename = $name.$extension;
+            
             $image_logo = Image::make($this->image_logo_new);
             $image_logo->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $image_logo->save(public_path('archives/images/logo/'.$name));
-            $this->image_logo = $name;
+
+            Storage::disk('local')->put('public/archives/images/logo/' . $filename, $image_logo->encode());
+            
+            $this->image_logo = $filename;
         }
     }
 

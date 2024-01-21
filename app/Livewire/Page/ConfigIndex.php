@@ -128,10 +128,10 @@ class ConfigIndex extends Component
             if(Storage::disk('public')->exists($path)){
                 Storage::disk('public')->delete($path);
             }
-            if (File::exists($path)) {
-                // Eliminar el archivo
-                File::delete($path);
-            } 
+            // if (File::exists($path)) {
+            //     // Eliminar el archivo
+            //     File::delete($path);
+            // } 
         }
     }
     // eliminar imagen del logo
@@ -182,7 +182,6 @@ class ConfigIndex extends Component
 
             Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
 
-            File::put('archives/images/hero', $image_hero->encode());
             // $image_hero->save('archives/images/hero/'. $filename);
             $this->image_hero = $filename;
         }

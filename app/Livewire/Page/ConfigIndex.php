@@ -184,7 +184,7 @@ class ConfigIndex extends Component
 
             Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
 
-            $path = public_path('archives/images/hero') . '/' . $filename;
+            $path = public_path('/archives/images/hero') . '/' . $filename;
 
             $image_hero->save($path );
             $this->image_hero = $filename;
@@ -210,7 +210,8 @@ class ConfigIndex extends Component
 
             Storage::disk('local')->put('public/archives/images/logo/' . $filename, $image_logo->encode());
             
-            // $image_logo->save('archives/images/logo/'. $filename);
+            $path = '/archives/images/logo/' . $filename;
+            $image_logo->save($path);
             $this->image_logo = $filename;
         }
     }

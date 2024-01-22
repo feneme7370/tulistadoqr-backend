@@ -33,8 +33,8 @@ class SocialMediaIndex extends Component
     // reglas de validacion
     public function rules(){
         return [
-            'name' => ['required', 'string', 'min:4'],
-            'slug' => ['required', 'string', 'min:4'],
+            'name' => ['required', 'string', 'min:2'],
+            'slug' => ['required', 'string'],
             'user_id' => ['required', 'numeric'],
             'company_id' => ['required', 'numeric'],
         ];

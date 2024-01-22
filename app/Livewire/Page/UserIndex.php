@@ -17,7 +17,7 @@ class UserIndex extends Component
     public function updatingSearch() {$this->resetPage();}
 
     // propiedades de busqueda
-    public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+    public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -45,18 +45,18 @@ class UserIndex extends Component
     // reglas de validacion
     public function rules(){
         return [
-            'name' => ['required', 'string', 'min:4'],
-            'slug' => ['required', 'string', 'min:4'],
-            'email' => ['required', 'email', 'min:4'],
-            'password' => ['nullable', 'min:4', 'confirmed'],
-            'password_confirmation' => ['nullable', 'min:4'],
-            'lastname' => ['required', 'string', 'min:4'],
-            'phone' => ['nullable', 'numeric', 'min:4'],
-            'adress' => ['nullable', 'string', 'min:4'],
-            'birthday' => ['nullable', 'string', 'min:4'],
-            'city' => ['nullable', 'string', 'min:4'],
-            'social' => ['nullable', 'string', 'min:4'],
-            'description' => ['nullable', 'string', 'min:4'],
+            'name' => ['required', 'string', 'min:2'],
+            'slug' => ['required', 'string'],
+            'email' => ['required', 'email', 'min:2'],
+            'password' => ['nullable', 'min:2', 'confirmed'],
+            'password_confirmation' => ['nullable', 'min:2'],
+            'lastname' => ['required', 'string', 'min:2'],
+            'phone' => ['nullable', 'numeric', 'min:2'],
+            'adress' => ['nullable', 'string', 'min:2'],
+            'birthday' => ['nullable', 'string', 'min:2'],
+            'city' => ['nullable', 'string', 'min:2'],
+            'social' => ['nullable', 'string', 'min:2'],
+            'description' => ['nullable', 'string', 'min:2'],
             'status' => ['numeric'],
             'company_id' => ['required', 'numeric'],
         ];
@@ -172,7 +172,12 @@ class UserIndex extends Component
         $companies = Company::get();
         $users = User::when( $this->search, function($query) {
                             return $query->where(function( $query) {
-                                $query->where('name', 'like', '%'.$this->search . '%');
+                                $query->where('name', 'like', '%'.$this->search . '%')
+                                        ->orWhere('lastname', 'like', '%'.$this->search . '%')
+                                        ->orWhere('email', 'like', '%'.$this->search . '%')
+                                        ->orWhereHas('company', function ($q) {
+                                            $q->where('name', 'like', '%'.$this->search . '%');
+                                        });
                             });
                         })
                         ->when($this->active, function( $query) {

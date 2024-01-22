@@ -1,7 +1,8 @@
 <div>
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
-        :messageError="session('messageError')" />
+        :messageError="session('messageError')" 
+    />
 
     {{-- titulo y boton --}}
     <x-sistem.menus.title-and-btn title="Membresias">
@@ -18,6 +19,7 @@
 
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.search-active />
+    <x-sistem.spinners.loading-spinner wire:loading wire:target="search"/>
 
     {{-- listado --}}
     <div class="mx-auto">
@@ -29,9 +31,9 @@
                     <thead>
                       <tr>
                         <th>ID</th>
+                        <th>Acciones</th>
                         <th>Nombre</th>
                         <th>Estado</th>
-                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -43,6 +45,14 @@
                           </td>
 
                           <td>
+                            <div class="actions">
+                              <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
+                              <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
+                                wire:loading.attr="disabled" />
+                            </div>
+                          </td>
+
+                          <td>
                             <p>{{$item->name}}</p>
                           </td>
 
@@ -51,13 +61,7 @@
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>
                           </td>
-                          <td>
-                            <div class="actions">
-                              <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
-                              <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
-                                wire:loading.attr="disabled" />
-                            </div>
-                          </td>
+                          
                         </tr>
                         @endforeach
             
@@ -96,12 +100,14 @@
     <!-- Modal para crear y editar -->
     <x-sistem.modal.dialog-modal wire:model="showActionModal">
         <x-slot name="title">
-            {{ __('Agregar') }}
+          {{ __($membership ? 'Editar' : 'Agregar') }}
         </x-slot>
 
         <x-slot name="content">
           <form {{-- method="POST" --}} class="grid gap-2 mt-2">
 
+            <x-sistem.forms.validation-errors class="mb-4" />
+            
             <div>
               <x-sistem.forms.label-form for="name" value="{{ __('Nombre de la membresia') }}" />
               <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
@@ -117,7 +123,7 @@
             </div>
                 
             <div>
-              <x-sistem.forms.label-form for="level" value="{{ __('Nivel') }}" />
+              <x-sistem.forms.label-form for="level" value="{{ __('Niveles') }}" />
               <x-sistem.forms.input-form id="level" type="text" placeholder="{{ __('Cantidad') }}" wire:model="level"
                    />
               <x-sistem.forms.input-error for="level" />
@@ -157,7 +163,7 @@
 
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-            <x-sistem.buttons.primary-btn wire:click="save" class="ml-3" wire:loading.attr="disabled" title="Guardar"  />
+            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="{{ __($membership ? 'Actualizar' : 'Guardar') }}"  />
         </x-slot>
     </x-sistem.modal.dialog-modal>
 

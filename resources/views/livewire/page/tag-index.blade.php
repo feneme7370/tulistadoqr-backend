@@ -19,6 +19,7 @@
 
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.search-only />
+    <x-sistem.spinners.loading-spinner wire:loading wire:target="search"/>
 
     {{-- listado --}}
     <div class="mx-auto">

@@ -15,7 +15,7 @@ class MembershipIndex extends Component
     public function updatingSearch() {$this->resetPage();}
 
     // propiedades de busqueda
-    public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+    public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
     // propiedades para el modal
     public $showActionModal = false;

@@ -100,9 +100,9 @@ class ProductIndex extends Component
             if(Storage::disk('public')->exists($path)){
                 Storage::disk('public')->delete($path);
             }
-            if(File::exists($path)){
-                File::delete($path);
-            }
+            // if(File::exists($path)){
+            //     File::delete($path);
+            // }
         }
     }
 
@@ -132,7 +132,7 @@ class ProductIndex extends Component
 
             Storage::disk('public')->put('archives/images/product_hero/' . $filename, $image_hero->encode());
 
-            $image_hero->save('archives/images/product_hero/'. $filename);
+            // $image_hero->save('archives/images/product_hero/'. $filename);
             $this->image_hero = $filename;
         }
     }

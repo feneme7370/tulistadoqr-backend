@@ -128,9 +128,9 @@ class ConfigIndex extends Component
             if(Storage::disk('public')->exists($path)){
                 Storage::disk('public')->delete($path);
             }
-            // if(File::exists($path)){
-            //     File::delete($path);
-            // }
+            if(File::exists($path)){
+                File::delete($path);
+            }
         }
     }
     // eliminar imagen del logo
@@ -140,9 +140,9 @@ class ConfigIndex extends Component
             if(Storage::disk('local')->exists($path)){
                 Storage::disk('local')->delete($path);
             }
-            if(File::exists($path)){
-                File::delete($path);
-            }
+            // if(File::exists($path)){
+            //     File::delete($path);
+            // }
         }
     }
 
@@ -184,7 +184,10 @@ class ConfigIndex extends Component
 
             Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
 
-            // $image_hero->save('archives/images/hero/'. $filename);
+            $path = public_path("archives/images/hero");
+            if(!File::exists($path)) File::makeDirectory($path, 775);
+
+            $image_hero->save($path . '/'. $filename);
             $this->image_hero = $filename;
         }
     }
@@ -208,7 +211,7 @@ class ConfigIndex extends Component
 
             Storage::disk('local')->put('public/archives/images/logo/' . $filename, $image_logo->encode());
             
-            $image_logo->save('archives/images/logo/'. $filename);
+            // $image_logo->save('archives/images/logo/'. $filename);
             $this->image_logo = $filename;
         }
     }

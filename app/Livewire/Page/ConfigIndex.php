@@ -173,20 +173,22 @@ class ConfigIndex extends Component
         // crear o reemplazar imagen
         if($this->image_hero_new){
             $this->deleteImage();
-            $imagen = $this->image_hero_new;
-            // $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
-            // $extension = $imagen->extension();
-            $filename = Str::uuid() . "." . $imagen->extension();;
+            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
+            $extension = '.jpg';
+            $filename = $name.$extension;
 
-            $image_hero = Image::make($imagen);
+            $image_hero = Image::make($this->image_hero_new)->encode('jpg', 75);
             $image_hero->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
+            $path = public_path('uploads') . '/' . $filename;
+            $image_hero->save($path );
+
             Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
 
-            $imagenPath = public_path('archives/images/hero') . '/' . $filename;
-            $image_hero->save($imagenPath);
+            
+            
             $this->image_hero = $filename;
         }
     }
@@ -208,10 +210,10 @@ class ConfigIndex extends Component
                 $constraint->aspectRatio();
             });
 
-            Storage::disk('local')->put('public/archives/images/logo/' . $filename, $image_logo->encode());
-            
-            $path = '/archives/images/logo/' . $filename;
-            $image_logo->save($path);
+            $path = storage_path('app/public/uploads/') . $filename;
+            $image_logo->save($path );
+            Storage::disk('public')->put('archives/images/logo/' . $filename, $image_logo->encode());
+
             $this->image_logo = $filename;
         }
     }

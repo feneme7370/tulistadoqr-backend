@@ -184,10 +184,9 @@ class ConfigIndex extends Component
 
             Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
 
-            $path = public_path("archives/images/hero");
-            if(!File::exists($path)) File::makeDirectory($path, 775);
+            $path = public_path('archives/images/hero') . '/' . $filename;
 
-            $image_hero->save($path . '/'. $filename);
+            $image_hero->save($path );
             $this->image_hero = $filename;
         }
     }

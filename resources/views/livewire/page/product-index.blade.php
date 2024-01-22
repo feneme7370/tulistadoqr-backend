@@ -197,6 +197,17 @@
                     <div class="grid grid-cols-1 gap-3">
             
                         <div class="">
+                            <p class="mb-1">Imagen del producto actual public:</p>
+                            <div class="w-64 h-64 mx-auto relative">
+                                @if ($this->image_hero && $this->image_hero != '')
+                                    <img src="{{asset('archives/images/product_hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                                    <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                                @else
+                                    <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+                                @endif
+                            </div>
+                        </div>
+                        <div class="">
                             <p class="mb-1">Imagen del producto actual:</p>
                             <div class="w-64 h-64 mx-auto relative">
                                 @if ($this->image_hero && $this->image_hero != '')

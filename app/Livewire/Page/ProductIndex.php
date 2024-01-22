@@ -3,15 +3,16 @@
 namespace App\Livewire\Page;
 
 use Livewire\Component;
+use App\Models\Page\Tag;
 use App\Models\Page\Level;
 use Illuminate\Support\Str;
 use App\Models\Page\Product;
 use Livewire\WithPagination;
 use App\Models\Page\Category;
-use App\Models\Page\Tag;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ProductIndex extends Component
@@ -99,6 +100,9 @@ class ProductIndex extends Component
             if(Storage::disk('public')->exists($path)){
                 Storage::disk('public')->delete($path);
             }
+            if(File::exists($path)){
+                File::delete($path);
+            }
         }
     }
 
@@ -128,7 +132,7 @@ class ProductIndex extends Component
 
             Storage::disk('public')->put('archives/images/product_hero/' . $filename, $image_hero->encode());
 
-            // $image_hero->save('archives/images/hero/'. $filename);
+            $image_hero->save('archives/images/product_hero/'. $filename);
             $this->image_hero = $filename;
         }
     }

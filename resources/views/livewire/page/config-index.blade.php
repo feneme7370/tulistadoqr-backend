@@ -68,7 +68,7 @@
                     <p class="mb-1">Imagen de portada actual:</p>
                     <div class="w-64 h-64 mx-auto relative">
                         @if ($this->image_hero && $this->image_hero != '')
-                            <img src="{{asset('storage/archives/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                            <img src="{{asset('archives/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
                             <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                         @else
                             <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
@@ -82,7 +82,7 @@
                         <x-sistem.spinners.loading-spinner/>
                     </div>
     
-                    <p class="mb-1">Imagen de portada nueva:</p>
+                    <p class="mb-1">Imagen de portada nueva Public:</p>
                     @if ($image_hero_new) 
                         <div class="w-64 h-64 mx-auto relative">
                             <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_hero_new->temporaryUrl() }}">
@@ -107,7 +107,7 @@
             <div class="grid grid-cols-1 gap-3">
     
                 <div class="">
-                    <p class="mb-1">Imagen del logo actual:</p>
+                    <p class="mb-1">Imagen del logo actual Storage:</p>
                     <div class="w-64 h-64 mx-auto relative">
                         @if ($this->image_logo && $this->image_logo != '')
                             <img src="{{asset('storage/archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />

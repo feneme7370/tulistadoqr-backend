@@ -5,32 +5,14 @@
         <span>{{auth()->user()->company->name}}</span>
     </x-sistem.menus.title-and-btn>
 
-    <img src="{{'storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{'/storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{'/public/archives/images/hero/'.auth()->user()->company->image_hero}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{'public/archives/images/hero/'.auth()->user()->company->image_hero}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{'public/storage/archives/images/hero/'.auth()->user()->company->image_hero}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{'/public/storage/archives/images/hero/'.auth()->user()->company->image_hero}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('storage/app/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/storage/app/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('app/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-
     <div class="grid gap-3 mb-2 md:grid-cols-2">
         <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
             @if (auth()->user()->company->image_hero)
-                <img src="{{asset('storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+                <img src="{{asset('archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
             @else
                 <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
             @endif
-            <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada</p>
+            <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada Public</p>
         </div>
 
         <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
@@ -39,7 +21,7 @@
             @else
                 <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
             @endif
-            <p class="absolute top-0 right-0 p-2 bg-black text-white">Logo</p>
+            <p class="absolute top-0 right-0 p-2 bg-black text-white">Logo Storage</p>
         </div>
 
     </div>
@@ -131,5 +113,6 @@
         @endcan
  
     </div>
+
 
 </x-app-layout>

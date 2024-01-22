@@ -177,15 +177,15 @@ class ConfigIndex extends Component
             $extension = '.jpg';
             $filename = $name.$extension;
 
-            $image_hero = Image::make($this->image_hero_new)->encode('jpg', 75);
+            $image_hero = Image::make($this->image_hero_new);
             $image_hero->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
-            $path = 'uploads/' . $filename;
+            $path = public_path('archives/images/hero/') . $filename;
             $image_hero->save($path );
 
-            Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
+            // Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
 
             
             
@@ -210,9 +210,9 @@ class ConfigIndex extends Component
                 $constraint->aspectRatio();
             });
 
-            $path = storage_path('uploads') .'/' . $filename;
-            $image_logo->save($path );
-            Storage::disk('public')->put('archives/images/logo/' . $filename, $image_logo->encode());
+            $path = 'archives/images/logo/' . $filename;
+            // $image_logo->save($path );
+            Storage::disk('public')->put($path, $image_logo->encode());
 
             $this->image_logo = $filename;
         }

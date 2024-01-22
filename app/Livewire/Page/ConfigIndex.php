@@ -182,7 +182,7 @@ class ConfigIndex extends Component
                 $constraint->aspectRatio();
             });
 
-            $path = public_path('uploads') . '/' . $filename;
+            $path = 'uploads/' . $filename;
             $image_hero->save($path );
 
             Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
@@ -210,7 +210,7 @@ class ConfigIndex extends Component
                 $constraint->aspectRatio();
             });
 
-            $path = storage_path('app/public/uploads/') . $filename;
+            $path = storage_path('uploads') .'/' . $filename;
             $image_logo->save($path );
             Storage::disk('public')->put('archives/images/logo/' . $filename, $image_logo->encode());
 

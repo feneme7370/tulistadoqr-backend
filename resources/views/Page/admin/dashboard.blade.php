@@ -5,115 +5,37 @@
         <span>{{auth()->user()->company->name}}</span>
     </x-sistem.menus.title-and-btn>
 
-    <div>
-        <img src="{{asset('archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('app/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('app/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('app/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('public/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('app/public/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('public/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{asset('app/public/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
+    <img src="{{Storage::url('storage/app/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/storage/app/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('app/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('storage/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/storage/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
 
-    <div>
-        <img src="{{public_path('archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('app/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('app/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('app/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('public/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('app/public/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('public/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{public_path('app/public/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-  
-    <div>
-        <img src="{{storage_path('archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('app/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('app/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('app/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('public/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('app/public/storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('public/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
-    <div>
-        <img src="{{storage_path('app/public/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    </div>
+    <div class="grid gap-3 mb-2 md:grid-cols-2">
+        <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
+            @if (auth()->user()->company->image_hero)
+                <img src="{{asset('storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+            @else
+                <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+            @endif
+            <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada</p>
+        </div>
 
+        <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
+            @if (auth()->user()->company->image_logo)
+                <img src="{{asset('storage/archives/images/hero/'.auth()->user()->company->image_logo)}}" alt="imagen logo" class="w-full h-full object-cover rounded-sm" />
+            @else
+                <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+            @endif
+            <p class="absolute top-0 right-0 p-2 bg-black text-white">Logo</p>
+        </div>
 
-
-
-
-
-
-
-
-
-    <div class="w-full md:w-96 h-64 mx-auto mb-5 bg-gray-200 relative">
-        @if (auth()->user()->company->image_hero)
-            <img src="{{asset('storage/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-        @else
-            <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-        @endif
-        <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada</p>
     </div>
       
     <div class="grid gap-3 mb-8 md:grid-cols-2 xl:grid-cols-4">

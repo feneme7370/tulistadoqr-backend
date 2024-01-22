@@ -95,9 +95,9 @@ class ProductIndex extends Component
     // eliminar imagen al reemplazarla
     public function deleteImage(){
         if($this->image_hero != ''){
-            $path = public_path('archives/images/product_hero/'.$this->image_hero);
-            if(file_exists($path)){
-                unlink($path);
+            $path = 'archives/images/product_hero/'.$this->image_hero;
+            if(Storage::disk('public')->exists($path)){
+                Storage::disk('public')->delete($path);
             }
         }
     }
@@ -114,22 +114,22 @@ class ProductIndex extends Component
     // subir imagen al crear producto o editar al reemplazar
     public function uploadImage(){
 
-        // Verificar si la carpeta existe, si no, crearla
-        $path = public_path('archives/images/product_hero/');
-        // if (!file_exists($path)) {
-        //     mkdir($path, 0777, true);
-        // }
-
         // crear o reemplazar imagen
         if($this->image_hero_new){
             $this->deleteImage();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id.'.jpg';
+            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
+            $extension = '.jpg';
+            $filename = $name.$extension;
+
             $image_hero = Image::make($this->image_hero_new);
             $image_hero->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $image_hero->save(public_path('archives/images/product_hero/'.$name));
-            $this->image_hero = $name;
+
+            Storage::disk('public')->put('archives/images/product_hero/' . $filename, $image_hero->encode());
+
+            // $image_hero->save('archives/images/hero/'. $filename);
+            $this->image_hero = $filename;
         }
     }
 

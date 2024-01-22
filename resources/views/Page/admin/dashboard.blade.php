@@ -5,17 +5,17 @@
         <span>{{auth()->user()->company->name}}</span>
     </x-sistem.menus.title-and-btn>
 
-    <img src="{{Storage::url('storage/app/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/storage/app/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('app/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('storage/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-    <img src="{{Storage::url('/storage/public/archives/images/hero/'.auth()->user()->company->image_hero))}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('storage/app/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/storage/app/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('storage/app/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('app/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+    <img src="{{Storage::url('/storage/public/archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
 
     <div class="grid gap-3 mb-2 md:grid-cols-2">
         <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">

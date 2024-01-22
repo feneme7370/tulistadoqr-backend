@@ -173,20 +173,20 @@ class ConfigIndex extends Component
         // crear o reemplazar imagen
         if($this->image_hero_new){
             $this->deleteImage();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
-            $extension = '.jpg';
-            $filename = $name.$extension;
+            $imagen = $this->image_hero_new;
+            // $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
+            // $extension = $imagen->extension();
+            $filename = Str::uuid() . "." . $imagen->extension();;
 
-            $image_hero = Image::make($this->image_hero_new);
+            $image_hero = Image::make($imagen);
             $image_hero->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
             Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
 
-            $path = public_path('/archives/images/hero') . '/' . $filename;
-
-            $image_hero->save($path );
+            $imagenPath = public_path('archives/images/hero') . '/' . $filename;
+            $image_hero->save($imagenPath);
             $this->image_hero = $filename;
         }
     }

@@ -52,17 +52,17 @@
         </div>
 
         {{-- imagen de portada empresa --}}
-        <div>
+        <div class="bg-gray-100 p-1 rounded-md">
             <h2 class="text-center font-bold text-xl">Imagen principal de la empresa</h2>
     
             <div>
                 <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
-                <x-sistem.forms.input-form id="image_hero_new" type="file" wire:model="image_hero_new" accept="image/*"
+                <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_hero_new" accept="image/*"
                      />
                 <x-sistem.forms.input-error for="image_hero_new" />
             </div>
     
-            <div class="grid grid-cols-1 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
     
                 <div class="">
                     <p class="mb-1">Imagen de portada actual:</p>
@@ -82,7 +82,7 @@
                         <x-sistem.spinners.loading-spinner/>
                     </div>
     
-                    <p class="mb-1">Imagen de portada nueva Public:</p>
+                    <p class="mb-1">Imagen de portada nueva:</p>
                     @if ($image_hero_new) 
                         <div class="w-64 h-64 mx-auto relative">
                             <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_hero_new->temporaryUrl() }}">
@@ -95,22 +95,22 @@
         </div>
 
         {{-- logo de la empresa --}}
-        <div>
+        <div class="bg-gray-100 p-1 rounded-md">
             <h2 class="text-center font-bold text-xl">Logo de la empresa</h2>
             <div>
                 <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
-                <x-sistem.forms.input-form id="image_logo_new" type="file" wire:model="image_logo_new" accept="image/*"
+                <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_logo_new" accept="image/*"
                      />
                 <x-sistem.forms.input-error for="image_logo_new" />
             </div>
     
-            <div class="grid grid-cols-1 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
     
                 <div class="">
-                    <p class="mb-1">Imagen del logo actual Storage:</p>
+                    <p class="mb-1">Imagen del logo actual:</p>
                     <div class="w-64 h-64 mx-auto relative">
                         @if ($this->image_logo && $this->image_logo != '')
-                            <img src="{{asset('storage/archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                            <img src="{{asset('archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
                             <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
                         @else
                             <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
@@ -159,6 +159,6 @@
             @endforeach
         </div>
 
-        <x-sistem.buttons.primary-btn wire:click="save" class="ml-3 mx-auto" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Actualizar"/>
+        <x-sistem.buttons.primary-btn wire:click="save" class="sm:mx-auto sm:mr-2" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Actualizar"/>
     </form>
 </div>

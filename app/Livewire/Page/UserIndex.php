@@ -7,14 +7,15 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Page\Company;
 use Livewire\WithPagination;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 
 class UserIndex extends Component
 {
     // paginacion
     use WithPagination;
-    public function updatingActive() {$this->resetPage();}
-    public function updatingSearch() {$this->resetPage();}
+    public function updatingActive() {$this->resetPage(pageName: 'p_user');}
+    public function updatingSearch() {$this->resetPage(pageName: 'p_user');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
@@ -47,7 +48,7 @@ class UserIndex extends Component
         return [
             'name' => ['required', 'string', 'min:2'],
             'slug' => ['required', 'string'],
-            'email' => ['required', 'email', 'min:2'],
+            'email' => ['required', 'email', 'min:2', Rule::unique('users')->ignore($this->user)],
             'password' => ['nullable', 'min:2', 'confirmed'],
             'password_confirmation' => ['nullable', 'min:2'],
             'lastname' => ['required', 'string', 'min:2'],
@@ -89,8 +90,11 @@ class UserIndex extends Component
     
     // eliminar desde el modal de confirmacion
     public function deleteUser() {
-        $this->resetErrorBag();
         $user = User::findOrFail($this->user->id);
+
+        $this->authorize('delete', $user); 
+
+        $this->resetErrorBag();
 
         if($user->id == 1){
             session()->flash('messageError', 'No se puede eliminar el registro');
@@ -115,11 +119,13 @@ class UserIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(User $user) {
+        $this->user = $user;
+        $this->authorize('update', $this->user); 
+
         $this->resetErrorBag();
         $this->reset(['user']);
         $this->reset(['name', 'slug', 'email', 'password', 'password_confirmation', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id']);
 
-        $this->user = $user;
         $this->name = $user['name'];
         $this->slug = $user['slug'];
         $this->email = $user['email'];
@@ -184,7 +190,7 @@ class UserIndex extends Component
                             return $query->where('status', 1);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-                        ->paginate($this->perPage);
+                        ->paginate($this->perPage, pageName: 'p_user');
         return view('livewire.page.user-index', compact('companies', 'users'));
     }
 }

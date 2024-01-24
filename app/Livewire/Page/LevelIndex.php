@@ -11,12 +11,17 @@ class LevelIndex extends Component
 {
         // paginacion
         use WithPagination;
-        public function updatingActive() {$this->resetPage();}
-        public function updatingSearch() {$this->resetPage();}
+        public function updatingActive() {$this->resetPage(pageName: 'p_level');}
+        public function updatingSearch() {$this->resetPage(pageName: 'p_level');}
     
         // propiedades de busqueda
         public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
     
+        protected function queryString()
+        {
+            return ['search' => [ 'as' => 'q' ],];
+        }
+
         // propiedades para el modal
         public $showActionModal = false;
         public $showDeleteModal = false;
@@ -67,13 +72,15 @@ class LevelIndex extends Component
     
         // abrir modal y recibir id
         public function openDeleteModal($id){
-            $this->showDeleteModal = true;
             $this->level = Level::findOrFail($id);
+            $this->authorize('delete', $this->level); 
+
+            $this->resetErrorBag();
+            $this->showDeleteModal = true;
         }
         
         // eliminar desde el modal de confirmacion
         public function deleteLevel() {
-            $this->resetErrorBag();
             $level = Level::findOrFail($this->level->id);
     
             // comprobar si tiene productos asignados
@@ -85,10 +92,6 @@ class LevelIndex extends Component
                 session()->flash('messageSuccess', 'Registro eliminado');
                 $this->reset();
             }
-
-            $level->delete();
-            session()->flash('messageSuccess', 'Registro eliminado');
-            $this->reset();
             
             $this->showDeleteModal = false;
         }
@@ -105,8 +108,10 @@ class LevelIndex extends Component
     
         // // mostrar modal para confirmar editar
         public function editActionModal(Level $level) {
-            $this->resetErrorBag();
             $this->level = $level;
+            $this->authorize('update', $this->level); 
+
+            $this->resetErrorBag();
             $this->name = $level['name'];
             $this->slug = $level['slug'];
             $this->description = $level['description'];
@@ -156,7 +161,7 @@ class LevelIndex extends Component
                             return $query->where('status', 1);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-                        ->paginate($this->perPage);
+                        ->paginate($this->perPage, pageName: 'p_level');
         return view('livewire.page.level-index', compact('levels'));
     }
 }

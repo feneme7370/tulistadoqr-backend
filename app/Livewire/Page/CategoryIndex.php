@@ -11,11 +11,16 @@ class CategoryIndex extends Component
 {
     // paginacion
     use WithPagination;
-    public function updatingActive() {$this->resetPage();}
-    public function updatingSearch() {$this->resetPage();}
+    public function updatingActive() {$this->resetPage(pageName: 'p_category');}
+    public function updatingSearch() {$this->resetPage(pageName: 'p_category');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+
+    protected function queryString()
+    {
+        return ['search' => [ 'as' => 'q' ],];
+    }
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -66,8 +71,12 @@ class CategoryIndex extends Component
 
     // abrir modal y recibir id
     public function openDeleteModal($id){
-        $this->showDeleteModal = true;
         $this->category = Category::findOrFail($id);
+        $this->authorize('delete', $this->category); 
+        
+        $this->resetErrorBag();
+        $this->showDeleteModal = true;
+        
     }
     
     // eliminar desde el modal de confirmacion
@@ -84,10 +93,6 @@ class CategoryIndex extends Component
             session()->flash('messageSuccess', 'Registro eliminado');
             $this->reset();
         }
-
-        $category->delete();
-        session()->flash('messageSuccess', 'Registro eliminado');
-        $this->reset();
         
         $this->showDeleteModal = false;
     }
@@ -104,8 +109,11 @@ class CategoryIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Category $category) {
-        $this->resetErrorBag();
         $this->category = $category;
+        $this->authorize('update', $this->category); 
+
+        $this->resetErrorBag();
+
         $this->name = $category['name'];
         $this->slug = $category['slug'];
         $this->description = $category['description'];
@@ -143,6 +151,7 @@ class CategoryIndex extends Component
 
         $this->showActionModal = false;
     }
+
     public function render()
     {
         $categories = Category::where('company_id', auth()->user()->company_id)
@@ -155,7 +164,7 @@ class CategoryIndex extends Component
                             return $query->where('status', 1);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-                        ->paginate($this->perPage);
+                        ->paginate($this->perPage, pageName: 'p_category');
         return view('livewire.page.category-index', compact('categories'));
     }
 }

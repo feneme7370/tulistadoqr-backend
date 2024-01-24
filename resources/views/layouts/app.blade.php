@@ -10,7 +10,8 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+        <script src="{{asset('lib\flowbite\flowbite.min.js')}}"></script>
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -19,7 +20,14 @@
     </head>
     <body class="font-sans antialiased">
 
-        @include('layouts.includes.sidebarFlowtrail')
+        @include('layouts.includes.sidebarFlowbite')
+
+        <!-- Page Content -->
+        <main class="p-4 sm:ml-64 pt-20">
+            {{ $slot }}
+        </main>
+        
+        {{-- @include('layouts.includes.sidebarFlowtrail')
 
         <div class="w-full">
             <div class="max-w-7xl mx-auto p-1 sm:px-6 lg:px-8">
@@ -34,7 +42,7 @@
                 </div>
                 @include('layouts.includes.footer-basic')
             </div>
-        </div>
+        </div> --}}
 
     </div>
 

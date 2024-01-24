@@ -5,6 +5,8 @@ namespace App\Livewire\Page;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Page\Company;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Locked;
 use App\Models\Page\SocialMedia;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -13,6 +15,7 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ConfigIndex extends Component
 {
+
     // subir imagen
     use WithFileUploads;
 
@@ -41,34 +44,20 @@ class ConfigIndex extends Component
     // reglas de validacion
     public function rules(){
         return [
-            'name' => ['required', 'string', 'min:4'],
-            'slug' => ['required', 'string', 'min:4'],
-            'email' => ['required', 'email', 'min:4'],
-            'phone' => ['nullable', 'numeric', 'min:4'],
-            'adress' => ['nullable', 'string', 'min:4'],
-            'city' => ['nullable', 'string', 'min:4'],
-            'social' => ['nullable', 'string', 'min:4'],
-            'description' => ['nullable', 'string', 'min:4'],
+            'name' => ['required', 'string', 'min:2', Rule::unique('companies')->ignore($this->company)],
+            'slug' => ['required', 'string', Rule::unique('companies')->ignore($this->company)],
+            'email' => ['required', 'email', 'min:2', Rule::unique('companies')->ignore($this->company)],
+            'phone' => ['nullable', 'numeric', 'min:2'],
+            'adress' => ['nullable', 'string', 'min:2'],
+            'city' => ['nullable', 'string', 'min:2'],
+            'social' => ['nullable', 'string', 'min:2'],
+            'description' => ['nullable', 'string', 'min:2'],
             'image_logo' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
             'image_logo_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
             'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
         ];
     }
-
-    protected $messages = [
-
-        'image_hero_new.nullable' => 'error en nullable',
-        'image_logo_new.nullable' => 'error en nullable',
-        'image_hero_new.image' => 'error en image',
-        'image_logo_new.image' => 'error en image',
-        'image_hero_new.mimes:jpeg,png,jpg,gif' => 'error en mimes:jpeg,png,jpg,gif',
-        'image_logo_new.mimes:jpeg,png,jpg,gif' => 'error en mimes:jpeg,png,jpg,gif',
-        'image_hero_new.max:3096' => 'error en max:3096',
-        'image_logo_new.max:3096' => 'error en max:3096',
-        
-
-    ];
 
     // renombrar variables a castellano
     protected $validationAttributes = [
@@ -89,6 +78,9 @@ class ConfigIndex extends Component
     // precargar datos a editar de la empresa
     public function mount(Company $company) {
 
+        // verificar que el usuario pertenece a empresa
+        $this->authorize('view', $company); 
+
         $this->company_data = $company;
         $this->socialMedia = SocialMedia::all();
         $this->loadSocialMediaData();
@@ -106,16 +98,14 @@ class ConfigIndex extends Component
     }
 
     // cargar datos de redes sociales de la empresa
-    public function loadSocialMediaData()
-    {
+    public function loadSocialMediaData(){
         foreach ($this->company_data->socialMedia as $social) {
             // llenar la variable socialMediaData[id] con cada id (facebook) y su url
             $this->socialMediaData[$social->id] = $social->pivot->url;
         }
     }
 
-    public function updateSocialMedia()
-    {
+    public function updateSocialMedia(){
         foreach ($this->socialMediaData as $socialMediaId => $url) {
             $this->company->socialMedia()->syncWithoutDetaching([$socialMediaId => ['url' => $url]]);
         }
@@ -125,9 +115,9 @@ class ConfigIndex extends Component
     public function deleteImage(){
         if($this->image_hero != ''){
             $path = 'archives/images/hero/'.$this->image_hero;
-            if(Storage::disk('public')->exists($path)){
-                Storage::disk('public')->delete($path);
-            }
+            // if(Storage::disk('public')->exists($path)){
+            //     Storage::disk('public')->delete($path);
+            // }
             if(File::exists($path)){
                 File::delete($path);
             }
@@ -136,16 +126,15 @@ class ConfigIndex extends Component
     // eliminar imagen del logo
     public function deleteImageLogo(){
         if($this->image_logo != ''){
-            $path = 'public/archives/images/logo/'.$this->image_logo;
-            if(Storage::disk('local')->exists($path)){
-                Storage::disk('local')->delete($path);
-            }
-            // if(File::exists($path)){
-            //     File::delete($path);
+            $path = 'archives/images/logo/'.$this->image_logo;
+            // if(Storage::disk('local')->exists($path)){
+            //     Storage::disk('local')->delete($path);
             // }
+            if(File::exists($path)){
+                File::delete($path);
+            }
         }
     }
-
 
     public function deleteImageEdit() {
         $this->deleteImage();
@@ -154,7 +143,6 @@ class ConfigIndex extends Component
             $this->only(['image_hero'])
         );
     }
-
 
     public function deleteImageLogoEdit() {
         $this->deleteImageLogo();
@@ -166,9 +154,6 @@ class ConfigIndex extends Component
 
     // subir imagen de portada a la empresa
     public function uploadImage(){
-    
-        // Verificar si la carpeta existe, si no, crearla
-
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
@@ -183,13 +168,11 @@ class ConfigIndex extends Component
             });
 
             $path = public_path('archives/images/hero/') . $filename;
-            $image_hero->save($path );
+            $image_hero->save($path);
+            $this->image_hero = $filename;
 
             // Storage::disk('public')->put('archives/images/hero/' . $filename, $image_hero->encode());
 
-            
-            
-            $this->image_hero = $filename;
         }
     }
 
@@ -211,8 +194,8 @@ class ConfigIndex extends Component
             });
 
             $path = 'archives/images/logo/' . $filename;
-            // $image_logo->save($path );
-            Storage::disk('public')->put($path, $image_logo->encode());
+            $image_logo->save($path);
+            // Storage::disk('public')->put($path, $image_logo->encode());
 
             $this->image_logo = $filename;
         }
@@ -220,6 +203,7 @@ class ConfigIndex extends Component
 
     // boton de guardar o editar
     public function save() {
+
         $this->slug = Str::slug($this->name);
 
         $this->validate();

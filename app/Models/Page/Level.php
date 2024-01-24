@@ -30,6 +30,6 @@ class Level extends Model
     }
     public function products()
     {
-        return $this->hasMany(Product::class, 'company_id', 'id');
+        return $this->hasMany(Product::class, 'level_id', 'id');
     }
 }

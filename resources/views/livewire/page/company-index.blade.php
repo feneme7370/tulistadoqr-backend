@@ -41,7 +41,7 @@
                     <tbody>
             
                         @foreach ($companies as $item)
-                        <tr>
+                        <tr wire:key="field-company-{{ $item->id }}">
 
                           <td class="text-center"><p>{{$item->id}}</p></td>
 

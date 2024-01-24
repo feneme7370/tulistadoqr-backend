@@ -38,7 +38,7 @@
                     <tbody>
             
                         @foreach ($social_medias as $item)
-                        <tr class="text-gray-700 dark:text-gray-400">
+                        <tr wire:key="field-social_media-{{ $item->id }}">
 
                           <td class="text-center"><p>{{$item->id}}</p></td>
                           

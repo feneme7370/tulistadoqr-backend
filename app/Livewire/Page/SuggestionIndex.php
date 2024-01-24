@@ -12,6 +12,9 @@ class SuggestionIndex extends Component
     // paginacion
     use WithPagination;
     
+    // propiedades de busqueda
+    public $perPage = 10;
+
     // propiedades del form
     public $product_id;
     public $user_id;
@@ -56,6 +59,8 @@ class SuggestionIndex extends Component
     // eliminar desde el modal de confirmacion
     public function deleteSuggestion($id) {
         $suggestion = Suggestion::findOrFail($id);
+        $this->authorize('delete', $suggestion);
+
         $suggestion->delete();
         session()->flash('messageSuccess', 'Registro eliminado');
         $this->reset();
@@ -90,9 +95,9 @@ class SuggestionIndex extends Component
         $products = Product::where('company_id', auth()->user()->company_id)
                         ->orderBy('name', 'ASC')->get();
 
-        $suggesteds = Suggestion::where('company_id', auth()->user()->company_id)
-        ->paginate(10);
+        $suggestions = Suggestion::where('company_id', auth()->user()->company_id)
+        ->paginate($this->perPage, pageName: 'p_suggestion');
         
-        return view('livewire.page.suggestion-index', compact('suggesteds', 'products'));
+        return view('livewire.page.suggestion-index', compact('suggestions', 'products'));
     }
 }

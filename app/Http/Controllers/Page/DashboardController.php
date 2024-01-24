@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Page\Level;
 use App\Models\Page\Product;
 use App\Models\Page\Suggestion;
+use App\Models\Page\Tag;
 
 class DashboardController extends Controller
 {
@@ -28,7 +29,8 @@ class DashboardController extends Controller
         $levels = Level::where('company_id', auth()->user()->company_id)->count();   
         $products = Product::where('company_id', auth()->user()->company_id)->count();   
         $suggestions = Suggestion::where('company_id', auth()->user()->company_id)->count();   
+        $tags = Tag::where('company_id', auth()->user()->company_id)->count();   
 
-        return view('Page.admin.dashboard', compact('companies', 'users', 'memberships', 'categories', 'levels', 'products', 'suggestions'));
+        return view('Page.admin.dashboard', compact('companies', 'users', 'memberships', 'categories', 'levels', 'products', 'suggestions', 'tags'));
     }
 }

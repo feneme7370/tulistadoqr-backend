@@ -50,8 +50,8 @@
             </thead>
             <tbody>
     
-                @foreach ($suggesteds as $item)
-                <tr>
+                @foreach ($suggestions as $item)
+                <tr wire:key="field-suggestion-{{ $item->id }}">
                   <td class="text-center"><p>{{$item->id}}</p></td>
                   
                   <td>
@@ -73,7 +73,7 @@
 
     {{-- Paginacion --}}
     <div class="mt-2">
-        {{ $suggesteds->onEachSide(1)->links() }}
+        {{ $suggestions->onEachSide(1)->links() }}
     </div>
 
 </div>

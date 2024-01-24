@@ -19,14 +19,19 @@ class ProductIndex extends Component
 {
     // paginacion
     use WithPagination;
-    public function updatingActive() {$this->resetPage();}
-    public function updatingSearch() {$this->resetPage();}
+    public function updatingActive() {$this->resetPage(pageName: 'p_product');}
+    public function updatingSearch() {$this->resetPage(pageName: 'p_product');}
 
     // subir archivos
     use WithFileUploads;
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+
+    protected function queryString()
+    {
+        return ['search' => [ 'as' => 'q' ],];
+    }
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -97,12 +102,9 @@ class ProductIndex extends Component
     public function deleteImage(){
         if($this->image_hero != ''){
             $path = 'archives/images/product_hero/'.$this->image_hero;
-            if(Storage::disk('public')->exists($path)){
-                Storage::disk('public')->delete($path);
+            if(File::exists($path)){
+                File::delete($path);
             }
-            // if(File::exists($path)){
-            //     File::delete($path);
-            // }
         }
     }
 
@@ -110,9 +112,11 @@ class ProductIndex extends Component
     public function deleteImageEdit() {
         $this->deleteImage();
         $this->image_hero = '';
+        
         $this->product->update(
             $this->only(['image_hero'])
         );
+
     }
 
     // subir imagen al crear producto o editar al reemplazar
@@ -130,9 +134,7 @@ class ProductIndex extends Component
                 $constraint->aspectRatio();
             });
 
-            Storage::disk('public')->put('archives/images/product_hero/' . $filename, $image_hero->encode());
-
-            // $image_hero->save('archives/images/product_hero/'. $filename);
+            $image_hero->save('archives/images/product_hero/'. $filename);
             $this->image_hero = $filename;
         }
     }
@@ -149,9 +151,12 @@ class ProductIndex extends Component
 
     // abrir modal y recibir id
     public function openDeleteModal($id){
+        $this->product = Product::findOrFail($id);
+        $this->authorize('delete', $this->product); 
+        
         $this->resetErrorBag();
         $this->showDeleteModal = true;
-        $this->product = Product::findOrFail($id);
+
     }
     
     // eliminar desde el modal de confirmacion
@@ -180,11 +185,15 @@ class ProductIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Product $product) {
-        $this->resetErrorBag();
         $this->reset(['product']);
         $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
-
+        
         $this->product = $product;
+        $this->authorize('update', $this->product); 
+
+        $this->resetErrorBag();
+        
+
         $this->name = $product['name'];
         $this->slug = $product['slug'];
         $this->price_original = $product['price_original'];
@@ -259,7 +268,7 @@ class ProductIndex extends Component
                             return $query->where('status', 1);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-                        ->paginate(10);
+                        ->paginate($this->perPage, pageName: 'p_product');
         return view('livewire.page.product-index', compact('categories', 'levels', 'products', 'tags'));
     }
 }

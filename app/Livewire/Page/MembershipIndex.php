@@ -11,11 +11,16 @@ class MembershipIndex extends Component
 {
     // paginacion
     use WithPagination;
-    public function updatingActive() {$this->resetPage();}
-    public function updatingSearch() {$this->resetPage();}
+    public function updatingActive() {$this->resetPage(pageName: 'p_membership');}
+    public function updatingSearch() {$this->resetPage(pageName: 'p_membership');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+
+    protected function queryString()
+    {
+        return ['search' => [ 'as' => 'q' ],];
+    }
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -63,8 +68,10 @@ class MembershipIndex extends Component
 
     // abrir modal y recibir id
     public function openDeleteModal($id){
-        $this->showDeleteModal = true;
         $this->membership = Membership::findOrFail($id);
+        $this->authorize('delete', $this->membership); 
+
+        $this->showDeleteModal = true;
     }
     
     // eliminar desde el modal de confirmacion
@@ -95,8 +102,10 @@ class MembershipIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Membership $membership) {
-        $this->resetErrorBag();
         $this->membership = $membership;
+        $this->authorize('update', $this->membership); 
+
+        $this->resetErrorBag();
         $this->name = $membership['name'];
         $this->slug = $membership['slug'];
         $this->category = $membership['category'];
@@ -144,7 +153,7 @@ class MembershipIndex extends Component
                         return $query->where('status', 1);
                     })
                     ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-                    ->paginate($this->perPage);
+                    ->paginate($this->perPage, pageName: 'p_membership');
         return view('livewire.page.membership-index', compact('memberships'));
     }
 }

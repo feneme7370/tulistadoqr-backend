@@ -41,7 +41,7 @@
                     <tbody>
             
                         @foreach ($categories as $item)
-                        <tr>
+                        <tr wire:key="field-category-{{ $item->id }}">
 
                           <td class="text-center"><p>{{$item->id}}</p></td>
 

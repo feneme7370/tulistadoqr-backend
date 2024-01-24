@@ -11,11 +11,16 @@ class SocialMediaIndex extends Component
 {
     // paginacion
     use WithPagination;
-    public function updatingActive() {$this->resetPage();}
-    public function updatingSearch() {$this->resetPage();}
+    public function updatingActive() {$this->resetPage(pageName: 'p_social_media');}
+    public function updatingSearch() {$this->resetPage(pageName: 'p_social_media');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+
+    protected function queryString()
+    {
+        return ['search' => [ 'as' => 'q' ],];
+    }
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -51,8 +56,10 @@ class SocialMediaIndex extends Component
 
     // abrir modal y recibir id
     public function openDeleteModal($id){
-        $this->showDeleteModal = true;
         $this->social_media = SocialMedia::findOrFail($id);
+        $this->authorize('delete', $this->social_media); 
+
+        $this->showDeleteModal = true;
     }
     
     // eliminar desde el modal de confirmacion
@@ -77,8 +84,10 @@ class SocialMediaIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(SocialMedia $social_media) {
-        $this->resetErrorBag();
         $this->social_media = $social_media;
+        $this->authorize('update', $this->social_media); 
+
+        $this->resetErrorBag();
         $this->name = $social_media['name'];
         $this->slug = $social_media['slug'];
         $this->user_id = $social_media['user_id'];
@@ -122,7 +131,7 @@ class SocialMediaIndex extends Component
                             });
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-                        ->paginate($this->perPage);
+                        ->paginate($this->perPage, pageName: 'p_social_media');
         return view('livewire.page.social-media-index', compact('social_medias'));
     }
 }

@@ -12,32 +12,23 @@
             @else
                 <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
             @endif
-            <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada Public</p>
+            <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada</p>
         </div>
 
         <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
             @if (auth()->user()->company->image_logo)
-                <img src="{{asset('storage/archives/images/logo/'.auth()->user()->company->image_logo)}}" alt="imagen logo" class="w-full h-full object-cover rounded-sm" />
+                <img src="{{asset('archives/images/logo/'.auth()->user()->company->image_logo)}}" alt="imagen logo" class="w-full h-full object-cover rounded-sm" />
             @else
                 <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
             @endif
-            <p class="absolute top-0 right-0 p-2 bg-black text-white">Logo Storage</p>
+            <p class="absolute top-0 right-0 p-2 bg-black text-white">Logo</p>
         </div>
 
     </div>
       
     <div class="grid gap-3 mb-8 md:grid-cols-2 xl:grid-cols-4">
 
-        {{-- <x-sistem.cards.mini-date 
-            href="{{route('suggesteds.index')}}" 
-            title="Destacados" 
-            :date_total="auth()->user()->company->membership->suggested" 
-            :date="$suggested"
-            >
-            <x-sistem.icons.hi-star/>
-        </x-sistem.cards.mini-date> --}}
-
-        
+       
         @can('memberships.index')
             <x-sistem.cards.mini-date 
             href="{{route('memberships.index')}}" 
@@ -98,6 +89,17 @@
                 :date="$products"
                 >
                 <x-sistem.icons.hi-briefcase/>
+            </x-sistem.cards.mini-date>
+        @endcan
+
+        @can('tags.index')
+            <x-sistem.cards.mini-date 
+                href="{{route('tags.index')}}" 
+                title="Etiquetas" 
+                :date_total="auth()->user()->company->membership->product" 
+                :date="$tags"
+                >
+                <x-sistem.icons.hi-tag/>
             </x-sistem.cards.mini-date>
         @endcan
 

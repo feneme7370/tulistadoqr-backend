@@ -7,16 +7,22 @@ use Illuminate\Support\Str;
 use App\Models\Page\Company;
 use Livewire\WithPagination;
 use App\Models\Page\Membership;
+use Illuminate\Validation\Rule;
 
 class CompanyIndex extends Component
 {
     // paginacion
     use WithPagination;
-    public function updatingActive() {$this->resetPage();}
-    public function updatingSearch() {$this->resetPage();}
+    public function updatingActive() {$this->resetPage(pageName: 'p_company');}
+    public function updatingSearch() {$this->resetPage(pageName: 'p_company');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+
+    protected function queryString()
+    {
+        return ['search' => [ 'as' => 'q' ],];
+    }
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -42,9 +48,9 @@ class CompanyIndex extends Component
     // reglas de validacion
     public function rules(){
         return [
-            'name' => ['required', 'string', 'min:2'],
-            'slug' => ['required', 'string'],
-            'email' => ['required', 'email', 'min:2'],
+            'name' => ['required', 'string', 'min:2', Rule::unique('companies')->ignore($this->company)],
+            'slug' => ['required', 'string', Rule::unique('companies')->ignore($this->company)],
+            'email' => ['required', 'email', 'min:2', Rule::unique('companies')->ignore($this->company)],
             'phone' => ['nullable', 'numeric', 'min:2'],
             'adress' => ['nullable', 'string', 'min:2'],
             'city' => ['nullable', 'string', 'min:2'],
@@ -82,8 +88,10 @@ class CompanyIndex extends Component
     
     // eliminar desde el modal de confirmacion
     public function deleteCompany() {
-        $this->resetErrorBag();
         $company = Company::findOrFail($this->company->id);
+        $this->authorize('delete', $company); 
+
+        $this->resetErrorBag();
 
         if($company->id == 1){
             session()->flash('messageError', 'No se puede eliminar el registro');
@@ -108,8 +116,10 @@ class CompanyIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Company $company) {
-        $this->resetErrorBag();
         $this->company = $company;
+        $this->authorize('update', $this->company); 
+
+        $this->resetErrorBag();
         $this->name = $company['name'];
         $this->slug = $company['slug'];
         $this->email = $company['email'];
@@ -164,7 +174,7 @@ class CompanyIndex extends Component
                             return $query->where('status', 1);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-                        ->paginate($this->perPage);
+                        ->paginate($this->perPage, pageName: 'p_company');
         return view('livewire.page.company-index', compact('companies', 'memberships'));
     }
 }

@@ -39,7 +39,8 @@
                     <tbody>
             
                         @foreach ($memberships as $item)
-                        <tr>
+                        <tr wire:key="field-membership-{{ $item->id }}">
+                          
                           <td class="text-center">
                             <p>{{$item->id}}</p>
                           </td>

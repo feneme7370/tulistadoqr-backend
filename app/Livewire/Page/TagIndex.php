@@ -11,8 +11,8 @@ class TagIndex extends Component
 {
     // paginacion
     use WithPagination;
-    public function updatingActive() {$this->resetPage();}
-    public function updatingSearch() {$this->resetPage();}
+    public function updatingActive() {$this->resetPage(pageName: 'p_tag');}
+    public function updatingSearch() {$this->resetPage(pageName: 'p_tag');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
@@ -51,8 +51,10 @@ class TagIndex extends Component
 
     // abrir modal y recibir id
     public function openDeleteModal($id){
-        $this->showDeleteModal = true;
         $this->tag = Tag::findOrFail($id);
+        $this->authorize('delete', $this->tag); 
+
+        $this->showDeleteModal = true;
     }
     
     // eliminar desde el modal de confirmacion
@@ -77,8 +79,10 @@ class TagIndex extends Component
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Tag $tag) {
-        $this->resetErrorBag();
         $this->tag = $tag;
+        $this->authorize('update', $this->tag); 
+
+        $this->resetErrorBag();
         $this->name = $tag['name'];
         $this->slug = $tag['slug'];
         $this->user_id = $tag['user_id'];
@@ -122,7 +126,7 @@ class TagIndex extends Component
                             });
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-                        ->paginate($this->perPage);
+                        ->paginate($this->perPage, pageName: 'p_tag');
         return view('livewire.page.tag-index', compact('tags'));
     }
 }

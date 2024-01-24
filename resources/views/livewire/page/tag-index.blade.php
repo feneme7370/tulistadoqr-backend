@@ -38,7 +38,7 @@
                     <tbody>
             
                         @foreach ($tags as $item)
-                        <tr>
+                        <tr wire:key="field-tag-{{ $item->id }}">
 
                           <td class="text-center"><p>{{$item->id}}</p></td>
 

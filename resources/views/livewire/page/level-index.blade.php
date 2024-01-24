@@ -42,7 +42,7 @@
                     <tbody>
             
                         @foreach ($levels as $item)
-                        <tr>
+                        <tr wire:key="field-level-{{ Hash::make($item->id) }}">
 
                           <td class="text-center"><p>{{$item->id}}</p></td>
                           <td>

@@ -1,7 +1,8 @@
 <div>
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
-        :messageError="session('messageError')" />
+        :messageError="session('messageError')" 
+    />
 
     {{-- titulo y boton --}}
     <x-sistem.menus.title-and-btn title="Usuarios">
@@ -40,7 +41,7 @@
                     <tbody>
             
                         @foreach ($users as $item)
-                        <tr>
+                        <tr wire:key="field-user-{{ $item->id }}">
 
                           <td class="text-center"><p>{{$item->id}}</p></td>
                           <td>
@@ -51,7 +52,7 @@
                             </div>
                           </td>   
 
-                          <td><p class="font-bold">{{$item->lastname}}, {{$item->name}}</p></td>
+                          <td><p>{{$item->lastname}}, {{$item->name}}</p></td>
 
                           <td><p>{{$item->email}}</p></td>
                           <td><p>{{$item->company->name}}</p></td>

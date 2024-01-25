@@ -28,6 +28,7 @@ class ConfigIndex extends Component
     public $city;
     public $social;
     public $description;
+    public $image_qr;
     public $image_logo;
     public $image_hero;
 
@@ -93,6 +94,7 @@ class ConfigIndex extends Component
         $this->city = $company['city'];
         $this->social = $company['social'];
         $this->description = $company['description'];
+        $this->image_qr = $company['image_qr'];
         $this->image_logo = $company['image_logo'];
         $this->image_hero = $company['image_hero'];
     }
@@ -219,6 +221,11 @@ class ConfigIndex extends Component
 
         return redirect()->route('dashboard.index');
         session()->flash('messageSuccess', 'Actualizado');
+    }
+
+    public function downloadQR(){
+        $path = 'archives/images/QR/' . $this->image_qr;
+        return response()->download(public_path($path));
     }
 
     public function render()

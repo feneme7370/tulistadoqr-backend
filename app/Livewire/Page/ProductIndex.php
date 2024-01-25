@@ -27,6 +27,9 @@ class ProductIndex extends Component
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+    public $category_search;
+    public $level_search;
+
 
     protected function queryString()
     {
@@ -67,7 +70,7 @@ class ProductIndex extends Component
             'slug' => ['required', 'string', 'min:3'],
             'price_original' => ['required', 'numeric', 'min:1'],
             'price_seller' => ['nullable', 'numeric', 'min:1'],
-            'quantity' => ['nullable', 'numeric', 'min:1'],
+            'quantity' => ['nullable', 'numeric'],
             'description' => ['nullable', 'string', 'max:255'],
             'status' => ['numeric'],
             'image_hero' => ['nullable', 'string'],
@@ -261,11 +264,23 @@ class ProductIndex extends Component
         $products = Product::where('company_id', auth()->user()->company_id)
                         ->when( $this->search, function($query) {
                             return $query->where(function( $query) {
-                                $query->where('name', 'like', '%'.$this->search . '%');
+                                $query->where('name', 'like', '%'.$this->search . '%')
+                                ->orWhereHas('category', function ($q) {
+                                    $q->where('name', 'like', '%'.$this->search . '%');
+                                })
+                                ->orWhereHas('level', function ($q) {
+                                    $q->where('name', 'like', '%'.$this->search . '%');
+                                });
                             });
                         })
                         ->when($this->active, function( $query) {
                             return $query->where('status', 1);
+                        })
+                        ->when($this->level_search, function( $query) {
+                            return $query->where('level_id', $this->level_search);
+                        })
+                        ->when($this->category_search, function( $query) {
+                            return $query->where('category_id', $this->category_search);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_product');

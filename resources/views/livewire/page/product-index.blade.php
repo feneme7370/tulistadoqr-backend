@@ -14,8 +14,33 @@
     </x-sistem.menus.title-and-btn>
 
     {{-- input buscador y filtro de activos --}}
-    <x-sistem.filter.search-active />
-    <x-sistem.spinners.loading-spinner wire:loading wire:target="search"/>
+    <div class="flex flex-row flex-1 justify-evenly items-center gap-2">
+        <div  class="w-full">
+            <x-sistem.forms.label-form for="level_search" value="{{ __('Nivel') }}" />
+            <x-sistem.forms.select-form wire:model.live="level_search" id="level_search">
+                <option value=""> Todos </option>
+                @foreach ($levels as $level)
+                    <option value="{{$level->id}}">{{$level->name}}</option>
+                @endforeach
+            </x-sistem.forms.select-form>
+            <x-sistem.forms.input-error for="level_search" />
+        </div>
+        <div  class="w-full">
+            <x-sistem.forms.label-form for="category_search" value="{{ __('Categoria') }}" />
+            <x-sistem.forms.select-form wire:model.live="category_search" id="category_search">
+                <option value=""> Todos </option>
+                @foreach ($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </x-sistem.forms.select-form>
+            <x-sistem.forms.input-error for="category_search" />
+        </div>
+
+    </div>
+
+    <x-sistem.filter.search-active placeholder="Buscar por nombre, nivel o categoria" />
+
+    <x-sistem.spinners.loading-spinner wire:loading wire:target="search, level_search, category_search"/>
 
     {{-- listado --}}
     <div class="mx-auto">
@@ -28,8 +53,8 @@
                             <th>ID</th>
                             <th>Acciones</th>
                             <th>Productos</th>
-                            <th>Nivel/Categoria</th>
-                            <th>Precio</th>
+                            <th>Nivel /Categoria</th>
+                            <th>Precio /Tags</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
@@ -51,14 +76,13 @@
 
                             <td class="text-center"><p>{{$item->name}}</p></td>
                             <td><p>{{$item->level->name}} / {{$item->category->name}}</p></td>
-                            <td class="text-center"><p>${{ number_format($item->price_original, 2,",",".") }}</p></td>
+                            <td class="text-center"><p>${{ number_format($item->price_original, 2,",",".") }} - ({{$item->tags->count()}})</p></td>
 
                             <td class="text-center">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight {{$item->status == '1' ? 'text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700' : 'text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700'}}   rounded-full  ">
-                                    {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
+                                <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
+                                  {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                                 </span>
-                            </td>
+                              </td>
 
 
                         </tr>
@@ -133,24 +157,14 @@
                         <x-sistem.forms.input-error for="price_seller" />
                     </div>
 
-                    <div>
+                    {{-- <div>
                         <x-sistem.forms.label-form for="quantity" value="{{ __('Cantidad') }}" />
                         <x-sistem.forms.input-form id="quantity" type="number"
                             placeholder="{{ __('Cantidad') }}" wire:model="quantity" />
                         <x-sistem.forms.input-error for="quantity" />
-                    </div>
+                    </div> --}}
 
-                    <div>
-                        <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
-                        <x-sistem.forms.textarea-form id="description"
-                            placeholder="{{ __('Ingresar una breve descripcion') }}" wire:model="description" />
-                        <x-sistem.forms.input-error for="description" />
-                    </div>
 
-                    <label for="status" class="flex items-center">
-                        <x-sistem.forms.checkbox-form id="status" wire:model="status" />
-                        <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
-                    </label>
 
                     <div>
                         <x-sistem.forms.label-form for="level_id" value="{{ __('Nivel') }}" />
@@ -172,16 +186,30 @@
                         <x-sistem.forms.input-error for="category_id" />
                     </div>
 
-                    <div>
-                        <x-sistem.forms.label-form for="product_tags" value="{{ __('Etiquetas') }}" />
-                        <x-sistem.forms.select-form multiple wire:model="product_tags" id="product_tags">
-                            @foreach ($tags as $tag)
-                                <option value="{{$tag->id}}">{{$tag->name}}</option>
-                            @endforeach
-                        </x-sistem.forms.select-form>
-                        <x-sistem.forms.input-error for="product_tags" />
-                    </div>
+                    
+                </div>
 
+                <div>
+                    <x-sistem.forms.label-form for="product_tags" value="{{ __('Etiquetas') }}" />
+                    <x-sistem.forms.select-form multiple wire:model="product_tags" id="product_tags">
+                        @foreach ($tags as $tag)
+                            <option value="{{$tag->id}}">{{$tag->name}}</option>
+                        @endforeach
+                    </x-sistem.forms.select-form>
+                    <x-sistem.forms.input-error for="product_tags" />
+                </div>
+
+                <div>
+                    <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
+                    <x-sistem.forms.textarea-form id="description"
+                        placeholder="{{ __('Ingresar una breve descripcion') }}" wire:model="description" />
+                    <x-sistem.forms.input-error for="description" />
+                </div>
+                <div>
+                    <label for="status" class="flex items-center">
+                        <x-sistem.forms.checkbox-form id="status" wire:model="status" />
+                        <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
+                    </label>
                 </div>
 
 

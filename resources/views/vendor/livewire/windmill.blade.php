@@ -15,7 +15,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
 
         <!-- simple pagination -->
-        <div class="flex flex-col gap-1 my-1 w-full">
+        <div class="flex flex-col gap-1 my-1 w-full sm:hidden">
             <div class="flex justify-between flex-1 sm:hidden px-2 my-1">
                 <span>
     
@@ -52,8 +52,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                     @endif
                 </span>
             </div>
-        
-            <div class="mx-auto">
+            <div class="mx-auto sm:hidden">
                 <p
                     class="">
                     <span>{!! __('pagination.showing') !!}</span>
@@ -65,6 +64,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                     <span>{!! __('pagination.results') !!}</span>
                 </p>
             </div>
+        
         </div>
 
 

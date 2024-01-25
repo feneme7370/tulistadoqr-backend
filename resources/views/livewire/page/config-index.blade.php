@@ -1,5 +1,9 @@
 <div class="w-11/12 mx-auto my-1">
     
+    <div>
+        <x-sistem.buttons.primary-btn wire:click="downloadQR" class="sm:mx-auto sm:mr-2" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Descargar QR"/>
+    </div>
+    
     <form class="grid grid-cols-1 gap-2 mt-2">
 
         {{-- datos de la empresa --}}
@@ -120,7 +124,7 @@
                 
                 <div class="">
                     
-                    <div wire:loading wire:target="image_hero_logo">
+                    <div wire:loading wire:target="image_logo_new">
                         <x-sistem.spinners.loading-spinner/>
                     </div>
     

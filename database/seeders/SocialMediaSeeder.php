@@ -39,6 +39,18 @@ class SocialMediaSeeder extends Seeder
             'company_id' => '1',
         ]);
         SocialMedia::create([
+            'name' => 'Tiktok',
+            'slug' => Str::slug('Tiktok'),
+            'user_id' => '1',
+            'company_id' => '1',
+        ]);
+        SocialMedia::create([
+            'name' => 'Telegram',
+            'slug' => Str::slug('Telegram'),
+            'user_id' => '1',
+            'company_id' => '1',
+        ]);
+        SocialMedia::create([
             'name' => 'Github',
             'slug' => Str::slug('Github'),
             'user_id' => '1',

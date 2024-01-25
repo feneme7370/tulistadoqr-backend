@@ -67,7 +67,7 @@
                           <td><p>{{$item->email}}</p></td>
 
                           <td class="text-center">
-                            <span class="px-2 py-1 font-semibold leading-tight {{$item->status == '1' ? 'text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700' : 'text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700'}}   rounded-full  ">
+                            <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>
                           </td>
@@ -117,6 +117,8 @@
 
             <x-sistem.forms.validation-errors class="mb-4" />
 
+            {{-- inputs de datos --}}
+            <div>
               <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre de la empresa') }}" />
                 <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
@@ -151,6 +153,13 @@
                      />
                 <x-sistem.forms.input-error for="city" />
               </div>
+              
+              <div>
+                <x-sistem.forms.label-form for="url" value="{{ __('URL') }}" />
+                <x-sistem.forms.input-form id="url" type="text" placeholder="{{ __('URL') }}" wire:model="url"
+                     />
+                <x-sistem.forms.input-error for="url" />
+              </div>
 
               {{-- <div>
                 <x-sistem.forms.label-form for="social" value="{{ __('Redes sociales') }}" />
@@ -168,7 +177,140 @@
                 </x-sistem.forms.select-form>
                 <x-sistem.forms.input-error for="membership_id" />
               </div>
-                
+            </div>
+              
+            {{-- imagenes --}}
+            <div>
+              {{-- imagen de portada empresa --}}
+              <div class="bg-gray-100 p-1 rounded-md">
+                  <h2 class="text-center font-bold text-xl">Imagen principal de la empresa</h2>
+          
+                  <div>
+                      <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
+                      <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_hero_new" accept="image/*"
+                          />
+                      <x-sistem.forms.input-error for="image_hero_new" />
+                  </div>
+          
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+                      <div class="">
+                          <p class="mb-1">Imagen de portada actual:</p>
+                          <div class="w-64 h-64 mx-auto relative">
+                              @if ($this->image_hero && $this->image_hero != '')
+                                  <img src="{{asset('archives/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                                  <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                              @else
+                                  <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+                              @endif
+                          </div>
+                      </div>
+                      
+                      <div class="">
+          
+                          <div wire:loading wire:target="image_hero_new">
+                              <x-sistem.spinners.loading-spinner/>
+                          </div>
+          
+                          <p class="mb-1">Imagen de portada nueva:</p>
+                          @if ($image_hero_new) 
+                              <div class="w-64 h-64 mx-auto relative">
+                                  <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_hero_new->temporaryUrl() }}">
+                              </div>
+                          @else
+                              <p class="text-center italic">No se ha agregado una imagen nueva</p>
+                          @endif
+                      </div>
+                  </div>
+              </div>
+
+              {{-- logo de la empresa --}}
+              <div class="bg-gray-100 p-1 rounded-md">
+                  <h2 class="text-center font-bold text-xl">Logo de la empresa</h2>
+                  <div>
+                      <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
+                      <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_logo_new" accept="image/*"
+                          />
+                      <x-sistem.forms.input-error for="image_logo_new" />
+                  </div>
+          
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+                      <div class="">
+                          <p class="mb-1">Imagen del logo actual:</p>
+                          <div class="w-64 h-64 mx-auto relative">
+                              @if ($this->image_logo && $this->image_logo != '')
+                                  <img src="{{asset('archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                                  <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
+                              @else
+                                  <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+                              @endif
+                          </div>
+                      </div>
+                      
+                      <div class="">
+                          
+                          <div wire:loading wire:target="image_qr_new">
+                              <x-sistem.spinners.loading-spinner/>
+                          </div>
+          
+                          <p class="mb-1">Imagen del logo nueva:</p>
+                          @if ($image_logo_new) 
+                              <div class="w-64 h-64 mx-auto relative">
+                                  <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_logo_new->temporaryUrl() }}">
+                              </div>
+                          @else
+                              <p class="text-center italic">No se ha agregado una imagen nueva</p>
+                          @endif
+                      </div>
+                  </div>
+              </div>
+
+              {{-- QR de la empresa --}}
+              <div class="bg-gray-100 p-1 rounded-md">
+                  <h2 class="text-center font-bold text-xl">QR de la empresa</h2>
+                  <div>
+                      <x-sistem.forms.label-form for="image_qr_new" value="{{ __('Imagen de qr') }}" />
+                      <x-sistem.forms.input-file-form id="image_qr_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_qr_new" accept="image/*"
+                          />
+                      <x-sistem.forms.input-error for="image_qr_new" />
+                  </div>
+          
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+                      <div class="">
+                          <p class="mb-1">Imagen del QR actual:</p>
+                          <div class="w-64 h-64 mx-auto relative">
+                              @if ($this->image_qr && $this->image_qr != '')
+                                  <img src="{{asset('archives/images/qr/'.$this->image_qr)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                                  <button wire:click='deleteImageQrEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
+                              @else
+                                  <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+                              @endif
+                          </div>
+                      </div>
+                      
+                      <div class="">
+                          
+                          <div wire:loading wire:target="image_qr_new">
+                              <x-sistem.spinners.loading-spinner/>
+                          </div>
+          
+                          <p class="mb-1">Imagen del qr nueva:</p>
+                          @if ($image_qr_new) 
+                              <div class="w-64 h-64 mx-auto relative">
+                                  <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_qr_new->temporaryUrl() }}">
+                              </div>
+                          @else
+                              <p class="text-center italic">No se ha agregado una imagen nueva</p>
+                          @endif
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+            {{-- descripcion --}}
+            <div>
               <div>
                 <x-sistem.forms.label-form for="description" value="{{ __('Descripcion de la empresa') }}" />
                 <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Descripcion') }}"
@@ -182,6 +324,7 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
                 </label>
               </div>
+            </div>
 
             </form>
         </x-slot>

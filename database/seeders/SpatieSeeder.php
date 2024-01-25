@@ -65,7 +65,7 @@ class SpatieSeeder extends Seeder
             'phone' => '2395969696',
             'birthday' => '1998-10-05',
             'adress' => 'Zanni 1508',
-            'city' => 'Pehuajo',
+            'city' => 'Carlos Casares',
             'social' => '',
             'description' => 'Usuario de prueba',
             'status' => '1',

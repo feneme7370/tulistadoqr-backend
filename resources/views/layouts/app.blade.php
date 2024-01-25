@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <script src="{{asset('lib\flowbite\flowbite.min.js')}}"></script>
+        
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -50,8 +50,7 @@
 
     @stack('modals')
     
+    <script src="{{asset('lib\flowbite\flowbite.min.js')}}"></script>
     @livewireScripts
-    {{-- <script src="{{asset('public/lib/windmill/js/focus-trap.js')}}"></script>
-    <script src="{{asset('public/lib/windmill/js/init-alpine.js')}}"></script> --}}
     </body>
 </html>

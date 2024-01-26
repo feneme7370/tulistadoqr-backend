@@ -4,6 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        
         <link rel="icon" type="image/x-icon" href="{{ asset('archives/sistem/img/TuMenuQR_favicon.png') }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -15,7 +18,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
+
 
         <!-- Styles -->
         @livewireStyles

@@ -52,7 +52,7 @@
 
     @stack('modals')
     
-    <script src="{{asset('lib\flowbite\flowbite.min.js')}}"></script>
     @livewireScripts
+    <script src="{{asset('lib\flowbite\flowbite.min.js')}}"></script>
     </body>
 </html>

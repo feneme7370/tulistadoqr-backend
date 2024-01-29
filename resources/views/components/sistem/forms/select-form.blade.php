@@ -17,6 +17,6 @@ focus:ring
 focus:ring-purple-950 
 focus:ring-offset-0
 ']) !!}>
-    <option disabled value="">-- Seleccionar --</option>
+    <option value="">-- Seleccionar --</option>
     {{ $slot }}
 </select>

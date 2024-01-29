@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\Page\CategoryController;
+use App\Http\Controllers\Api\Page\CompanyController;
+use App\Http\Controllers\Api\Page\LevelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Page\ProductController;
@@ -19,4 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{company}', [ProductController::class, 'index']);
+Route::get('/categories/{company}', [CategoryController::class, 'index']);
+Route::get('/levels/{company}', [LevelController::class, 'index']);
+Route::get('/companies/{company}', [CompanyController::class, 'index']);

@@ -52,6 +52,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Acciones</th>
+                            <th>Imagen</th>
                             <th>Productos</th>
                             <th>Nivel /Categoria</th>
                             <th>Precio /Tags</th>
@@ -72,6 +73,10 @@
                                     <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
                                         wire:loading.attr="disabled" />
                                 </div>
+                            </td>
+
+                            <td>
+                                <img class=" h-10 w-10 sm:h-32 sm:w-32" src="archives/images/product_hero/{{$item->image_hero}}" alt="imagen producto">
                             </td>
 
                             <td class="text-center"><p>{{$item->name}}</p></td>

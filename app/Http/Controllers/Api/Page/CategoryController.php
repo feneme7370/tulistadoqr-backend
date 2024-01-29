@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers\Api\Page;
 
-use App\Models\Page\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Page\ProductResource;
 use App\Models\Page\Category;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Page\CategoryResource;
 use App\Models\Page\Company;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Company $company)
     {
-        $products = Product::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
-        return ProductResource::collection($products);
-
+        $categories = Category::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        return CategoryResource::collection($categories);
     }
 
     /**

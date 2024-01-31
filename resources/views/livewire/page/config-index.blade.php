@@ -1,5 +1,9 @@
 <div class="w-11/12 mx-auto my-1">
     
+    <x-sistem.menus.text-info>
+        <p>Ajuste todos los datos de la empresa, cargue la imagen de portada y su logo en caso que sea una imagen. Tambien puede descargar aqui su codigo QR que redirecciona al menu digital.</p>
+    </x-sistem.menus.text-info>
+
     <div>
         <x-sistem.buttons.primary-btn wire:click="downloadQR" class="sm:mx-auto sm:mr-2" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Descargar QR"/>
     </div>

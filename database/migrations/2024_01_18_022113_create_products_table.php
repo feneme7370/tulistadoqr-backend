@@ -20,9 +20,8 @@ return new class extends Migration
             $table->integer('quantity')->nullable();
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->nullable();
+            $table->string('image_hero_uri')->nullable();
             $table->string('image_hero')->nullable();
-            $table->string('image_logo')->nullable();
-            $table->foreignId('level_id')->constrained()->onUpdate('cascade')->restrictOnDelete();
             $table->foreignId('category_id')->constrained()->onUpdate('cascade')->restrictOnDelete();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->restrictOnDelete();
             $table->foreignId('company_id')->constrained()->onUpdate('cascade')->restrictOnDelete();

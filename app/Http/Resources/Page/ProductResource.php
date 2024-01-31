@@ -27,15 +27,14 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'status' => $this->status,
             'image_hero' => $this->image_hero,
-            'image_logo' => $this->image_logo,
             'category_id' => $this->category_id,
-            'level_id' => $this->level_id,
+            // 'level_id' => $this->level_id,
             'company_id' => $this->company_id,
             'user_id' => $this->user_id,
             'category' => $this->category->name,
-            'level' => $this->level->name,
-            'company_id' => $this->company,
-            'user_id' => $this->user,
+            // 'level' => $this->level,
+            'company' => $this->company,
+            'user' => $this->user,
         ];
     }
 }

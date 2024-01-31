@@ -29,8 +29,11 @@ class ConfigIndex extends Component
     public $social;
     public $description;
     public $image_qr;
+    public $image_qr_uri;
     public $image_logo;
+    public $image_logo_uri;
     public $image_hero;
+    public $image_hero_uri;
 
     public $image_logo_new;
     public $image_hero_new;
@@ -54,7 +57,9 @@ class ConfigIndex extends Component
             'social' => ['nullable', 'string', 'min:2'],
             'description' => ['nullable', 'string', 'min:2'],
             'image_logo' => ['nullable', 'string'],
+            'image_logo_uri' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
+            'image_hero_uri' => ['nullable', 'string'],
             'image_logo_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
             'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
         ];
@@ -71,7 +76,9 @@ class ConfigIndex extends Component
         'social' => 'redes sociales',
         'description' => 'descripcion',
         'image_logo' => 'imagen del logo',
+        'image_logo_uri' => 'uri imagen del logo',
         'image_hero' => 'imagen de portada',
+        'image_hero_uri' => 'uri imagen de portada',
         'image_logo_new' => 'imagen del logo nueva',
         'image_hero_new' => 'imagen de portada nueva',
     ];
@@ -95,8 +102,11 @@ class ConfigIndex extends Component
         $this->social = $company['social'];
         $this->description = $company['description'];
         $this->image_qr = $company['image_qr'];
+        $this->image_qr_uri = $company['image_qr_uri'];
         $this->image_logo = $company['image_logo'];
+        $this->image_logo_uri = $company['image_logo_uri'];
         $this->image_hero = $company['image_hero'];
+        $this->image_hero_uri = $company['image_hero_uri'];
     }
 
     // cargar datos de redes sociales de la empresa
@@ -207,6 +217,8 @@ class ConfigIndex extends Component
     public function save() {
 
         $this->slug = Str::slug($this->name);
+        $this->image_hero_uri = 'archives/images/hero/';
+        $this->image_logo_uri = 'archives/images/logo/';
 
         $this->validate();
         
@@ -214,7 +226,7 @@ class ConfigIndex extends Component
         $this->uploadImageLogo();
 
         $this->company->update(
-            $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'description', 'image_logo', 'image_hero'])
+            $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'description', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri'])
         );
 
         $this->updateSocialMedia();

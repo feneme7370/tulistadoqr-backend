@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('slug');
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->nullable()->default(1);
+            $table->longText('image_hero')->nullable();
+            $table->longText('image_hero_uri')->nullable();
+            $table->foreignId('level_id')->constrained()->onUpdate('cascade')->restrictOnDelete();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->restrictOnDelete();
             $table->foreignId('company_id')->constrained()->onUpdate('cascade')->restrictOnDelete();
             $table->timestamps();

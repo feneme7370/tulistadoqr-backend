@@ -23,8 +23,11 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->nullable()->default(1);
+            $table->string('image_qr_uri')->nullable();
             $table->string('image_qr')->nullable();
+            $table->string('image_logo_uri')->nullable();
             $table->string('image_logo')->nullable();
+            $table->string('image_hero_uri')->nullable();
             $table->string('image_hero')->nullable();
             $table->foreignId('membership_id')->constrained()->onUpdate('cascade')->restrictOnDelete();
             $table->timestamps();

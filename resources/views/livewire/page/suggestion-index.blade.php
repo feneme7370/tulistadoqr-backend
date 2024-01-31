@@ -9,6 +9,11 @@
         <div></div>
     </x-sistem.menus.title-and-btn>
 
+    {{-- texto informativo --}}
+    <x-sistem.menus.text-info>
+      <p>Agregue productos sugeridos, estos apareceran tambien en una seccion aparte del menu digital. Puede poner productos en oferta, platos del dia, etc.</p>
+    </x-sistem.menus.text-info>
+
     {{-- input buscador y filtro de activos --}}
     <div class="p-2 mb-1 flex justify-between items-center flex-col md:flex-row bg-white rounded-lg shadow-md gap-1 dark:bg-gray-800">
       

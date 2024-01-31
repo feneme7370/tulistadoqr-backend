@@ -18,6 +18,11 @@
 
     </x-sistem.menus.title-and-btn>
 
+    {{-- texto informativo --}}
+    <x-sistem.menus.text-info>
+      <p>Agregue categorias generales como "Bebidas", "Comidas", "Postres" o "Menu infantil". Los que se agreguen se podran asociar a un producto y luego poder ser filtrados en la pagina por cada rubro.</p>
+    </x-sistem.menus.text-info>
+  
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.search-active />
     <x-sistem.spinners.loading-spinner wire:loading wire:target="search"/>
@@ -33,6 +38,7 @@
                       <tr>
                         <th>ID</th>
                         <th>Acciones</th>
+                        <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
                         <th>Creado por</th>
@@ -52,6 +58,11 @@
                                 wire:loading.attr="disabled" />
                             </div>
                           </td>
+
+                          <td>
+                            <img class=" h-10 w-10 sm:h-32 sm:w-32" src="{{$item->image_hero_uri}}{{$item->image_hero}}" alt="imagen producto">
+                          </td>
+
                           <td><p>{{$item->name}}</p></td>
                           <td><p>{{$item->description}}</p></td>
                           <td><p>{{$item->user->lastname}}, {{$item->user->name}}</p></td>
@@ -126,6 +137,49 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
                 </label>
               </div>
+
+              {{-- imagen de categoria --}}
+              <div>
+                <h2 class="text-center font-bold text-xl">Imagen del nivel</h2>
+        
+                <div>
+                    <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen del nivel') }}" />
+                    <x-sistem.forms.input-form id="image_hero_new" type="file" wire:model="image_hero_new" accept="image/*"
+                        />
+                    <x-sistem.forms.input-error for="image_hero_new" />
+                </div>
+        
+                <div class="grid grid-cols-1 gap-3">
+        
+                    <div class="">
+                        <p class="mb-1">Imagen del nivel actual:</p>
+                        <div class="w-64 h-64 mx-auto relative">
+                            @if ($this->image_hero && $this->image_hero != '')
+                                <img src="{{asset($this->image_hero_uri.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
+                                <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                            @else
+                                <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+                            @endif
+                        </div>
+                    </div>
+                    
+                    <div class="">
+        
+                        <div wire:loading wire:target="image_hero_new">
+                            <x-sistem.spinners.loading-spinner/>
+                        </div>
+        
+                        <p class="mb-1">Imagen del nivel nueva:</p>
+                        @if ($image_hero_new) 
+                            <div class="w-64 h-64 mx-auto relative">
+                                <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_hero_new->temporaryUrl() }}">
+                            </div>
+                        @else
+                            <p class="text-center italic">No se ha agregado una imagen nueva</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
 
             </form>
 

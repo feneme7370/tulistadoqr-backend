@@ -44,8 +44,11 @@ class CompanyIndex extends Component
     public $description;
     public $status;
     public $image_qr;
+    public $image_qr_uri;
     public $image_logo;
+    public $image_logo_uri;
     public $image_hero;
+    public $image_hero_uri;
     public $image_qr_new;
     public $image_logo_new;
     public $image_hero_new;
@@ -67,8 +70,11 @@ class CompanyIndex extends Component
             'url' => ['nullable', 'string', 'min:2'],
             'description' => ['nullable', 'string', 'min:2'],
             'image_qr' => ['nullable', 'string'],
+            'image_qr_uri' => ['nullable', 'string'],
             'image_logo' => ['nullable', 'string'],
+            'image_logo_uri' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
+            'image_hero_uri' => ['nullable', 'string'],
             'image_qr_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
             'image_logo_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
             'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
@@ -89,8 +95,11 @@ class CompanyIndex extends Component
         'url' => 'url',
         'description' => 'descripcion',
         'image_qr' => 'imagen del qr',
+        'image_qr_uri' => 'uri imagen del qr',
         'image_logo' => 'imagen del logo',
+        'image_logo_uri' => 'uri imagen del logo',
         'image_hero' => 'imagen de portada',
+        'image_hero_uri' => 'uri imagen de portada',
         'status' => 'estado',
         'membership_id' => 'membresia',
     ];
@@ -282,6 +291,9 @@ class CompanyIndex extends Component
     
         $this->status = $this->status ? '1' : '0';
         $this->slug = Str::slug($this->name);
+        $this->image_qr_uri = 'archives/images/qr/';
+        $this->image_logo_uri = 'archives/images/logo/';
+        $this->image_hero_uri = 'archives/images/hero/';
 
         $this->validate();
 
@@ -292,14 +304,14 @@ class CompanyIndex extends Component
         if( isset( $this->company['id'])) {
 
             $this->company->update(
-                $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_logo', 'image_hero', 'status', 'membership_id'])
+                $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_qr_uri', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri', 'status', 'membership_id'])
             );
             session()->flash('messageSuccess', 'Actualizado');
 
         } else {
 
             Company::create(
-                $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_logo', 'image_hero', 'status', 'membership_id'])
+                $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_qr_uri', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri', 'status', 'membership_id'])
             );
             session()->flash('messageSuccess', 'Guardado');
         }

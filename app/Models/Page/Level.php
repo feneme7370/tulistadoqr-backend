@@ -16,6 +16,8 @@ class Level extends Model
         'slug',
         'description',
         'status',
+        'image_hero',
+        'image_hero_uri',
         'user_id',
         'company_id',
     ];
@@ -31,5 +33,9 @@ class Level extends Model
     public function products()
     {
         return $this->hasMany(Product::class, 'level_id', 'id');
+    }
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'level_id', 'id');
     }
 }

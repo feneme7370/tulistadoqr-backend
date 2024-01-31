@@ -17,6 +17,11 @@
 
     </x-sistem.menus.title-and-btn>
 
+    {{-- texto informativo --}}
+    <x-sistem.menus.text-info>
+      <p>Las etiquetas sirven para crear secciones que relacionen a algunos productos, por ejemplo poner "Verano" y asociar los productos que al ver la seccion verano, aparezcan a la vista del cliente.</p>
+    </x-sistem.menus.text-info>
+
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.search-only />
     <x-sistem.spinners.loading-spinner wire:loading wire:target="search"/>

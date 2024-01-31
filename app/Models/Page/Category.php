@@ -16,6 +16,9 @@ class Category extends Model
         'slug',
         'description',
         'status',
+        'image_hero',
+        'image_hero_uri',
+        'level_id',
         'user_id',
         'company_id',
     ];
@@ -31,5 +34,9 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
+    }
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id', 'id');
     }
 }

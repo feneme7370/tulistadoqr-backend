@@ -13,9 +13,14 @@
         </x-sistem.buttons.primary-btn>
     </x-sistem.menus.title-and-btn>
 
+    {{-- texto informativo --}}
+    <x-sistem.menus.text-info>
+        <p>Agregue los productos que ofrece en su menu, puede agregar un precio de oferta, una imagen y si quiere una descripcion que quiera que el cliente vea del producto.</p>
+        </x-sistem.menus.text-info>
+
     {{-- input buscador y filtro de activos --}}
     <div class="flex flex-row flex-1 justify-evenly items-center gap-2">
-        <div  class="w-full">
+        {{-- <div  class="w-full">
             <x-sistem.forms.label-form for="level_search" value="{{ __('Nivel') }}" />
             <x-sistem.forms.select-form wire:model.live="level_search" id="level_search">
                 <option value=""> Todos </option>
@@ -24,13 +29,13 @@
                 @endforeach
             </x-sistem.forms.select-form>
             <x-sistem.forms.input-error for="level_search" />
-        </div>
+        </div> --}}
         <div  class="w-full">
             <x-sistem.forms.label-form for="category_search" value="{{ __('Categoria') }}" />
             <x-sistem.forms.select-form wire:model.live="category_search" id="category_search">
                 <option value=""> Todos </option>
                 @foreach ($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
                 @endforeach
             </x-sistem.forms.select-form>
             <x-sistem.forms.input-error for="category_search" />
@@ -54,7 +59,7 @@
                             <th>Acciones</th>
                             <th>Imagen</th>
                             <th>Productos</th>
-                            <th>Nivel /Categoria</th>
+                            <th>Categoria</th>
                             <th>Precio /Tags</th>
                             <th>Estado</th>
                         </tr>
@@ -76,11 +81,11 @@
                             </td>
 
                             <td>
-                                <img class=" h-10 w-10 sm:h-32 sm:w-32" src="archives/images/product_hero/{{$item->image_hero}}" alt="imagen producto">
+                                <img class=" h-10 w-10 sm:h-32 sm:w-32" src="{{$item->image_hero_uri}}{{$item->image_hero}}" alt="imagen producto">
                             </td>
 
                             <td class="text-center"><p>{{$item->name}}</p></td>
-                            <td><p>{{$item->level->name}} / {{$item->category->name}}</p></td>
+                            <td><p>{{$item->category->level->name}} / {{$item->category->name}}</p></td>
                             <td class="text-center"><p>${{ number_format($item->price_original, 2,",",".") }} - ({{$item->tags->count()}})</p></td>
 
                             <td class="text-center">
@@ -171,7 +176,7 @@
 
 
 
-                    <div>
+                    {{-- <div>
                         <x-sistem.forms.label-form for="level_id" value="{{ __('Nivel') }}" />
                         <x-sistem.forms.select-form wire:model="level_id" id="level_id">
                             @foreach ($levels as $level)
@@ -179,13 +184,13 @@
                             @endforeach
                         </x-sistem.forms.select-form>
                         <x-sistem.forms.input-error for="level_id" />
-                    </div>
+                    </div> --}}
 
                     <div>
                         <x-sistem.forms.label-form for="category_id" value="{{ __('Categoria') }}" />
                         <x-sistem.forms.select-form wire:model="category_id" id="category_id">
                             @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
                             @endforeach
                         </x-sistem.forms.select-form>
                         <x-sistem.forms.input-error for="category_id" />

@@ -40,8 +40,12 @@ class CompanySeeder extends Seeder
             'url' => 'www.facebook.com',
             'description' => 'Veni a desayunar o merendar las mejores medias lunas de la zona, tambien tenemos licuados, cafes, tortas entre otras cosas',
             'status' => '1',
-            'image_logo' => '',
-            'image_hero' => '',
+            'image_logo' => 'galletas_05.jpg',
+            'image_logo_uri' => 'archives/images/logo',
+            'image_hero' => 'galletas_06.jpg',
+            'image_hero_uri' => 'archives/images/hero',
+            'image_qr' => '1706149337_1_1.jpg',
+            'image_qr_uri' => 'archives/images/qr',
             'membership_id' => '3',
         ]);
         Company::create([

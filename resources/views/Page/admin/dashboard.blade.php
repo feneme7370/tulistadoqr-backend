@@ -22,7 +22,7 @@
     <div class="grid gap-3 mb-2 md:grid-cols-2">
         <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
             @if (auth()->user()->company->image_hero)
-                <img src="{{asset('archives/images/hero/'.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
+                <img src="{{asset(auth()->user()->company->image_hero_uri.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
             @else
                 <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
             @endif
@@ -31,7 +31,7 @@
 
         <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
             @if (auth()->user()->company->image_logo)
-                <img src="{{asset('archives/images/logo/'.auth()->user()->company->image_logo)}}" alt="imagen logo" class="w-full h-full object-cover rounded-sm" />
+                <img src="{{asset(auth()->user()->company->image_logo_uri.auth()->user()->company->image_logo)}}" alt="imagen logo" class="w-full h-full object-cover rounded-sm" />
             @else
                 <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
             @endif

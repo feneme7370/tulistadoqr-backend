@@ -5,7 +5,7 @@ namespace App\Http\Resources\Page;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class SuggestionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,14 +16,10 @@ class CategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'description' => $this->description,
-            'status' => $this->status,
-            'level_id' => $this->level_id,
+            'product_id' => $this->product_id,
             'company_id' => $this->company_id,
             'user_id' => $this->user_id,
-            'level' => $this->level,
+            'product' => $this->product,
             'company' => $this->company,
             'user' => $this->user,
         ];

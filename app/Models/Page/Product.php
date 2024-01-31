@@ -20,10 +20,9 @@ class Product extends Model
         'quantity',
         'description',
         'status',
+        'image_hero_uri',
         'image_hero',
-        'image_logo',
         'category_id',
-        'level_id',
         'company_id',
         'user_id',
     ];
@@ -36,10 +35,10 @@ class Product extends Model
     {
         return $this->belongsTo(Company::class, 'company_id', 'id');
     }
-    public function level()
-    {
-        return $this->belongsTo(Level::class, 'level_id', 'id');
-    }
+    // public function level()
+    // {
+    //     return $this->belongsTo(Level::class, 'level_id', 'id');
+    // }
     public function category()
     {
         return $this->belongsTo(Category::class);

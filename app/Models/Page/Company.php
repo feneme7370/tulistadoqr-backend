@@ -23,8 +23,11 @@ class Company extends Model
         'description',
         'status',
         'image_qr',
+        'image_qr_uri',
         'image_logo',
+        'image_logo_uri',
         'image_hero',
+        'image_hero_uri',
         'membership_id',
     ];
 

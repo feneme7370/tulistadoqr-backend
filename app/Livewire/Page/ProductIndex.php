@@ -48,6 +48,7 @@ class ProductIndex extends Component
     public $quantity;
     public $description;
     public $status;
+    public $image_hero_uri;
     public $image_hero;
     public $category_id;
     public $level_id;
@@ -73,6 +74,7 @@ class ProductIndex extends Component
             'quantity' => ['nullable', 'numeric'],
             'description' => ['nullable', 'string', 'max:255'],
             'status' => ['numeric'],
+            'image_hero_uri' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
             'category_id' => ['required', 'numeric'],
             'level_id' => ['required', 'numeric'],
@@ -92,6 +94,7 @@ class ProductIndex extends Component
         'quantity' => 'cantidad',
         'description' => 'descripcion',
         'status' => 'estado',
+        'image_hero_uri' => 'uri imagen de portada',
         'image_hero' => 'imagen de portada',
         'category_id' => 'categoria',
         'level_id' => 'nivel',
@@ -181,7 +184,7 @@ class ProductIndex extends Component
         if($this->countProducts()){return;}
         $this->resetErrorBag();
         $this->reset(['product']);
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
         $this->status = true;
         $this->showActionModal = true;
     }
@@ -189,7 +192,7 @@ class ProductIndex extends Component
     // // mostrar modal para confirmar editar
     public function editActionModal(Product $product) {
         $this->reset(['product']);
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
         
         $this->product = $product;
         $this->authorize('update', $this->product); 
@@ -204,6 +207,7 @@ class ProductIndex extends Component
         $this->quantity = $product['quantity'];
         $this->description = $product['description'];
         $this->status = $product['status'] == '1' ? true : false;
+        $this->image_hero_uri = $product['image_hero_uri'];
         $this->image_hero = $product['image_hero'];
         $this->category_id = $product['category_id'];
         $this->level_id = $product['level_id'];
@@ -217,6 +221,7 @@ class ProductIndex extends Component
     
         // crear datos necesarios
         $this->status = $this->status ? '1' : '0';
+        $this->image_hero_uri = 'archives/images/product_hero/';
         $this->slug = Str::slug($this->name);
         $this->user_id = auth()->user()->id;
         $this->company_id = auth()->user()->company->id;
@@ -231,20 +236,20 @@ class ProductIndex extends Component
         if( isset( $this->product['id'])) {
 
             $this->product->update(
-                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'category_id', 'level_id', 'user_id', 'company_id'])
+                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'level_id', 'user_id', 'company_id'])
             );
 
             $this->product->tags()->sync($this->product_tags);
 
             $this->reset(['product']);
-            $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
+            $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
 
             session()->flash('messageSuccess', 'Actualizado');
 
         } else {
 
             $product = Product::create(
-                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'category_id', 'level_id', 'user_id', 'company_id'])
+                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'level_id', 'user_id', 'company_id'])
             );
 
             $product->tags()->sync($this->product_tags);
@@ -257,7 +262,8 @@ class ProductIndex extends Component
     
     public function render()
     {
-        $categories = Category::where('company_id', auth()->user()->company_id)->get();
+        $categories = Category::where('company_id', auth()->user()->company_id)
+                        ->orderBy('level_id', 'DESC')->get();
         $tags = Tag::where('company_id', auth()->user()->company_id)->get();
         $levels = Level::where('company_id', auth()->user()->company_id)->get();
 
@@ -267,23 +273,26 @@ class ProductIndex extends Component
                                 $query->where('name', 'like', '%'.$this->search . '%')
                                 ->orWhereHas('category', function ($q) {
                                     $q->where('name', 'like', '%'.$this->search . '%');
-                                })
-                                ->orWhereHas('level', function ($q) {
-                                    $q->where('name', 'like', '%'.$this->search . '%');
                                 });
+                                // ->orWhereHas('level', function ($q) {
+                                //     $q->where('name', 'like', '%'.$this->search . '%');
+                                // });
                             });
                         })
                         ->when($this->active, function( $query) {
                             return $query->where('status', 1);
                         })
-                        ->when($this->level_search, function( $query) {
-                            return $query->where('level_id', $this->level_search);
-                        })
+                        // ->when($this->level_search, function( $query) {
+                        //     return $query->where('level_id', $this->level_search);
+                        // })
                         ->when($this->category_search, function( $query) {
                             return $query->where('category_id', $this->category_search);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_product');
-        return view('livewire.page.product-index', compact('categories', 'levels', 'products', 'tags'));
+        return view('livewire.page.product-index', compact(
+            'categories', 
+            'products', 
+            'tags'));
     }
 }

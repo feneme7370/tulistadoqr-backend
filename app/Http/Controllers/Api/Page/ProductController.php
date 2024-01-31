@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\Api\Page;
 
+use App\Models\Page\Level;
+use App\Models\Page\Company;
 use App\Models\Page\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Page\ProductResource;
 use App\Models\Page\Category;
-use App\Models\Page\Company;
+use App\Models\Page\Suggestion;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Page\LevelResource;
+use App\Http\Resources\Page\CompanyResource;
+use App\Http\Resources\Page\ProductResource;
+use App\Http\Resources\Page\CategoryResource;
+use App\Http\Resources\Page\SuggestionResource;
 
 class ProductController extends Controller
 {
@@ -17,7 +23,29 @@ class ProductController extends Controller
     public function index(Company $company)
     {
         $products = Product::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
-        return ProductResource::collection($products);
+        $responseProducts = ProductResource::collection($products);
+
+        $suggestions = Suggestion::where('company_id', $company->id)->orderBy('id', 'DESC')->get();
+        $responseSuggestions = SuggestionResource::collection($suggestions);
+
+        $levels = Level::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $responseLevels =  LevelResource::collection($levels);
+
+        $categories = Category::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $responseCategories = CategoryResource::collection($categories);
+
+        $companies = Company::where('id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $responseCompany = CompanyResource::collection($companies);
+
+        $array_products = [
+            'responseProducts' => $responseProducts, 
+            'responseSuggestions' => $responseSuggestions,
+            'responseLevels' => $responseLevels,
+            'responseCategories' => $responseCategories,
+            'responseCompany' => $responseCompany
+
+        ];
+        return $array_products;
 
     }
 

@@ -22,6 +22,7 @@ class Company extends Model
         'url',
         'description',
         'status',
+        'type_menu',
         'image_qr',
         'image_qr_uri',
         'image_logo',

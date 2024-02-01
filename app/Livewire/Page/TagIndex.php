@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 
 class TagIndex extends Component
 {
+    ///////////////////////////// MODULO PAGINACION /////////////////////////////
+
     // paginacion
     use WithPagination;
     public function updatingActive() {$this->resetPage(pageName: 'p_tag');}
@@ -16,6 +18,13 @@ class TagIndex extends Component
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+
+    // mostrar variables en queryString
+    protected function queryString(){
+        return ['search' => [ 'as' => 'q' ],];
+    }
+
+    ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -29,6 +38,8 @@ class TagIndex extends Component
 
     // propiedades para editar
     public $tag;
+
+    ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
     // reglas de validacion
     public function rules(){
@@ -48,9 +59,20 @@ class TagIndex extends Component
         'company_id' => 'empresa',
     ];
 
+    ///////////////////////////// MODULO UTILIDADES /////////////////////////////
+
+    // resetear variables
+    public function resetProperties() {
+        $this->resetErrorBag();
+        $this->reset(['name', 'slug', 'user_id', 'company_id']);
+    }
+
+    ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
     // abrir modal y recibir id
     public function openDeleteModal($id){
+        $this->resetProperties();
+
         $this->tag = Tag::findOrFail($id);
         $this->authorize('delete', $this->tag); 
 
@@ -59,64 +81,80 @@ class TagIndex extends Component
     
     // eliminar desde el modal de confirmacion
     public function deleteTag() {
-        $this->resetErrorBag();
-        $tag = Tag::findOrFail($this->tag->id);
+        $this->resetProperties();
 
+        $tag = Tag::findOrFail($this->tag->id);
         $tag->delete();
+
         session()->flash('messageSuccess', 'Registro eliminado');
-        $this->reset();
-        
+        $this->resetProperties();
+
         $this->showDeleteModal = false;
     }
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
-        $this->resetErrorBag();
         $this->reset(['tag']);
-        $this->reset(['name', 'slug', 'user_id', 'company_id']);
+        $this->resetProperties();
+
         $this->showActionModal = true;
     }
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Tag $tag) {
+        $this->resetProperties();
+
         $this->tag = $tag;
         $this->authorize('update', $this->tag); 
 
-        $this->resetErrorBag();
         $this->name = $tag['name'];
         $this->slug = $tag['slug'];
         $this->user_id = $tag['user_id'];
         $this->company_id = $tag['company_id'];
+
         $this->showActionModal = true;
     }
 
     // boton de guardar o editar
     public function save() {
     
+        // poner datos automaticos
         $this->slug = Str::slug($this->name);
         $this->user_id = auth()->user()->id;
         $this->company_id = auth()->user()->company->id;
 
+        // validar datos
         $this->validate();
         
         if( isset( $this->tag['id'])) {
 
+            // editar datos
             $this->tag->update(
                 $this->only(['name', 'slug', 'user_id', 'company_id'])
             );
-            session()->flash('messageSuccess', 'Actualizado');
+
+            $this->reset(['tag']);
+            $this->resetProperties();
+            session()->flash('messageSuccess', 'Actualizado con exito');
 
         } else {
 
+            // crear datos
             Tag::create(
                 $this->only(['name', 'slug', 'user_id', 'company_id'])
             );
-            session()->flash('messageSuccess', 'Guardado');
+
+            $this->reset(['tag']);
+            $this->resetProperties();
+            session()->flash('messageSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;
     }
     
+    ///////////////////////////// MODULO RENDER /////////////////////////////
+
+    // renderizar vista
     public function render()
     {
         $tags = Tag::where('company_id', auth()->user()->company_id)
@@ -127,6 +165,7 @@ class TagIndex extends Component
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_tag');
+                        
         return view('livewire.page.tag-index', compact('tags'));
     }
 }

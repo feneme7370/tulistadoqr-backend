@@ -9,16 +9,22 @@ use App\Models\Page\Suggestion;
 
 class SuggestionIndex extends Component
 {
+    ///////////////////////////// MODULO PAGINACION /////////////////////////////
+
     // paginacion
     use WithPagination;
     
     // propiedades de busqueda
     public $perPage = 10;
 
+    ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
+
     // propiedades del form
     public $product_id;
     public $user_id;
     public $company_id;
+
+    ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
     // reglas de validacion
     public function rules(){
@@ -35,6 +41,8 @@ class SuggestionIndex extends Component
         'user_id' => 'usuario',
         'company_id' => 'empresa',
     ];
+
+    ///////////////////////////// MODULO UTILIDADES /////////////////////////////
 
     // contar elementos de membresia
     public function countSuggestion() {
@@ -56,14 +64,23 @@ class SuggestionIndex extends Component
         }
     }
 
+    // resetear variables
+    public function resetProperties() {
+        $this->resetErrorBag();
+        $this->reset(['product_id', 'user_id', 'company_id']);
+    }
+
+    ///////////////////////////// MODULO CRUD /////////////////////////////
+
     // eliminar desde el modal de confirmacion
     public function deleteSuggestion($id) {
+        $this->resetProperties();
+        
         $suggestion = Suggestion::findOrFail($id);
         $this->authorize('delete', $suggestion);
 
         $suggestion->delete();
         session()->flash('messageSuccess', 'Registro eliminado');
-        $this->reset();
     }
 
     // boton de guardar o editar
@@ -85,11 +102,14 @@ class SuggestionIndex extends Component
             $this->only(['product_id', 'user_id', 'company_id'])
         );
 
-        $this->reset();
-        session()->flash('messageSuccess', 'Guardado');
+        $this->resetProperties();
+        session()->flash('messageSuccess', 'Guardado con exito');
 
     }
 
+    ///////////////////////////// MODULO RENDER /////////////////////////////
+
+    // renderizar vista
     public function render()
     {
         $products = Product::where('company_id', auth()->user()->company_id)

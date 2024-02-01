@@ -6,27 +6,35 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Page\Company;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Page\Membership;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-use Livewire\WithFileUploads;
+use App\helpers\sistem\CrudInterventionImage;
 
 class CompanyIndex extends Component
 {
+    ///////////////////////////// MODULO SUBIR ARCHIVOS /////////////////////////////
+    // subir archivos en livewire
+    use WithFileUploads;
+
+    ///////////////////////////// MODULO PAGINACION /////////////////////////////
+
     // paginacion
     use WithPagination;
     public function updatingActive() {$this->resetPage(pageName: 'p_company');}
     public function updatingSearch() {$this->resetPage(pageName: 'p_company');}
 
-    use WithFileUploads;
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
-    protected function queryString()
-    {
+    // mostrar variables en queryString
+    protected function queryString(){
         return ['search' => [ 'as' => 'q' ],];
     }
+
+    ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -56,6 +64,8 @@ class CompanyIndex extends Component
 
     // propiedades para editar
     public $company;
+
+    ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
     // reglas de validacion
     public function rules(){
@@ -104,171 +114,179 @@ class CompanyIndex extends Component
         'membership_id' => 'membresia',
     ];
 
+    ///////////////////////////// MODULO UTILIDADES /////////////////////////////
 
-    // abrir modal y recibir id
-    public function openDeleteModal($id){
-        $this->showDeleteModal = true;
-        $this->company = Company::findOrFail($id);
+    // resetear variables
+    public function resetProperties() {
+        $this->resetErrorBag();
+        $this->reset([    
+            'name',
+            'slug',
+            'email',
+            'phone',
+            'adress',
+            'city',
+            'social',
+            'url',
+            'description',
+            'status',
+            'image_qr',
+            'image_qr_uri',
+            'image_logo',
+            'image_logo_uri',
+            'image_hero',
+            'image_hero_uri',
+            'image_qr_new',
+            'image_logo_new',
+            'image_hero_new',
+            'membership_id',
+        ]);
     }
     
-    // eliminar desde el modal de confirmacion
-    public function deleteCompany() {
-        $company = Company::findOrFail($this->company->id);
-        $this->authorize('delete', $company); 
+    ///////////////////////////// MODULO IMAGENES /////////////////////////////
 
-        $this->resetErrorBag();
-
-        if($company->id == 1){
-            session()->flash('messageError', 'No se puede eliminar el registro');
-            $this->showDeleteModal = false;
-        }else{
-            $company->delete();
-            session()->flash('messageSuccess', 'Registro eliminado');
-            $this->reset();
-            
-            $this->showDeleteModal = false;
-        }
-    }
-
-    // eliminar imagen de portada
+    // eliminar imagen al reemplazarla
     public function deleteImage(){
-        if($this->image_hero != ''){
-            $path = 'archives/images/hero/'.$this->image_hero;
-            if(File::exists($path)){
-                File::delete($path);
-            }
-        }
-    }
-    // eliminar imagen del logo
-    public function deleteImageLogo(){
-        if($this->image_logo != ''){
-            $path = 'archives/images/logo/'.$this->image_logo;
-            if(File::exists($path)){
-                File::delete($path);
-            }
-        }
-    }
-    // eliminar imagen del QR
-    public function deleteImageQR(){
-        if($this->image_qr != ''){
-            $path = 'archives/images/qr/'.$this->image_qr;
-            if(File::exists($path)){
-                File::delete($path);
-            }
-        }
+        CrudInterventionImage::deleteImage(
+            $this->image_hero, 
+            'archives/images/hero/'
+        );
     }
 
+    // eliminar solo imagen del producto en editar
     public function deleteImageEdit() {
         $this->deleteImage();
         $this->image_hero = '';
-        $this->company->update(
+        $this->level->update(
             $this->only(['image_hero'])
         );
     }
 
-    public function deleteImageLogoEdit() {
-        $this->deleteImageLogo();
-        $this->image_logo = '';
-        $this->company->update(
-            $this->only(['image_logo'])
-        );
-    }
-
-    public function deleteImageQrEdit() {
-        $this->deleteImageQr();
-        $this->image_qr = '';
-        $this->company->update(
-            $this->only(['image_qr'])
-        );
-    }
-
-    // subir imagen de portada a la empresa
+    // subir imagen al crear producto o editar al reemplazar
     public function uploadImage(){
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
-            $this->deleteImage();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
-            $extension = '.jpg';
-            $filename = $name.$extension;
-
-            $image_hero = Image::make($this->image_hero_new);
-            $image_hero->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            $path = public_path('archives/images/hero/') . $filename;
-            $image_hero->save($path);
-            $this->image_hero = $filename;
+            $this->image_hero = CrudInterventionImage::uploadImage(
+                $this->image_hero, 
+                'archives/images/hero/', 
+                $this->image_hero_new
+            );
         }
     }
 
-    // subir logo a la empresa
+    // eliminar imagen al reemplazarla
+    public function deleteImageLogo(){
+        CrudInterventionImage::deleteImage(
+            $this->image_logo, 
+            'archives/images/logo/'
+        );
+    }
+
+    // eliminar solo imagen del producto en editar
+    public function deleteImageLogoEdit() {
+        $this->deleteImage();
+        $this->image_logo = '';
+        $this->level->update(
+            $this->only(['image_logo'])
+        );
+    }
+
+    // subir imagen al crear producto o editar al reemplazar
     public function uploadImageLogo(){
-    
-        // Verificar si la carpeta existe, si no, crearla
 
         // crear o reemplazar imagen
         if($this->image_logo_new){
-            $this->deleteImageLogo();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
-            $extension = '.jpg';
-            $filename = $name.$extension;
-            
-            $image_logo = Image::make($this->image_logo_new);
-            $image_logo->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            $path = 'archives/images/logo/' . $filename;
-            $image_logo->save($path);
-
-            $this->image_logo = $filename;
+            $this->image_logo = CrudInterventionImage::uploadImage(
+                $this->image_logo, 
+                'archives/images/logo/', 
+                $this->image_logo_new
+            );
         }
     }
 
-    // subir qr a la empresa
+    // eliminar imagen al reemplazarla
+    public function deleteImageQr(){
+        CrudInterventionImage::deleteImage(
+            $this->image_qr, 
+            'archives/images/qr/'
+        );
+    }
+
+    // eliminar solo imagen del producto en editar
+    public function deleteImageQrEdit() {
+        $this->deleteImage();
+        $this->image_qr = '';
+        $this->level->update(
+            $this->only(['image_qr'])
+        );
+    }
+
+    // subir imagen al crear producto o editar al reemplazar
     public function uploadImageQr(){
-    
-        // Verificar si la carpeta existe, si no, crearla
 
         // crear o reemplazar imagen
         if($this->image_qr_new){
+            $this->image_qr = CrudInterventionImage::uploadImage(
+                $this->image_qr, 
+                'archives/images/qr/', 
+                $this->image_qr_new
+            );
+        }
+    }
+
+    ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
+
+    // abrir modal y recibir id
+    public function openDeleteModal($id){
+        $this->resetProperties();
+
+        $this->company = Company::findOrFail($id);
+        $this->authorize('delete', $this->company); 
+
+        $this->showDeleteModal = true;
+    }
+    
+    // eliminar desde el modal de confirmacion
+    public function deleteCompany() {
+        $this->resetProperties();
+
+        $company = Company::findOrFail($this->company->id);
+
+        // validar company principal
+        if($company->id == 1){
+            session()->flash('messageError', 'No se puede eliminar el registro');
+            $this->showDeleteModal = false;
+        }else{
+
+            $this->deleteImage();
+            $this->deleteImageLogo();
             $this->deleteImageQr();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
-            $extension = '.jpg';
-            $filename = $name.$extension;
+            $company->delete();
+
+            $this->resetProperties();
+            session()->flash('messageSuccess', 'Registro eliminado');
             
-            $image_qr = Image::make($this->image_qr_new);
-            $image_qr->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            $path = 'archives/images/qr/' . $filename;
-            $image_qr->save($path);
-
-            $this->image_qr = $filename;
+            $this->showDeleteModal = false;
         }
     }
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
-        $this->resetErrorBag();
+        $this->resetProperties();
         $this->reset(['company']);
-        $this->reset(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_qr_new', 'image_logo', 'image_logo_new', 'image_hero', 'image_hero_new', 'status', 'membership_id']);
+
         $this->status = true;
         $this->showActionModal = true;
     }
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Company $company) {
-        $this->reset(['company']);
-        $this->reset(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_qr_new', 'image_logo', 'image_logo_new', 'image_hero', 'image_hero_new', 'status', 'membership_id']);
+        $this->resetProperties();
 
         $this->company = $company;
         $this->authorize('update', $this->company); 
 
-        $this->resetErrorBag();
         $this->name = $company['name'];
         $this->slug = $company['slug'];
         $this->email = $company['email'];
@@ -289,14 +307,17 @@ class CompanyIndex extends Component
     // boton de guardar o editar
     public function save() {
     
+        // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
         $this->slug = Str::slug($this->name);
         $this->image_qr_uri = 'archives/images/qr/';
         $this->image_logo_uri = 'archives/images/logo/';
         $this->image_hero_uri = 'archives/images/hero/';
 
+        // validar datos
         $this->validate();
 
+        // subir imagen de portada
         $this->uploadImage();
         $this->uploadImageLogo();
         $this->uploadImageQr();
@@ -306,22 +327,32 @@ class CompanyIndex extends Component
             $this->company->update(
                 $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_qr_uri', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri', 'status', 'membership_id'])
             );
-            session()->flash('messageSuccess', 'Actualizado');
+
+            $this->reset(['company']);
+            $this->resetProperties();
+            session()->flash('messageSuccess', 'Actualizado con exito');
 
         } else {
 
             Company::create(
                 $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_qr_uri', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri', 'status', 'membership_id'])
             );
-            session()->flash('messageSuccess', 'Guardado');
+
+            $this->reset(['company']);
+            $this->resetProperties();
+            session()->flash('messageSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;
     }
 
+    ///////////////////////////// MODULO RENDER /////////////////////////////
+
+    // renderizar vista
     public function render()
     {
         $memberships = Membership::get();
+
         $companies = Company::when( $this->search, function($query) {
                             return $query->where(function( $query) {
                                 $query->where('name', 'like', '%'.$this->search . '%')
@@ -333,6 +364,7 @@ class CompanyIndex extends Component
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_company');
+                        
         return view('livewire.page.company-index', compact('companies', 'memberships'));
     }
 }

@@ -11,30 +11,33 @@ use Livewire\WithPagination;
 use App\Models\Page\Category;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
+use App\helpers\sistem\CrudInterventionImage;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ProductIndex extends Component
 {
+    ///////////////////////////// MODULO SUBIR ARCHIVOS /////////////////////////////
+    // subir archivos en livewire
+    use WithFileUploads;
+
+    ///////////////////////////// MODULO PAGINACION /////////////////////////////
+
     // paginacion
     use WithPagination;
     public function updatingActive() {$this->resetPage(pageName: 'p_product');}
     public function updatingSearch() {$this->resetPage(pageName: 'p_product');}
-
-    // subir archivos
-    use WithFileUploads;
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
     public $category_search;
     public $level_search;
 
-
-    protected function queryString()
-    {
+    // mostrar variables en queryString
+    protected function queryString(){
         return ['search' => [ 'as' => 'q' ],];
     }
+
+    ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -48,21 +51,21 @@ class ProductIndex extends Component
     public $quantity;
     public $description;
     public $status;
-    public $image_hero_uri;
     public $image_hero;
+    public $image_hero_uri;
+    public $image_hero_new;
     public $category_id;
     public $level_id;
     public $user_id;
     public $company_id;
-
-    // cargar imagen para guardar y almacenar string en image_hero
-    public $image_hero_new;
 
     // propiedades para editar
     public $product;
 
     // propiedades para editar
     public $product_tags = [];
+
+    ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
     // reglas de validacion
     public function rules(){
@@ -77,7 +80,6 @@ class ProductIndex extends Component
             'image_hero_uri' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
             'category_id' => ['required', 'numeric'],
-            'level_id' => ['required', 'numeric'],
             'user_id' => ['required', 'numeric'],
             'company_id' => ['required', 'numeric'],
 
@@ -97,53 +99,13 @@ class ProductIndex extends Component
         'image_hero_uri' => 'uri imagen de portada',
         'image_hero' => 'imagen de portada',
         'category_id' => 'categoria',
-        'level_id' => 'nivel',
         'user_id' => 'usuario',
         'company_id' => 'empresa',
 
         'image_hero_new' => 'archivo de imagen',
     ];
 
-    // eliminar imagen al reemplazarla
-    public function deleteImage(){
-        if($this->image_hero != ''){
-            $path = 'archives/images/product_hero/'.$this->image_hero;
-            if(File::exists($path)){
-                File::delete($path);
-            }
-        }
-    }
-
-    // eliminar solo imagen del producto en editar
-    public function deleteImageEdit() {
-        $this->deleteImage();
-        $this->image_hero = '';
-        
-        $this->product->update(
-            $this->only(['image_hero'])
-        );
-
-    }
-
-    // subir imagen al crear producto o editar al reemplazar
-    public function uploadImage(){
-
-        // crear o reemplazar imagen
-        if($this->image_hero_new){
-            $this->deleteImage();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
-            $extension = '.jpg';
-            $filename = $name.$extension;
-
-            $image_hero = Image::make($this->image_hero_new);
-            $image_hero->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            $image_hero->save('archives/images/product_hero/'. $filename);
-            $this->image_hero = $filename;
-        }
-    }
+    ///////////////////////////// MODULO UTILIDADES /////////////////////////////
 
     // contar elementos de membresia
     public function countProducts() {
@@ -154,52 +116,91 @@ class ProductIndex extends Component
             return true;
         }
     }
+    // resetear variables
+    public function resetProperties() {
+        $this->resetErrorBag();
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id']);
+    }
+
+    ///////////////////////////// MODULO IMAGENES /////////////////////////////
+
+    // eliminar imagen al reemplazarla
+    public function deleteImage(){
+        CrudInterventionImage::deleteImage(
+            $this->image_hero, 
+            'archives/images/product_hero/'
+        );
+    }
+
+    // eliminar solo imagen del producto en editar
+    public function deleteImageEdit() {
+        $this->deleteImage();
+        $this->image_hero = '';
+        $this->product->update(
+            $this->only(['image_hero'])
+        );
+    }
+
+    // subir imagen al crear producto o editar al reemplazar
+    public function uploadImage(){
+
+        // crear o reemplazar imagen
+        if($this->image_hero_new){
+            $this->image_hero = CrudInterventionImage::uploadImage(
+                $this->image_hero, 
+                'archives/images/product_hero/', 
+                $this->image_hero_new
+            );
+        }
+    }
+
+    ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
     // abrir modal y recibir id
     public function openDeleteModal($id){
+        $this->resetProperties();
+
         $this->product = Product::findOrFail($id);
         $this->authorize('delete', $this->product); 
         
-        $this->resetErrorBag();
         $this->showDeleteModal = true;
-
     }
     
     // eliminar desde el modal de confirmacion
     public function deleteProduct() {
+        $this->resetProperties();
+
         $product = Product::findOrFail($this->product->id);
 
         $this->image_hero = $product['image_hero'];
+        
         $this->deleteImage();
-
         $product->delete();
 
         session()->flash('messageSuccess', 'Registro eliminado');
-        $this->reset();
+        $this->resetProperties();
+
         $this->showDeleteModal = false;
     }
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
         if($this->countProducts()){return;}
-        $this->resetErrorBag();
+        
+        $this->resetProperties();
         $this->reset(['product']);
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
+        
         $this->status = true;
         $this->showActionModal = true;
     }
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Product $product) {
-        $this->reset(['product']);
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
+        $this->resetProperties();
         
         $this->product = $product;
         $this->authorize('update', $this->product); 
-
-        $this->resetErrorBag();
         
-
         $this->name = $product['name'];
         $this->slug = $product['slug'];
         $this->price_original = $product['price_original'];
@@ -210,16 +211,16 @@ class ProductIndex extends Component
         $this->image_hero_uri = $product['image_hero_uri'];
         $this->image_hero = $product['image_hero'];
         $this->category_id = $product['category_id'];
-        $this->level_id = $product['level_id'];
         $this->user_id = $product['user_id'];
         $this->company_id = $product['company_id'];
+
         $this->showActionModal = true;
     }
 
     // boton de guardar o editar
     public function save() {
     
-        // crear datos necesarios
+        // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
         $this->image_hero_uri = 'archives/images/product_hero/';
         $this->slug = Str::slug($this->name);
@@ -235,36 +236,46 @@ class ProductIndex extends Component
         // crear o editar segun id
         if( isset( $this->product['id'])) {
 
+            // editar datos
             $this->product->update(
-                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'level_id', 'user_id', 'company_id'])
+                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
             );
 
             $this->product->tags()->sync($this->product_tags);
 
             $this->reset(['product']);
-            $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'level_id', 'user_id', 'company_id']);
+            $this->resetProperties();
 
-            session()->flash('messageSuccess', 'Actualizado');
+            session()->flash('messageSuccess', 'Actualizado con exito');
 
         } else {
 
+            // crear datos
             $product = Product::create(
-                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'level_id', 'user_id', 'company_id'])
+                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
             );
 
             $product->tags()->sync($this->product_tags);
 
-            session()->flash('messageSuccess', 'Guardado');
+            $this->reset(['product']);
+            $this->resetProperties();
+
+            session()->flash('messageSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;
     }
     
+    ///////////////////////////// MODULO RENDER /////////////////////////////
+
+    // renderizar vista
     public function render()
     {
         $categories = Category::where('company_id', auth()->user()->company_id)
                         ->orderBy('level_id', 'DESC')->get();
+
         $tags = Tag::where('company_id', auth()->user()->company_id)->get();
+
         $levels = Level::where('company_id', auth()->user()->company_id)->get();
 
         $products = Product::where('company_id', auth()->user()->company_id)
@@ -274,22 +285,17 @@ class ProductIndex extends Component
                                 ->orWhereHas('category', function ($q) {
                                     $q->where('name', 'like', '%'.$this->search . '%');
                                 });
-                                // ->orWhereHas('level', function ($q) {
-                                //     $q->where('name', 'like', '%'.$this->search . '%');
-                                // });
                             });
                         })
                         ->when($this->active, function( $query) {
                             return $query->where('status', 1);
                         })
-                        // ->when($this->level_search, function( $query) {
-                        //     return $query->where('level_id', $this->level_search);
-                        // })
                         ->when($this->category_search, function( $query) {
                             return $query->where('category_id', $this->category_search);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_product');
+
         return view('livewire.page.product-index', compact(
             'categories', 
             'products', 

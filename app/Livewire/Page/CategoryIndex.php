@@ -9,11 +9,17 @@ use Livewire\WithPagination;
 use App\Models\Page\Category;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use App\helpers\sistem\CrudInterventionImage;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class CategoryIndex extends Component
 {
+    ///////////////////////////// MODULO SUBIR ARCHIVOS /////////////////////////////
+    // subir archivos en livewire
     use WithFileUploads;
+
+    ///////////////////////////// MODULO PAGINACION /////////////////////////////
+
     // paginacion
     use WithPagination;
     public function updatingActive() {$this->resetPage(pageName: 'p_category');}
@@ -22,10 +28,12 @@ class CategoryIndex extends Component
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
-    protected function queryString()
-    {
+    // mostrar variables en queryString
+    protected function queryString(){
         return ['search' => [ 'as' => 'q' ],];
     }
+
+    ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -45,6 +53,8 @@ class CategoryIndex extends Component
 
     // propiedades para editar
     public $category;
+
+    ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
     // reglas de validacion
     public function rules(){
@@ -78,6 +88,8 @@ class CategoryIndex extends Component
         'image_hero_new' => 'archivo de imagen',
     ];
 
+    ///////////////////////////// MODULO UTILIDADES /////////////////////////////
+
     // contar elementos de membresia
     public function countCategories() {
         $amount = count(Category::where('company_id', auth()->user()->company_id)->get());
@@ -88,20 +100,26 @@ class CategoryIndex extends Component
         }
     }
 
+    // resetear variables
+    public function resetProperties() {
+        $this->resetErrorBag();
+        $this->reset(['name', 'slug', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'level_id', 'user_id', 'company_id']);
+    }
+
+    ///////////////////////////// MODULO IMAGENES /////////////////////////////
+
     // eliminar imagen al reemplazarla
     public function deleteImage(){
-        if($this->image_hero != ''){
-            $path = 'archives/images/category_hero/'.$this->image_hero;
-            if(File::exists($path)){
-                File::delete($path);
-            }
-        }
+        CrudInterventionImage::deleteImage(
+            $this->image_hero, 
+            'archives/images/category_hero/'
+        );
     }
+
     // eliminar solo imagen del producto en editar
     public function deleteImageEdit() {
         $this->deleteImage();
         $this->image_hero = '';
-        
         $this->category->update(
             $this->only(['image_hero'])
         );
@@ -112,44 +130,43 @@ class CategoryIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
-            $this->deleteImage();
-            $name = time().'_'.auth()->user()->id.'_'.auth()->user()->company_id;
-            $extension = '.jpg';
-            $filename = $name.$extension;
-
-            $image_hero = Image::make($this->image_hero_new);
-            $image_hero->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            $image_hero->save('archives/images/category_hero/'. $filename);
-            $this->image_hero = $filename;
+            $this->image_hero = CrudInterventionImage::uploadImage(
+                $this->image_hero, 
+                'archives/images/category_hero/', 
+                $this->image_hero_new
+            );
         }
     }
 
+    ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
+
     // abrir modal y recibir id
     public function openDeleteModal($id){
+        $this->resetProperties();
+
         $this->category = Category::findOrFail($id);
         $this->authorize('delete', $this->category); 
         
-        $this->resetErrorBag();
-        $this->showDeleteModal = true;
-        
+        $this->showDeleteModal = true; 
     }
     
     // eliminar desde el modal de confirmacion
     public function deleteCategory() {
-        $this->resetErrorBag();
+        $this->resetProperties();
+
         $category = Category::findOrFail($this->category->id);
 
         // comprobar si tiene productos asignados
         if($category->products->count() > 0){
             session()->flash('messageError', 'No se puede eliminar, tiene productos asignados');
-            $this->reset();
+            $this->resetProperties();
         }else{
+            $this->image_hero = $category['image_hero'];
+            
+            $this->deleteImage();
             $category->delete();
             session()->flash('messageSuccess', 'Registro eliminado');
-            $this->reset();
+            $this->resetProperties();
         }
         
         $this->showDeleteModal = false;
@@ -158,16 +175,17 @@ class CategoryIndex extends Component
     // mostrar modal para confirmar crear
     public function createActionModal() {
         if($this->countCategories()){return;}
-        $this->resetErrorBag();
+        
         $this->reset(['category']);
-        $this->reset(['name', 'slug', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'level_id', 'user_id', 'company_id']);
+        $this->resetProperties();
+
         $this->status = true;
         $this->showActionModal = true;
     }
 
     // // mostrar modal para confirmar editar
     public function editActionModal(Category $category) {
-        $this->reset(['name', 'slug', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'level_id', 'user_id', 'company_id']);
+        $this->resetProperties();
 
         $this->category = $category;
         $this->authorize('update', $this->category); 
@@ -183,18 +201,21 @@ class CategoryIndex extends Component
         $this->level_id = $category['level_id'];
         $this->user_id = $category['user_id'];
         $this->company_id = $category['company_id'];
+
         $this->showActionModal = true;
     }
 
     // boton de guardar o editar
     public function save() {
     
+        // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
         $this->slug = Str::slug($this->name);
         $this->image_hero_uri = 'archives/images/category_hero/';
         $this->user_id = auth()->user()->id;
         $this->company_id = auth()->user()->company->id;
 
+        // validar datos
         $this->validate();
 
         // subir imagen de portada
@@ -202,22 +223,33 @@ class CategoryIndex extends Component
         
         if( isset( $this->category['id'])) {
 
+            // editar datos
             $this->category->update(
                 $this->only(['name', 'slug', 'description', 'status', 'image_hero', 'image_hero_uri', 'level_id', 'user_id', 'company_id'])
             );
-            session()->flash('messageSuccess', 'Actualizado');
+
+            $this->reset(['category']);
+            $this->resetProperties();
+            session()->flash('messageSuccess', 'Actualizado con exito');
 
         } else {
 
+            // crear datos
             Category::create(
                 $this->only(['name', 'slug', 'description', 'status', 'image_hero', 'image_hero_uri', 'level_id', 'user_id', 'company_id'])
             );
-            session()->flash('messageSuccess', 'Guardado');
+
+            $this->reset(['category']);
+            $this->resetProperties();
+            session()->flash('messageSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;
     }
 
+    ///////////////////////////// MODULO RENDER /////////////////////////////
+
+    // renderizar vista
     public function render()
     {
         $levels = Level::where('company_id', auth()->user()->company->id)->get();
@@ -232,6 +264,7 @@ class CategoryIndex extends Component
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_category');
+                        
         return view('livewire.page.category-index', compact('categories', 'levels'));
     }
 }

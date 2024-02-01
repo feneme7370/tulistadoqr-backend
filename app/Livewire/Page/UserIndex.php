@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserIndex extends Component
 {
+    ///////////////////////////// MODULO PAGINACION /////////////////////////////
+
     // paginacion
     use WithPagination;
     public function updatingActive() {$this->resetPage(pageName: 'p_user');}
@@ -20,6 +22,12 @@ class UserIndex extends Component
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
+    // mostrar variables en queryString
+    protected function queryString(){
+        return ['search' => [ 'as' => 'q' ],];
+    }
+
+    ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
     // propiedades para el modal
     public $showActionModal = false;
     public $showDeleteModal = false;
@@ -42,6 +50,8 @@ class UserIndex extends Component
 
     // propiedades para editar
     public $user;
+
+    ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
     // reglas de validacion
     public function rules(){
@@ -81,50 +91,77 @@ class UserIndex extends Component
         'company_id' => 'empresa',
     ];
 
+    ///////////////////////////// MODULO UTILIDADES /////////////////////////////
+
+    // resetear variables
+    public function resetProperties() {
+        $this->resetErrorBag();
+        $this->reset([
+            'name',
+            'email',
+            'password',
+            'password_confirmation',
+            'slug',
+            'lastname',
+            'phone',
+            'adress',
+            'birthday',
+            'city',
+            'social',
+            'description',
+            'status',
+            'company_id',
+        ]);
+    }
+
+    ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
     // abrir modal y recibir id
     public function openDeleteModal($id){
-        $this->showDeleteModal = true;
+        $this->resetProperties();
+
         $this->user = User::findOrFail($id);
+        $this->authorize('delete', $this->user);
+        
+        $this->showDeleteModal = true;
     }
     
     // eliminar desde el modal de confirmacion
     public function deleteUser() {
+        $this->resetProperties();
+
         $user = User::findOrFail($this->user->id);
-
-        $this->authorize('delete', $user); 
-
-        $this->resetErrorBag();
 
         if($user->id == 1){
             session()->flash('messageError', 'No se puede eliminar el registro');
-            $this->showDeleteModal = false;
+            $this->resetProperties();
+
         }else{
+
             $user->delete();
-            session()->flash('messageSuccess', 'Registro eliminado');
-            $this->reset();
             
-            $this->showDeleteModal = false;
+            session()->flash('messageSuccess', 'Registro eliminado');
+            $this->resetProperties();
         }
+
+        $this->showDeleteModal = false;
     }
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
-        $this->resetErrorBag();
         $this->reset(['user']);
-        $this->reset(['name', 'slug', 'email', 'password', 'password_confirmation', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id']);
+        $this->resetProperties();
+
         $this->status = true;
         $this->showActionModal = true;
     }
 
     // // mostrar modal para confirmar editar
     public function editActionModal(User $user) {
+        $this->resetProperties();
+
         $this->user = $user;
         $this->authorize('update', $this->user); 
-
-        $this->resetErrorBag();
-        $this->reset(['user']);
-        $this->reset(['name', 'slug', 'email', 'password', 'password_confirmation', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id']);
 
         $this->name = $user['name'];
         $this->slug = $user['slug'];
@@ -138,29 +175,36 @@ class UserIndex extends Component
         $this->description = $user['description'];
         $this->status = $user['status'] == '1' ? true : false;
         $this->company_id = $user['company_id'];
+
         $this->showActionModal = true;
     }
 
     // boton de guardar o editar
     public function save() {
     
+        // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
         $this->slug = Str::slug($this->name);
         
-
+        // validar datos
         $this->validate();
 
+        // crear password nuevo o dejar el existente
         if($this->password){
             $this->password = Hash::make($this->password);
         }else{
             $this->password = $this->user->password;
         }
         
+
         if( isset( $this->user['id'])) {
 
             $this->user->update(
                 $this->only(['name', 'slug', 'email', 'password', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id'])
             );
+
+            $this->reset(['user']);
+            $this->resetProperties();
             session()->flash('messageSuccess', 'Actualizado');
 
         } else {
@@ -168,14 +212,22 @@ class UserIndex extends Component
             User::create(
                 $this->only(['name', 'slug', 'email', 'password', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id'])
             );
+
+            $this->reset(['user']);
+            $this->resetProperties();
             session()->flash('messageSuccess', 'Guardado');
         }
 
         $this->showActionModal = false;
     }
+
+    ///////////////////////////// MODULO RENDER /////////////////////////////
+
+    // renderizar vista
     public function render()
     {
         $companies = Company::get();
+
         $users = User::when( $this->search, function($query) {
                             return $query->where(function( $query) {
                                 $query->where('name', 'like', '%'.$this->search . '%')
@@ -191,6 +243,7 @@ class UserIndex extends Component
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_user');
+                        
         return view('livewire.page.user-index', compact('companies', 'users'));
     }
 }

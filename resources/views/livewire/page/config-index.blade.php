@@ -50,13 +50,17 @@
                     />
                 <x-sistem.forms.input-error for="city" />
             </div>
+
+            <div>
+                <x-sistem.forms.label-form for="type_menu" value="{{ __('Tipo de menu') }}" />
+                <x-sistem.forms.select-form wire:model="type_menu" id="type_menu">
+                    <option value="1">Menu Acordion</option>
+                    <option value="2">Listado</option>
+                    <option value="3">Secciones</option>
+                </x-sistem.forms.select-form>
+                <x-sistem.forms.input-error for="type_menu" />
+            </div>
     
-            {{-- <div>
-                <x-sistem.forms.label-form for="social" value="{{ __('Redes sociales') }}" />
-                <x-sistem.forms.input-form id="social" type="text" placeholder="{{ __('Redes Sociales') }}" wire:model="social"
-                    />
-                <x-sistem.forms.input-error for="social" />
-            </div> --}}
         </div>
 
         {{-- imagen de portada empresa --}}

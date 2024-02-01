@@ -60,8 +60,12 @@
                             </div>
                           </td>
 
-                          <td>
-                            <img class=" h-10 w-10 sm:h-32 sm:w-32" src="{{$item->image_hero_uri}}{{$item->image_hero}}" alt="imagen producto">
+                          <td class="sm:min-w-32">
+                            @if ($item->image_hero)
+                            <img class="block h-10 w-10 sm:h-32 sm:w-32 object-cover" src="{{$item->image_hero_uri.$item->image_hero}}" alt="imagen producto">                            
+                            @else
+                            <img class=" h-10 w-10 sm:h-32 sm:w-32 object-cover" src="archives/sistem/img/withoutImage.jpg" alt="imagen producto">
+                            @endif
                           </td>
 
                           <td><p>{{$item->name}}</p></td>

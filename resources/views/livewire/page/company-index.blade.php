@@ -43,9 +43,9 @@
                         @foreach ($companies as $item)
                         <tr wire:key="field-company-{{ $item->id }}">
 
-                          <td class="text-center"><p>{{$item->id}}</p></td>
+                          <td class="with-id-columns"><p>{{$item->id}}</p></td>
 
-                          <td>
+                          <td class="with-actions-columns">
                             <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
                               <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
@@ -53,20 +53,18 @@
                             </div>
                           </td>
 
-                          <td>
-                            <div class="flex justify-center items-center text-sm">
-                              <!-- Avatar with inset shadow -->
-                              <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy">
-                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                              </div>
-                            </div>
+                          <td class="with-image-columns">
+                            @if ($item->image_hero)
+                            <img src="{{$item->image_hero_uri.$item->image_hero}}" alt="imagen producto" loading="lazy">                            
+                            @else
+                            <img src="archives/sistem/img/withoutImage.jpg" alt="imagen producto" loading="lazy">
+                            @endif
                           </td>
 
                           <td><p>{{$item->name}}</p></td>
                           <td><p>{{$item->email}}</p></td>
 
-                          <td class="text-center">
+                          <td class="with-status-columns">
                             <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>
@@ -187,7 +185,7 @@
           
                   <div>
                       <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
-                      <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_hero_new" accept="image/*"
+                      <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_hero_new" accept="image/*"
                           />
                       <x-sistem.forms.input-error for="image_hero_new" />
                   </div>
@@ -229,7 +227,7 @@
                   <h2 class="text-center font-bold text-xl">Logo de la empresa</h2>
                   <div>
                       <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
-                      <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_logo_new" accept="image/*"
+                      <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_logo_new" accept="image/*"
                           />
                       <x-sistem.forms.input-error for="image_logo_new" />
                   </div>
@@ -271,7 +269,7 @@
                   <h2 class="text-center font-bold text-xl">QR de la empresa</h2>
                   <div>
                       <x-sistem.forms.label-form for="image_qr_new" value="{{ __('Imagen de qr') }}" />
-                      <x-sistem.forms.input-file-form id="image_qr_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_qr_new" accept="image/*"
+                      <x-sistem.forms.input-file-form id="image_qr_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_qr_new" accept="image/*"
                           />
                       <x-sistem.forms.input-error for="image_qr_new" />
                   </div>

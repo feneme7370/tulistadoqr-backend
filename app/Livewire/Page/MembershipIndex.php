@@ -33,6 +33,9 @@ class MembershipIndex extends Component
     // propiedades del form
     public $name;
     public $slug;
+    public $price;
+    public $short_description;
+    public $description;
     public $category;
     public $level;
     public $product;
@@ -50,6 +53,9 @@ class MembershipIndex extends Component
         return [
             'name' => ['required', 'string', 'min:3'],
             'slug' => ['required', 'string', 'min:3'],
+            'price' => ['required', 'numeric'],
+            'short_description' => ['required', 'string', 'min:3'],
+            'description' => ['required', 'string', 'min:3'],
             'category' => ['required', 'numeric'],
             'level' => ['required', 'numeric'],
             'product' => ['required', 'numeric'],
@@ -63,6 +69,9 @@ class MembershipIndex extends Component
     protected $validationAttributes = [
         'name' => 'nombre',
         'slug' => 'slug',
+        'price' => 'precio',
+        'short_description' => 'breve descripcion',
+        'description' => 'descripcion',
         'category' => 'categoria',
         'level' => 'nivel',
         'product' => 'producto',
@@ -79,6 +88,9 @@ class MembershipIndex extends Component
         $this->reset([
             'name',
             'slug',
+            'price',
+            'short_description',
+            'description',
             'category',
             'level',
             'product',
@@ -134,6 +146,9 @@ class MembershipIndex extends Component
 
         $this->name = $membership['name'];
         $this->slug = $membership['slug'];
+        $this->price = $membership['price'];
+        $this->short_description = $membership['short_description'];
+        $this->description = $membership['description'];
         $this->category = $membership['category'];
         $this->level = $membership['level'];
         $this->product = $membership['product'];
@@ -157,7 +172,7 @@ class MembershipIndex extends Component
         if( isset( $this->membership['id'])) {
 
             $this->membership->update(
-                $this->only(['name', 'slug', 'category', 'level', 'product', 'user', 'suggestion', 'status'])
+                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'status'])
             );
 
             $this->reset(['membership']);
@@ -167,7 +182,7 @@ class MembershipIndex extends Component
         } else {
 
             Membership::create(
-                $this->only(['name', 'slug', 'category', 'level', 'product', 'user', 'suggestion', 'status'])
+                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'status'])
             );
 
             $this->reset(['membership']);

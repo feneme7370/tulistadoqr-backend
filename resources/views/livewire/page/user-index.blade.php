@@ -43,8 +43,8 @@
                         @foreach ($users as $item)
                         <tr wire:key="field-user-{{ $item->id }}">
 
-                          <td class="text-center"><p>{{$item->id}}</p></td>
-                          <td>
+                          <td class="with-id-columns"><p>{{$item->id}}</p></td>
+                          <td class="with-actions-columns">
                             <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
                               <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
@@ -57,7 +57,7 @@
                           <td><p>{{$item->email}}</p></td>
                           <td><p>{{$item->company->name}}</p></td>
 
-                          <td class="text-center">
+                          <td class="with-status-columns">
                             <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>

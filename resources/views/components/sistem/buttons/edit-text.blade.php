@@ -5,11 +5,11 @@
 flex items-center gap-2 p-1 font-semibold text-xs 
 
 uppercase tracking-widest
-text-indigo-400 
+text-purple-700 
 
-hover:text-indigo-500 
+hover:text-purple-500 
 
-active:text-indigo-700
+active:text-purple-500
 ']) }}>
     <div class="flex flex-row gap-1 items-center">
         

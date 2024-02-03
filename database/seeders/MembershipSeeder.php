@@ -17,6 +17,9 @@ class MembershipSeeder extends Seeder
         Membership::create([
             'name' => 'Plate',
             'slug' => Str::slug('Plate'),
+            'price' => 3000,
+            'short_description' => 'Plan Basico',
+            'description' => 'Si tienes pocos productos que ofrecer este es el tuyo',
             'category' => '3',
             'level' => '5',
             'product' => '10',
@@ -27,6 +30,9 @@ class MembershipSeeder extends Seeder
         Membership::create([
             'name' => 'Gold',
             'slug' => Str::slug('Gold'),
+            'price' => 5000,
+            'short_description' => 'Plan Intermedio',
+            'description' => 'Ideal para comercios, roticerias, y bares',
             'category' => '10',
             'level' => '13',
             'product' => '100',
@@ -37,6 +43,9 @@ class MembershipSeeder extends Seeder
         Membership::create([
             'name' => 'Platinium',
             'slug' => Str::slug('Platinium'),
+            'price' => 7000,
+            'short_description' => 'Plan Completo',
+            'description' => 'Util para mostrar toda la amplia gama de productos y variedades de tu comercio',
             'category' => '20',
             'level' => '50',
             'product' => '500',

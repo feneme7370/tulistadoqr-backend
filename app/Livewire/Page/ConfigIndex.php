@@ -68,8 +68,8 @@ class ConfigIndex extends Component
             'image_logo_uri' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
             'image_hero_uri' => ['nullable', 'string'],
-            'image_logo_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
-            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
+            'image_logo_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120'],
+            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120'],
         ];
     }
 

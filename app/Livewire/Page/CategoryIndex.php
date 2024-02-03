@@ -69,7 +69,7 @@ class CategoryIndex extends Component
             'user_id' => ['required', 'numeric'],
             'company_id' => ['required', 'numeric'],
 
-            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
+            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120'],
         ];
     }
 

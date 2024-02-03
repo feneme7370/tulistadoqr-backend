@@ -40,9 +40,9 @@
                         @foreach ($social_medias as $item)
                         <tr wire:key="field-social_media-{{ $item->id }}">
 
-                          <td class="text-center"><p>{{$item->id}}</p></td>
+                          <td class="with-id-columns"><p>{{$item->id}}</p></td>
                           
-                          <td>
+                          <td class="with-actions-columns">
                             <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
                               <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"

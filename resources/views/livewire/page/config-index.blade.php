@@ -69,7 +69,7 @@
     
             <div>
                 <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
-                <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_hero_new" accept="image/*"
+                <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_hero_new" accept="image/*"
                      />
                 <x-sistem.forms.input-error for="image_hero_new" />
             </div>
@@ -79,12 +79,12 @@
                 <div class="">
                     <p class="mb-1">Imagen de portada actual:</p>
                     <div class="w-64 h-64 mx-auto relative">
-                        @if ($this->image_hero && $this->image_hero != '')
-                            <img src="{{asset('archives/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
-                            <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                        @else
-                            <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-                        @endif
+                        <x-sistem.lightbox.img-lightbox 
+                            class="h-64 max-w-96 p-1 bg-purple-200"
+                            :uri="$this->image_hero_uri" 
+                            :name="$this->image_hero"    
+                        />
+                        <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                     </div>
                 </div>
                 
@@ -97,7 +97,10 @@
                     <p class="mb-1">Imagen de portada nueva:</p>
                     @if ($image_hero_new) 
                         <div class="w-64 h-64 mx-auto relative">
-                            <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_hero_new->temporaryUrl() }}">
+                            <x-sistem.lightbox.img-lightbox 
+                                class="h-64 max-w-96 p-1 bg-purple-200"
+                                :name="$image_hero_new->temporaryUrl()" 
+                            />
                         </div>
                     @else
                         <p class="text-center italic">No se ha agregado una imagen nueva</p>
@@ -111,7 +114,7 @@
             <h2 class="text-center font-bold text-xl">Logo de la empresa</h2>
             <div>
                 <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
-                <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 3 mg)" wire:model="image_logo_new" accept="image/*"
+                <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_logo_new" accept="image/*"
                      />
                 <x-sistem.forms.input-error for="image_logo_new" />
             </div>
@@ -121,12 +124,12 @@
                 <div class="">
                     <p class="mb-1">Imagen del logo actual:</p>
                     <div class="w-64 h-64 mx-auto relative">
-                        @if ($this->image_logo && $this->image_logo != '')
-                            <img src="{{asset('archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
-                            <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
-                        @else
-                            <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-                        @endif
+                        <x-sistem.lightbox.img-lightbox 
+                            class="h-64 max-w-96 p-1 bg-purple-200"
+                            :uri="$this->image_logo_uri" 
+                            :name="$this->image_logo"    
+                        />
+                        <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
                     </div>
                 </div>
                 
@@ -139,7 +142,10 @@
                     <p class="mb-1">Imagen del logo nueva:</p>
                     @if ($image_logo_new) 
                         <div class="w-64 h-64 mx-auto relative">
-                            <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_logo_new->temporaryUrl() }}">
+                            <x-sistem.lightbox.img-lightbox 
+                                class="h-64 max-w-96 p-1 bg-purple-200"
+                                :name="$image_logo_new->temporaryUrl()" 
+                            />
                         </div>
                     @else
                         <p class="text-center italic">No se ha agregado una imagen nueva</p>

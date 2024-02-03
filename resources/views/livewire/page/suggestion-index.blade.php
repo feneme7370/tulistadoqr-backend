@@ -50,6 +50,7 @@
               <tr>
                 <th>ID</th>
                 <th>Acciones</th>
+                <th>Imagen</th>
                 <th>Producto</th>
               </tr>
             </thead>
@@ -57,13 +58,20 @@
     
                 @foreach ($suggestions as $item)
                 <tr wire:key="field-suggestion-{{ $item->id }}">
-                  <td class="text-center"><p>{{$item->id}}</p></td>
+                  <td class="with-id-columns"><p>{{$item->id}}</p></td>
                   
-                  <td>
+                  <td class="with-actions-columns">
                     <div class="actions">
                       <x-sistem.buttons.delete-text wire:click="deleteSuggestion({{$item->id}})"
                         wire:loading.attr="disabled" />
                     </div>
+                  </td>
+
+                  <td class="with-image-columns">
+                    <x-sistem.lightbox.img-lightbox 
+                        :uri="$item->product->image_hero_uri" 
+                        :name="$item->product->image_hero"    
+                    />
                   </td>
                   
                   <td class="text-center"><p>{{$item->product->name}}</p></td>

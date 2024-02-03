@@ -12,6 +12,9 @@ class Membership extends Model
     protected $fillable = [
         'name',
         'slug',
+        'price',
+        'short_description',
+        'description',
         'category',
         'level',
         'product',

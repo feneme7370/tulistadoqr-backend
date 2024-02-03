@@ -1,12 +1,12 @@
 
 {{-- navbar --}}
-<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<nav class="fixed top-0 z-50 w-full bg-purple-700 border-b border-purple-300 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    class="inline-flex items-center p-2 text-sm bg-purple-300 text-purple-700 rounded-lg sm:hidden hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,7 @@
                     {{-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" /> --}}
                     <img src="{{asset('archives/sistem/img/TuMenuQR_favicon.png')}}" class="h-8 me-3" alt="FlowBite Logo" />
                     <span
-                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">TuMenuQR</span>
+                        class="self-center text-gray-100 text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">TuMenuQR</span>
                 </a>
 
             </div>
@@ -81,9 +81,9 @@
 
 {{-- sidebar --}}
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-purple-100 border-r border-purple-300 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
     aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+    <div class="h-full px-3 pb-4 overflow-y-auto dark:bg-gray-800 ">
 
         {{-- listado inicial --}}
         <ul class="space-y-2 font-medium">
@@ -101,7 +101,7 @@
         {{-- listado superadmin --}}
 
         @role('superadmin')
-        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-purple-300 dark:border-gray-700">
             
             {{-- item desplegable --}}
             {{-- <li>
@@ -180,7 +180,7 @@
         @endrole
 
         {{-- listado cliente --}}
-        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-purple-300 dark:border-gray-700">
             
             @can('config.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
@@ -246,17 +246,17 @@
         </ul>
 
 
-        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-purple-300 dark:border-gray-700">
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}" x-data>
                 @csrf
-                <x-sistem.navlinks.navlink-sidebar-flowtrail 
+                <x-sistem.navlinks.navlink-sidebar-flowbite 
                     title="Cerrar Sesion"
                     href="#"
                     @click.prevent="$root.submit();"
                 >
                     <x-sistem.icons.hi-arrow-right-on-rectangle/>
-                </x-sistem.navlinks.navlink-sidebar-flowtrail>
+                </x-sistem.navlinks.navlink-sidebar-flowbite>
             </form>
         </ul>
     </div>

@@ -17,24 +17,25 @@
         </a> 
 
     </div>
-
+    
     {{-- portada y logo --}}
     <div class="grid gap-3 mb-2 md:grid-cols-2">
-        <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
-            @if (auth()->user()->company->image_hero)
-                <img src="{{asset(auth()->user()->company->image_hero_uri.auth()->user()->company->image_hero)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm" />
-            @else
-                <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-            @endif
+
+        <div class="relative">
+            <x-sistem.lightbox.img-lightbox 
+                class="h-64 max-w-96 p-1 bg-purple-200"
+                :uri="auth()->user()->company->image_hero_uri" 
+                :name="auth()->user()->company->image_hero"    
+            />
             <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada</p>
         </div>
 
-        <div class="max-w-96 h-64 mx-auto p-1 bg-gray-200 relative">
-            @if (auth()->user()->company->image_logo)
-                <img src="{{asset(auth()->user()->company->image_logo_uri.auth()->user()->company->image_logo)}}" alt="imagen logo" class="w-full h-full object-cover rounded-sm" />
-            @else
-                <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-            @endif
+        <div class="relative">
+            <x-sistem.lightbox.img-lightbox 
+                class="h-64 max-w-96 p-1 bg-purple-200"
+                :uri="auth()->user()->company->image_logo_uri" 
+                :name="auth()->user()->company->image_logo"    
+            />
             <p class="absolute top-0 right-0 p-2 bg-black text-white">Logo</p>
         </div>
 

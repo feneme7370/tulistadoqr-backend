@@ -8,6 +8,7 @@
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         
         <link rel="icon" type="image/x-icon" href="{{ asset('archives/sistem/img/TuMenuQR_favicon.png') }}">
+        <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">nk
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -53,9 +54,11 @@
 
 
 
-    @stack('modals')
-    
+    <script src="{{asset('lib/flowbite/flowbite.min.js')}}"></script>
+    <script src="{{asset('lib/dist/js/lightbox-plus-jquery.min.js')}}"></script>
     @livewireScripts
-    <script src="{{asset('lib\flowbite\flowbite.min.js')}}"></script>
+    @stack('modals')
+    @stack('lightbox')
+    
     </body>
 </html>

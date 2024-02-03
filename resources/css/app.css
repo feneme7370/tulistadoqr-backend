@@ -36,6 +36,37 @@
         @apply line-clamp-2;
     }
     .t_table tbody tr td .actions{
-        @apply flex justify-evenly items-center space-x-4 text-sm;
+        @apply flex justify-center items-center gap-2 text-sm;
+    }
+    .t_table tbody tr td.with-actions-columns{
+        @apply w-5;
+    }
+    .t_table tbody tr td.with-id-columns{
+        @apply w-5 text-center;
+    }
+    .t_table tbody tr td.with-status-columns{
+        @apply w-8 text-center;
+    }
+    .t_table tbody tr td.with-image-columns{
+        @apply h-10 sm:w-16;
+    }
+    .t_table tbody tr td.with-image-columns img{
+        @apply block h-10 w-10 sm:h-16 sm:w-16 object-cover rounded-lg;
+    }
+
+
+    /* Estilos para la barra de desplazamiento */
+    .content::-webkit-scrollbar {
+        width: 12px;
+    }
+    
+    .content::-webkit-scrollbar-thumb {
+        background-color: #4a5568;
+        border-radius: 6px;
+    }
+    
+    .content::-webkit-scrollbar-track {
+        background-color: #596214;
     }
 }
+  

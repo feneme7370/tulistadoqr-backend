@@ -23,6 +23,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/products/{company}', [ProductController::class, 'index']);
-Route::get('/categories/{company}', [CategoryController::class, 'index']);
-Route::get('/levels/{company}', [LevelController::class, 'index']);
-Route::get('/companies/{company}', [CompanyController::class, 'index']);

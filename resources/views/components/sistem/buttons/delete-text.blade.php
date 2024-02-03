@@ -5,11 +5,11 @@
 flex items-center gap-2 p-1 font-semibold text-xs 
 
 uppercase tracking-widest
-text-red-400 
+text-red-700 
 
 hover:text-red-500 
 
-active:text-red-700
+active:text-red-500
 ']) }}>
 
         <x-sistem.icons.hi-trash/>

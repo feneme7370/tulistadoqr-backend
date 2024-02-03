@@ -69,9 +69,9 @@
                         @foreach ($products as $item)
                         <tr wire:key="field-product-{{ $item->id }}">
                             
-                            <td class="text-center"><p>{{$item->id}}</p></td>
+                            <td class="with-id-columns"><p>{{$item->id}}</p></td>
                             
-                            <td>
+                            <td class="with-actions-columns">
                                 <div class="actions">
                                     <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
                                         wire:loading.attr="disabled" />
@@ -80,19 +80,18 @@
                                 </div>
                             </td>
 
-                            <td class="sm:min-w-32">
-                                @if ($item->image_hero)
-                                <img class="block h-10 w-10 sm:h-32 sm:w-32 object-cover" src="{{$item->image_hero_uri.$item->image_hero}}" alt="imagen producto">                            
-                                @else
-                                <img class=" h-10 w-10 sm:h-32 sm:w-32 object-cover" src="archives/sistem/img/withoutImage.jpg" alt="imagen producto">
-                                @endif
+                            <td class="with-image-columns">
+                                <x-sistem.lightbox.img-lightbox 
+                                    :uri="$item->image_hero_uri" 
+                                    :name="$item->image_hero"    
+                                />
                             </td>
 
                             <td class="text-center"><p>{{$item->name}}</p></td>
                             <td><p>{{$item->category->level->name}} / {{$item->category->name}}</p></td>
                             <td class="text-center"><p>${{ number_format($item->price_original, 2,",",".") }} - ({{$item->tags->count()}})</p></td>
 
-                            <td class="text-center">
+                            <td class="with-status-columns">
                                 <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
                                   {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                                 </span>
@@ -171,25 +170,6 @@
                         <x-sistem.forms.input-error for="price_seller" />
                     </div>
 
-                    {{-- <div>
-                        <x-sistem.forms.label-form for="quantity" value="{{ __('Cantidad') }}" />
-                        <x-sistem.forms.input-form id="quantity" type="number"
-                            placeholder="{{ __('Cantidad') }}" wire:model="quantity" />
-                        <x-sistem.forms.input-error for="quantity" />
-                    </div> --}}
-
-
-
-                    {{-- <div>
-                        <x-sistem.forms.label-form for="level_id" value="{{ __('Nivel') }}" />
-                        <x-sistem.forms.select-form wire:model="level_id" id="level_id">
-                            @foreach ($levels as $level)
-                                <option value="{{$level->id}}">{{$level->name}}</option>
-                            @endforeach
-                        </x-sistem.forms.select-form>
-                        <x-sistem.forms.input-error for="level_id" />
-                    </div> --}}
-
                     <div>
                         <x-sistem.forms.label-form for="category_id" value="{{ __('Categoria') }}" />
                         <x-sistem.forms.select-form wire:model="category_id" id="category_id">
@@ -228,28 +208,27 @@
 
 
                 {{-- imagen de portada empresa --}}
-                <div>
-                    <h2 class="text-center font-bold text-xl">Imagen principal del producto</h2>
+                <div class="bg-gray-100 p-1 rounded-md">
+                    <h2 class="text-center font-bold text-xl">Imagen del producto</h2>
             
                     <div>
                         <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen del producto') }}" />
-                        <x-sistem.forms.input-form id="image_hero_new" type="file" wire:model="image_hero_new" accept="image/*"
+                        <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_hero_new" accept="image/*"
                             />
                         <x-sistem.forms.input-error for="image_hero_new" />
                     </div>
             
-                    <div class="grid grid-cols-1 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             
                         <div class="">
                             <p class="mb-1">Imagen del producto actual:</p>
                             <div class="w-64 h-64 mx-auto relative">
-                                @if ($this->image_hero && $this->image_hero != '')
-                                    <img src="{{asset('archives/images/product_hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
-                                    <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                                @else
-                                    <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-                                @endif
-                            </div>
+                                <x-sistem.lightbox.img-lightbox 
+                                    class="h-64 max-w-96 p-1 bg-purple-200"
+                                    :uri="$this->image_hero_uri" 
+                                    :name="$this->image_hero"    
+                                />
+                              </div>
                         </div>
                         
                         <div class="">
@@ -260,15 +239,16 @@
             
                             <p class="mb-1">Imagen del producto nueva:</p>
                             @if ($image_hero_new) 
-                                <div class="w-64 h-64 mx-auto relative">
-                                    <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_hero_new->temporaryUrl() }}">
-                                </div>
+                                <x-sistem.lightbox.img-lightbox 
+                                    class="h-64 max-w-96 p-1 bg-purple-200"
+                                    :name="$image_hero_new->temporaryUrl()"    
+                                />
                             @else
                                 <p class="text-center italic">No se ha agregado una imagen nueva</p>
                             @endif
                         </div>
                     </div>
-                </div>
+                  </div>
 
                 <x-sistem.notifications.alerts-input :messageErrorInput="session('messageErrorInput')" />
             </form>

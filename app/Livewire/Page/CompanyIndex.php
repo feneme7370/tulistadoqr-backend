@@ -85,9 +85,9 @@ class CompanyIndex extends Component
             'image_logo_uri' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
             'image_hero_uri' => ['nullable', 'string'],
-            'image_qr_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
-            'image_logo_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
-            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3096'],
+            'image_qr_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120'],
+            'image_logo_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120'],
+            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120'],
             'status' => ['numeric'],
             'membership_id' => ['required', 'numeric'],
         ];
@@ -157,7 +157,7 @@ class CompanyIndex extends Component
     public function deleteImageEdit() {
         $this->deleteImage();
         $this->image_hero = '';
-        $this->level->update(
+        $this->company->update(
             $this->only(['image_hero'])
         );
     }
@@ -187,7 +187,7 @@ class CompanyIndex extends Component
     public function deleteImageLogoEdit() {
         $this->deleteImage();
         $this->image_logo = '';
-        $this->level->update(
+        $this->company->update(
             $this->only(['image_logo'])
         );
     }
@@ -217,7 +217,7 @@ class CompanyIndex extends Component
     public function deleteImageQrEdit() {
         $this->deleteImage();
         $this->image_qr = '';
-        $this->level->update(
+        $this->company->update(
             $this->only(['image_qr'])
         );
     }

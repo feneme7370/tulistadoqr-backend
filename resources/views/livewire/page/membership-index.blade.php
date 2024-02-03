@@ -41,11 +41,11 @@
                         @foreach ($memberships as $item)
                         <tr wire:key="field-membership-{{ $item->id }}">
                           
-                          <td class="text-center">
+                          <td class="with-id-columns">
                             <p>{{$item->id}}</p>
                           </td>
 
-                          <td>
+                          <td class="with-actions-columns">
                             <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
                               <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
@@ -57,7 +57,7 @@
                             <p>{{$item->name}}</p>
                           </td>
 
-                          <td class="text-center">
+                          <td class="with-status-columns">
                             <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>
@@ -114,6 +114,27 @@
               <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
                   autofocus />
               <x-sistem.forms.input-error for="name" />
+            </div>
+            
+            <div>
+              <x-sistem.forms.label-form for="price" value="{{ __('Precio') }}" />
+              <x-sistem.forms.input-form id="price" type="text" placeholder="{{ __('Precio') }}" wire:model="price"
+                   />
+              <x-sistem.forms.input-error for="price" />
+            </div>
+
+            <div>
+              <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
+              <x-sistem.forms.textarea-form id="short_description" type="text" placeholder="{{ __('Breve descripcion') }}" wire:model="short_description"
+                   />
+              <x-sistem.forms.input-error for="short_description" />
+            </div>
+
+            <div>
+              <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
+              <x-sistem.forms.textarea-form id="description" type="text" placeholder="{{ __('Descripcion') }}" wire:model="description"
+                   />
+              <x-sistem.forms.input-error for="description" />
             </div>
                 
             <div>

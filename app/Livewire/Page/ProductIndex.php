@@ -26,11 +26,11 @@ class ProductIndex extends Component
     use WithPagination;
     public function updatingActive() {$this->resetPage(pageName: 'p_product');}
     public function updatingSearch() {$this->resetPage(pageName: 'p_product');}
+    public function updatingCategorySearch() {$this->resetPage(pageName: 'p_product');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
-    public $category_search;
-    public $level_search;
+    public $categorySearch;
 
     // mostrar variables en queryString
     protected function queryString(){
@@ -83,7 +83,7 @@ class ProductIndex extends Component
             'user_id' => ['required', 'numeric'],
             'company_id' => ['required', 'numeric'],
 
-            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120'],
+            'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
         ];
     }
 
@@ -290,8 +290,8 @@ class ProductIndex extends Component
                         ->when($this->active, function( $query) {
                             return $query->where('status', 1);
                         })
-                        ->when($this->category_search, function( $query) {
-                            return $query->where('category_id', $this->category_search);
+                        ->when($this->categorySearch, function( $query) {
+                            return $query->where('category_id', $this->categorySearch);
                         })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_product');

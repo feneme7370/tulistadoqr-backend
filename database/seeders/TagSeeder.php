@@ -22,7 +22,7 @@ class TagSeeder extends Seeder
             'company_id' => 2,
         ]);
         Tag::create([
-            'name' => 'Nuevos',
+            'name' => 'Salados',
             'slug' => Str::slug('Nuevos'),
             'user_id' => 2,
             'company_id' => 2,

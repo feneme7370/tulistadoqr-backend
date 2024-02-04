@@ -22,7 +22,7 @@
 
             {{-- navbar --}}
             <nav id="nav"
-                class="absolute top-0 left-0 z-50 flex flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">
+                class="absolute top-0 left-0 z-60 flex flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">
                 <a href="#"
                     class="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Inicio</a>
                 <a href="#features"
@@ -42,9 +42,9 @@
             <div
                 class="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
                 <a href="{{route('login')}}"
-                    class="relative z-40 px-3 py-2 mr-0 text-base font-bold text-pink-500 md:px-5 lg:text-white sm:mr-3 md:mt-0">Acceso</a>
+                    class="relative z-70 px-3 py-2 mr-0 text-base font-bold text-pink-500 md:px-5 lg:text-white sm:mr-3 md:mt-0">Acceso</a>
                 <a href="https://api.whatsapp.com/send/?phone=5492396513953&amp;text=Quier saber mas sobre TuMenuQR" target="_blank"
-                    class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">Contactame</a>
+                    class="relative z-70 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">Contactame</a>
 
                 {{-- parte azul y rosa --}}
                 <svg class="absolute top-0 left-0 hidden w-screen max-w-3xl -mt-64 -ml-12 lg:block"
@@ -92,7 +92,7 @@
 
             {{-- boton hamburguesa --}}
             <div id="nav-mobile-btn"
-                class="absolute top-0 right-0 z-50 block w-6 mt-8 mr-10 cursor-pointer select-none md:hidden sm:mt-10">
+                class="absolute top-0 right-0 z-70 block w-6 mt-8 mr-10 cursor-pointer select-none md:hidden sm:mt-10">
                 <span class="block w-full h-1 mt-2 duration-200 transform bg-purple-700 rounded-full sm:mt-1"></span>
                 <span class="block w-full h-1 mt-1 duration-200 transform bg-purple-700 rounded-full"></span>
             </div>
@@ -143,25 +143,19 @@
                 <div class="flex-col hidden mt-3 sm:mt-12 sm:flex lg:mt-24">
                     <p class="mb-4 text-sm font-medium tracking-widest text-gray-500 uppercase">Redes sociales</p>
                     <div class="flex items-center gap-3">
-                        {{-- facebook --}}
-                        <a href="https://{{$company->socialMedia[0]->pivot->url}}" target="_blank">
-                            <svg class="h-8 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/>
-                            </svg>
-                        </a>
-                        {{-- twitter --}}
-                        <a href="https://{{$company->socialMedia[1]->pivot->url}}" target="_blank">
-                            <svg class="h-8 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
-                        </a>
-                        {{-- instagram --}}
-                        <a href="https://{{$company->socialMedia[3]->pivot->url}}" target="_blank">
-                            <svg class="h-8 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-                        </a>
+                        @foreach ($company->socialMedia as $item)
+                            
+                            <a href="https://{{$item->pivot->url}}" target="_blank" >
+                                <x-sistem.icons.for-icons-social :icon="$item->slug" />
+                            </a>
+                            
+                        @endforeach
                     </div>
                 </div>
             </div>
 
             {{-- imagen de pc derecha --}}
-            <div class="relative z-50 flex flex-col items-end justify-center w-full h-full lg:w-1/2 ms:pl-10">
+            <div class="relative z-40 flex flex-col items-end justify-center w-full h-full lg:w-1/2 ms:pl-10">
                 <div class="container relative left-0 w-full max-w-4xl lg:absolute xl:max-w-6xl lg:w-screen">
                     <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/226962964/original/55e325403da145a8a5cb816db41ee2a8bed41f3f/design-professional-creative-digital-food-menu-restaurant-menu-card-cafe-menu.png"
                         class="w-full rounded-xl h-auto mt-20 mb-20 ml-0 lg:mt-24 xl:mt-40 lg:mb-0 lg:h-full lg:-ml-12">
@@ -668,19 +662,14 @@
                     <div class="inline-block px-3 py-2 mt-5 mb-3 font-bold text-gray-800 uppercase md:mt-0">Redes Sociales</div>
 
                     <div class="flex items-center justify-center sm:justify-start sm: px-3 gap-3">
-                        {{-- facebook --}}
-                        <a href="https://{{$company->socialMedia[0]->pivot->url}}" target="_blank">
-                            <svg class="h-6 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/>
-                            </svg>
-                        </a>
-                        {{-- twitter --}}
-                        <a href="https://{{$company->socialMedia[1]->pivot->url}}" target="_blank">
-                            <svg class="h-6 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
-                        </a>
-                        {{-- instagram --}}
-                        <a href="https://{{$company->socialMedia[3]->pivot->url}}" target="_blank">
-                            <svg class="h-6 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-                        </a>
+
+                        @foreach ($company->socialMedia as $item)
+                            
+                            <a href="https://{{$item->pivot->url}}" target="_blank" >
+                                <x-sistem.icons.for-icons-social :icon="$item->slug" />
+                            </a>
+                            
+                        @endforeach
                     </div>
 
                 </div>

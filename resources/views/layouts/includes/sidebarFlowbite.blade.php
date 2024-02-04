@@ -53,6 +53,32 @@
                         </div>
                         <ul class="py-1" role="none">
                             <li>
+                                <button id="darkModeToggle" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Modo Oscuro</button>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const html = document.getElementById('html');
+                                        const darkModeToggle = document.getElementById('darkModeToggle');
+                        
+                                        // Verifica el estado actual del modo oscuro en el almacenamiento local
+                                        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                        
+                                        // Aplica la clase de modo oscuro si está activado
+                                        if (isDarkMode) {
+                                            html.classList.add('dark');
+                                        }
+                        
+                                        // Agrega un evento de clic al botón para cambiar el modo oscuro
+                                        darkModeToggle.addEventListener('click', function () {
+                                            // Cambia la clase del cuerpo y actualiza el estado en el almacenamiento local
+                                            html.classList.toggle('dark');
+                                            const updatedDarkModeState = html.classList.contains('dark');
+                                            localStorage.setItem('darkMode', updatedDarkModeState);
+                                        });
+                                    });
+                        
+                                </script>
+                            </li>
+                            <li>
                                 <a href="{{ route('dashboard.index') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Dashboard</a>

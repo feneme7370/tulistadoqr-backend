@@ -56,5 +56,11 @@ class SocialMediaSeeder extends Seeder
             'user_id' => '1',
             'company_id' => '1',
         ]);
+        SocialMedia::create([
+            'name' => 'Whatsapp',
+            'slug' => Str::slug('Whatsapp'),
+            'user_id' => '1',
+            'company_id' => '1',
+        ]);
     }
 }

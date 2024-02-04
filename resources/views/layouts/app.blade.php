@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased transition-all duration-300 ease-in-out" id="body">
 
         @include('layouts.includes.sidebarFlowbite')
 
@@ -51,8 +51,6 @@
         </div> --}}
 
     </div>
-
-
 
     <script src="{{asset('lib/flowbite/flowbite.min.js')}}"></script>
     <script src="{{asset('lib/dist/js/lightbox-plus-jquery.min.js')}}"></script>

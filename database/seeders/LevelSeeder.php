@@ -18,9 +18,9 @@ class LevelSeeder extends Seeder
         Level::create([
                 'name' => 'Bebidas',
                 'slug' => Str::slug('Bebidas'),
-                'description' => 'Descripcion del nivel',
+                'description' => 'Proba nuestros licuados, tenemos una amplia variedad de gustos, tambien ofrecemos cafe, te, entre otras cosas',
                 'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_01.jpg',
+                'image_hero' => '2_2_1706821420_s2G4E3n.jpg',
                 'status' => 1,
                 'user_id' => 2,
                 'company_id' => 2,
@@ -28,9 +28,9 @@ class LevelSeeder extends Seeder
         Level::create([
                 'name' => 'Comidas',
                 'slug' => Str::slug('Comidas'),
-                'description' => 'Descripcion del nivel',
+                'description' => 'Tenemos galletas, donas y medias lunas para disfrutar',
                 'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_02.jpg',
+                'image_hero' => '2_2_1706811560_OVLAIVB.jpg',
                 'status' => 1,
                 'user_id' => 2,
                 'company_id' => 2,
@@ -38,72 +38,12 @@ class LevelSeeder extends Seeder
         Level::create([
                 'name' => 'Postres',
                 'slug' => Str::slug('Postres'),
-                'description' => 'Descripcion del nivel',
+                'description' => 'Postres de todo tipo, con chocolate, frutos rojos, porciones de tortas muy ricas',
                 'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_03.jpg',
+                'image_hero' => '2_2_1706821420_s2G4E3s.jpg',
                 'status' => 1,
                 'user_id' => 2,
                 'company_id' => 2,
-            ]);
-        Level::create([
-                'name' => 'Bebidas',
-                'slug' => Str::slug('Bebidas'),
-                'description' => 'Descripcion del nivel',
-                'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_04.jpg',
-                'status' => 1,
-                'user_id' => 3,
-                'company_id' => 3,
-            ]);
-        Level::create([
-                'name' => 'Comidas',
-                'slug' => Str::slug('Comidas'),
-                'description' => 'Descripcion del nivel',
-                'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_05.jpg',
-                'status' => 1,
-                'user_id' => 3,
-                'company_id' => 3,
-            ]);
-        Level::create([
-                'name' => 'Postres',
-                'slug' => Str::slug('Postres'),
-                'description' => 'Descripcion del nivel',
-                'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_06.jpg',
-                'status' => 1,
-                'user_id' => 3,
-                'company_id' => 3,
-            ]);
-        Level::create([
-                'name' => 'Bebidas',
-                'slug' => Str::slug('Bebidas'),
-                'description' => 'Descripcion del nivel',
-                'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_07.jpg',
-                'status' => 1,
-                'user_id' => 4,
-                'company_id' => 4,
-            ]);
-        Level::create([
-                'name' => 'Comidas',
-                'slug' => Str::slug('Comidas'),
-                'description' => 'Descripcion del nivel',
-                'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_08.jpg',
-                'status' => 1,
-                'user_id' => 4,
-                'company_id' => 4,
-            ]);
-        Level::create([
-                'name' => 'Postres',
-                'slug' => Str::slug('Postres'),
-                'description' => 'Descripcion del nivel',
-                'image_hero_uri' => 'archives/images/level_hero/',
-                'image_hero' => 'cafe_09.jpg',
-                'status' => 1,
-                'user_id' => 4,
-                'company_id' => 4,
             ]);
     }
 }

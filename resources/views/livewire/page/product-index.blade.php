@@ -20,32 +20,22 @@
 
     {{-- input buscador y filtro de activos --}}
     <div class="flex flex-row flex-1 justify-evenly items-center gap-2">
-        {{-- <div  class="w-full">
-            <x-sistem.forms.label-form for="level_search" value="{{ __('Nivel') }}" />
-            <x-sistem.forms.select-form wire:model.live="level_search" id="level_search">
-                <option value=""> Todos </option>
-                @foreach ($levels as $level)
-                    <option value="{{$level->id}}">{{$level->name}}</option>
-                @endforeach
-            </x-sistem.forms.select-form>
-            <x-sistem.forms.input-error for="level_search" />
-        </div> --}}
         <div  class="w-full">
-            <x-sistem.forms.label-form for="category_search" value="{{ __('Categoria') }}" />
-            <x-sistem.forms.select-form wire:model.live="category_search" id="category_search">
+            <x-sistem.forms.label-form for="categorySearch" value="{{ __('Categoria') }}" />
+            <x-sistem.forms.select-form wire:model.live="categorySearch" id="categorySearch">
                 <option value=""> Todos </option>
                 @foreach ($categories as $category)
                     <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
                 @endforeach
             </x-sistem.forms.select-form>
-            <x-sistem.forms.input-error for="category_search" />
+            <x-sistem.forms.input-error for="categorySearch" />
         </div>
 
     </div>
 
     <x-sistem.filter.search-active placeholder="Buscar por nombre, nivel o categoria" />
 
-    <x-sistem.spinners.loading-spinner wire:loading wire:target="search, level_search, category_search"/>
+    <x-sistem.spinners.loading-spinner wire:loading wire:target="search, level_search, categorySearch"/>
 
     {{-- listado --}}
     <div class="mx-auto">

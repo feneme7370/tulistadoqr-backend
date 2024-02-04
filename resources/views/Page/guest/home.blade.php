@@ -4,7 +4,7 @@
     <!-- HEADER SECTION -->
     <header class="relative z-50 w-full h-24">
         <div
-            class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0 bg-purple-100">
+            class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0 sm:bg-purple-100">
 
             {{-- logo --}}
             <a href="/" class="relative flex items-center h-5 font-black leading-none">
@@ -22,7 +22,7 @@
 
             {{-- navbar --}}
             <nav id="nav"
-                class="absolute top-0 left-0 z-60 flex flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">
+                class="absolute top-0 left-0 z-80 flex flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">
                 <a href="#"
                     class="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Inicio</a>
                 <a href="#features"
@@ -42,9 +42,9 @@
             <div
                 class="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
                 <a href="{{route('login')}}"
-                    class="relative z-70 px-3 py-2 mr-0 text-base font-bold text-pink-500 md:px-5 lg:text-white sm:mr-3 md:mt-0">Acceso</a>
+                    class="relative z-40 px-3 py-2 mr-0 text-base font-bold text-pink-500 md:px-5 lg:text-white sm:mr-3 md:mt-0">Acceso</a>
                 <a href="https://api.whatsapp.com/send/?phone=5492396513953&amp;text=Quier saber mas sobre TuMenuQR" target="_blank"
-                    class="relative z-70 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">Contactame</a>
+                    class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">Contactame</a>
 
                 {{-- parte azul y rosa --}}
                 <svg class="absolute top-0 left-0 hidden w-screen max-w-3xl -mt-64 -ml-12 lg:block"
@@ -92,7 +92,7 @@
 
             {{-- boton hamburguesa --}}
             <div id="nav-mobile-btn"
-                class="absolute top-0 right-0 z-70 block w-6 mt-8 mr-10 cursor-pointer select-none md:hidden sm:mt-10">
+                class="absolute top-0 right-0 z-80 block w-6 mt-8 mr-10 cursor-pointer select-none md:hidden sm:mt-10">
                 <span class="block w-full h-1 mt-2 duration-200 transform bg-purple-700 rounded-full sm:mt-1"></span>
                 <span class="block w-full h-1 mt-1 duration-200 transform bg-purple-700 rounded-full"></span>
             </div>
@@ -155,10 +155,10 @@
             </div>
 
             {{-- imagen de pc derecha --}}
-            <div class="relative z-40 flex flex-col items-end justify-center w-full h-full lg:w-1/2 ms:pl-10">
+            <div class="relative z-50 flex flex-col items-end justify-center w-full h-full lg:w-1/2 ms:pl-10 mt-20 mb-20">
                 <div class="container relative left-0 w-full max-w-4xl lg:absolute xl:max-w-6xl lg:w-screen">
                     <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/226962964/original/55e325403da145a8a5cb816db41ee2a8bed41f3f/design-professional-creative-digital-food-menu-restaurant-menu-card-cafe-menu.png"
-                        class="w-full rounded-xl h-auto mt-20 mb-20 ml-0 lg:mt-24 xl:mt-40 lg:mb-0 lg:h-full lg:-ml-12">
+                        class="w-full rounded-xl h-auto  ml-0 lg:mt-24 xl:mt-40 lg:mb-0 lg:h-full lg:-ml-12">
                     {{-- <img src="https://cdn.devdojo.com/images/september2020/macbook-mockup.png"
                         class="w-full h-auto mt-20 mb-20 ml-0 lg:mt-24 xl:mt-40 lg:mb-0 lg:h-full lg:-ml-12"> --}}
                 </div>

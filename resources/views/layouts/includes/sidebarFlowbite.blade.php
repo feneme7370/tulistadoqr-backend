@@ -36,7 +36,7 @@
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                                src="{{asset('archives/sistem/img/TuMenuQR_favicon.png')}}" alt="user photo">
                         </button>
                     </div>
 
@@ -91,7 +91,7 @@
                             <li>
                                 <form method="POST" action="{{ route('logout') }}" x-data>
                                     @csrf
-                                    <a href="#" @click.prevent="$root.submit();"
+                                    <a href="" @click.prevent="$root.submit();"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Cerrar sesion</a>
 

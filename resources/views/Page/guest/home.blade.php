@@ -4,7 +4,7 @@
     <!-- HEADER SECTION -->
     <header class="relative z-50 w-full h-24">
         <div
-            class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0 sm:bg-purple-100">
+            class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0 ">
 
             {{-- logo --}}
             <a href="/" class="relative flex items-center h-5 font-black leading-none">
@@ -168,7 +168,7 @@
     <!-- HERO SECTION END -->
 
     <!-- FEATURES SECTION -->
-    <div id="features" class="relative w-full px-8 py-5 border-t border-gray-200 md:py-16 lg:py-24 xl:py-40 xl:px-0">
+    <div id="features" class="relative w-full px-8 py-2 border-t border-gray-200 md:py-8 lg:py-16 xl:py-24 xl:px-0">
         <div class="container flex flex-col items-center justify-between h-full max-w-6xl mx-auto">
             
             <h2 class="my-5 text-base font-medium tracking-tight text-indigo-500 uppercase">Nuestros servicios</h2>
@@ -180,7 +180,7 @@
 
                 <div class="w-full max-w-md p-4 mx-auto mb-0 sm:mb-16 lg:mb-0 lg:w-1/3">
                     <div class="relative flex flex-col items-center justify-center w-full h-full p-2 sm:mr-5 rounded-lg">
-                        <svg class="absolute w-full h-full text-purple-100 fill-current" viewBox="0 0 377 340"
+                        <svg class="absolute w-full h-full text-purple-200 fill-current" viewBox="0 0 377 340"
                             xmlns="http://www.w3.org/2000/svg">
                             <g>
                                 <g>
@@ -191,7 +191,7 @@
                         </svg>
 
                         <!-- FEATURE Icon 1 -->
-                        <svg class="relative w-20 h-20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"
+                        {{-- <svg class="relative w-20 h-20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
                             <defs>
                                 <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1TriangleIcon1">
@@ -233,9 +233,10 @@
                                     </g>
                                 </g>
                             </g>
-                        </svg>
+                        </svg> --}}
+
                         <h4 class="relative mt-3 text-lg font-bold">Facil gestion</h4>
-                        <p class="relative mt-2 text-base text-center text-gray-600">Sistema facil de gestionar con categorias, carga de productos y mencionarlos como destacados.</p>
+                        <p class="relative mt-2 text-sm text-center text-gray-600">Sistema facil de gestionar con categorias, carga de productos y mencionarlos como destacados.</p>
                         {{-- <a href="#_" class="relative flex mt-2 text-sm font-medium text-indigo-500 underline">Learn
                             More</a> --}}
                     </div>
@@ -243,7 +244,7 @@
 
                 <div class="w-full max-w-md p-4 mx-auto mb-0 sm:mb-16 lg:mb-0 lg:w-1/3">
                     <div class="relative flex flex-col items-center justify-center w-full h-full p-2 sm:mr-5 rounded-lg">
-                        <svg class="absolute w-full h-full text-purple-100 fill-current" viewBox="0 0 358 372"
+                        <svg class="absolute w-full h-full text-purple-200 fill-current" viewBox="0 0 358 372"
                             xmlns="http://www.w3.org/2000/svg">
                             <g>
                                 <g>
@@ -254,7 +255,7 @@
                         </svg>
 
                         <!-- FEATURE Icon 2 -->
-                        <svg class="relative w-20 h-20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"
+                        {{-- <svg class="relative w-20 h-20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
                             <defs>
                                 <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1Icon2">
@@ -295,7 +296,7 @@
                                     </g>
                                 </g>
                             </g>
-                        </svg>
+                        </svg> --}}
                         <h4 class="relative mt-3 text-lg font-bold">Acceso QR</h4>
                         <p class="relative mt-2 text-base text-center text-gray-600">Con solo escanear el codigo se tiene acceso a todos los productos publicados con sus respectivos precios.</p>
                         {{-- <a href="#_" class="relative flex mt-2 text-sm font-medium text-indigo-500 underline">Learn
@@ -305,7 +306,7 @@
 
                 <div class="w-full max-w-md p-4 mx-auto mb-16 lg:mb-0 lg:w-1/3">
                     <div class="relative flex flex-col items-center justify-center w-full h-full p-2 sm:mr-5 rounded-lg">
-                        <svg class="absolute w-full h-full text-purple-100 fill-current" viewBox="0 0 378 410"
+                        <svg class="absolute w-full h-full text-purple-200 fill-current" viewBox="0 0 378 410"
                             xmlns="http://www.w3.org/2000/svg">
                             <g>
                                 <g>
@@ -316,7 +317,7 @@
                         </svg>
 
                         <!-- FEATURE Icon 3 -->
-                        <svg class="relative w-20 h-20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"
+                        {{-- <svg class="relative w-20 h-20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
                             <defs>
                                 <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1Icon3">
@@ -357,7 +358,7 @@
                                     </g>
                                 </g>
                             </g>
-                        </svg>
+                        </svg> --}}
                         <h4 class="relative mt-3 text-lg font-bold">Carga inicial</h4>
                         <p class="relative mt-2 text-base text-center text-gray-600">Hacemos la carga de todo el menu inicial para ahorrarte ese paso.</p>
                         {{-- <a href="#_" class="relative flex mt-2 text-sm font-medium text-indigo-500 underline">Learn
@@ -405,7 +406,7 @@
                                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                             </svg>
                                         </div>
-                                        <span class="ml-3 text-lg text-gray-700">{{$memberships[0]->category}} Categorias</span>
+                                        <span class="ml-1 text-sm text-gray-700">{{$memberships[0]->category}} Categorias</span>
                                     </li>
                                     <li class="flex items-center">
                                         <div class="p-2 text-purple-500 rounded-full fill-current ">
@@ -416,7 +417,7 @@
                                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                             </svg>
                                         </div>
-                                        <span class="ml-3 text-lg text-gray-700">{{$memberships[0]->product}} Productos</span>
+                                        <span class="ml-1 text-sm text-gray-700">{{$memberships[0]->product}} Productos</span>
                                     </li>
                                     <li class="flex items-center">
                                         <div class="p-2 text-purple-500 rounded-full fill-current ">
@@ -427,13 +428,13 @@
                                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                             </svg>
                                         </div>
-                                        <span class="ml-3 text-lg text-gray-700">{{$memberships[0]->suggestion}} Destacado</span>
+                                        <span class="ml-1 text-sm text-gray-700">{{$memberships[0]->suggestion}} Destacado</span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="flex items-center p-8 uppercase">
                                 <a href="https://api.whatsapp.com/send/?phone=5492396513953&amp;text=Quier saber mas sobre TuMenuQR" target="_blank"
-                                    class="block w-full px-6 py-4 mt-3 text-lg font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-purple-600">Contratar Plan</a>
+                                    class="block w-full px-2 py-3 mt-3 text-base font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-purple-600">Contratar Plan</a>
                             </div>
                         </div>
                     </div>
@@ -462,7 +463,7 @@
                                             <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                         </svg>
                                     </div>
-                                    <span class="ml-3 text-lg text-gray-700">{{$memberships[1]->category}} Categorias</span>
+                                    <span class="ml-1 text-sm text-gray-700">{{$memberships[1]->category}} Categorias</span>
                                 </li>
                                 <li class="flex items-center">
                                     <div class="p-2 text-purple-500 rounded-full fill-current ">
@@ -473,7 +474,7 @@
                                             <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                         </svg>
                                     </div>
-                                    <span class="ml-3 text-lg text-gray-700">{{$memberships[1]->product}} Productos</span>
+                                    <span class="ml-1 text-sm text-gray-700">{{$memberships[1]->product}} Productos</span>
                                 </li>
                                 <li class="flex items-center">
                                     <div class="p-2 text-purple-500 rounded-full fill-current ">
@@ -484,14 +485,14 @@
                                             <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                         </svg>
                                     </div>
-                                    <span class="ml-3 text-lg text-gray-700">{{$memberships[1]->suggestion}} Destacados</span>
+                                    <span class="ml-1 text-sm text-gray-700">{{$memberships[1]->suggestion}} Destacados</span>
                                 </li>
                             </ul>
                         </div>
 
                         <div class="flex items-center block p-8 uppercase">
                             <a href="https://api.whatsapp.com/send/?phone=5492396513953&amp;text=Quier saber mas sobre TuMenuQR" target="_blank"
-                                class="block w-full px-6 py-4 mt-3 text-lg font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-indigo-600">Lo quiero!</a>
+                                class="block w-full px-2 py-3 mt-3 text-base font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-indigo-600">Lo quiero!</a>
                         </div>
                     </div>
 
@@ -518,7 +519,7 @@
                                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                             </svg>
                                         </div>
-                                        <span class="ml-3 text-lg text-gray-700">{{$memberships[2]->category}} Categorias</span>
+                                        <span class="ml-1 text-sm text-gray-700">{{$memberships[2]->category}} Categorias</span>
                                     </li>
                                     <li class="flex items-center">
                                         <div class="p-2 text-purple-500 rounded-full fill-current ">
@@ -529,7 +530,7 @@
                                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                             </svg>
                                         </div>
-                                        <span class="ml-3 text-lg text-gray-700">{{$memberships[2]->product}} Productos</span>
+                                        <span class="ml-1 text-sm text-gray-700">{{$memberships[2]->product}} Productos</span>
                                     </li>
                                     <li class="flex items-center">
                                         <div class="p-2 text-purple-500 rounded-full fill-current ">
@@ -540,14 +541,14 @@
                                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                             </svg>
                                         </div>
-                                        <span class="ml-3 text-lg text-gray-700">{{$memberships[2]->suggestion}} Destacados</span>
+                                        <span class="ml-1 text-sm text-gray-700">{{$memberships[2]->suggestion}} Destacados</span>
                                     </li>
                                 </ul>
                             </div>
 
                             <div class="flex items-center block p-8 uppercase">
                                 <a href="https://api.whatsapp.com/send/?phone=5492396513953&amp;text=Quier saber mas sobre TuMenuQR" target="_blank"
-                                    class="block w-full px-6 py-4 mt-3 text-lg font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-purple-600">Quiero contratarlo</a>
+                                    class="block w-full px-2 py-3 mt-3 text-base font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-purple-600">Quiero contratarlo</a>
                             </div>
                         </div>
                     </div>

@@ -14,6 +14,8 @@ use App\Http\Resources\Page\CompanyResource;
 use App\Http\Resources\Page\ProductResource;
 use App\Http\Resources\Page\CategoryResource;
 use App\Http\Resources\Page\SuggestionResource;
+use App\Http\Resources\Page\TagResource;
+use App\Models\Page\Tag;
 
 class ProductController extends Controller
 {
@@ -37,12 +39,16 @@ class ProductController extends Controller
         $companies = Company::where('id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
         $responseCompany = CompanyResource::collection($companies);
 
+        $tags = Tag::where('id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $responseTag = TagResource::collection($tags);
+
         $array_products = [
             'responseProducts' => $responseProducts, 
             'responseSuggestions' => $responseSuggestions,
             'responseLevels' => $responseLevels,
             'responseCategories' => $responseCategories,
-            'responseCompany' => $responseCompany
+            'responseCompany' => $responseCompany,
+            'responseTag' => $responseTag
 
         ];
         return $array_products;

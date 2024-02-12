@@ -24,5 +24,5 @@ focus:ring-offset-0
 
 ']) }}>
     {{$icon}}
-    <span>{{ $title }}</span>
+    <span>{{ $slot }}{{ $title }}</span>
 </button>

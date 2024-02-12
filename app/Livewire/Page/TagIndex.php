@@ -61,6 +61,16 @@ class TagIndex extends Component
 
     ///////////////////////////// MODULO UTILIDADES /////////////////////////////
 
+    // contar elementos de niveles
+    public function countTags() {
+        $amount = count(Tag::where('company_id', auth()->user()->company_id)->get());
+        $membershipNumber = auth()->user()->company->membership->tag;
+        if($amount >= $membershipNumber){
+            session()->flash('messageError', 'Excede la cantidad permitida');
+            return true;
+        }
+    }
+
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
@@ -94,6 +104,8 @@ class TagIndex extends Component
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
+        if($this->countTags()){return;}
+
         $this->reset(['tag']);
         $this->resetProperties();
 

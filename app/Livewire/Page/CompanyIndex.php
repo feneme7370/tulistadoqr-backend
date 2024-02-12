@@ -64,6 +64,9 @@ class CompanyIndex extends Component
 
     // propiedades para editar
     public $company;
+    public $dataImage;
+    public $dataImageLogo;
+    public $dataImageQr;
 
     ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
@@ -149,7 +152,7 @@ class CompanyIndex extends Component
     public function deleteImage(){
         CrudInterventionImage::deleteImage(
             $this->image_hero, 
-            'archives/images/hero/'
+            $this->company->id . '/heros/'
         );
     }
 
@@ -167,11 +170,13 @@ class CompanyIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
-            $this->image_hero = CrudInterventionImage::uploadImage(
+            $this->dataImage = CrudInterventionImage::uploadImage(
                 $this->image_hero, 
-                'archives/images/hero/', 
+                $this->company->id . '/heros/', 
                 $this->image_hero_new
             );
+
+            $this->image_hero = $this->dataImage[0];
         }
     }
 
@@ -179,13 +184,13 @@ class CompanyIndex extends Component
     public function deleteImageLogo(){
         CrudInterventionImage::deleteImage(
             $this->image_logo, 
-            'archives/images/logo/'
+            $this->company->id . '/logos/'
         );
     }
 
     // eliminar solo imagen del producto en editar
     public function deleteImageLogoEdit() {
-        $this->deleteImage();
+        $this->deleteImageLogo();
         $this->image_logo = '';
         $this->company->update(
             $this->only(['image_logo'])
@@ -197,11 +202,13 @@ class CompanyIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_logo_new){
-            $this->image_logo = CrudInterventionImage::uploadImage(
+            $this->dataImageLogo = CrudInterventionImage::uploadImage(
                 $this->image_logo, 
-                'archives/images/logo/', 
+                $this->company->id . '/logos/', 
                 $this->image_logo_new
             );
+
+            $this->image_logo = $this->dataImageLogo[0];
         }
     }
 
@@ -209,13 +216,13 @@ class CompanyIndex extends Component
     public function deleteImageQr(){
         CrudInterventionImage::deleteImage(
             $this->image_qr, 
-            'archives/images/qr/'
+            $this->company->id . '/qrs/'
         );
     }
 
     // eliminar solo imagen del producto en editar
     public function deleteImageQrEdit() {
-        $this->deleteImage();
+        $this->deleteImageQr();
         $this->image_qr = '';
         $this->company->update(
             $this->only(['image_qr'])
@@ -227,11 +234,13 @@ class CompanyIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_qr_new){
-            $this->image_qr = CrudInterventionImage::uploadImage(
+            $this->dataImageQr = CrudInterventionImage::uploadImage(
                 $this->image_qr, 
-                'archives/images/qr/', 
+                $this->company->id . '/qrs/', 
                 $this->image_qr_new
             );
+
+            $this->image_qr = $this->dataImageQr[0];
         }
     }
 
@@ -297,8 +306,11 @@ class CompanyIndex extends Component
         $this->url = $company['url'];
         $this->description = $company['description'];
         $this->image_qr = $company['image_qr'];
+        $this->image_qr_uri = $company['image_qr_uri'];
         $this->image_logo = $company['image_logo'];
+        $this->image_logo_uri = $company['image_logo_uri'];
         $this->image_hero = $company['image_hero'];
+        $this->image_hero_uri = $company['image_hero_uri'];
         $this->status = $company['status'] == '1' ? true : false;
         $this->membership_id = $company['membership_id'];
         $this->showActionModal = true;
@@ -310,17 +322,25 @@ class CompanyIndex extends Component
         // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
         $this->slug = Str::slug($this->name);
-        $this->image_qr_uri = 'archives/images/qr/';
-        $this->image_logo_uri = 'archives/images/logo/';
-        $this->image_hero_uri = 'archives/images/hero/';
 
         // validar datos
         $this->validate();
 
         // subir imagen de portada
         $this->uploadImage();
+        if($this->dataImage){
+            $this->image_hero_uri = $this->dataImage[1];
+        }
+        // subir imagen de portada
         $this->uploadImageLogo();
+        if($this->dataImageLogo){
+            $this->image_logo_uri = $this->dataImageLogo[1];
+        }
+        // subir imagen de portada
         $this->uploadImageQr();
+        if($this->dataImageQr){
+            $this->image_qr_uri = $this->dataImageQr[1];
+        }
         
         if( isset( $this->company['id'])) {
 

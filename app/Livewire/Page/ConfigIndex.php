@@ -45,6 +45,8 @@ class ConfigIndex extends Component
     
     // propiedades para editar
     public $company;
+    public $dataImage;
+    public $dataImageLogo;
     
     public $company_data;
     public $socialMedia;
@@ -154,7 +156,7 @@ class ConfigIndex extends Component
     public function deleteImage(){
         CrudInterventionImage::deleteImage(
             $this->image_hero, 
-            'archives/images/hero/'
+            auth()->user()->company->id . '/heros/'
         );
     }
 
@@ -172,11 +174,13 @@ class ConfigIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
-            $this->image_hero = CrudInterventionImage::uploadImage(
+            $this->dataImage = CrudInterventionImage::uploadImage(
                 $this->image_hero, 
-                'archives/images/hero/', 
+                auth()->user()->company->id . '/heros/', 
                 $this->image_hero_new
             );
+
+            $this->image_hero = $this->dataImage[0];
         }
     }
 
@@ -184,7 +188,7 @@ class ConfigIndex extends Component
     public function deleteImageLogo(){
         CrudInterventionImage::deleteImage(
             $this->image_logo, 
-            'archives/images/logo/'
+            auth()->user()->company->id . '/logos/'
         );
     }
 
@@ -202,11 +206,13 @@ class ConfigIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_logo_new){
-            $this->image_logo = CrudInterventionImage::uploadImage(
+            $this->dataImageLogo = CrudInterventionImage::uploadImage(
                 $this->image_logo, 
-                'archives/images/logo/', 
+                auth()->user()->company->id . '/logos/', 
                 $this->image_logo_new
             );
+
+            $this->image_logo = $this->dataImageLogo[0];
         }
     }
 
@@ -216,15 +222,20 @@ class ConfigIndex extends Component
     public function save() {
 
         $this->slug = Str::slug($this->name);
-        $this->image_hero_uri = 'archives/images/hero/';
-        $this->image_logo_uri = 'archives/images/logo/';
 
         // validar datos
         $this->validate();
 
-        // subir imagen de portada y logo
+        // subir imagen de portada
         $this->uploadImage();
+        if($this->dataImage){
+            $this->image_hero_uri = $this->dataImage[1];
+        }
+        // subir imagen de portada
         $this->uploadImageLogo();
+        if($this->dataImageLogo){
+            $this->image_logo_uri = $this->dataImageLogo[1];
+        }
 
         $this->company->update(
             $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'description', 'type_menu', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri'])

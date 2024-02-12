@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->double('price_original');
-            $table->double('price_seller');
+            $table->double('price_seller')->nullable();
             $table->integer('quantity')->nullable();
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->nullable();

@@ -71,11 +71,11 @@
                             </td>
 
                             <td class="with-image-columns">
-                                <x-sistem.lightbox.img-lightbox 
+                                <x-sistem.lightbox.img-tumb-lightbox 
                                     :uri="$item->image_hero_uri" 
                                     :name="$item->image_hero"    
                                 />
-                            </td>
+                              </td>
 
                             <td class="text-center"><p>{{$item->name}}</p></td>
                             <td><p>{{$item->category->level->name}} / {{$item->category->name}}</p></td>
@@ -208,36 +208,37 @@
                         <x-sistem.forms.input-error for="image_hero_new" />
                     </div>
             
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            
-                        <div class="">
-                            <p class="mb-1">Imagen del producto actual:</p>
-                            <div class="w-64 h-64 mx-auto relative">
+                    <div class="flex justify-center items-center">
+        
+                        @if ($image_hero_new)
+                          <div class="">
+              
+                              <div wire:loading wire:target="image_hero_new">
+                                  <x-sistem.spinners.loading-spinner/>
+                              </div>
+              
+                              <p class="mb-1">Imagen del producto nueva:</p>
+                                  <x-sistem.lightbox.img-lightbox 
+                                      class="h-64 max-w-96 p-1 bg-purple-200"
+                                      :name="$image_hero_new->temporaryUrl()"    
+                                  />
+                          </div>
+                        @else
+                          <div class="">
+                              <div wire:loading wire:target="image_hero_new">
+                                  <x-sistem.spinners.loading-spinner/>
+                              </div>
+                              <p class="mb-1">Imagen del producto actual:</p>
+                              <div class="w-64 h-64 mx-auto relative">
                                 <x-sistem.lightbox.img-lightbox 
                                     class="h-64 max-w-96 p-1 bg-purple-200"
                                     :uri="$this->image_hero_uri" 
                                     :name="$this->image_hero"    
                                 />
                               </div>
-                        </div>
-                        
-                        <div class="">
-            
-                            <div wire:loading wire:target="image_hero_new">
-                                <x-sistem.spinners.loading-spinner/>
-                            </div>
-            
-                            <p class="mb-1">Imagen del producto nueva:</p>
-                            @if ($image_hero_new) 
-                                <x-sistem.lightbox.img-lightbox 
-                                    class="h-64 max-w-96 p-1 bg-purple-200"
-                                    :name="$image_hero_new->temporaryUrl()"    
-                                />
-                            @else
-                                <p class="text-center italic">No se ha agregado una imagen nueva</p>
-                            @endif
-                        </div>
-                    </div>
+                          </div>
+                        @endif
+                      </div>
                   </div>
 
                 <x-sistem.notifications.alerts-input :messageErrorInput="session('messageErrorInput')" />
@@ -249,8 +250,15 @@
             <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled"
                 title="Cancelar" />
 
-            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled"
-                title="{{$product ? 'Actualizar' : 'Guardar'}}" autofocus />
+            <x-sistem.buttons.primary-btn 
+                wire:click="save"
+                wire:loading.class="opacity-50"  
+                wire:loading.attr="disabled"
+                title="{{$product ? 'Actualizar' : 'Guardar'}}" >
+                <div wire:loading>
+                    <x-sistem.spinners.loading-spinner-btn/>
+                </div>
+            </x-sistem.buttons.primary-btn> 
         </x-slot>
     </x-sistem.modal.dialog-modal>
 

@@ -54,11 +54,10 @@
                           </td>
 
                           <td class="with-image-columns">
-                            @if ($item->image_hero)
-                            <img src="{{$item->image_hero_uri.$item->image_hero}}" alt="imagen producto" loading="lazy">                            
-                            @else
-                            <img src="archives/sistem/img/withoutImage.jpg" alt="imagen producto" loading="lazy">
-                            @endif
+                            <x-sistem.lightbox.img-tumb-lightbox 
+                                :uri="$item->image_hero_uri" 
+                                :name="$item->image_hero"    
+                            />
                           </td>
 
                           <td><p>{{$item->name}}</p></td>
@@ -190,20 +189,9 @@
                       <x-sistem.forms.input-error for="image_hero_new" />
                   </div>
           
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          
-                      <div class="">
-                          <p class="mb-1">Imagen de portada actual:</p>
-                          <div class="w-64 h-64 mx-auto relative">
-                              @if ($this->image_hero && $this->image_hero != '')
-                                  <img src="{{asset('archives/images/hero/'.$this->image_hero)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
-                                  <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                              @else
-                                  <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-                              @endif
-                          </div>
-                      </div>
-                      
+                  <div class="flex justify-center items-center">
+        
+                    @if ($image_hero_new)
                       <div class="">
           
                           <div wire:loading wire:target="image_hero_new">
@@ -211,14 +199,27 @@
                           </div>
           
                           <p class="mb-1">Imagen de portada nueva:</p>
-                          @if ($image_hero_new) 
-                              <div class="w-64 h-64 mx-auto relative">
-                                  <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_hero_new->temporaryUrl() }}">
-                              </div>
-                          @else
-                              <p class="text-center italic">No se ha agregado una imagen nueva</p>
-                          @endif
+                              <x-sistem.lightbox.img-lightbox 
+                                  class="h-32 w-32 p-1 bg-purple-200"
+                                  :name="$image_hero_new->temporaryUrl()"    
+                              />
                       </div>
+                    @else
+                      <div class="">
+                          <div wire:loading wire:target="image_hero_new">
+                              <x-sistem.spinners.loading-spinner/>
+                          </div>
+                          <p class="mb-1">Imagen de portada actual:</p>
+                          <div class="h-32 w-32 mx-auto relative">
+                            <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                            <x-sistem.lightbox.img-tumb-lightbox 
+                                class="h-32 w-32 p-1 bg-purple-200"
+                                :uri="$this->image_hero_uri" 
+                                :name="$this->image_hero"    
+                            />
+                          </div>
+                      </div>
+                    @endif
                   </div>
               </div>
 
@@ -232,35 +233,37 @@
                       <x-sistem.forms.input-error for="image_logo_new" />
                   </div>
           
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div class="flex justify-center items-center">
+        
+                    @if ($image_logo_new)
+                      <div class="">
           
-                      <div class="">
-                          <p class="mb-1">Imagen del logo actual:</p>
-                          <div class="w-64 h-64 mx-auto relative">
-                              @if ($this->image_logo && $this->image_logo != '')
-                                  <img src="{{asset('archives/images/logo/'.$this->image_logo)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
-                                  <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
-                              @else
-                                  <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-                              @endif
-                          </div>
-                      </div>
-                      
-                      <div class="">
-                          
-                          <div wire:loading wire:target="image_qr_new">
+                          <div wire:loading wire:target="image_logo_new">
                               <x-sistem.spinners.loading-spinner/>
                           </div>
           
-                          <p class="mb-1">Imagen del logo nueva:</p>
-                          @if ($image_logo_new) 
-                              <div class="w-64 h-64 mx-auto relative">
-                                  <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_logo_new->temporaryUrl() }}">
-                              </div>
-                          @else
-                              <p class="text-center italic">No se ha agregado una imagen nueva</p>
-                          @endif
+                          <p class="mb-1">Imagen de logo nueva:</p>
+                              <x-sistem.lightbox.img-lightbox 
+                                  class="h-32 w-32 p-1 bg-purple-200"
+                                  :name="$image_logo_new->temporaryUrl()"    
+                              />
                       </div>
+                    @else
+                      <div class="">
+                          <div wire:loading wire:target="image_logo_new">
+                              <x-sistem.spinners.loading-spinner/>
+                          </div>
+                          <p class="mb-1">Imagen de logo actual:</p>
+                          <div class="h-32 w-32 mx-auto relative">
+                            <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                            <x-sistem.lightbox.img-tumb-lightbox 
+                                class="h-32 w-32 p-1 bg-purple-200"
+                                :uri="$this->image_logo_uri" 
+                                :name="$this->image_logo"    
+                            />
+                          </div>
+                      </div>
+                    @endif
                   </div>
               </div>
 
@@ -274,35 +277,37 @@
                       <x-sistem.forms.input-error for="image_qr_new" />
                   </div>
           
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div class="flex justify-center items-center">
+        
+                    @if ($image_qr_new)
+                      <div class="">
           
-                      <div class="">
-                          <p class="mb-1">Imagen del QR actual:</p>
-                          <div class="w-64 h-64 mx-auto relative">
-                              @if ($this->image_qr && $this->image_qr != '')
-                                  <img src="{{asset('archives/images/qr/'.$this->image_qr)}}" alt="imagen" class="w-64 h-64 object-cover rounded-md" />
-                                  <button wire:click='deleteImageQrEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
-                              @else
-                                  <img class="w-64 h-64 object-cover rounded-md" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
-                              @endif
-                          </div>
-                      </div>
-                      
-                      <div class="">
-                          
                           <div wire:loading wire:target="image_qr_new">
                               <x-sistem.spinners.loading-spinner/>
                           </div>
           
-                          <p class="mb-1">Imagen del qr nueva:</p>
-                          @if ($image_qr_new) 
-                              <div class="w-64 h-64 mx-auto relative">
-                                  <img class="relative w-64 h-64 object-cover rounded-md" src="{{ $image_qr_new->temporaryUrl() }}">
-                              </div>
-                          @else
-                              <p class="text-center italic">No se ha agregado una imagen nueva</p>
-                          @endif
+                          <p class="mb-1">Imagen de QR nueva:</p>
+                              <x-sistem.lightbox.img-lightbox 
+                                  class="h-32 w-32 p-1 bg-purple-200"
+                                  :name="$image_qr_new->temporaryUrl()"    
+                              />
                       </div>
+                    @else
+                      <div class="">
+                          <div wire:loading wire:target="image_qr_new">
+                              <x-sistem.spinners.loading-spinner/>
+                          </div>
+                          <p class="mb-1">Imagen de QR actual:</p>
+                          <div class="h-32 w-32 mx-auto relative">
+                            <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                            <x-sistem.lightbox.img-tumb-lightbox 
+                                class="h-32 w-32 p-1 bg-purple-200"
+                                :uri="$this->image_qr_uri" 
+                                :name="$this->image_qr"    
+                            />
+                          </div>
+                      </div>
+                    @endif
                   </div>
               </div>
 
@@ -329,7 +334,15 @@
 
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="{{$company ? 'Actualizar' : 'Guardar'}}"  />
+            <x-sistem.buttons.primary-btn 
+              wire:click="save" 
+              wire:loading.class="opacity-50" 
+              wire:loading.attr="disabled"  
+              title="{{$company ? 'Actualizar' : 'Guardar'}}" >
+                <div wire:loading>
+                    <x-sistem.spinners.loading-spinner-btn/>
+                </div>
+            </x-sistem.buttons.primary-btn> 
         </x-slot>
     </x-sistem.modal.dialog-modal>
 

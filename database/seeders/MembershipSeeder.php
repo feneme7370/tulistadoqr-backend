@@ -25,6 +25,7 @@ class MembershipSeeder extends Seeder
             'product' => '10',
             'user' => '1',
             'suggestion' => '1',
+            'tag' => '2',
             'status' => '1',
         ]);
         Membership::create([
@@ -38,6 +39,7 @@ class MembershipSeeder extends Seeder
             'product' => '100',
             'user' => '2',
             'suggestion' => '3',
+            'tag' => '2',
             'status' => '1',
         ]);
         Membership::create([
@@ -51,6 +53,7 @@ class MembershipSeeder extends Seeder
             'product' => '500',
             'user' => '5',
             'suggestion' => '10',
+            'tag' => '2',
             'status' => '1',
         ]);
     }

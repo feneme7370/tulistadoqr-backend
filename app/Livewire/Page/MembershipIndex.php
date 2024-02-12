@@ -41,6 +41,7 @@ class MembershipIndex extends Component
     public $product;
     public $user;
     public $suggestion;
+    public $tag;
     public $status;
 
     // propiedades para editar
@@ -61,6 +62,7 @@ class MembershipIndex extends Component
             'product' => ['required', 'numeric'],
             'user' => ['required', 'numeric'],
             'suggestion' => ['required', 'numeric'],
+            'tag' => ['required', 'numeric'],
             'status' => ['numeric'],
         ];
     }
@@ -77,6 +79,7 @@ class MembershipIndex extends Component
         'product' => 'producto',
         'user' => 'usuario',
         'suggestion' => 'sugerencia',
+        'tag' => 'etiqueta',
         'status' => 'estado',
     ];
 
@@ -96,6 +99,7 @@ class MembershipIndex extends Component
             'product',
             'user',
             'suggestion',
+            'tag',
             'status',
         ]);
     }
@@ -154,6 +158,7 @@ class MembershipIndex extends Component
         $this->product = $membership['product'];
         $this->user = $membership['user'];
         $this->suggestion = $membership['suggestion'];
+        $this->tag = $membership['tag'];
         $this->status = $membership['status'] == '1' ? true : false;
 
         $this->showActionModal = true;
@@ -172,7 +177,7 @@ class MembershipIndex extends Component
         if( isset( $this->membership['id'])) {
 
             $this->membership->update(
-                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'status'])
+                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'tag', 'status'])
             );
 
             $this->reset(['membership']);
@@ -182,7 +187,7 @@ class MembershipIndex extends Component
         } else {
 
             Membership::create(
-                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'status'])
+                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'tag', 'status'])
             );
 
             $this->reset(['membership']);

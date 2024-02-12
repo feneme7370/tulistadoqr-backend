@@ -4,7 +4,7 @@
 
     @if($name && !$name == '' && !$name == null)
         <a href="{{asset( $uri .$name)}}" data-lightbox="{{$name}}">
-            <img src="{{asset( $uri .$name)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm"/>
+            <img src="{{asset( $uri . $name)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm"/>
         </a>
     @else
         <a href="{{asset('archives/sistem/img/withoutImage.jpg')}}" data-lightbox="withoutImage.jpg">
@@ -20,8 +20,8 @@
             'alwaysShowNavOnTouchDevices': true,
             'showImageNumberLabel': true,
             'imageFadeDuration': 1000,
-            'resizeDuration': 1000,
-            'fadeDuration': 1000,
+            'resizeDuration': 100,
+            'fadeDuration': 100,
             'disableScrolling': true,
             'wrapAround': true,
             })

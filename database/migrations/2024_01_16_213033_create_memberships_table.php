@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('product');
             $table->string('user');
             $table->string('suggestion');
+            $table->string('tag');
             $table->tinyInteger('status')->nullable()->default(1);
             $table->timestamps();
         });

@@ -74,39 +74,37 @@
                 <x-sistem.forms.input-error for="image_hero_new" />
             </div>
     
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-    
-                <div class="">
-                    <p class="mb-1">Imagen de portada actual:</p>
-                    <div class="w-64 h-64 mx-auto relative">
-                        <x-sistem.lightbox.img-lightbox 
-                            class="h-64 max-w-96 p-1 bg-purple-200"
+            <div class="flex justify-center items-center">
+        
+                @if ($image_hero_new)
+                  <div class="">
+      
+                      <div wire:loading wire:target="image_hero_new">
+                          <x-sistem.spinners.loading-spinner/>
+                      </div>
+      
+                      <p class="mb-1">Imagen de portada nueva:</p>
+                          <x-sistem.lightbox.img-tumb-lightbox 
+                              class="h-32 w-32 p-1 bg-purple-200"
+                              :name="$image_hero_new->temporaryUrl()"    
+                          />
+                  </div>
+                @else
+                  <div class="">
+                      <div wire:loading wire:target="image_hero_new">
+                          <x-sistem.spinners.loading-spinner/>
+                      </div>
+                      <p class="mb-1">Imagen de portada actual:</p>
+                      <div class="h-32 w-32 mx-auto relative">
+                        <x-sistem.lightbox.img-tumb-lightbox 
+                            class="h-32 w-32 p-1 bg-purple-200"
                             :uri="$this->image_hero_uri" 
                             :name="$this->image_hero"    
                         />
-                        <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                    </div>
-                </div>
-                
-                <div class="">
-    
-                    <div wire:loading wire:target="image_hero_new">
-                        <x-sistem.spinners.loading-spinner/>
-                    </div>
-    
-                    <p class="mb-1">Imagen de portada nueva:</p>
-                    @if ($image_hero_new) 
-                        <div class="w-64 h-64 mx-auto relative">
-                            <x-sistem.lightbox.img-lightbox 
-                                class="h-64 max-w-96 p-1 bg-purple-200"
-                                :name="$image_hero_new->temporaryUrl()" 
-                            />
-                        </div>
-                    @else
-                        <p class="text-center italic">No se ha agregado una imagen nueva</p>
-                    @endif
-                </div>
-            </div>
+                      </div>
+                  </div>
+                @endif
+              </div>
         </div>
 
         {{-- logo de la empresa --}}
@@ -119,39 +117,37 @@
                 <x-sistem.forms.input-error for="image_logo_new" />
             </div>
     
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-    
-                <div class="">
-                    <p class="mb-1">Imagen del logo actual:</p>
-                    <div class="w-64 h-64 mx-auto relative">
+            <div class="flex justify-center items-center">
+        
+                @if ($image_logo_new)
+                  <div class="">
+      
+                      <div wire:loading wire:target="image_logo_new">
+                          <x-sistem.spinners.loading-spinner/>
+                      </div>
+      
+                      <p class="mb-1">Imagen de categoria general nueva:</p>
+                          <x-sistem.lightbox.img-lightbox 
+                              class="h-32 w-32 p-1 bg-purple-200"
+                              :name="$image_logo_new->temporaryUrl()"    
+                          />
+                  </div>
+                @else
+                  <div class="">
+                      <div wire:loading wire:target="image_logo_new">
+                          <x-sistem.spinners.loading-spinner/>
+                      </div>
+                      <p class="mb-1">Imagen de categoria general actual:</p>
+                      <div class="h-32 w-32 mx-auto relative">
                         <x-sistem.lightbox.img-lightbox 
-                            class="h-64 max-w-96 p-1 bg-purple-200"
+                            class="h-32 w-32 p-1 bg-purple-200"
                             :uri="$this->image_logo_uri" 
                             :name="$this->image_logo"    
                         />
-                        <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 text-sm rounded-lg text-white">Eliminar</button>
-                    </div>
-                </div>
-                
-                <div class="">
-                    
-                    <div wire:loading wire:target="image_logo_new">
-                        <x-sistem.spinners.loading-spinner/>
-                    </div>
-    
-                    <p class="mb-1">Imagen del logo nueva:</p>
-                    @if ($image_logo_new) 
-                        <div class="w-64 h-64 mx-auto relative">
-                            <x-sistem.lightbox.img-lightbox 
-                                class="h-64 max-w-96 p-1 bg-purple-200"
-                                :name="$image_logo_new->temporaryUrl()" 
-                            />
-                        </div>
-                    @else
-                        <p class="text-center italic">No se ha agregado una imagen nueva</p>
-                    @endif
-                </div>
-            </div>
+                      </div>
+                  </div>
+                @endif
+              </div>
         </div>
 
         {{-- informacion de la empresa --}}
@@ -177,6 +173,14 @@
             @endforeach
         </div>
 
-        <x-sistem.buttons.primary-btn wire:click="save" class="sm:mx-auto sm:mr-2" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Actualizar"/>
+        <x-sistem.buttons.primary-btn 
+            wire:click="save"
+            wire:loading.class="opacity-50" 
+            wire:loading.attr="disabled"
+            title="Actualizar" >
+            <div wire:loading>
+                <x-sistem.spinners.loading-spinner-btn/>
+            </div>
+        </x-sistem.buttons.primary-btn> 
     </form>
 </div>

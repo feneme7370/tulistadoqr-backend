@@ -61,7 +61,7 @@
                           </td>
 
                           <td class="with-image-columns">
-                            <x-sistem.lightbox.img-lightbox 
+                            <x-sistem.lightbox.img-tumb-lightbox 
                                 :uri="$item->image_hero_uri" 
                                 :name="$item->image_hero"    
                             />
@@ -164,9 +164,26 @@
                     <x-sistem.forms.input-error for="image_hero_new" />
                 </div>
         
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="flex justify-center items-center">
         
+                  @if ($image_hero_new)
                     <div class="">
+        
+                        <div wire:loading wire:target="image_hero_new">
+                            <x-sistem.spinners.loading-spinner/>
+                        </div>
+        
+                        <p class="mb-1">Imagen de categoria nueva:</p>
+                            <x-sistem.lightbox.img-lightbox 
+                                class="h-64 max-w-96 p-1 bg-purple-200"
+                                :name="$image_hero_new->temporaryUrl()"    
+                            />
+                    </div>
+                  @else
+                    <div class="">
+                        <div wire:loading wire:target="image_hero_new">
+                            <x-sistem.spinners.loading-spinner/>
+                        </div>
                         <p class="mb-1">Imagen de categoria actual:</p>
                         <div class="w-64 h-64 mx-auto relative">
                           <x-sistem.lightbox.img-lightbox 
@@ -176,24 +193,9 @@
                           />
                         </div>
                     </div>
-                    
-                    <div class="">
-        
-                        <div wire:loading wire:target="image_hero_new">
-                            <x-sistem.spinners.loading-spinner/>
-                        </div>
-        
-                        <p class="mb-1">Imagen de categoria nueva:</p>
-                        @if ($image_hero_new) 
-                            <x-sistem.lightbox.img-lightbox 
-                                class="h-64 max-w-96 p-1 bg-purple-200"
-                                :name="$image_hero_new->temporaryUrl()"    
-                            />
-                        @else
-                            <p class="text-center italic">No se ha agregado una imagen nueva</p>
-                        @endif
-                    </div>
+                  @endif
                 </div>
+                
               </div>
 
             </form>
@@ -202,7 +204,15 @@
 
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="{{$category ? 'Actualizar' : 'Guardar'}}"  />
+            <x-sistem.buttons.primary-btn 
+              wire:click="save" 
+              wire:loading.class="opacity-50" 
+              wire:loading.attr="disabled"
+              title="{{$category ? 'Actualizar' : 'Guardar'}}" >
+                <div wire:loading>
+                    <x-sistem.spinners.loading-spinner-btn/>
+                </div>
+            </x-sistem.buttons.primary-btn> 
         </x-slot>
     </x-sistem.modal.dialog-modal>
 

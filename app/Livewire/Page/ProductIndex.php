@@ -61,6 +61,7 @@ class ProductIndex extends Component
 
     // propiedades para editar
     public $product;
+    public $dataImage;
 
     // propiedades para editar
     public $product_tags = [];
@@ -128,7 +129,7 @@ class ProductIndex extends Component
     public function deleteImage(){
         CrudInterventionImage::deleteImage(
             $this->image_hero, 
-            'archives/images/product_hero/'
+            auth()->user()->company->id . '/products/'
         );
     }
 
@@ -146,11 +147,13 @@ class ProductIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
-            $this->image_hero = CrudInterventionImage::uploadImage(
+            $this->dataImage = CrudInterventionImage::uploadImage(
                 $this->image_hero, 
-                'archives/images/product_hero/', 
+                auth()->user()->company->id . '/products/', 
                 $this->image_hero_new
             );
+
+            $this->image_hero = $this->dataImage[0];
         }
     }
 
@@ -222,7 +225,6 @@ class ProductIndex extends Component
     
         // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
-        $this->image_hero_uri = 'archives/images/product_hero/';
         $this->slug = Str::slug($this->name);
         $this->user_id = auth()->user()->id;
         $this->company_id = auth()->user()->company->id;
@@ -232,6 +234,9 @@ class ProductIndex extends Component
 
         // subir imagen de portada
         $this->uploadImage();
+        if($this->dataImage){
+            $this->image_hero_uri = $this->dataImage[1];
+        }
         
         // crear o editar segun id
         if( isset( $this->product['id'])) {

@@ -68,7 +68,7 @@
                   </td>
 
                   <td class="with-image-columns">
-                    <x-sistem.lightbox.img-lightbox 
+                    <x-sistem.lightbox.img-tumb-lightbox 
                         :uri="$item->product->image_hero_uri" 
                         :name="$item->product->image_hero"    
                     />

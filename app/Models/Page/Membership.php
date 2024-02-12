@@ -20,6 +20,7 @@ class Membership extends Model
         'product',
         'user',
         'suggestion',
+        'tag',
         'status',
     ];
 

@@ -46,12 +46,12 @@ class CompanySeeder extends Seeder
             'description' => 'Veni a desayunar o merendar las mejores medias lunas de la zona, tambien tenemos licuados, cafes, tortas entre otras cosas',
             'status' => '1',
             'type_menu' => '1',
-            'image_logo' => '1_1_1707081541_9mDy1hL.jpg',
-            'image_logo_uri' => 'archives/images/logo/',
-            'image_hero' => '1_1_1707081893_ywpv3Z0.jpg',
-            'image_hero_uri' => 'archives/images/hero/',
-            'image_qr' => '1_1_1707081893_Gy9mEtI.jpg',
-            'image_qr_uri' => 'archives/images/qr/',
+            'image_logo' => '1_1_1707777476_UcXnFVS.jpg',
+            'image_logo_uri' => 'archives/images/2/logos/',
+            'image_hero' => '1_1_1707776999_pcBZ8P5.jpg',
+            'image_hero_uri' => 'archives/images/2/heros/',
+            'image_qr' => '1_1_1707777476_wcCxNmF.jpg',
+            'image_qr_uri' => 'archives/images/2/qrs/',
             'membership_id' => '3',
         ]);
         Company::create([

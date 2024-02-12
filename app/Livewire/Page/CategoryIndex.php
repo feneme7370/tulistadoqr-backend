@@ -53,6 +53,7 @@ class CategoryIndex extends Component
 
     // propiedades para editar
     public $category;
+    public $dataImage;
 
     ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
@@ -112,7 +113,7 @@ class CategoryIndex extends Component
     public function deleteImage(){
         CrudInterventionImage::deleteImage(
             $this->image_hero, 
-            'archives/images/category_hero/'
+            auth()->user()->company->id . '/categories/'
         );
     }
 
@@ -130,11 +131,13 @@ class CategoryIndex extends Component
 
         // crear o reemplazar imagen
         if($this->image_hero_new){
-            $this->image_hero = CrudInterventionImage::uploadImage(
+            $this->dataImage = CrudInterventionImage::uploadImage(
                 $this->image_hero, 
-                'archives/images/category_hero/', 
+                auth()->user()->company->id . '/categories/', 
                 $this->image_hero_new
             );
+
+            $this->image_hero = $this->dataImage[0];
         }
     }
 
@@ -211,7 +214,6 @@ class CategoryIndex extends Component
         // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
         $this->slug = Str::slug($this->name);
-        $this->image_hero_uri = 'archives/images/category_hero/';
         $this->user_id = auth()->user()->id;
         $this->company_id = auth()->user()->company->id;
 
@@ -220,6 +222,9 @@ class CategoryIndex extends Component
 
         // subir imagen de portada
         $this->uploadImage();
+        if($this->dataImage){
+            $this->image_hero_uri = $this->dataImage[1];
+        }
         
         if( isset( $this->category['id'])) {
 

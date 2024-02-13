@@ -39,7 +39,7 @@
                     <tbody>
             
                         @foreach ($memberships as $item)
-                        <tr wire:key="field-membership-{{ $item->id }}">
+                        <tr wire:key="field-membership-{{ Hash::make($item->id) }}">
                           
                           <td class="with-id-columns">
                             <p>{{$item->id}}</p>

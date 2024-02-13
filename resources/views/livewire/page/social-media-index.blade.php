@@ -38,7 +38,7 @@
                     <tbody>
             
                         @foreach ($social_medias as $item)
-                        <tr wire:key="field-social_media-{{ $item->id }}">
+                        <tr wire:key="field-socialmedia-{{ Hash::make($item->id) }}">
 
                           <td class="with-id-columns"><p>{{$item->id}}</p></td>
                           

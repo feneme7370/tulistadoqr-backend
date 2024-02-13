@@ -57,7 +57,7 @@
             <tbody>
     
                 @foreach ($suggestions as $item)
-                <tr wire:key="field-suggestion-{{ $item->id }}">
+                <tr wire:key="field-suggestion-{{ Hash::make($item->id) }}">
                   <td class="with-id-columns"><p>{{$item->id}}</p></td>
                   
                   <td class="with-actions-columns">

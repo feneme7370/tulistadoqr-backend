@@ -41,7 +41,7 @@
                     <tbody>
             
                         @foreach ($companies as $item)
-                        <tr wire:key="field-company-{{ $item->id }}">
+                        <tr wire:key="field-company-{{ Hash::make($item->id) }}">
 
                           <td class="with-id-columns"><p>{{$item->id}}</p></td>
 

@@ -12,9 +12,9 @@
             lightbox.option({
             'alwaysShowNavOnTouchDevices': true,
             'showImageNumberLabel': true,
-            'imageFadeDuration': 1000,
-            'resizeDuration': 1000,
-            'fadeDuration': 1000,
+            'imageFadeDuration': 100,
+            'resizeDuration': 100,
+            'fadeDuration': 100,
             'disableScrolling': true,
             'wrapAround': true,
             })

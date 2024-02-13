@@ -48,7 +48,7 @@
                       </tr>
                     </thead>
                     <tbody>
-            
+             
                         @foreach ($levels as $item)
                         <tr wire:key="field-level-{{ Hash::make($item->id) }}">
 

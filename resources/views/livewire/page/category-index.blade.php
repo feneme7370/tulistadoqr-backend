@@ -48,7 +48,7 @@
                     <tbody>
             
                         @foreach ($categories as $item)
-                        <tr wire:key="field-category-{{ $item->id }}">
+                        <tr wire:key="field-category-{{ Hash::make($item->id) }}">
 
                           <td class="with-id-columns"><p>{{$item->id}}</p></td>
 

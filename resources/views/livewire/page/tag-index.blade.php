@@ -43,7 +43,7 @@
                     <tbody>
             
                         @foreach ($tags as $item)
-                        <tr wire:key="field-tag-{{ $item->id }}">
+                        <tr wire:key="field-tag-{{ Hash::make($item->id) }}">
 
                           <td class="with-id-columns"><p>{{$item->id}}</p></td>
 
@@ -87,7 +87,7 @@
         <x-slot name="footer">
             <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
 
-            <x-sistem.buttons.delete-btn wire:click="deleteTag()" wire:loading.attr="disabled"
+            <x-sistem.buttons.delete-btn wire:click="deleteTag" wire:loading.attr="disabled"
             title="Borrar" autofocus/>
         </x-slot>
     </x-sistem.modal.dialog-modal>

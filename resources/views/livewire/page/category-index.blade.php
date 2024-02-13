@@ -55,8 +55,8 @@
                           <td class="with-actions-columns">
                             <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
-                              <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
-                                wire:loading.attr="disabled" />
+                              <x-sistem.buttons.delete-text wire:click="$dispatch('deleteCategory', {{$item->id}})"
+                              wire:loading.attr="disabled" />
                             </div>
                           </td>
 
@@ -217,4 +217,47 @@
         </x-slot>
     </x-sistem.modal.dialog-modal>
 
+    @push('scripts')
+    <script>
+          document.addEventListener('livewire:init', () => {
+            Livewire.on('deleteCategory', (event) => {
+              Swal.fire({
+              title: 'Quieres eliminar el registro',
+              text: "Se eliminara de forma definitiva",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Se, eliminar'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // eliminar dato
+                Livewire.dispatch('deleteCategoryId', {id : event})
+              }
+            })
+          });
+      })
+    </script>
+
+    <script>
+      Livewire.on('toastifyCategory', (mensaje) => {
+        Toastify({
+          text: mensaje,
+          duration: 4000,
+          // destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "#f0fdf4",
+            color: "#166534",
+            padding: "2rem",
+          },
+          onClick: function(){} // Callback after click
+        }).showToast();
+      })
+    </script>
+    @endpush
 </div>

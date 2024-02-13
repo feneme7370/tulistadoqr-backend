@@ -10,6 +10,7 @@
         
         <link rel="icon" type="image/x-icon" href="{{ asset('archives/sistem/img/TuMenuQR_favicon.png') }}">
         <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
+        <link rel="stylesheet" href="{{asset('lib/toastify/toastify.css')}}">
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -30,11 +31,14 @@
 
     @livewireScripts
     <script src="{{asset('lib/flowbite/flowbite.min.js')}}"></script>
-    <script src="{{asset('lib/dist/js/lightbox-plus-jquery.min.js')}}"></script>
+    <script src="{{asset('lib/lightbox/js/lightbox-plus-jquery.min.js')}}"></script>
+    <script src="{{asset('lib/sweetalert2/sweetalert2.all.min.js')}}"></script>
+    <script src="{{asset('lib/toastify/toastify.js')}}"></script>
     
     @stack('modals')
     @stack('lightbox')
     @stack('flowbite')
+    @stack('scripts')
     
     </body>
 </html>

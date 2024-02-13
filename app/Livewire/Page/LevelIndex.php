@@ -138,37 +138,62 @@ class LevelIndex extends Component
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
     // abrir modal y recibir id
-    public function openDeleteModal($id){
+    // public function openDeleteModal($id){
+    //     $this->resetProperties();
+
+    //     $this->level = Level::findOrFail($id);
+    //     $this->authorize('delete', $this->level); 
+
+    //     // $this->showDeleteModal = true;
+    // }
+    
+    // eliminar desde el modal de confirmacion
+    // public function deleteLevel() {
+    //     $this->resetProperties();
+
+    //     $level = Level::findOrFail($this->level->id);
+
+    //     // comprobar si tiene productos asignados
+    //     if($level->categories->count() > 0){
+    //         session()->flash('messageError', 'No se puede eliminar, tiene categorias asignados');
+    //         $this->resetProperties();
+    //     }else{
+    //         $this->image_hero = $level['image_hero'];
+            
+    //         $this->deleteImage();
+    //         $level->delete();
+
+    //         $this->resetProperties();
+    //         $this->reset('level');
+    //         session()->flash('messageSuccess', 'Registro eliminado');
+    //     }
+        
+    //     $this->showDeleteModal = false;
+    // }
+
+    // eliminar desde sweetalert
+    protected $listeners = ['deleteLevelId'];
+    public function deleteLevelId($id){
         $this->resetProperties();
 
         $this->level = Level::findOrFail($id);
         $this->authorize('delete', $this->level); 
 
-        $this->showDeleteModal = true;
-    }
-    
-    // eliminar desde el modal de confirmacion
-    public function deleteLevel() {
-        $this->resetProperties();
-
-        $level = Level::findOrFail($this->level->id);
-
         // comprobar si tiene productos asignados
-        if($level->categories->count() > 0){
+        if($this->level->categories->count() > 0){
             session()->flash('messageError', 'No se puede eliminar, tiene categorias asignados');
             $this->resetProperties();
         }else{
-            $this->image_hero = $level['image_hero'];
+            $this->image_hero = $this->level['image_hero'];
             
             $this->deleteImage();
-            $level->delete();
+            $this->level->delete();
 
             $this->resetProperties();
             $this->reset('level');
-            session()->flash('messageSuccess', 'Registro eliminado');
+            // session()->flash('messageSuccess', 'Registro eliminado');
+            $this->dispatch('toastifyLevel', 'Eliminado con exito');
         }
-        
-        $this->showDeleteModal = false;
     }
 
     // mostrar modal para confirmar crear
@@ -228,7 +253,8 @@ class LevelIndex extends Component
 
             $this->reset(['level']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Actualizado con exito');
+            // session()->flash('messageSuccess', 'Actualizado con exito');
+            $this->dispatch('toastifyLevel', 'Actualizado con exito');
 
         } else {
 
@@ -239,7 +265,8 @@ class LevelIndex extends Component
 
             $this->reset(['level']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Guardado con exito');
+            // session()->flash('messageSuccess', 'Guardado con exito');
+            $this->dispatch('toastifyLevel', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

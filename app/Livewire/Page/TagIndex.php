@@ -80,29 +80,46 @@ class TagIndex extends Component
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
     // abrir modal y recibir id
-    public function openDeleteModal($id){
+    // public function openDeleteModal($id){
+    //     $this->resetProperties();
+
+    //     $this->tag = Tag::findOrFail($id);
+    //     $this->authorize('delete', $this->tag); 
+
+    //     $this->showDeleteModal = true;
+    // }
+    
+    // eliminar desde el modal de confirmacion
+    // public function deleteTag() {
+    //     $this->resetProperties();
+
+    //     $tag = Tag::findOrFail($this->tag->id);
+    //     $tag->delete();
+
+    //     session()->flash('messageSuccess', 'Registro eliminado');
+    //     $this->resetProperties();
+    //     $this->reset('tag');
+
+    //     $this->showDeleteModal = false;
+    // }
+
+    // eliminar desde sweetalert
+    protected $listeners = ['deleteTagId'];
+    public function deleteTagId($id){
         $this->resetProperties();
 
         $this->tag = Tag::findOrFail($id);
         $this->authorize('delete', $this->tag); 
 
-        $this->showDeleteModal = true;
-    }
-    
-    // eliminar desde el modal de confirmacion
-    public function deleteTag() {
-        $this->resetProperties();
+        $this->tag->delete();
 
-        $tag = Tag::findOrFail($this->tag->id);
-        $tag->delete();
-
-        session()->flash('messageSuccess', 'Registro eliminado');
         $this->resetProperties();
         $this->reset('tag');
+        // session()->flash('messageSuccess', 'Registro eliminado');
+        $this->dispatch('toastifyTag', 'Eliminado con exito');
 
-        $this->showDeleteModal = false;
     }
-
+    
     // mostrar modal para confirmar crear
     public function createActionModal() {
         if($this->countTags()){return;}
@@ -148,7 +165,8 @@ class TagIndex extends Component
 
             $this->reset(['tag']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Actualizado con exito');
+            // session()->flash('messageSuccess', 'Actualizado con exito');
+            $this->dispatch('toastifyTag', 'Actualizado con exito');
 
         } else {
 
@@ -159,7 +177,8 @@ class TagIndex extends Component
 
             $this->reset(['tag']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Guardado con exito');
+            // session()->flash('messageSuccess', 'Guardado con exito');
+            $this->dispatch('toastifyTag', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

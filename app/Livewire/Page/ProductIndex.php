@@ -160,31 +160,51 @@ class ProductIndex extends Component
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
     // abrir modal y recibir id
-    public function openDeleteModal($id){
+    // public function openDeleteModal($id){
+    //     $this->resetProperties();
+
+    //     $this->product = Product::findOrFail($id);
+    //     $this->authorize('delete', $this->product); 
+        
+    //     $this->showDeleteModal = true;
+    // }
+    
+    // eliminar desde el modal de confirmacion
+    // public function deleteProduct() {
+    //     $this->resetProperties();
+
+    //     $product = Product::findOrFail($this->product->id);
+
+    //     $this->image_hero = $product['image_hero'];
+        
+    //     $this->deleteImage();
+    //     $product->delete();
+
+    //     session()->flash('messageSuccess', 'Registro eliminado');
+    //     $this->resetProperties();
+    //     $this->reset('product');
+
+    //     $this->showDeleteModal = false;
+    // }
+
+    // eliminar desde sweetalert
+    protected $listeners = ['deleteProductId'];
+    public function deleteProductId($id){
         $this->resetProperties();
 
         $this->product = Product::findOrFail($id);
         $this->authorize('delete', $this->product); 
-        
-        $this->showDeleteModal = true;
-    }
-    
-    // eliminar desde el modal de confirmacion
-    public function deleteProduct() {
-        $this->resetProperties();
 
-        $product = Product::findOrFail($this->product->id);
-
-        $this->image_hero = $product['image_hero'];
+        $this->image_hero = $this->product['image_hero'];
         
         $this->deleteImage();
-        $product->delete();
+        $this->product->delete();
 
-        session()->flash('messageSuccess', 'Registro eliminado');
         $this->resetProperties();
         $this->reset('product');
+        // session()->flash('messageSuccess', 'Registro eliminado');
+        $this->dispatch('toastifyProduct', 'Eliminado con exito');
 
-        $this->showDeleteModal = false;
     }
 
     // mostrar modal para confirmar crear
@@ -253,7 +273,8 @@ class ProductIndex extends Component
             $this->reset(['product']);
             $this->resetProperties();
 
-            session()->flash('messageSuccess', 'Actualizado con exito');
+            // session()->flash('messageSuccess', 'Actualizado con exito');
+            $this->dispatch('toastifyProduct', 'Actualizado con exito');
 
         } else {
 
@@ -267,7 +288,8 @@ class ProductIndex extends Component
             $this->reset(['product']);
             $this->resetProperties();
 
-            session()->flash('messageSuccess', 'Guardado con exito');
+            // session()->flash('messageSuccess', 'Guardado con exito');
+            $this->dispatch('toastifyProduct', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

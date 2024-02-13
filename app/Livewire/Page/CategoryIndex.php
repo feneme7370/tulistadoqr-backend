@@ -144,37 +144,62 @@ class CategoryIndex extends Component
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
     // abrir modal y recibir id
-    public function openDeleteModal($id){
+    // public function openDeleteModal($id){
+    //     $this->resetProperties();
+    //     $this->reset('category');
+
+    //     $this->category = Category::findOrFail($id);
+    //     $this->authorize('delete', $this->category); 
+        
+    //     $this->showDeleteModal = true; 
+    // }
+    
+    // eliminar desde el modal de confirmacion
+    // public function deleteCategory() {
+    //     $this->resetProperties();
+
+    //     $category = Category::findOrFail($this->category->id);
+
+    //     // comprobar si tiene productos asignados
+    //     if($category->products->count() > 0){
+    //         session()->flash('messageError', 'No se puede eliminar, tiene productos asignados');
+    //         $this->resetProperties();
+    //     }else{
+    //         $this->image_hero = $category['image_hero'];
+            
+    //         $this->deleteImage();
+    //         $category->delete();
+    //         session()->flash('messageSuccess', 'Registro eliminado');
+    //         $this->resetProperties();
+    //         $this->reset('category');
+    //     }
+        
+    //     $this->showDeleteModal = false;
+    // }
+
+    // eliminar desde sweetalert
+    protected $listeners = ['deleteCategoryId'];
+    public function deleteCategoryId($id){
         $this->resetProperties();
-        $this->reset('category');
 
         $this->category = Category::findOrFail($id);
         $this->authorize('delete', $this->category); 
-        
-        $this->showDeleteModal = true; 
-    }
-    
-    // eliminar desde el modal de confirmacion
-    public function deleteCategory() {
-        $this->resetProperties();
-
-        $category = Category::findOrFail($this->category->id);
 
         // comprobar si tiene productos asignados
-        if($category->products->count() > 0){
+        if($this->category->products->count() > 0){
             session()->flash('messageError', 'No se puede eliminar, tiene productos asignados');
             $this->resetProperties();
         }else{
-            $this->image_hero = $category['image_hero'];
+            $this->image_hero = $this->category['image_hero'];
             
             $this->deleteImage();
-            $category->delete();
-            session()->flash('messageSuccess', 'Registro eliminado');
+            $this->category->delete();
+
             $this->resetProperties();
             $this->reset('category');
+            // session()->flash('messageSuccess', 'Registro eliminado');
+            $this->dispatch('toastifyCategory', 'Eliminado con exito');
         }
-        
-        $this->showDeleteModal = false;
     }
 
     // mostrar modal para confirmar crear
@@ -237,7 +262,8 @@ class CategoryIndex extends Component
 
             $this->reset(['category']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Actualizado con exito');
+            // session()->flash('messageSuccess', 'Actualizado con exito');
+            $this->dispatch('toastifyCategory', 'Actualizado con exito');
 
         } else {
 
@@ -248,7 +274,8 @@ class CategoryIndex extends Component
 
             $this->reset(['category']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Guardado con exito');
+            // session()->flash('messageSuccess', 'Guardado con exito');
+            $this->dispatch('toastifyCategory', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

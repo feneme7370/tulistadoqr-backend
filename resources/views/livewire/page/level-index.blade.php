@@ -207,24 +207,20 @@
         document.addEventListener('livewire:init', () => {
           Livewire.on('deleteLevel', (event) => {
             Swal.fire({
-            title: 'Quieres eliminar el registro',
-            text: "Se eliminara de forma definitiva",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Se, eliminar'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              // eliminar dato
-              Livewire.dispatch('deleteLevelId', {id : event})
-              // Swal.fire(
-              //   'Eliminado!',
-              //   'El registro fue eliminado.',
-              //   'success'
-              // )
-            }
-          })
+              title: 'Quieres eliminar el registro',
+              text: "Se eliminara de forma definitiva",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#7e22ce',
+              cancelButtonText: 'Cancelar',
+              confirmButtonText: 'Si, eliminar'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // eliminar dato
+                  Livewire.dispatch('deleteLevelId', {id : event})
+                }
+              })
         });
     })
   </script>
@@ -243,7 +239,6 @@
         style: {
           background: "#f0fdf4",
           color: "#166534",
-          padding: "2rem",
         },
         onClick: function(){} // Callback after click
       }).showToast();

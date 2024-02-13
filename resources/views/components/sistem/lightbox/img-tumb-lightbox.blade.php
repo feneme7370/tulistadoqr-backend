@@ -8,7 +8,7 @@
         </a>
     @else
         <a href="{{asset('archives/sistem/img/withoutImage.jpg')}}" data-lightbox="withoutImage.jpg">
-            <img class="w-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
+            <img class="w-full h-full object-cover rounded-sm" src="{{asset('archives/sistem/img/withoutImage.jpg')}}">
         </a>
     @endif
 

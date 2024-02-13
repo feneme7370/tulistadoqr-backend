@@ -19,7 +19,7 @@
         </x-sistem.menus.text-info>
 
     {{-- input buscador y filtro de activos --}}
-    <div class="flex flex-row flex-1 justify-evenly items-center gap-2">
+    <div class="flex flex-row flex-1 justify-evenly items-center gap-2 p-2">
         <div  class="w-full">
             <x-sistem.forms.label-form for="categorySearch" value="{{ __('Categoria') }}" />
             <x-sistem.forms.select-form wire:model.live="categorySearch" id="categorySearch">
@@ -29,6 +29,16 @@
                 @endforeach
             </x-sistem.forms.select-form>
             <x-sistem.forms.input-error for="categorySearch" />
+        </div>
+
+        <div  class="w-1/4">
+            <x-sistem.forms.label-form for="perPage" value="{{ __('Mostrar') }}" />
+            <x-sistem.forms.select-form wire:model.live="perPage" id="perPage">
+                <option value="10"> 10 </option>
+                <option value="30"> 30 </option>
+                <option value="50"> 50 </option>
+                <option value="100"> 100 </option>
+            </x-sistem.forms.select-form>
         </div>
 
     </div>
@@ -49,8 +59,8 @@
                             <th>Acciones</th>
                             <th>Imagen</th>
                             <th>Productos</th>
-                            <th>Categoria</th>
                             <th>Precio</th>
+                            <th>Categoria</th>
                             <th>Tags</th>
                             <th>Estado</th>
                         </tr>
@@ -79,11 +89,13 @@
                               </td>
 
                             <td class="text-center"><p>{{$item->name}}</p></td>
-                            <td><p>{{$item->category->level->name}} / {{$item->category->name}}</p></td>
                             
                             <td 
                                 class="text-center"                                
-                            ><p class="{{$item->price_seller ? 'text-green-800 font-bold' : 'text-orange-800'}}" >${{$item->price_seller ? number_format($item->price_seller, 2,",",".") : number_format($item->price_original, 2,",",".") }}</p></td>
+                            ><p class="{{$item->price_seller ? 'text-green-800 font-bold' : 'text-orange-800'}}" >${{$item->price_seller ? number_format($item->price_seller, 2,",",".") : number_format($item->price_original, 2,",",".") }}</p>
+                            </td>
+                            
+                            <td class="text-center"><p>{{$item->category->level->name}} / {{$item->category->name}}</p></td>
                             
                             <td class="text-center"><p>{{$item->tags->count()}}</p></td>
 
@@ -273,19 +285,20 @@
     <script>
           document.addEventListener('livewire:init', () => {
             Livewire.on('deleteProduct', (event) => {
-              Swal.fire({
-              title: 'Quieres eliminar el registro',
-              text: "Se eliminara de forma definitiva",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Se, eliminar'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                // eliminar dato
-                Livewire.dispatch('deleteProductId', {id : event})
-              }
+            Swal.fire({
+                title: 'Quieres eliminar el registro',
+                text: "Se eliminara de forma definitiva",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#7e22ce',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Si, eliminar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    // eliminar dato
+                    Livewire.dispatch('deleteProductId', {id : event})
+                    }
             })
           });
       })
@@ -305,7 +318,6 @@
             style: {
             background: "#f0fdf4",
             color: "#166534",
-            padding: "2rem",
             },
             onClick: function(){} // Callback after click
         }).showToast();

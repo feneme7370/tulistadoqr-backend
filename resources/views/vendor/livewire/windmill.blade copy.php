@@ -15,7 +15,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
 
         <!-- simple pagination -->
-        <div class=" flex-col gap-1 my-1 w-full hidden">
+        <div class="flex flex-col gap-1 my-1 w-full sm:hidden">
             <div class="flex justify-between flex-1 sm:hidden px-2 my-1">
                 <span>
     
@@ -69,12 +69,12 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
 
 
         <!-- vista completa -->
-        <div class=" flex-1 flex items-center justify-between p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 
             <!-- informacion izquierda paginacion-->
             <div>
                 <p
-                    class="text-center">
+                    class="">
                     <span>{!! __('pagination.showing') !!}</span>
                     <span class="font-medium">{{ $paginator->firstItem() }}</span>
                     <span>{!! __('pagination.to') !!}</span>

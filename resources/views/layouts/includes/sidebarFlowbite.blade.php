@@ -52,10 +52,10 @@
                             </p>
                         </div>
                         <ul class="py-1" role="none">
-                            <li>
+                            {{-- <li>
                                 <button id="darkModeToggle" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Modo Oscuro</button>
 
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ route('dashboard.index') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -266,7 +266,7 @@
     </div>
 </aside>
 
-@push('flowbite')
+{{-- @push('flowbite')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const html = document.getElementById('html');
@@ -290,4 +290,4 @@
     });
 
 </script>
-@endpush
+@endpush --}}

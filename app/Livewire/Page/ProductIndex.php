@@ -74,7 +74,7 @@ class ProductIndex extends Component
             'name' => ['required', 'string', 'min:3'],
             'slug' => ['required', 'string', 'min:3'],
             'price_original' => ['required', 'numeric', 'min:1'],
-            'price_seller' => ['nullable', 'numeric', 'min:1'],
+            'price_seller' => ['nullable', 'numeric', 'min:0'],
             'quantity' => ['nullable', 'numeric'],
             'description' => ['nullable', 'string', 'max:255'],
             'status' => ['numeric'],
@@ -182,6 +182,7 @@ class ProductIndex extends Component
 
         session()->flash('messageSuccess', 'Registro eliminado');
         $this->resetProperties();
+        $this->reset('product');
 
         $this->showDeleteModal = false;
     }
@@ -225,6 +226,7 @@ class ProductIndex extends Component
     
         // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
+        $this->price_seller = $this->price_seller == '' ? '0' : $this->price_seller ;
         $this->slug = Str::slug($this->name);
         $this->user_id = auth()->user()->id;
         $this->company_id = auth()->user()->company->id;

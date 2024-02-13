@@ -164,6 +164,7 @@ class LevelIndex extends Component
             $level->delete();
 
             $this->resetProperties();
+            $this->reset('level');
             session()->flash('messageSuccess', 'Registro eliminado');
         }
         

@@ -50,14 +50,15 @@
                             <th>Imagen</th>
                             <th>Productos</th>
                             <th>Categoria</th>
-                            <th>Precio /Tags        </th>
+                            <th>Precio</th>
+                            <th>Tags</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($products as $item)
-                        <tr wire:key="field-product-{{ Hash::make($item->id) }}">
+                        <tr>
                             
                             <td class="with-id-columns"><p>{{$item->id}}</p></td>
                             
@@ -79,7 +80,12 @@
 
                             <td class="text-center"><p>{{$item->name}}</p></td>
                             <td><p>{{$item->category->level->name}} / {{$item->category->name}}</p></td>
-                            <td class="text-center"><p>${{ number_format($item->price_original, 2,",",".") }} - ({{$item->tags->count()}})</p></td>
+                            
+                            <td 
+                                class="text-center"                                
+                            ><p class="{{$item->price_seller ? 'text-green-800 font-bold' : 'text-orange-800'}}" >${{$item->price_seller ? number_format($item->price_seller, 2,",",".") : number_format($item->price_original, 2,",",".") }}</p></td>
+                            
+                            <td class="text-center"><p>{{$item->tags->count()}}</p></td>
 
                             <td class="with-status-columns">
                                 <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
@@ -142,7 +148,7 @@
                     <div>
                         <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
                         <x-sistem.forms.input-form id="name" type="name"
-                            placeholder="{{ __('Nombre') }}" wire:model="name" autofocus />
+                            placeholder="{{ __('Nombre') }}" wire:model="name" />
                         <x-sistem.forms.input-error for="name" />
                     </div>
 
@@ -230,6 +236,7 @@
                               </div>
                               <p class="mb-1">Imagen del producto actual:</p>
                               <div class="w-64 h-64 mx-auto relative">
+                                <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                                 <x-sistem.lightbox.img-lightbox 
                                     class="h-64 max-w-96 p-1 bg-purple-200"
                                     :uri="$this->image_hero_uri" 

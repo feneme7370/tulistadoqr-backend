@@ -146,6 +146,7 @@ class CategoryIndex extends Component
     // abrir modal y recibir id
     public function openDeleteModal($id){
         $this->resetProperties();
+        $this->reset('category');
 
         $this->category = Category::findOrFail($id);
         $this->authorize('delete', $this->category); 
@@ -170,6 +171,7 @@ class CategoryIndex extends Component
             $category->delete();
             session()->flash('messageSuccess', 'Registro eliminado');
             $this->resetProperties();
+            $this->reset('category');
         }
         
         $this->showDeleteModal = false;

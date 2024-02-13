@@ -98,6 +98,7 @@ class TagIndex extends Component
 
         session()->flash('messageSuccess', 'Registro eliminado');
         $this->resetProperties();
+        $this->reset('tag');
 
         $this->showDeleteModal = false;
     }

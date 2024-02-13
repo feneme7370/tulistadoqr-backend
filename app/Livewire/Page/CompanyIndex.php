@@ -274,6 +274,7 @@ class CompanyIndex extends Component
             $company->delete();
 
             $this->resetProperties();
+            $this->reset('company');
             session()->flash('messageSuccess', 'Registro eliminado');
             
             $this->showDeleteModal = false;

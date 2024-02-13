@@ -96,6 +96,7 @@
                       </div>
                       <p class="mb-1">Imagen de portada actual:</p>
                       <div class="h-32 w-32 mx-auto relative">
+                        <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                         <x-sistem.lightbox.img-tumb-lightbox 
                             class="h-32 w-32 p-1 bg-purple-200"
                             :uri="$this->image_hero_uri" 
@@ -126,7 +127,7 @@
                           <x-sistem.spinners.loading-spinner/>
                       </div>
       
-                      <p class="mb-1">Imagen de categoria general nueva:</p>
+                      <p class="mb-1">Imagen de logo nueva:</p>
                           <x-sistem.lightbox.img-lightbox 
                               class="h-32 w-32 p-1 bg-purple-200"
                               :name="$image_logo_new->temporaryUrl()"    
@@ -137,8 +138,9 @@
                       <div wire:loading wire:target="image_logo_new">
                           <x-sistem.spinners.loading-spinner/>
                       </div>
-                      <p class="mb-1">Imagen de categoria general actual:</p>
+                      <p class="mb-1">Imagen de logo actual:</p>
                       <div class="h-32 w-32 mx-auto relative">
+                        <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                         <x-sistem.lightbox.img-lightbox 
                             class="h-32 w-32 p-1 bg-purple-200"
                             :uri="$this->image_logo_uri" 

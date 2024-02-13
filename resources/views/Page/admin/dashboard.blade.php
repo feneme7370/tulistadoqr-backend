@@ -78,7 +78,7 @@
         @can('levels.index')
             <x-sistem.cards.mini-date 
                 href="{{route('levels.index')}}" 
-                title="Niveles"
+                title="Categorias Generales"
                 :date_total="auth()->user()->company->membership->level" 
                 :date="$levels"
                 >

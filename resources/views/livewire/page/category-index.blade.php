@@ -40,7 +40,7 @@
                         <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
-                        <th>Nivel</th>
+                        <th>Categoria General</th>
                         <th>Creado por</th>
                         <th>Estado</th>
                       </tr>
@@ -48,7 +48,7 @@
                     <tbody>
             
                         @foreach ($categories as $item)
-                        <tr wire:key="field-category-{{ Hash::make($item->id) }}">
+                        <tr>
 
                           <td class="with-id-columns"><p>{{$item->id}}</p></td>
 
@@ -125,12 +125,12 @@
               <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
                 <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
-                    autofocus />
+                     />
                 <x-sistem.forms.input-error for="name" />
               </div>
 
               <div>
-                <x-sistem.forms.label-form for="level_id" value="{{ __('Nivel') }}" />
+                <x-sistem.forms.label-form for="level_id" value="{{ __('Categoria General') }}" />
                 <x-sistem.forms.select-form wire:model="level_id" id="level_id">
                     @foreach ($levels as $level)
                         <option value="{{$level->id}}">{{$level->name}}</option>
@@ -186,6 +186,7 @@
                         </div>
                         <p class="mb-1">Imagen de categoria actual:</p>
                         <div class="w-64 h-64 mx-auto relative">
+                          <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                           <x-sistem.lightbox.img-lightbox 
                               class="h-64 max-w-96 p-1 bg-purple-200"
                               :uri="$this->image_hero_uri" 

@@ -7,7 +7,7 @@
     />
       
     {{-- titulo y boton --}}
-    <x-sistem.menus.title-and-btn title="Niveles">
+    <x-sistem.menus.title-and-btn title="Categorias Generales">
 
         <x-sistem.buttons.primary-btn 
             title="Agregar" 
@@ -50,7 +50,7 @@
                     <tbody>
              
                         @foreach ($levels as $item)
-                        <tr wire:key="field-level-{{ Hash::make($item->id) }}">
+                        <tr>
 
                           <td class="with-id-columns"><p>{{$item->id}}</p></td>
                           <td class="with-actions-columns">
@@ -125,7 +125,7 @@
               <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
                 <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
-                    autofocus />
+                     />
                 <x-sistem.forms.input-error for="name" />
               </div>
                 
@@ -145,10 +145,10 @@
 
               {{-- imagen del nivel --}}
               <div class="bg-gray-100 p-1 rounded-md">
-                <h2 class="text-center font-bold text-xl">Imagen del nivel</h2>
+                <h2 class="text-center font-bold text-xl">Imagen de categoria general</h2>
         
                 <div>
-                    <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen del nivel') }}" />
+                    <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de categoria general') }}" />
                     <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_hero_new" accept="image/*"
                         />
                     <x-sistem.forms.input-error for="image_hero_new" />

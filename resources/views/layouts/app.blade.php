@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
+<html :class="{ 'theme-dark': dark }" lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <title>{{ config('app.name', 'Laravel') }}</title>
         {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
         
         <link rel="icon" type="image/x-icon" href="{{ asset('archives/sistem/img/TuMenuQR_favicon.png') }}">
         <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-
-
+        
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -36,6 +34,7 @@
     
     @stack('modals')
     @stack('lightbox')
+    @stack('flowbite')
     
     </body>
 </html>

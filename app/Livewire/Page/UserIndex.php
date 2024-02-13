@@ -142,6 +142,7 @@ class UserIndex extends Component
             
             session()->flash('messageSuccess', 'Registro eliminado');
             $this->resetProperties();
+            $this->reset('user');
         }
 
         $this->showDeleteModal = false;

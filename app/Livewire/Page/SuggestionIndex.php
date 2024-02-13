@@ -80,6 +80,8 @@ class SuggestionIndex extends Component
         $this->authorize('delete', $suggestion);
 
         $suggestion->delete();
+
+        $this->resetProperties();
         session()->flash('messageSuccess', 'Registro eliminado');
     }
 

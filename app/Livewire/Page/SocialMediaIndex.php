@@ -89,6 +89,8 @@ class SocialMediaIndex extends Component
         session()->flash('messageSuccess', 'Registro eliminado');
 
         $this->resetProperties();
+        $this->reset('social_media');
+
         $this->showDeleteModal = false;
     }
 

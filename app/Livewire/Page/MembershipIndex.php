@@ -127,6 +127,7 @@ class MembershipIndex extends Component
             $membership->delete();
             session()->flash('messageSuccess', 'Registro eliminado');
             $this->resetProperties();
+            $this->reset('membership');
         }
         
         $this->showDeleteModal = false;

@@ -26,6 +26,7 @@ class ProductIndex extends Component
     use WithPagination;
     public function updatingActive() {$this->resetPage(pageName: 'p_product');}
     public function updatingSearch() {$this->resetPage(pageName: 'p_product');}
+    public function updatingPerPage() {$this->resetPage(pageName: 'p_product');}
     public function updatingCategorySearch() {$this->resetPage(pageName: 'p_product');}
 
     // propiedades de busqueda

@@ -112,7 +112,7 @@
             <x-sistem.cards.mini-date 
                 href="{{route('tags.index')}}" 
                 title="Etiquetas" 
-                :date_total="auth()->user()->company->membership->product" 
+                :date_total="auth()->user()->company->membership->tag" 
                 :date="$tags"
                 >
                 <x-sistem.icons.hi-tag/>

@@ -39,7 +39,7 @@ class ProductController extends Controller
         $companies = Company::where('id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
         $responseCompany = CompanyResource::collection($companies);
 
-        $tags = Tag::where('id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $tags = Tag::where('id', $company->id)->orderBy('id', 'DESC')->get();
         $responseTag = TagResource::collection($tags);
 
         $array_products = [

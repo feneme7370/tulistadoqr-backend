@@ -24,6 +24,7 @@
             'fadeDuration': 100,
             'disableScrolling': true,
             'wrapAround': true,
+            
             })
         </script>
     @endpush

@@ -57,6 +57,7 @@
                     <option value="1">Menu Acordion</option>
                     <option value="2">Listado</option>
                     <option value="3">Secciones</option>
+                    <option value="4">Tabla</option>
                 </x-sistem.forms.select-form>
                 <x-sistem.forms.input-error for="type_menu" />
             </div>

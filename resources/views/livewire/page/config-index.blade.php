@@ -1,6 +1,11 @@
-<div class="w-11/12 mx-auto my-1">
+<div class="p-2 rounded-lg mx-auto my-1 dark:bg-gray-800">
     
-    <x-sistem.menus.text-info>
+    {{-- mensaje de alerta --}}
+    <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
+        :messageError="session('messageError')" 
+    />
+
+    <x-sistem.menus.text-info class="dark:text-gray-300">
         <p>Ajuste todos los datos de la empresa, cargue la imagen de portada y su logo en caso que sea una imagen. Tambien puede descargar aqui su codigo QR que redirecciona al menu digital.</p>
     </x-sistem.menus.text-info>
 
@@ -11,7 +16,7 @@
     <form class="grid grid-cols-1 gap-2 mt-2">
 
         {{-- datos de la empresa --}}
-        <h2 class="text-center font-bold text-xl">Datos de la empresa</h2>
+        <h2 class="text-center font-bold text-xl dark:text-gray-200">Datos de la empresa</h2>
 
         {{-- inputs --}}
         <div class="grid md:grid-cols-2 gap-3">
@@ -19,7 +24,7 @@
             <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
                 <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
-                    autofocus />
+                 />
                 <x-sistem.forms.input-error for="name" />
             </div>
             
@@ -65,8 +70,8 @@
         </div>
 
         {{-- imagen de portada empresa --}}
-        <div class="bg-gray-100 p-1 rounded-md">
-            <h2 class="text-center font-bold text-xl">Imagen principal de la empresa</h2>
+        <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
+            <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen principal de la empresa</h2>
     
             <div>
                 <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
@@ -85,8 +90,8 @@
                       </div>
       
                       <p class="mb-1">Imagen de portada nueva:</p>
-                          <x-sistem.lightbox.img-tumb-lightbox 
-                              class="h-32 w-32 p-1 bg-purple-200"
+                          <x-sistem.lightbox.img-lightbox 
+                              class="h-32 w-32 p-1 bg-primary-200"
                               :name="$image_hero_new->temporaryUrl()"    
                           />
                   </div>
@@ -99,7 +104,7 @@
                       <div class="h-32 w-32 mx-auto relative">
                         <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                         <x-sistem.lightbox.img-tumb-lightbox 
-                            class="h-32 w-32 p-1 bg-purple-200"
+                            class="h-32 w-32 p-1 bg-primary-200"
                             :uri="$this->image_hero_uri" 
                             :name="$this->image_hero"    
                         />
@@ -110,8 +115,8 @@
         </div>
 
         {{-- logo de la empresa --}}
-        <div class="bg-gray-100 p-1 rounded-md">
-            <h2 class="text-center font-bold text-xl">Logo de la empresa</h2>
+        <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
+            <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Logo de la empresa</h2>
             <div>
                 <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
                 <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_logo_new" accept="image/*"
@@ -130,7 +135,7 @@
       
                       <p class="mb-1">Imagen de logo nueva:</p>
                           <x-sistem.lightbox.img-lightbox 
-                              class="h-32 w-32 p-1 bg-purple-200"
+                              class="h-32 w-32 p-1 bg-primary-200"
                               :name="$image_logo_new->temporaryUrl()"    
                           />
                   </div>
@@ -143,7 +148,7 @@
                       <div class="h-32 w-32 mx-auto relative">
                         <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                         <x-sistem.lightbox.img-lightbox 
-                            class="h-32 w-32 p-1 bg-purple-200"
+                            class="h-32 w-32 p-1 bg-primary-200"
                             :uri="$this->image_logo_uri" 
                             :name="$this->image_logo"    
                         />

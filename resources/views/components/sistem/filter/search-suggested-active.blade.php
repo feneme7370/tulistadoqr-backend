@@ -7,11 +7,11 @@
             class="w-full" />
     </div>
     
-    <div class="mr-2 flex gap-2 items-center md:justify-end w-full">
+    <div class="mr-2 flex gap-2 items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
         <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model="suggested" />Destacados
     </div>
 
-    <div class="mr-2 flex gap-2 items-center md:justify-end w-full">
+    <div class="mr-2 flex gap-2 items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
         <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model="active" />Activos
     </div>
 </div>

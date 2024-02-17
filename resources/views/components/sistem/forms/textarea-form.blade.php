@@ -12,9 +12,9 @@ dark:text-gray-300
 dark:bg-gray-700
 
 focus:outline-none 
-focus:shadow-outline-purple
-focus:border-purple-400
+focus:shadow-outline-primary
+focus:border-primary-400
 focus:ring 
-focus:ring-purple-950 
+focus:ring-primary-950 
 focus:ring-offset-0
 ']) !!}  rows="4"></textarea>

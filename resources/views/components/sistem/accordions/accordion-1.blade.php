@@ -2,12 +2,12 @@
     @foreach ($categories as $category)
          
               <div class="">
-                  <p class="text-center font-bold text-purple-900 text-2xl my-4">{{$category->name}}</p>
+                  <p class="text-center font-bold text-primary-900 text-2xl my-4">{{$category->name}}</p>
 
                   {{-- accordion --}}
                   @foreach ($category->subcategories as $subcategory)
                   <div class="max-w-2xl my-1 mx-auto">
-                      <div class="bg-white rounded-xl border-2 border-purple-100">
+                      <div class="bg-white rounded-xl border-2 border-primary-100">
                           <div class="accordion-header py-2 px-6 cursor-pointer flex items-center justify-between p-3">
                               <span class="font-semibold text-lg">{{$subcategory->name}}</span>
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -23,7 +23,7 @@
                                       <p class="text-sm text-gray-600">{{$product->description}}</p>
                                   </div>
                                   <div>
-                                      <p class="font-extrabold text-purple-700">${{ number_format($product->price, 2,",",".") }}</p>
+                                      <p class="font-extrabold text-primary-700">${{ number_format($product->price, 2,",",".") }}</p>
                                   </div>
                               </div>
                               @endforeach

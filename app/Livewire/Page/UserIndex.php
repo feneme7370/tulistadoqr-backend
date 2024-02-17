@@ -210,9 +210,11 @@ class UserIndex extends Component
 
         } else {
 
-            User::create(
+            $userCreated = User::create(
                 $this->only(['name', 'slug', 'email', 'password', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id'])
             );
+
+            $userCreated->assignRole(['employee']);
 
             $this->reset(['user']);
             $this->resetProperties();

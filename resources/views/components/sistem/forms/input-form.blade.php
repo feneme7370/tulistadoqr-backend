@@ -11,10 +11,10 @@ dark:focus:shadow-outline-gray
 dark:text-gray-300
 dark:bg-gray-700
 
-focus:border-purple-400 
+focus:border-primary-400 
 focus:outline-none  
-focus:shadow-outline-purple 
+focus:shadow-outline-primary 
 focus:ring 
-focus:ring-purple-950 
+focus:ring-primary-950 
 focus:ring-offset-0
 ']) !!}>

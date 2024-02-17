@@ -18,12 +18,12 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased transition-all duration-300 ease-in-out" id="body">
+    <body class="font-sans antialiased transition-all duration-300 ease-in-out dark:bg-gray-300" id="body">
 
         @include('layouts.includes.sidebarFlowbite')
 
         <!-- Page Content -->
-        <main class="p-4 sm:ml-64 pt-20">
+        <main class="p-4 sm:ml-64 pt-20 ">
             {{ $slot }}
         </main>
 

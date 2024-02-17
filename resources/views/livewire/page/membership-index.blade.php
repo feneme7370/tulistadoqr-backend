@@ -94,7 +94,7 @@
             <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
 
             <x-sistem.buttons.delete-btn wire:click="deleteMembership()" wire:loading.attr="disabled"
-            title="Borrar" autofocus/>
+            title="Borrar" />
         </x-slot>
     </x-sistem.modal.dialog-modal>
 
@@ -112,7 +112,7 @@
             <div>
               <x-sistem.forms.label-form for="name" value="{{ __('Nombre de la membresia') }}" />
               <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
-                  autofocus />
+                   />
               <x-sistem.forms.input-error for="name" />
             </div>
             

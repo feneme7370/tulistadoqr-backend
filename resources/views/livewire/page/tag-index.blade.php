@@ -6,6 +6,7 @@
 
     {{-- titulo y boton --}}
     <x-sistem.menus.title-and-btn title="Etiquetas">
+
         <x-sistem.buttons.primary-btn 
             title="Agregar" 
             wire:click="createActionModal" 
@@ -24,7 +25,7 @@
 
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.search-only />
-    <x-sistem.spinners.loading-spinner wire:loading wire:target="search"/>
+    <x-sistem.spinners.loading-spinner wire:loading wire:target="search" />
 
     {{-- listado --}}
     <div class="mx-auto">
@@ -88,7 +89,7 @@
             <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
 
             <x-sistem.buttons.delete-btn wire:click="deleteTag" wire:loading.attr="disabled"
-            title="Borrar" autofocus/>
+            title="Borrar" />
         </x-slot>
     </x-sistem.modal.dialog-modal>
 
@@ -105,7 +106,7 @@
               <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
                 <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
-                    autofocus />
+                     />
                 <x-sistem.forms.input-error for="name" />
               </div>
 

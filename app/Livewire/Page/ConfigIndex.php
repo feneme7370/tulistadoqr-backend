@@ -98,7 +98,12 @@ class ConfigIndex extends Component
     
     public function downloadQR(){
         $path = 'archives/images/QR/' . $this->image_qr;
-        return response()->download(public_path($path));
+        if(File::exists($path)){
+            return response()->download(public_path($path));
+        }else{
+            session()->flash('messageError', 'Solicitar imagen QR a femaser');
+        }
+
     }
 
     ///////////////////////////// MODULO CARGA DE DATOS /////////////////////////////

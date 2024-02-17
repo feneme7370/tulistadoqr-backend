@@ -19,31 +19,51 @@
         </x-sistem.menus.text-info>
 
     {{-- input buscador y filtro de activos --}}
-    <div class="flex flex-row flex-1 justify-evenly items-center gap-2 p-2">
-        <div  class="w-full">
-            <x-sistem.forms.label-form for="categorySearch" value="{{ __('Categoria') }}" />
-            <x-sistem.forms.select-form wire:model.live="categorySearch" id="categorySearch">
-                <option value=""> Todos </option>
-                @foreach ($categories as $category)
-                    <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
-                @endforeach
-            </x-sistem.forms.select-form>
-            <x-sistem.forms.input-error for="categorySearch" />
-        </div>
+    {{-- <div class="flex flex-row flex-1 justify-evenly items-center gap-2 p-2"> --}}
+        <x-sistem.filter.bg-input class="flex-row flex-1">
+        
+            <div  class="w-full">
+                <x-sistem.forms.label-form for="categorySearch" value="{{ __('Categoria') }}" />
+                <x-sistem.forms.select-form wire:model.live="categorySearch" id="categorySearch">
+                    <option value=""> Todos </option>
+                    @foreach ($categories as $category)
+                        <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
+                    @endforeach
+                </x-sistem.forms.select-form>
+                <x-sistem.forms.input-error for="categorySearch" />
+            </div>
+    
+            <div  class="w-1/4">
+                <x-sistem.forms.label-form for="perPage" value="{{ __('Mostrar') }}" />
+                <x-sistem.forms.select-form wire:model.live="perPage" id="perPage">
+                    <option value="10"> 10 </option>
+                    <option value="30"> 30 </option>
+                    <option value="50"> 50 </option>
+                    <option value="100"> 100 </option>
+                </x-sistem.forms.select-form>
+            </div>
+        </x-sistem.filter.bg-input>
 
-        <div  class="w-1/4">
-            <x-sistem.forms.label-form for="perPage" value="{{ __('Mostrar') }}" />
-            <x-sistem.forms.select-form wire:model.live="perPage" id="perPage">
-                <option value="10"> 10 </option>
-                <option value="30"> 30 </option>
-                <option value="50"> 50 </option>
-                <option value="100"> 100 </option>
-            </x-sistem.forms.select-form>
-        </div>
+        <x-sistem.filter.bg-input class="flex-row flex-1">
+        
+            <div class="w-full">
+                <x-sistem.forms.input-form 
+                    wire:model.live.debounce.600ms="search" 
+                    type="search" 
+                    placeholder="Buscar por nombre o categoria" 
+                    class="w-full" />
+            </div>
+            <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
+                <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />Solo activos
+            </div>
+            <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
+                <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />En oferta
+            </div>
+        </x-sistem.filter.bg-input>
 
-    </div>
+    {{-- </div> --}}
 
-    <x-sistem.filter.search-active placeholder="Buscar por nombre, nivel o categoria" />
+    {{-- <x-sistem.filter.search-active placeholder="Buscar por nombre, nivel o categoria" /> --}}
 
     <x-sistem.spinners.loading-spinner wire:loading wire:target="search, level_search, categorySearch"/>
 
@@ -137,7 +157,7 @@
                 title="Cancelar" />
 
             <x-sistem.buttons.delete-btn wire:click="deleteProduct" wire:loading.attr="disabled"
-                title="Borrar" autofocus />
+                title="Borrar" />
         </x-slot>
     </x-sistem.modal.dialog-modal>
 
@@ -216,8 +236,8 @@
 
 
                 {{-- imagen de portada empresa --}}
-                <div class="bg-gray-100 p-1 rounded-md">
-                    <h2 class="text-center font-bold text-xl">Imagen del producto</h2>
+                <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
+                    <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen del producto</h2>
             
                     <div>
                         <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen del producto') }}" />
@@ -237,7 +257,7 @@
               
                               <p class="mb-1">Imagen del producto nueva:</p>
                                   <x-sistem.lightbox.img-lightbox 
-                                      class="h-64 max-w-96 p-1 bg-purple-200"
+                                      class="h-64 max-w-96 p-1 bg-primary-200"
                                       :name="$image_hero_new->temporaryUrl()"    
                                   />
                           </div>
@@ -250,7 +270,7 @@
                               <div class="w-64 h-64 mx-auto relative">
                                 <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                                 <x-sistem.lightbox.img-lightbox 
-                                    class="h-64 max-w-96 p-1 bg-purple-200"
+                                    class="h-64 max-w-96 p-1 bg-primary-200"
                                     :uri="$this->image_hero_uri" 
                                     :name="$this->image_hero"    
                                 />

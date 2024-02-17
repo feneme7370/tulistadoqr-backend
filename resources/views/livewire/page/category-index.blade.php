@@ -109,7 +109,7 @@
             <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
 
             <x-sistem.buttons.delete-btn wire:click="deleteCategory()" wire:loading.attr="disabled"
-            title="Borrar" autofocus/>
+            title="Borrar"/>
         </x-slot>
     </x-sistem.modal.dialog-modal>
 
@@ -154,8 +154,8 @@
               </div>
 
               {{-- imagen de categoria --}}
-              <div class="bg-gray-100 p-1 rounded-md">
-                <h2 class="text-center font-bold text-xl">Imagen de categoria</h2>
+              <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
+                <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen de categoria</h2>
         
                 <div>
                     <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de categoria') }}" />
@@ -175,7 +175,7 @@
         
                         <p class="mb-1">Imagen de categoria nueva:</p>
                             <x-sistem.lightbox.img-lightbox 
-                                class="h-64 max-w-96 p-1 bg-purple-200"
+                                class="h-64 max-w-96 p-1"
                                 :name="$image_hero_new->temporaryUrl()"    
                             />
                     </div>
@@ -188,7 +188,7 @@
                         <div class="w-64 h-64 mx-auto relative">
                           <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
                           <x-sistem.lightbox.img-lightbox 
-                              class="h-64 max-w-96 p-1 bg-purple-200"
+                              class="h-64 max-w-96 p-1"
                               :uri="$this->image_hero_uri" 
                               :name="$this->image_hero"    
                           />

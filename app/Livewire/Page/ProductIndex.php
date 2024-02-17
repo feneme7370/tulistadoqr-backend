@@ -27,11 +27,12 @@ class ProductIndex extends Component
     public function updatingActive() {$this->resetPage(pageName: 'p_product');}
     public function updatingSearch() {$this->resetPage(pageName: 'p_product');}
     public function updatingPerPage() {$this->resetPage(pageName: 'p_product');}
+    public function updatingOffers() {$this->resetPage(pageName: 'p_product');}
     public function updatingCategorySearch() {$this->resetPage(pageName: 'p_product');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
-    public $categorySearch;
+    public $categorySearch, $offers = false;
 
     // mostrar variables en queryString
     protected function queryString(){
@@ -319,6 +320,9 @@ class ProductIndex extends Component
                         })
                         ->when($this->active, function( $query) {
                             return $query->where('status', 1);
+                        })
+                        ->when($this->offers, function( $query) {
+                            return $query->where('price_seller', '!=' , '0');
                         })
                         ->when($this->categorySearch, function( $query) {
                             return $query->where('category_id', $this->categorySearch);

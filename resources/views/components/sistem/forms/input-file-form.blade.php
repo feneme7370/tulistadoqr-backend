@@ -4,11 +4,12 @@
     <input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => '
 
     block w-full 
-    text-sm form-input text-gray-900  bg-white rounded-lg shadow-md
+    text-sm form-input text-gray-900 rounded-lg shadow-md
     my-1 p-2 
     cursor-pointer
     border border-gray-300
-    bg-gray-50
+    
+    bg-gray-50 dark:bg-300
 
     dark:border-gray-600
     dark:focus:shadow-outline-gray
@@ -16,11 +17,11 @@
     dark:bg-gray-700
 
     dark:placeholder-gray-400
-    focus:border-purple-400 
+    focus:border-primary-400 
     focus:outline-none  
-    focus:shadow-outline-purple 
+    focus:shadow-outline-primary 
     focus:ring 
-    focus:ring-purple-950 
+    focus:ring-primary-950 
     focus:ring-offset-0
     ']) !!}>
 

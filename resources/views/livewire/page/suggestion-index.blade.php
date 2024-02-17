@@ -33,7 +33,7 @@
             title="Agregar"
             wire:click="save" 
             wire:loading.attr="disabled" 
-            autofocus>
+            >
             @slot('icon')
                 <x-sistem.icons.hi-plus-circle/>
             @endslot

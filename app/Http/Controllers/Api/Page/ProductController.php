@@ -27,6 +27,9 @@ class ProductController extends Controller
         $products = Product::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
         $responseProducts = ProductResource::collection($products);
 
+        $offers = Product::where('company_id', $company->id)->where('status', 1)->where('price_seller', '!=', 0)->orderBy('id', 'DESC')->get();
+        $responseOffers = ProductResource::collection($offers);
+
         $suggestions = Suggestion::where('company_id', $company->id)->orderBy('id', 'DESC')->get();
         $responseSuggestions = SuggestionResource::collection($suggestions);
 
@@ -48,7 +51,8 @@ class ProductController extends Controller
             'responseLevels' => $responseLevels,
             'responseCategories' => $responseCategories,
             'responseCompany' => $responseCompany,
-            'responseTag' => $responseTag
+            'responseTag' => $responseTag,
+            'responseOffers' => $responseOffers,
 
         ];
         return $array_products;

@@ -48,7 +48,7 @@ class CompanySeeder extends Seeder
             'type_menu' => '1',
             'image_logo' => '1_1_1707777476_UcXnFVS.jpg',
             'image_logo_uri' => 'archives/images/2/logos/',
-            'image_hero' => '1_1_1707776999_pcBZ8P5.jpg',
+            'image_hero' => '2_2_1708134332_Vu4gtWB.jpg',
             'image_hero_uri' => 'archives/images/2/heros/',
             'image_qr' => '1_1_1707777476_wcCxNmF.jpg',
             'image_qr_uri' => 'archives/images/2/qrs/',

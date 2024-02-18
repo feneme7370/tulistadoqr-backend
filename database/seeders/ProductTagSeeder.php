@@ -13,6 +13,6 @@ class ProductTagSeeder extends Seeder
      */
     public function run(): void
     {
-        ProductTag::factory(120)->create();
+        // ProductTag::factory(120)->create();
     }
 }

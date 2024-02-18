@@ -72,7 +72,7 @@
 
     {{-- Paginacion --}}
     <div class="mt-2">
-        {{ $tags->onEachSide(1)->links() }}
+        {{ $tags->links() }}
     </div>
 
     <!-- Modal para borrar -->
@@ -120,47 +120,50 @@
         </x-slot>
     </x-sistem.modal.dialog-modal>
 
-    @push('scripts')
-    <script>
-          document.addEventListener('livewire:init', () => {
-            Livewire.on('deleteTag', (event) => {
-              Swal.fire({
-                title: 'Quieres eliminar el registro',
-                text: "Se eliminara de forma definitiva",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#7e22ce',
-                cancelButtonText: 'Cancelar',
-                confirmButtonText: 'Si, eliminar'
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    // eliminar dato
-                    Livewire.dispatch('deleteTagId', {id : event})
-                  }
-                })
-          });
-      })
-    </script>
-
-    <script>
-      Livewire.on('toastifyTag', (mensaje) => {
-        Toastify({
-          text: mensaje,
-          duration: 4000,
-          // destination: "https://github.com/apvarun/toastify-js",
-          newWindow: true,
-          close: true,
-          gravity: "top", // `top` or `bottom`
-          position: "right", // `left`, `center` or `right`
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          style: {
-            background: "#f0fdf4",
-            color: "#166534",
-          },
-          onClick: function(){} // Callback after click
-        }).showToast();
-      })
-    </script>
-    @endpush
+    <div>
+      @push('scripts')
+      <script>
+            document.addEventListener('livewire:init', () => {
+              Livewire.on('deleteTag', (event) => {
+                Swal.fire({
+                  title: 'Quieres eliminar el registro',
+                  text: "Se eliminara de forma definitiva",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#d33',
+                  cancelButtonColor: '#7e22ce',
+                  cancelButtonText: 'Cancelar',
+                  confirmButtonText: 'Si, eliminar'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      // eliminar dato
+                      Livewire.dispatch('deleteTagId', {id : event})
+                    }
+                  })
+            });
+        })
+      </script>
+  
+      <script>
+        Livewire.on('toastifyTag', (mensaje) => {
+          Toastify({
+            text: mensaje,
+            duration: 4000,
+            // destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "#f0fdf4",
+              color: "#166534",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+        })
+      </script>
+      @endpush
+    </div>
+    </div>
 </div>

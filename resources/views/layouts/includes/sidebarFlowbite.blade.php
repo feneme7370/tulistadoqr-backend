@@ -226,7 +226,7 @@
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
-            @can('tags.index')
+            {{-- @can('tags.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
                     href="{{ route('tags.index') }}"
                     :active="request()->routeIs('tags.index')"
@@ -234,7 +234,7 @@
                 >
                     <x-sistem.icons.hi-tag/>
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
-            @endcan
+            @endcan --}}
 
             @can('suggestions.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite

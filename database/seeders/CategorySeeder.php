@@ -145,7 +145,7 @@ class CategorySeeder extends Seeder
             'company_id' => 2,
         ]);
 
-
+        // id 11
         Category::create([
             'name' => 'Gaseosas',
             'slug' => Str::slug('Gaseosas'),
@@ -157,6 +157,8 @@ class CategorySeeder extends Seeder
             'user_id' => 3,
             'company_id' => 3,
         ]);
+
+        // id 12
         Category::create([
             'name' => 'Agua Savorizada',
             'slug' => Str::slug('Agua Savorizada'),
@@ -168,6 +170,8 @@ class CategorySeeder extends Seeder
             'user_id' => 3,
             'company_id' => 3,
         ]);
+
+        // id 13
         Category::create([
             'name' => 'Vinos',
             'slug' => Str::slug('Vinos'),
@@ -180,7 +184,7 @@ class CategorySeeder extends Seeder
             'company_id' => 3,
         ]);
         
-        
+        // id 14
         Category::create([
             'name' => 'Pizzas',
             'slug' => Str::slug('Pizzas'),
@@ -192,6 +196,8 @@ class CategorySeeder extends Seeder
             'user_id' => 3,
             'company_id' => 3,
         ]);
+
+        // id 15
         Category::create([
             'name' => 'Hamburguesas',
             'slug' => Str::slug('Hamburguesas'),
@@ -203,6 +209,8 @@ class CategorySeeder extends Seeder
             'user_id' => 3,
             'company_id' => 3,
         ]);
+
+        // id 16
         Category::create([
             'name' => 'Milanesas',
             'slug' => Str::slug('Milanesas'),
@@ -214,6 +222,8 @@ class CategorySeeder extends Seeder
             'user_id' => 3,
             'company_id' => 3,
         ]);
+
+        // id 17
         Category::create([
             'name' => 'Papas Fritas',
             'slug' => Str::slug('Papas Fritas'),
@@ -225,6 +235,8 @@ class CategorySeeder extends Seeder
             'user_id' => 3,
             'company_id' => 3,
         ]);
+
+        // id 18
         Category::create([
             'name' => 'Picada',
             'slug' => Str::slug('Picada'),
@@ -236,6 +248,8 @@ class CategorySeeder extends Seeder
             'user_id' => 3,
             'company_id' => 3,
         ]);
+
+        // id 19
         Category::create([
             'name' => 'Tallarines',
             'slug' => Str::slug('Tallarines'),
@@ -244,6 +258,32 @@ class CategorySeeder extends Seeder
             'image_hero_uri' => 'archives/images/3/categories/',
             'image_hero' => 'tallarines.jpg',
             'level_id' => 4,
+            'user_id' => 3,
+            'company_id' => 3,
+        ]);
+        
+        // id 20
+        Category::create([
+            'name' => 'Sandwich',
+            'slug' => Str::slug('Sandwich'),
+            'description' => 'Ponele lo que quieras',
+            'status' => 1,
+            'image_hero_uri' => 'archives/images/3/categories/',
+            'image_hero' => 'sandwich.jpg',
+            'level_id' => 4,
+            'user_id' => 3,
+            'company_id' => 3,
+        ]);
+        
+        // id 21
+        Category::create([
+            'name' => 'Postres',
+            'slug' => Str::slug('Postres'),
+            'description' => 'Termina la comida de la mejor forma',
+            'status' => 1,
+            'image_hero_uri' => 'archives/images/3/categories/',
+            'image_hero' => 'tallarines.jpg',
+            'level_id' => 5,
             'user_id' => 3,
             'company_id' => 3,
         ]);

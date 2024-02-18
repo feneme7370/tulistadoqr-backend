@@ -82,11 +82,11 @@
             </tbody>
           </table>
         </div>
-      </div>
+    </div>
 
     {{-- Paginacion --}}
     <div class="mt-2">
-        {{ $suggestions->onEachSide(1)->links() }}
+        {{ $suggestions->links() }}
     </div>
 
 </div>

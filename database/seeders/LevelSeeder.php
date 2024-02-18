@@ -27,7 +27,7 @@ class LevelSeeder extends Seeder
                 'company_id' => 2,
             ]);
 
-            // id 2
+        // id 2
         Level::create([
                 'name' => 'Comidas',
                 'slug' => Str::slug('Comidas'),
@@ -39,8 +39,7 @@ class LevelSeeder extends Seeder
                 'company_id' => 2,
             ]);
 
-
-
+        // id 3
         Level::create([
                 'name' => 'Bebidas',
                 'slug' => Str::slug('Bebidas'),
@@ -51,6 +50,8 @@ class LevelSeeder extends Seeder
                 'user_id' => 2,
                 'company_id' => 2,
             ]);
+
+        // id 4
         Level::create([
                 'name' => 'Comidas',
                 'slug' => Str::slug('Comidas'),
@@ -61,6 +62,8 @@ class LevelSeeder extends Seeder
                 'user_id' => 2,
                 'company_id' => 2,
             ]);
+
+        // id 5
         Level::create([
                 'name' => 'Postres',
                 'slug' => Str::slug('Postres'),

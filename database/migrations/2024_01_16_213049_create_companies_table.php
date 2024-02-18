@@ -21,15 +21,18 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('social')->nullable();
             $table->string('url')->nullable();
+            $table->longText('short_description')->nullable();
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->nullable()->default(1);
             $table->string('type_menu')->nullable();
+
             $table->string('image_qr_uri')->nullable();
             $table->string('image_qr')->nullable();
             $table->string('image_logo_uri')->nullable();
             $table->string('image_logo')->nullable();
             $table->string('image_hero_uri')->nullable();
             $table->string('image_hero')->nullable();
+            
             $table->foreignId('membership_id')->constrained()->onUpdate('cascade')->restrictOnDelete();
             $table->timestamps();
         });

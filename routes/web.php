@@ -13,6 +13,7 @@ use App\Http\Controllers\Page\ProductController;
 use App\Http\Controllers\Page\SocialMediaController;
 use App\Http\Controllers\Page\SuggestionController;
 use App\Http\Controllers\Page\TagController;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 /*
 |--------------------------------------------------------------------------

@@ -20,7 +20,6 @@ class DashboardController extends Controller
         // $products = Product::where('company_id', auth()->user()->company_id)->count();   
         // $suggested = Suggested::where('company_id', auth()->user()->company_id)->count();   
         
-        
         $companies = Company::count();
         $memberships = Membership::count();
         $users = User::count();   

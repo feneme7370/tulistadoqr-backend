@@ -287,7 +287,8 @@ class CategoryIndex extends Component
     public function render()
     {
         $levels = Level::where('company_id', auth()->user()->company->id)->get();
-        $categories = Category::where('company_id', auth()->user()->company_id)
+        $categories = Category::with(['user', 'level'])
+                        ->where('company_id', auth()->user()->company_id)
                         ->when( $this->search, function($query) {
                             return $query->where(function( $query) {
                                 $query->where('name', 'like', '%'.$this->search . '%');

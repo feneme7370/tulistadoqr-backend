@@ -117,8 +117,9 @@ class SuggestionIndex extends Component
         $products = Product::where('company_id', auth()->user()->company_id)
                         ->orderBy('name', 'ASC')->get();
 
-        $suggestions = Suggestion::where('company_id', auth()->user()->company_id)
-        ->paginate($this->perPage, pageName: 'p_suggestion');
+        $suggestions = Suggestion::with('product')
+                        ->where('company_id', auth()->user()->company_id)
+                        ->paginate($this->perPage, pageName: 'p_suggestion');
         
         return view('livewire.page.suggestion-index', compact('suggestions', 'products'));
     }

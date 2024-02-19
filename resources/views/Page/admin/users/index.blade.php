@@ -1,5 +1,5 @@
 <x-app-layout>
 
-    <livewire:page.user-index> 
+    <livewire:page.user-index />
 
 </x-app-layout>

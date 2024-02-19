@@ -302,14 +302,16 @@ class ProductIndex extends Component
     // renderizar vista
     public function render()
     {
-        $categories = Category::where('company_id', auth()->user()->company_id)
+        $categories = Category::with('level')
+                        ->where('company_id', auth()->user()->company_id)
                         ->orderBy('level_id', 'DESC')->get();
 
         $tags = Tag::where('company_id', auth()->user()->company_id)->get();
 
         $levels = Level::where('company_id', auth()->user()->company_id)->get();
 
-        $products = Product::where('company_id', auth()->user()->company_id)
+        $products = Product::with('category', 'category.level', 'tags')
+                        ->where('company_id', auth()->user()->company_id)
                         ->when( $this->search, function($query) {
                             return $query->where(function( $query) {
                                 $query->where('name', 'like', '%'.$this->search . '%')

@@ -7,7 +7,7 @@
     </a>
     
 
-    @push('lightbox')
+    @push('scripts')
         <script>
             lightbox.option({
             'alwaysShowNavOnTouchDevices': true,

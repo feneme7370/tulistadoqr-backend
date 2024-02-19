@@ -9,14 +9,17 @@
         {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
         
         <link rel="icon" type="image/x-icon" href="{{ asset('archives/sistem/img/TuMenuQR_favicon.png') }}">
-        <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
-        <link rel="stylesheet" href="{{asset('lib/toastify/toastify.css')}}">
+
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
         <!-- Styles -->
         @livewireStyles
+
+        <!-- libs -->
+        <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
+        <link rel="stylesheet" href="{{asset('lib/toastify/toastify.css')}}">
     </head>
     <body class="font-sans antialiased transition-all duration-300 ease-in-out dark:bg-gray-300" id="body">
 
@@ -30,14 +33,14 @@
     </div>
 
     @livewireScripts
+
+    <!-- libs -->
     <script src="{{asset('lib/flowbite/flowbite.min.js')}}"></script>
     <script src="{{asset('lib/lightbox/js/lightbox-plus-jquery.min.js')}}"></script>
     <script src="{{asset('lib/sweetalert2/sweetalert2.all.min.js')}}"></script>
     <script src="{{asset('lib/toastify/toastify.js')}}"></script>
     
     @stack('modals')
-    @stack('lightbox')
-    @stack('flowbite')
     @stack('scripts')
     
     </body>

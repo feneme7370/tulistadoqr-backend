@@ -49,6 +49,8 @@ class CompanyIndex extends Component
     public $city;
     public $social;
     public $url;
+    public $times_description;
+    public $short_description;
     public $description;
     public $status;
     public $image_qr;
@@ -81,6 +83,8 @@ class CompanyIndex extends Component
             'city' => ['nullable', 'string', 'min:2'],
             'social' => ['nullable', 'string', 'min:2'],
             'url' => ['nullable', 'string', 'min:2'],
+            'times_description' => ['nullable', 'string', 'min:2'],
+            'short_description' => ['nullable', 'string', 'min:2'],
             'description' => ['nullable', 'string', 'min:2'],
             'image_qr' => ['nullable', 'string'],
             'image_qr_uri' => ['nullable', 'string'],
@@ -106,6 +110,8 @@ class CompanyIndex extends Component
         'city' => 'ciudad',
         'social' => 'redes sociales',
         'url' => 'url',
+        'times_description' => 'breve descripcion de los horarios',
+        'short_description' => 'breve descripcion',
         'description' => 'descripcion',
         'image_qr' => 'imagen del qr',
         'image_qr_uri' => 'uri imagen del qr',
@@ -131,6 +137,8 @@ class CompanyIndex extends Component
             'city',
             'social',
             'url',
+            'times_description',
+            'short_description',
             'description',
             'status',
             'image_qr',
@@ -305,6 +313,8 @@ class CompanyIndex extends Component
         $this->city = $company['city'];
         $this->social = $company['social'];
         $this->url = $company['url'];
+        $this->times_description = $company['times_description'];
+        $this->short_description = $company['short_description'];
         $this->description = $company['description'];
         $this->image_qr = $company['image_qr'];
         $this->image_qr_uri = $company['image_qr_uri'];
@@ -346,7 +356,7 @@ class CompanyIndex extends Component
         if( isset( $this->company['id'])) {
 
             $this->company->update(
-                $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_qr_uri', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri', 'status', 'membership_id'])
+                $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'times_description', 'short_description', 'description', 'image_qr', 'image_qr_uri', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri', 'status', 'membership_id'])
             );
 
             $this->reset(['company']);
@@ -356,7 +366,7 @@ class CompanyIndex extends Component
         } else {
 
             Company::create(
-                $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'description', 'image_qr', 'image_qr_uri', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri', 'status', 'membership_id'])
+                $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'url', 'times_description', 'short_description', 'description', 'image_qr', 'image_qr_uri', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri', 'status', 'membership_id'])
             );
 
             $this->reset(['company']);

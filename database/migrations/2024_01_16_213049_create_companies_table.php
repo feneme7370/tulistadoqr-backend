@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('social')->nullable();
             $table->string('url')->nullable();
+            $table->longText('times_description')->nullable();
             $table->longText('short_description')->nullable();
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->nullable()->default(1);

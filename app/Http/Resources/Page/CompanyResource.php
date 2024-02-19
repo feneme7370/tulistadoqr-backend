@@ -24,6 +24,8 @@ class CompanyResource extends JsonResource
             'city' => $this->city,
             'social' => $this->social,
             'url' => $this->url,
+            'times_description' => $this->times_description,
+            'short_description' => $this->short_description,
             'description' => $this->description,
             'status' => $this->status,
             'type_menu' => $this->type_menu,

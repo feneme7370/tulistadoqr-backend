@@ -78,12 +78,26 @@
                 </div>
                 
             </div>
+            {{-- breve descripcion --}}
+            <div>
+                <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
+                <x-sistem.forms.textarea-form id="short_description" placeholder="{{ __('Ingrese una breve descripcion') }}"
+                    wire:model="short_description" />
+                <x-sistem.forms.input-error for="short_description" />
+            </div>
             {{-- descripcion --}}
             <div>
                 <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
-                <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Ingrese una breve descripcion') }}"
+                <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Ingrese una descripcion') }}"
                     wire:model="description" />
                 <x-sistem.forms.input-error for="description" />
+            </div>
+            {{-- descripcion de horarios --}}
+            <div>
+                <x-sistem.forms.label-form for="times_description" value="{{ __('Descripcion de horarios') }}" />
+                <x-sistem.forms.textarea-form id="times_description" placeholder="{{ __('Ej. Lunes a Jueves 10:00 a 22:00 - Viernes a Domingo 10:00 a 11:30') }}"
+                    wire:model="times_description" />
+                <x-sistem.forms.input-error for="times_description" />
             </div>
 
         </div>

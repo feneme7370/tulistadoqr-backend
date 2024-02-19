@@ -11,7 +11,7 @@ class GuestController extends Controller
 {
     public function index()
     {
-        $company = Company::where('id', 1)->first();
+        $company = Company::with('socialMedia')->where('id', 1)->first();
         $memberships = Membership::all();
         // dd($company->socialMedia[0]->pivot->url);
         return view('Page.guest.home', compact(

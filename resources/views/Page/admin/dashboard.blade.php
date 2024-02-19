@@ -22,7 +22,7 @@
     </div>
     
     {{-- portada y logo --}}
-    <div class="flex justify-center items-center gap-3 mb-2>
+    <div class="flex justify-center items-center gap-3 mb-2">
 
         <div class="relative">
             <x-sistem.lightbox.img-tumb-lightbox 

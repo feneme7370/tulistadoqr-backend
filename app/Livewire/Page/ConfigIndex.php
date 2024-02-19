@@ -31,6 +31,8 @@ class ConfigIndex extends Component
     public $adress;
     public $city;
     public $social;
+    public $times_description;
+    public $short_description;
     public $description;
     public $type_menu;
     public $image_qr;
@@ -64,6 +66,8 @@ class ConfigIndex extends Component
             'adress' => ['nullable', 'string', 'min:2'],
             'city' => ['nullable', 'string', 'min:2'],
             'social' => ['nullable', 'string', 'min:2'],
+            'times_description' => ['nullable', 'string', 'min:2'],
+            'short_description' => ['nullable', 'string', 'min:2'],
             'description' => ['nullable', 'string', 'min:2'],
             'type_menu' => ['nullable', 'numeric'],
             'image_logo' => ['nullable', 'string'],
@@ -84,6 +88,8 @@ class ConfigIndex extends Component
         'adress' => 'direccion',
         'city' => 'ciudad',
         'social' => 'redes sociales',
+        'times_description' => 'descripcion de horarios',
+        'short_description' => 'breve descripcion',
         'description' => 'descripcion',
         'type_menu' => 'tipo de menu',
         'image_logo' => 'imagen del logo',
@@ -97,8 +103,9 @@ class ConfigIndex extends Component
     ///////////////////////////// MODULO UTILIDADES /////////////////////////////
     
     public function downloadQR(){
-        $path = 'archives/images/QR/' . $this->image_qr;
+        $path = 'archives/images/' . $this->company->id . '/qrs/'. $this->image_qr;
         if(File::exists($path)){
+            redirect()->route('dashboard.index');
             return response()->download(public_path($path));
         }else{
             session()->flash('messageError', 'Solicitar imagen QR a femaser');
@@ -127,6 +134,8 @@ class ConfigIndex extends Component
         $this->adress = $company['adress'];
         $this->city = $company['city'];
         $this->social = $company['social'];
+        $this->times_description = $company['times_description'];
+        $this->short_description = $company['short_description'];
         $this->description = $company['description'];
         $this->type_menu = $company['type_menu'];
         $this->image_qr = $company['image_qr'];
@@ -243,7 +252,7 @@ class ConfigIndex extends Component
         }
 
         $this->company->update(
-            $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'description', 'type_menu', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri'])
+            $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'times_description', 'short_description', 'description', 'type_menu', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri'])
         );
 
         $this->updateSocialMedia();

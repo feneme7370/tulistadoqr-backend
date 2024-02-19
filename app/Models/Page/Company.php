@@ -20,6 +20,8 @@ class Company extends Model
         'city',
         'social',
         'url',
+        'short_description',
+        'times_description',
         'description',
         'status',
         'type_menu',

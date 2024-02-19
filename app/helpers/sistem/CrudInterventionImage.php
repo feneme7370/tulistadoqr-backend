@@ -51,8 +51,8 @@ class CrudInterventionImage
         });
 
         // guardar imagenes
-        $image_hero->save($path . $filename, 70);
-        $image_hero_tumb->save($path . $filename_tumb, 70);
+        $image_hero->save($path . $filename, 80);
+        $image_hero_tumb->save($path . $filename_tumb, 95);
         
         // retornar el nombre sin el tumb
         return [$filename, $path];

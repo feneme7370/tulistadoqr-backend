@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Page\CategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Page\CategoryController;
 use App\Http\Controllers\Page\GuestController;
 use App\Http\Controllers\Page\DashboardController;
 use App\Http\Controllers\Page\CompanyController;
@@ -13,7 +13,6 @@ use App\Http\Controllers\Page\ProductController;
 use App\Http\Controllers\Page\SocialMediaController;
 use App\Http\Controllers\Page\SuggestionController;
 use App\Http\Controllers\Page\TagController;
-use Barryvdh\Debugbar\Facades\Debugbar;
 
 /*
 |--------------------------------------------------------------------------

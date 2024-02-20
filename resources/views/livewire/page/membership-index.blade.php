@@ -166,6 +166,13 @@
             </div>
                 
             <div>
+              <x-sistem.forms.label-form for="tag" value="{{ __('Etiquetas') }}" />
+              <x-sistem.forms.input-form id="tag" type="text" placeholder="{{ __('Cantidad') }}" wire:model="tag"
+                   />
+              <x-sistem.forms.input-error for="tag" />
+            </div>
+                
+            <div>
               <x-sistem.forms.label-form for="suggestion" value="{{ __('Sugerencias') }}" />
               <x-sistem.forms.input-form id="suggestion" type="text" placeholder="{{ __('Cantidad') }}" wire:model="suggestion"
                    />

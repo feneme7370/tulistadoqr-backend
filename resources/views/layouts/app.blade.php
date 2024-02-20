@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -9,7 +9,9 @@
         {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
         
         <link rel="icon" type="image/x-icon" href="{{ asset('archives/sistem/img/TuMenuQR_favicon.png') }}">
-
+        <!-- libs -->
+        <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
+        <link rel="stylesheet" href="{{asset('lib/toastify/toastify.css')}}">
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -17,9 +19,7 @@
         <!-- Styles -->
         @livewireStyles
 
-        <!-- libs -->
-        <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
-        <link rel="stylesheet" href="{{asset('lib/toastify/toastify.css')}}">
+
     </head>
     <body class="font-sans antialiased transition-all duration-300 ease-in-out dark:bg-gray-300" id="body">
 

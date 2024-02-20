@@ -24,7 +24,7 @@
     </x-sistem.menus.text-info>
 
     {{-- input buscador y filtro de activos --}}
-    <x-sistem.filter.search-only />
+    {{-- <x-sistem.filter.search-only /> --}}
     <x-sistem.spinners.loading-spinner wire:loading wire:target="search" />
 
     {{-- listado --}}
@@ -43,7 +43,7 @@
                   </thead>
                   <tbody>
           
-                      @foreach ($tags as $item)
+                      @foreach($tags as $item)
                       <tr>
 
                         <td class="with-id-columns"><p>{{$item->id}}</p></td>

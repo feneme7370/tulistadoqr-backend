@@ -22,16 +22,16 @@
     </div>
     
     {{-- portada y logo --}}
-    {{-- <div class="flex justify-center items-center gap-3 mb-2"> --}}
+    <div class="flex justify-center items-center gap-3 mb-2">
 
-        {{-- <div class="relative">
+        <div class="relative">
             <x-sistem.lightbox.img-tumb-lightbox 
                 class="h-32 w-32 p-1 bg-purple-100"
                 :uri="auth()->user()->company->image_hero_uri" 
                 :name="auth()->user()->company->image_hero"    
             />
             <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada</p>
-        </div> --}}
+        </div>
 
         {{-- <div class="relative">
             <x-sistem.lightbox.img-lightbox 
@@ -42,7 +42,7 @@
             <p class="absolute top-0 right-0 p-2 bg-black text-white">Logo</p>
         </div> --}}
 
-    {{-- </div> --}}
+    </div>
       
     {{-- mini datos --}}
     <div class="grid gap-3 mb-8 lg:grid-cols-2 xl:grid-cols-4">

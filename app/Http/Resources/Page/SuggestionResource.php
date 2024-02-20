@@ -20,6 +20,7 @@ class SuggestionResource extends JsonResource
             'company_id' => $this->company_id,
             'user_id' => $this->user_id,
             'product' => $this->product,
+            'tags' => $this->product->tags,
             'company' => $this->company,
             'user' => $this->user,
         ];

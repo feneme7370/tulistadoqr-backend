@@ -32,6 +32,7 @@ class ProductResource extends JsonResource
             'company_id' => $this->company_id,
             'user_id' => $this->user_id,
             'category' => $this->category->name,
+            'tags' => $this->tags,
             'company' => $this->company,
             'user' => $this->user,
         ];

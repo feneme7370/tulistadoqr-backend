@@ -225,7 +225,6 @@
                     <option value="2">Listado</option>
                     <option value="3">Secciones</option>
                     <option value="4">Tabla</option>
-                    <option value="5">Tabla sin imagen</option>
                 </x-sistem.forms.select-form>
                 <x-sistem.forms.input-error for="type_menu" />
             </div>

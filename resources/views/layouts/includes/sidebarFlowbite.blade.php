@@ -250,7 +250,7 @@
         </ul>
 
 
-        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300 dark:border-gray-700">
+        {{-- <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300 dark:border-gray-700">
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}" x-data>
                 @csrf
@@ -262,7 +262,7 @@
                     <x-sistem.icons.hi-arrow-right-on-rectangle/>
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             </form>
-        </ul>
+        </ul> --}}
     </div>
 </aside>
 

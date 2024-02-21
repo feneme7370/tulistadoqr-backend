@@ -17,7 +17,7 @@
                 </button>
 
                 {{-- logo izquierda --}}
-                <a href="{{ route('dashboard.index') }}" class="flex ms-2 md:me-24">
+                <a href="{{ route('dashboard.index') }}"  class="flex ms-2 md:me-24">
                     {{-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" /> --}}
                     <img src="{{asset('archives/sistem/img/TuMenuQR_favicon.png')}}" class="h-8 me-3" alt="FlowBite Logo" />
                     <span
@@ -58,11 +58,13 @@
                             </li>
                             <li>
                                 <a href="{{ route('dashboard.index') }}"
+                                    
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Dashboard</a>
                             </li>
                             <li>
                                 <a href="{{ route('config.index', auth()->user()->company->id ) }}"
+                                    
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Configuracion</a>
                             </li>
@@ -70,6 +72,7 @@
                                 <form method="POST" action="{{ route('logout') }}" x-data>
                                     @csrf
                                     <a href="" @click.prevent="$root.submit();"
+                                    
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Cerrar sesion</a>
 
@@ -93,6 +96,7 @@
         <ul class="space-y-2 font-medium">
             <li>
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('dashboard.index') }}"
                     :active="request()->routeIs('dashboard.index')"
                     title="Dashboard"
@@ -142,6 +146,7 @@
 
             @can('memberships.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('memberships.index') }}"
                     :active="request()->routeIs('memberships.index')"
                     title="Membresias"
@@ -152,6 +157,7 @@
 
             @can('companies.index') 
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('companies.index') }}"
                     :active="request()->routeIs('companies.index')"
                     title="Empresas"
@@ -162,6 +168,7 @@
 
             @can('users.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('users.index') }}"
                     :active="request()->routeIs('users.index')"
                     title="Usuarios"
@@ -172,6 +179,7 @@
 
             @can('social_medias.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('social_medias.index') }}"
                     :active="request()->routeIs('social_medias.index')"
                     title="Redes Sociales"
@@ -188,6 +196,7 @@
             
             @can('config.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('config.index', auth()->user()->company_id) }}"
                     :active="request()->routeIs('config.index')"
                     title="Configuracion"
@@ -198,6 +207,7 @@
 
             @can('tags.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                
                     href="{{ route('tags.index') }}"
                     :active="request()->routeIs('tags.index')"
                     title="Etiquetas"
@@ -208,6 +218,7 @@
 
             @can('levels.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('levels.index') }}"
                     :active="request()->routeIs('levels.index')"
                     title="Categoria General"
@@ -218,6 +229,7 @@
 
             @can('categories.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('categories.index') }}"
                     :active="request()->routeIs('categories.index')"
                     title="Categorias"
@@ -228,6 +240,7 @@
 
             @can('products.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('products.index') }}"
                     :active="request()->routeIs('products.index')"
                     title="Productos"
@@ -238,6 +251,7 @@
 
             @can('suggestions.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
                     href="{{ route('suggestions.index') }}"
                     :active="request()->routeIs('suggestions.index')"
                     title="Sugerencias"

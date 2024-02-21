@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
+<html class="transition-all ease-in-out light" lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -35,13 +35,19 @@
     @livewireScripts
 
     <!-- libs -->
-    <script src="{{asset('lib/flowbite/flowbite.min.js')}}"></script>
-    <script src="{{asset('lib/lightbox/js/lightbox-plus-jquery.min.js')}}"></script>
-    <script src="{{asset('lib/sweetalert2/sweetalert2.all.min.js')}}"></script>
-    <script src="{{asset('lib/toastify/toastify.js')}}"></script>
+    <script defer src="{{asset('lib/flowbite/flowbite.min.js')}}"></script>
+    <script defer src="{{asset('lib/lightbox/js/lightbox-plus-jquery.min.js')}}"></script>
+    <script defer src="{{asset('lib/sweetalert2/sweetalert2.all.min.js')}}"></script>
+    <script defer src="{{asset('lib/toastify/toastify.js')}}"></script>
     
-    @stack('modals')
+    {{-- <script>
+        document.addEventListener("livewire:navigated", () => {
+            initFlowbite();
+        });
+    </script> --}}
     @stack('scripts')
+    @stack('modals')
+
     
     </body>
 </html>

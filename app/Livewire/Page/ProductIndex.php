@@ -122,7 +122,7 @@ class ProductIndex extends Component
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags']);
     }
 
     ///////////////////////////// MODULO IMAGENES /////////////////////////////
@@ -240,6 +240,8 @@ class ProductIndex extends Component
         $this->user_id = $product['user_id'];
         $this->company_id = $product['company_id'];
 
+        $this->product_tags = $this->product->tags->pluck('id')->toArray();
+
         $this->showActionModal = true;
     }
 
@@ -310,7 +312,8 @@ class ProductIndex extends Component
 
         $levels = Level::where('company_id', auth()->user()->company_id)->get();
 
-        $products = Product::with('category', 'category.level', 'tags')
+        $products = Product::select('id', 'name', 'price_original', 'price_seller', 'image_hero_uri', 'image_hero', 'description', 'status', 'category_id')
+                        ->with('category', 'category.level', 'tags')
                         ->where('company_id', auth()->user()->company_id)
                         ->when( $this->search, function($query) {
                             return $query->where(function( $query) {

@@ -1,18 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Page\CategoryController;
-use App\Http\Controllers\Page\GuestController;
-use App\Http\Controllers\Page\DashboardController;
-use App\Http\Controllers\Page\CompanyController;
-use App\Http\Controllers\Page\ConfigController;
-use App\Http\Controllers\Page\LevelController;
-use App\Http\Controllers\Page\MembershipController;
-use App\Http\Controllers\Page\UserController;
-use App\Http\Controllers\Page\ProductController;
-use App\Http\Controllers\Page\SocialMediaController;
-use App\Http\Controllers\Page\SuggestionController;
 use App\Http\Controllers\Page\TagController;
+use App\Http\Controllers\Page\UserController;
+use App\Http\Controllers\Page\GuestController;
+use App\Http\Controllers\Page\LevelController;
+use App\Http\Controllers\Page\ConfigController;
+use App\Http\Controllers\Page\CompanyController;
+use App\Http\Controllers\Page\ProductController;
+use App\Http\Controllers\Page\CategoryController;
+use App\Http\Controllers\Page\DashboardController;
+use App\Http\Controllers\Page\MembershipController;
+use App\Http\Controllers\Page\SuggestionController;
+use App\Http\Controllers\Page\SocialMediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ use App\Http\Controllers\Page\TagController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+\Debugbar::disable();
 Route::get('/', [GuestController::class, 'index'])->name('guest.index');
 
 Route::middleware([

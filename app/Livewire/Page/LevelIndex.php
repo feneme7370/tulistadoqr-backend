@@ -277,7 +277,8 @@ class LevelIndex extends Component
     // renderizar vista
     public function render(){
 
-        $levels = Level::with('user')
+        $levels = Level::select('id', 'name', 'image_hero_uri', 'image_hero', 'status', 'description', 'user_id')
+                        ->with('user', 'company')
                         ->where('company_id', auth()->user()->company_id)
                         ->when( $this->search, function($query) {
                             return $query->where(function( $query) {

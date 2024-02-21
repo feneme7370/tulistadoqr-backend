@@ -20,7 +20,7 @@
 
     {{-- texto informativo --}}
     <x-sistem.menus.text-info>
-      <p>Las etiquetas sirven para crear secciones que relacionen a algunos productos, por ejemplo poner "Verano" y asociar los productos que al ver la seccion verano, aparezcan a la vista del cliente.</p>
+      <p>Las etiquetas sirven reflejar una cualidad del producto, por ej. "Sin TACC", "Vegano", "Sin Sal", o si quiere aclarar algo como "Nuevo", "Oferta".</p>
     </x-sistem.menus.text-info>
 
     {{-- input buscador y filtro de activos --}}
@@ -72,7 +72,7 @@
 
     {{-- Paginacion --}}
     <div class="mt-2">
-        {{ $tags->links() }}
+        {{ $tags->onEachSide(1)->links() }}
     </div>
 
     <!-- Modal para borrar -->

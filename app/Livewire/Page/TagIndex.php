@@ -189,7 +189,7 @@ class TagIndex extends Component
     // renderizar vista
     public function render()
     {
-        $tags = Tag::where('company_id', auth()->user()->company_id)
+        $tags = Tag::select('id', 'name')->with('company')->where('company_id', auth()->user()->company_id)
                         ->when( $this->search, function($query) {
                             return $query->where(function( $query) {
                                 $query->where('name', 'like', '%'.$this->search . '%');

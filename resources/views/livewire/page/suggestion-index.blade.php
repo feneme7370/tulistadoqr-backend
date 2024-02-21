@@ -86,7 +86,7 @@
 
     {{-- Paginacion --}}
     <div class="mt-2">
-        {{ $suggestions->links() }}
+        {{ $suggestions->onEachSide(1)->links() }}
     </div>
 
 </div>

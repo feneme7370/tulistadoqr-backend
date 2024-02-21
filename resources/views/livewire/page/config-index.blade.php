@@ -103,7 +103,7 @@
         </div>
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-images" role="tabpanel" aria-labelledby="images-tab">
             {{-- imagenes --}}
-            <h2 class="text-center font-bold text-xl dark:text-gray-200">Imagenes</h2>
+            <h2 class="text-center font-bold text-xl dark:text-gray-200 mb-3">Imagenes</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
 

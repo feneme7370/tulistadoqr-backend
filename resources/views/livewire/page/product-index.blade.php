@@ -16,50 +16,50 @@
     {{-- texto informativo --}}
     <x-sistem.menus.text-info>
         <p>Agregue los productos que ofrece en su menu, puede agregar un precio de oferta, una imagen y si quiere una descripcion que quiera que el cliente vea del producto.</p>
-        </x-sistem.menus.text-info>
+    </x-sistem.menus.text-info>
 
     {{-- input buscador y filtro de activos --}}
     {{-- <div class="flex flex-row flex-1 justify-evenly items-center gap-2 p-2"> --}}
-        <x-sistem.filter.bg-input class="flex-row flex-1">
-        
-            <div  class="w-full">
-                <x-sistem.forms.label-form for="categorySearch" value="{{ __('Categoria') }}" />
-                <x-sistem.forms.select-form wire:model.live="categorySearch" id="categorySearch">
-                    <option value=""> Todos </option>
-                    @foreach ($categories as $category)
-                        <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
-                    @endforeach
-                </x-sistem.forms.select-form>
-                <x-sistem.forms.input-error for="categorySearch" />
-            </div>
+    <x-sistem.filter.bg-input class="flex-row flex-1">
     
-            <div  class="w-1/4">
-                <x-sistem.forms.label-form for="perPage" value="{{ __('Mostrar') }}" />
-                <x-sistem.forms.select-form wire:model.live="perPage" id="perPage">
-                    <option value="10"> 10 </option>
-                    <option value="30"> 30 </option>
-                    <option value="50"> 50 </option>
-                    <option value="100"> 100 </option>
-                </x-sistem.forms.select-form>
-            </div>
-        </x-sistem.filter.bg-input>
+        <div  class="w-full">
+            <x-sistem.forms.label-form for="categorySearch" value="{{ __('Categoria') }}" />
+            <x-sistem.forms.select-form wire:model.live="categorySearch" id="categorySearch">
+                <option value=""> Todos </option>
+                @foreach ($categories as $category)
+                    <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
+                @endforeach
+            </x-sistem.forms.select-form>
+            <x-sistem.forms.input-error for="categorySearch" />
+        </div>
 
-        <x-sistem.filter.bg-input class="flex-row flex-1">
-        
-            <div class="w-full">
-                <x-sistem.forms.input-form 
-                    wire:model.live.debounce.600ms="search" 
-                    type="search" 
-                    placeholder="Buscar por nombre o categoria" 
-                    class="w-full" />
-            </div>
-            <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
-                <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />Solo activos
-            </div>
-            <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
-                <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />En oferta
-            </div>
-        </x-sistem.filter.bg-input>
+        <div  class="w-1/4">
+            <x-sistem.forms.label-form for="perPage" value="{{ __('Mostrar') }}" />
+            <x-sistem.forms.select-form wire:model.live="perPage" id="perPage">
+                <option value="10"> 10 </option>
+                <option value="30"> 30 </option>
+                <option value="50"> 50 </option>
+                <option value="100"> 100 </option>
+            </x-sistem.forms.select-form>
+        </div>
+    </x-sistem.filter.bg-input>
+
+    <x-sistem.filter.bg-input class="flex-row flex-1">
+    
+        <div class="w-full">
+            <x-sistem.forms.input-form 
+                wire:model.live.debounce.600ms="search" 
+                type="search" 
+                placeholder="Buscar por nombre o categoria" 
+                class="w-full" />
+        </div>
+        <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
+            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />Solo activos
+        </div>
+        <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
+            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />En oferta
+        </div>
+    </x-sistem.filter.bg-input>
 
     {{-- </div> --}}
 
@@ -139,7 +139,7 @@
     {{-- Paginacion --}}
     <div class="mt-2">
         {{-- {{ $products->onEachSide(1)->links('pagination::windmill-pagination') }} --}}
-        {{ $products->links() }}
+        {{ $products->onEachSide(1)->links() }}
     </div>
 
     <!-- Modal para borrar -->

@@ -30,7 +30,7 @@
                 :uri="auth()->user()->company->image_hero_uri" 
                 :name="auth()->user()->company->image_hero"    
             />
-            <p class="absolute top-0 right-0 p-2 bg-black text-white">Portada</p>
+            <p class="absolute top-0 right-0 p-2 rounded-bl-xl bg-primary-800 text-white">Portada</p>
         </div>
 
         {{-- <div class="relative">
@@ -45,7 +45,7 @@
     </div>
       
     {{-- mini datos --}}
-    <div class="grid gap-3 mb-8 lg:grid-cols-2 xl:grid-cols-4">
+    <div class="grid gap-3 mb-8 sm:grid-cols-2 xl:grid-cols-4">
        
         @can('memberships.index')
             <x-sistem.cards.mini-date 

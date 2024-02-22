@@ -180,6 +180,12 @@
             </div>
                 
             <div>
+              <label for="list_product" class="flex items-center">
+                  <x-sistem.forms.checkbox-form id="list_product" wire:model="list_product" />
+                  <span class="ml-2 text-sm text-gray-600">{{ __('Lista de productos') }}</span>
+              </label>
+            </div>
+            <div>
               <label for="status" class="flex items-center">
                   <x-sistem.forms.checkbox-form id="status" wire:model="status" />
                   <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>

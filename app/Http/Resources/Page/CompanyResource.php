@@ -29,6 +29,7 @@ class CompanyResource extends JsonResource
             'description' => $this->description,
             'status' => $this->status,
             'type_menu' => $this->type_menu,
+            'list_product' => $this->membership->list_product,
             'image_qr' => $this->image_qr,
             'image_qr_uri' => $this->image_qr_uri,
             'image_logo' => $this->image_logo,

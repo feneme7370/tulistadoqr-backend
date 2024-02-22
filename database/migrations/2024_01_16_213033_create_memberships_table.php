@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('memberships', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->string('slug');
             $table->string('price');
             $table->mediumText('short_description');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('user');
             $table->string('suggestion');
             $table->string('tag');
+            $table->tinyInteger('list_product')->nullable()->default(1);
             $table->tinyInteger('status')->nullable()->default(1);
             $table->timestamps();
         });

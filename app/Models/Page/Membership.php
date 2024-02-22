@@ -21,6 +21,7 @@ class Membership extends Model
         'user',
         'suggestion',
         'tag',
+        'list_product',
         'status',
     ];
 

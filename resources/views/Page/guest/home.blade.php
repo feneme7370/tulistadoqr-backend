@@ -170,9 +170,20 @@
             <h3
                 class="max-w-2xl px-5 mt-2 text-3xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl">
                 Ofrecemos todo para que puedas gestionar tu menu</h3>
-            <div class="flex flex-col w-full mt-0 lg:flex-row sm:mt-10 lg:mt-20">
 
-                <div class="w-full max-w-md p-4 mx-auto mb-3 lg:mb-0 lg:w-1/3">
+            <div class="flex flex-col sm:flex-row items-center mt-5 gap-5 w-full lg:flex-row sm:mt-10 lg:mt-20">
+
+            @foreach ($services as $service)
+                
+            <a href="#" class="w-full max-w-sm p-2 flex justify-center items-center flex-col">
+                <span class="h-16 w-16 fill-primary-800 mb-5"><x-sistem.icons.for-icos-home :icon="$service['icon']" /> </span>
+                <h5 class="mb-2 text-lg text-center font-bold tracking-tight text-gray-900">{{ $service['title'] }}</h5>
+                <p class="font-sm italic text-gray-700">{{ $service['description'] }}</p>
+            </a>
+
+            @endforeach
+    
+                {{-- <div class="w-full max-w-md p-4 mx-auto mb-3 lg:mb-0 lg:w-1/3">
                     <div class="relative flex flex-col items-center justify-center w-full h-full p-2 sm:mr-5 rounded-lg">
                         <svg class="absolute w-full h-full text-primary-100 fill-current" viewBox="0 0 377 340"
                             xmlns="http://www.w3.org/2000/svg">
@@ -188,61 +199,8 @@
                         <h4 class="relative mt-3 text-lg font-bold">Facil gestion</h4>
                         <p class="relative mt-2 text-sm text-center text-gray-600 italic">Sistema facil de usar, intuitivo y rapido.</p>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="w-full max-w-md p-4 mx-auto mb-3 lg:mb-0 lg:w-1/3">
-                    <div class="relative flex flex-col items-center justify-center w-full h-full p-2 sm:mr-5 rounded-lg">
-                        <svg class="absolute w-full h-full text-primary-100 fill-current" viewBox="0 0 358 372"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g>
-                                <g>
-                                    <path
-                                        d="M315.7 6.5c30.2 15.1 42.6 61.8 41.5 102.5-1.1 40.6-15.7 75.2-24.3 114.8-8.7 39.7-11.3 84.3-34.3 107.2-23 22.9-66.3 23.9-114.5 30.7-48.2 6.7-101.3 19.1-123.2-4.1-21.8-23.2-12.5-82.1-21.6-130.2C30.2 179.3 2.6 141.9.7 102c-2-39.9 21.7-82.2 57.4-95.6 35.7-13.5 83.3 2.1 131.2 1.7 47.9-.4 96.1-16.8 126.4-1.6z" />
-                                </g>
-                            </g>
-                        </svg>
-
-                        <!-- FEATURE Icon 2 -->
-                        <h4 class="relative mt-3 text-lg font-bold">Acceso QR</h4>
-                        <p class="relative mt-2 text-sm text-center text-gray-600 italic">Accede al menu desde el QR o link.</p>
-                    </div>
-                </div>
-
-                <div class="w-full max-w-md p-4 mx-auto mb-3 lg:mb-0 lg:w-1/3">
-                    <div class="relative flex flex-col items-center justify-center w-full h-full p-2 sm:mr-5 rounded-lg">
-                        <svg class="absolute w-full h-full text-primary-100 fill-current" viewBox="0 0 378 410"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g>
-                                <g>
-                                    <path
-                                        d="M305.9 14.4c23.8 24.6 16.3 84.9 26.6 135.1 10.4 50.2 38.6 90.3 43.7 137.8 5.1 47.5-12.8 102.4-50.7 117.4-37.9 15.1-95.7-9.8-151.7-12.2-56.1-2.5-110.3 17.6-130-3.4-19.7-20.9-4.7-82.9-11.5-131.2C25.5 209.5-3 174.7 1.2 147c4.2-27.7 41-48.3 75-69.6C110.1 56.1 141 34.1 184 17.5c43.1-16.6 98.1-27.7 121.9-3.1z" />
-                                </g>
-                            </g>
-                        </svg>
-
-                        <!-- FEATURE Icon 3 -->
-                        <h4 class="relative mt-3 text-lg font-bold">Multiples Menus</h4>
-                        <p class="relative mt-2 text-base text-center text-gray-600 italic">Elegi la mejor forma de mostrar tus productos.</p>
-                    </div>
-                </div>
-
-                <div class="w-full max-w-md p-4 mx-auto mb-3 lg:mb-0 lg:w-1/3">
-                    <div class="relative flex flex-col items-center justify-center w-full h-full p-2 sm:mr-5 rounded-lg">
-                        <svg class="absolute w-full h-full text-primary-100 fill-current" viewBox="0 0 378 410"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g>
-                                <g>
-                                    <path
-                                        d="M305.9 14.4c23.8 24.6 16.3 84.9 26.6 135.1 10.4 50.2 38.6 90.3 43.7 137.8 5.1 47.5-12.8 102.4-50.7 117.4-37.9 15.1-95.7-9.8-151.7-12.2-56.1-2.5-110.3 17.6-130-3.4-19.7-20.9-4.7-82.9-11.5-131.2C25.5 209.5-3 174.7 1.2 147c4.2-27.7 41-48.3 75-69.6C110.1 56.1 141 34.1 184 17.5c43.1-16.6 98.1-27.7 121.9-3.1z" />
-                                </g>
-                            </g>
-                        </svg>
-
-                        <!-- FEATURE Icon 4 -->
-                        <h4 class="relative mt-3 text-lg font-bold">Productos con imagenes</h4>
-                        <p class="relative mt-2 text-base text-center text-gray-600 italic">Se puede cargar una imagen por producto.</p>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -253,9 +211,29 @@
     <div id="demos" class="relative w-full px-8 py-2 md:py-8 lg:py-16 xl:py-24 xl:px-0">
         <div class="container flex flex-col items-center justify-between h-full max-w-6xl mx-auto">
             <h2 class="mt-5 mb-1 text-base font-medium tracking-tight text-primary-500 uppercase">Mira nuestras demos</h2>
-            <hr class="border border-primary-900 w-full">
+            <hr class="border border-primary-900 w-full mb-5">
             <div class="w-full my-4 flex flex-col items-center gap-3 justify-around sm:flex-row">
-                <div class="w-full max-w-48 flex flex-col items-center gap-3 border border-primary-900 bg-gray-100 p-3 rounded-3xl">
+
+<div class="flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
+    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="{{ asset('archives/sistem/img/demo1.jpg') }}" alt="">
+    <div class="flex flex-col justify-between p-4 leading-normal">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Meriendalunas</h5>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Menu para merendar.</p>
+        <a href="https://tulistadoqr-demo1.femaser.com/" target="_blank"
+        class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 1</a>
+    </div>
+</div>
+<div class="flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
+    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="{{ asset('archives/sistem/img/demo2.jpg') }}" alt="">
+    <div class="flex flex-col justify-between p-4 leading-normal">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">El Favorito</h5>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Rotiseria.</p>
+        <a href="https://tulistadoqr-demo2.femaser.com/" target="_blank"
+        class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 2</a>
+    </div>
+</div>
+
+                {{-- <div class="w-full max-w-48 flex flex-col items-center gap-3 border border-primary-900 bg-gray-100 p-3 rounded-3xl">
                     <h3 class="font-bold text-primary-900 text-center">Meriendalunas</h3>
                     <p class="font-light text-gray-700 text-center italic">Menu para merendar</p>
                     <a href="https://tulistadoqr-demo1.femaser.com/" target="_blank"
@@ -266,7 +244,7 @@
                     <p class="font-light text-gray-700 text-center italic">Rotiseria</p>
                     <a href="https://tulistadoqr-demo2.femaser.com/" target="_blank"
                     class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 2</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -365,7 +343,7 @@
                         </div>
 
                         <div class="flex items-center p-8 uppercase">
-                            <a href="https://api.whatsapp.com/send/?phone=5492396513953&amp;text=Quier saber mas sobre TuMenuQR" target="_blank"
+                            <a href="https://api.whatsapp.com/send/?phone=5492396513953&amp;text=Quier saber mas sobre TuListadoQR, el plan {{ $membership->short_description }} de {{ $membership->price }}" target="_blank"
                                 class="block w-full px-2 py-3 mt-3 text-base font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-primary-600">Lo quiero!</a>
                         </div>
                     </div>

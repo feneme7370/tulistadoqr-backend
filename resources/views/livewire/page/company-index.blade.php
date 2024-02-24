@@ -64,7 +64,7 @@
                           <td><p>{{$item->email}}</p></td>
 
                           <td class="with-status-columns">
-                            <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
+                            <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded '}}">
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>
                           </td>
@@ -179,8 +179,8 @@
             {{-- imagenes --}}
             <div>
               {{-- imagen de portada empresa --}}
-              <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-                  <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen principal de la empresa</h2>
+              <div class="bg-gray-100 p-1 rounded-md">
+                  <h2 class="text-center text-gray-900 font-bold text-xl">Imagen principal de la empresa</h2>
           
                   <div>
                       <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
@@ -224,8 +224,8 @@
               </div>
 
               {{-- logo de la empresa --}}
-              <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-                  <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Logo de la empresa</h2>
+              <div class="bg-gray-100 p-1 rounded-md">
+                  <h2 class="text-center text-gray-900 font-bold text-xl">Logo de la empresa</h2>
                   <div>
                       <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
                       <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_logo_new" accept="image/*"
@@ -268,8 +268,8 @@
               </div>
 
               {{-- QR de la empresa --}}
-              <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-                  <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">QR de la empresa</h2>
+              <div class="bg-gray-100 p-1 rounded-md">
+                  <h2 class="text-center text-gray-900 font-bold text-xl">QR de la empresa</h2>
                   <div>
                       <x-sistem.forms.label-form for="image_qr_new" value="{{ __('Imagen de qr') }}" />
                       <x-sistem.forms.input-file-form id="image_qr_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_qr_new" accept="image/*"

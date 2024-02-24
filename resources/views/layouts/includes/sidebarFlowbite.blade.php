@@ -280,7 +280,7 @@
     </div>
 </aside>
 
-@push('scripts')
+{{-- @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const html = document.getElementById('html');
@@ -304,4 +304,4 @@
     });
 
 </script>
-@endpush
+@endpush --}}

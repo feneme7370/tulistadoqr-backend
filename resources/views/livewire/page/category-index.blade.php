@@ -73,7 +73,7 @@
                           <td><p>{{$item->user->lastname}}, {{$item->user->name}}</p></td>
 
                           <td class="with-status-columns">
-                            <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
+                            <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded'}}">
                               {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                             </span>
                           </td>
@@ -154,8 +154,8 @@
               </div>
 
               {{-- imagen de categoria --}}
-              <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-                <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen de categoria</h2>
+              <div class="bg-gray-100 p-1 rounded-md">
+                <h2 class="text-center text-gray-900 font-bold text-xl">Imagen de categoria</h2>
         
                 <div>
                     <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de categoria') }}" />

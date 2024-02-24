@@ -1,11 +1,11 @@
-<div class="p-2 rounded-lg mx-auto my-1 dark:bg-gray-800">
+<div class="p-2 rounded-lg mx-auto my-1 ">
     
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
         :messageError="session('messageError')" 
     />
 
-    <x-sistem.menus.text-info class="dark:text-gray-300">
+    <x-sistem.menus.text-info class="">
         <p>Ajuste todos los datos de la empresa, cargue la imagen de portada y su logo en caso que sea una imagen. Tambien puede descargar aqui su codigo QR que redirecciona al menu digital.</p>
     </x-sistem.menus.text-info>
 
@@ -16,28 +16,28 @@
 
     <form class="grid grid-cols-1 gap-2 mt-2">
 
-    <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" data-tabs-active-classes="text-gray-600 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-200 border-gray-600 dark:border-gray-500" data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" role="tablist">
+    <div class="mb-4 border-b border-gray-200">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" data-tabs-active-classes="text-gray-600 hover:text-gray-600 border-gray-600" data-tabs-inactive-classes="text-gray-500 hover:text-gray-600 border-gray-100 hover:border-gray-300" role="tablist">
             <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dates-styled-tab" data-tabs-target="#styled-dates" type="button" role="tab" aria-controls="dates" aria-selected="true">Datos</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="dates-styled-tab" data-tabs-target="#styled-dates" type="button" role="tab" aria-controls="dates" aria-selected="true">Datos</button>
             </li>
             <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="images-styled-tab" data-tabs-target="#styled-images" type="button" role="tab" aria-controls="images" aria-selected="false">Descripcion</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 " id="images-styled-tab" data-tabs-target="#styled-images" type="button" role="tab" aria-controls="images" aria-selected="false">Descripcion</button>
             </li>
             <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="media-styled-tab" data-tabs-target="#styled-media" type="button" role="tab" aria-controls="media" aria-selected="false">Redes Sociales</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 " id="media-styled-tab" data-tabs-target="#styled-media" type="button" role="tab" aria-controls="media" aria-selected="false">Redes Sociales</button>
             </li>
             <li role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="customize-styled-tab" data-tabs-target="#styled-customize" type="button" role="tab" aria-controls="customize" aria-selected="false">Personalizar</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 " id="customize-styled-tab" data-tabs-target="#styled-customize" type="button" role="tab" aria-controls="customize" aria-selected="false">Personalizar</button>
             </li>
         </ul>
     </div>
 
     <div id="default-styled-tab-content">
-        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dates" role="tabpanel" aria-labelledby="dates-tab">
+        <div class="hidden p-4 rounded-lg bg-gray-50" id="styled-dates" role="tabpanel" aria-labelledby="dates-tab">
 
             {{-- datos de la empresa --}}
-            <h2 class="text-center font-bold text-xl dark:text-gray-200">Datos de la empresa</h2>
+            <h2 class="text-center font-bold text-xl">Datos de la empresa</h2>
 
             {{-- inputs --}}
             <div class="grid md:grid-cols-2 gap-3">
@@ -81,7 +81,7 @@
 
 
         </div>
-        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-images" role="tabpanel" aria-labelledby="images-tab">
+        <div class="hidden p-4 rounded-lg bg-gray-50" id="styled-images" role="tabpanel" aria-labelledby="images-tab">
             {{-- breve descripcion --}}
             <div>
                 <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
@@ -105,9 +105,9 @@
             </div>
 
         </div>
-        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-media" role="tabpanel" aria-labelledby="media-tab">
+        <div class="hidden p-4 rounded-lg bg-gray-50" id="styled-media" role="tabpanel" aria-labelledby="media-tab">
             {{-- redes sociales --}}
-            <h2 class="text-center font-bold text-xl dark:text-gray-200">Redes sociales</h2>
+            <h2 class="text-center font-bold text-xl">Redes sociales</h2>
 
             {{-- redes sociales --}}
             <div class="grid md:grid-cols-2 gap-3">
@@ -121,9 +121,9 @@
                 @endforeach
             </div>
         </div>
-        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-customize" role="tabpanel" aria-labelledby="customize-tab">
+        <div class="hidden p-4 rounded-lg bg-gray-50" id="styled-customize" role="tabpanel" aria-labelledby="customize-tab">
             {{-- personalizar pagina --}} 
-            <h2 class="text-center font-bold text-xl dark:text-gray-200">Personalizar pagina</h2>
+            <h2 class="text-center font-bold text-xl">Personalizar pagina</h2>
 
             <div>
                 <x-sistem.forms.label-form for="type_menu" value="{{ __('Tipo de menu') }}" />
@@ -139,13 +139,13 @@
     </div>
 
 
-    <h2 class="text-center font-bold text-xl dark:text-gray-200 mb-3">Imagenes</h2>
+    <h2 class="text-center font-bold text-xl mb-3">Imagenes</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
 
         {{-- imagen de portada empresa --}}
-        <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-            <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen principal de la empresa</h2>
+        <div class="bg-gray-100 p-1 rounded-md">
+            <h2 class="text-center text-gray-900 font-bold text-xl">Imagen principal de la empresa</h2>
     
             <div>
                 <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
@@ -189,8 +189,8 @@
         </div>
 
         {{-- logo de la empresa --}}
-        <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-            <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Logo de la empresa</h2>
+        <div class="bg-gray-100 p-1 rounded-md">
+            <h2 class="text-center text-gray-900 font-bold text-xl">Logo de la empresa</h2>
             <div>
                 <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
                 <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_logo_new" accept="image/*"

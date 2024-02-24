@@ -3,7 +3,7 @@
 <div>
     @if(session()->has('messageSuccess'))
     
-    <div x-data="{ showAlert: true }" x-show="showAlert" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+    <div x-data="{ showAlert: true }" x-show="showAlert" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50" role="alert">
         <strong class="sr-only">{{$title}}</strong>
         <span class="ms-3 text-sm font-medium">{{$messageSuccess}}</span>
         <span @click="showAlert = false" class="absolute top-0 bottom-0 right-0 px-4 py-3">
@@ -17,7 +17,7 @@
     </div>
     @endif
     @if(session()->has('messageError'))
-    <div x-data="{ showAlert: true }" x-show="showAlert" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <div x-data="{ showAlert: true }" x-show="showAlert" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 " role="alert">
         <strong class="sr-only">{{$title}}</strong>
         <span class="ms-3 text-sm font-medium">{{$messageError}}</span>
         <span @click="showAlert = false" class="absolute top-0 bottom-0 right-0 px-4 py-3">

@@ -8,7 +8,7 @@ text-primary-600
 
 focus:border-primary-400 
 focus:outline-none  
-focus:shadow-outline-primary dark:focus:shadow-outline-gray
+focus:shadow-outline-primary
 focus:ring 
 focus:ring-primary-950 
 focus:ring-offset-0

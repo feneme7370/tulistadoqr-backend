@@ -217,8 +217,8 @@
 <div class="flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
     <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" lazy="loading" src="{{ asset('archives/sistem/img/demo1.jpg') }}" alt="">
     <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Meriendalunas</h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Menu para merendar.</p>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Meriendalunas</h5>
+        <p class="mb-3 font-normal text-gray-700">Menu para merendar.</p>
         <a href="https://tulistadoqr-demo1.femaser.com/" target="_blank"
         class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 1</a>
     </div>
@@ -226,8 +226,8 @@
 <div class="flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
     <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" lazy="loading" src="{{ asset('archives/sistem/img/demo2.jpg') }}" alt="">
     <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">El Favorito</h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Rotiseria.</p>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">El Favorito</h5>
+        <p class="mb-3 font-normal text-gray-700">Rotiseria.</p>
         <a href="https://tulistadoqr-demo2.femaser.com/" target="_blank"
         class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 2</a>
     </div>

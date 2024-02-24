@@ -5,11 +5,6 @@ block w-full text-center
 text-sm form-input text-gray-900  bg-white rounded-lg shadow-md
 my-1 p-2 
 
-dark:border-gray-600
-dark:focus:shadow-outline-gray
-dark:text-gray-300
-dark:bg-gray-700
-
 focus:outline-none 
 focus:shadow-outline-primary
 focus:border-primary-400

@@ -53,10 +53,10 @@
                 placeholder="Buscar por nombre o categoria" 
                 class="w-full" />
         </div>
-        <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
+        <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
             <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />Solo activos
         </div>
-        <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900 dark:text-gray-200">
+        <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
             <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />En oferta
         </div>
     </x-sistem.filter.bg-input>
@@ -120,7 +120,7 @@
                             <td class="text-center"><p>{{$item->tags->count()}}</p></td>
 
                             <td class="with-status-columns">
-                                <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'}}">
+                                <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded'}}">
                                   {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                                 </span>
                               </td>
@@ -236,8 +236,8 @@
 
 
                 {{-- imagen de portada empresa --}}
-                <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-                    <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen del producto</h2>
+                <div class="bg-gray-100 p-1 rounded-md">
+                    <h2 class="text-center text-gray-90 font-bold text-xl">Imagen del producto</h2>
             
                     <div>
                         <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen del producto') }}" />

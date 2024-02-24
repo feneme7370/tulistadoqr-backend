@@ -11,12 +11,6 @@
     
     bg-gray-50 dark:bg-300
 
-    dark:border-gray-600
-    dark:focus:shadow-outline-gray
-    dark:text-gray-300
-    dark:bg-gray-700
-
-    dark:placeholder-gray-400
     focus:border-primary-400 
     focus:outline-none  
     focus:shadow-outline-primary 

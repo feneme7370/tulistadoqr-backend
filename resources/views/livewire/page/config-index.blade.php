@@ -22,7 +22,7 @@
                 <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dates-styled-tab" data-tabs-target="#styled-dates" type="button" role="tab" aria-controls="dates" aria-selected="true">Datos</button>
             </li>
             <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="images-styled-tab" data-tabs-target="#styled-images" type="button" role="tab" aria-controls="images" aria-selected="false">Imagenes</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="images-styled-tab" data-tabs-target="#styled-images" type="button" role="tab" aria-controls="images" aria-selected="false">Descripcion</button>
             </li>
             <li class="me-2" role="presentation">
                 <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="media-styled-tab" data-tabs-target="#styled-media" type="button" role="tab" aria-controls="media" aria-selected="false">Redes Sociales</button>
@@ -78,6 +78,10 @@
                 </div>
                 
             </div>
+
+
+        </div>
+        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-images" role="tabpanel" aria-labelledby="images-tab">
             {{-- breve descripcion --}}
             <div>
                 <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
@@ -98,103 +102,6 @@
                 <x-sistem.forms.textarea-form id="times_description" placeholder="{{ __('Ej. Lunes a Jueves 10:00 a 22:00 - Viernes a Domingo 10:00 a 11:30') }}"
                     wire:model="times_description" />
                 <x-sistem.forms.input-error for="times_description" />
-            </div>
-
-        </div>
-        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-images" role="tabpanel" aria-labelledby="images-tab">
-            {{-- imagenes --}}
-            <h2 class="text-center font-bold text-xl dark:text-gray-200 mb-3">Imagenes</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-
-                {{-- imagen de portada empresa --}}
-                <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-                    <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen principal de la empresa</h2>
-            
-                    <div>
-                        <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
-                        <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_hero_new" accept="image/*"
-                            />
-                        <x-sistem.forms.input-error for="image_hero_new" />
-                    </div>
-            
-                    <div class="flex justify-center items-center">
-                
-                        @if ($image_hero_new)
-                        <div class="">
-            
-                            <div wire:loading wire:target="image_hero_new">
-                                <x-sistem.spinners.loading-spinner/>
-                            </div>
-            
-                            <p class="mb-1">Imagen de portada nueva:</p>
-                                <x-sistem.lightbox.img-lightbox 
-                                    class="h-32 w-32 p-1 bg-primary-200"
-                                    :name="$image_hero_new->temporaryUrl()"    
-                                />
-                        </div>
-                        @else
-                        <div class="">
-                            <div wire:loading wire:target="image_hero_new">
-                                <x-sistem.spinners.loading-spinner/>
-                            </div>
-                            <p class="mb-1">Imagen de portada actual:</p>
-                            <div class="h-32 w-32 mx-auto relative">
-                                <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                                <x-sistem.lightbox.img-tumb-lightbox 
-                                    class="h-32 w-32 p-1 bg-primary-200"
-                                    :uri="$this->image_hero_uri" 
-                                    :name="$this->image_hero"    
-                                />
-                            </div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-
-                {{-- logo de la empresa --}}
-                <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
-                    <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Logo de la empresa</h2>
-                    <div>
-                        <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
-                        <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_logo_new" accept="image/*"
-                            />
-                        <x-sistem.forms.input-error for="image_logo_new" />
-                    </div>
-            
-                    <div class="flex justify-center items-center">
-                
-                        @if ($image_logo_new)
-                        <div class="">
-            
-                            <div wire:loading wire:target="image_logo_new">
-                                <x-sistem.spinners.loading-spinner/>
-                            </div>
-            
-                            <p class="mb-1">Imagen de logo nueva:</p>
-                                <x-sistem.lightbox.img-lightbox 
-                                    class="h-32 w-32 p-1 bg-primary-200"
-                                    :name="$image_logo_new->temporaryUrl()"    
-                                />
-                        </div>
-                        @else
-                        <div class="">
-                            <div wire:loading wire:target="image_logo_new">
-                                <x-sistem.spinners.loading-spinner/>
-                            </div>
-                            <p class="mb-1">Imagen de logo actual:</p>
-                            <div class="h-32 w-32 mx-auto relative">
-                                <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                                <x-sistem.lightbox.img-lightbox 
-                                    class="h-32 w-32 p-1 bg-primary-200"
-                                    :uri="$this->image_logo_uri" 
-                                    :name="$this->image_logo"    
-                                />
-                            </div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -227,6 +134,101 @@
                     <option value="4">Tabla</option>
                 </x-sistem.forms.select-form>
                 <x-sistem.forms.input-error for="type_menu" />
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="text-center font-bold text-xl dark:text-gray-200 mb-3">Imagenes</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+
+        {{-- imagen de portada empresa --}}
+        <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
+            <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Imagen principal de la empresa</h2>
+    
+            <div>
+                <x-sistem.forms.label-form for="image_hero_new" value="{{ __('Imagen de portada') }}" />
+                <x-sistem.forms.input-file-form id="image_hero_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_hero_new" accept="image/*"
+                    />
+                <x-sistem.forms.input-error for="image_hero_new" />
+            </div>
+    
+            <div class="flex justify-center items-center">
+        
+                @if ($image_hero_new)
+                <div class="">
+    
+                    <div wire:loading wire:target="image_hero_new">
+                        <x-sistem.spinners.loading-spinner/>
+                    </div>
+    
+                    <p class="mb-1">Imagen de portada nueva:</p>
+                        <x-sistem.lightbox.img-lightbox 
+                            class="h-32 w-32 p-1 bg-primary-200"
+                            :name="$image_hero_new->temporaryUrl()"    
+                        />
+                </div>
+                @else
+                <div class="">
+                    <div wire:loading wire:target="image_hero_new">
+                        <x-sistem.spinners.loading-spinner/>
+                    </div>
+                    <p class="mb-1">Imagen de portada actual:</p>
+                    <div class="h-32 w-32 mx-auto relative">
+                        <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                        <x-sistem.lightbox.img-tumb-lightbox 
+                            class="h-32 w-32 p-1 bg-primary-200"
+                            :uri="$this->image_hero_uri" 
+                            :name="$this->image_hero"    
+                        />
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+
+        {{-- logo de la empresa --}}
+        <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-md">
+            <h2 class="text-center text-gray-900 dark:text-gray-200 font-bold text-xl">Logo de la empresa</h2>
+            <div>
+                <x-sistem.forms.label-form for="image_logo_new" value="{{ __('Imagen de logo') }}" />
+                <x-sistem.forms.input-file-form id="image_logo_new" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="image_logo_new" accept="image/*"
+                    />
+                <x-sistem.forms.input-error for="image_logo_new" />
+            </div>
+    
+            <div class="flex justify-center items-center">
+        
+                @if ($image_logo_new)
+                <div class="">
+    
+                    <div wire:loading wire:target="image_logo_new">
+                        <x-sistem.spinners.loading-spinner/>
+                    </div>
+    
+                    <p class="mb-1">Imagen de logo nueva:</p>
+                        <x-sistem.lightbox.img-lightbox 
+                            class="h-32 w-32 p-1 bg-primary-200"
+                            :name="$image_logo_new->temporaryUrl()"    
+                        />
+                </div>
+                @else
+                <div class="">
+                    <div wire:loading wire:target="image_logo_new">
+                        <x-sistem.spinners.loading-spinner/>
+                    </div>
+                    <p class="mb-1">Imagen de logo actual:</p>
+                    <div class="h-32 w-32 mx-auto relative">
+                        <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                        <x-sistem.lightbox.img-lightbox 
+                            class="h-32 w-32 p-1 bg-primary-200"
+                            :uri="$this->image_logo_uri" 
+                            :name="$this->image_logo"    
+                        />
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

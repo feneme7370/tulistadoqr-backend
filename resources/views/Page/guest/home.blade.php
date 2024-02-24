@@ -215,7 +215,7 @@
             <div class="w-full my-4 flex flex-col items-center gap-3 justify-around sm:flex-row">
 
 <div class="flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
-    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="{{ asset('archives/sistem/img/demo1.jpg') }}" alt="">
+    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" lazy="loading" src="{{ asset('archives/sistem/img/demo1.jpg') }}" alt="">
     <div class="flex flex-col justify-between p-4 leading-normal">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Meriendalunas</h5>
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Menu para merendar.</p>
@@ -224,7 +224,7 @@
     </div>
 </div>
 <div class="flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
-    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="{{ asset('archives/sistem/img/demo2.jpg') }}" alt="">
+    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" lazy="loading" src="{{ asset('archives/sistem/img/demo2.jpg') }}" alt="">
     <div class="flex flex-col justify-between p-4 leading-normal">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">El Favorito</h5>
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Rotiseria.</p>

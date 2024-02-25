@@ -1,10 +1,9 @@
 /.phpunit.cache
 /node_modules
-# /public/build
-# /public/hot
+
 /public/archives/images
 /public/storage
-# /storage/*.key
+
 /vendor
 .phpunit.result.cache
 Homestead.json
@@ -16,3 +15,6 @@ yarn-error.log
 /.idea
 /.vscode
 .env.local
+# /public/build
+# /public/hot
+# /storage/*.key

@@ -13,16 +13,16 @@ class TagIndex extends Component
 
     // paginacion
     use WithPagination;
-    public function updatingActive() {$this->resetPage(pageName: 'p_tag');}
-    public function updatingSearch() {$this->resetPage(pageName: 'p_tag');}
+    // public function updatingActive() {$this->resetPage(pageName: 'p_tag');}
+    // public function updatingSearch() {$this->resetPage(pageName: 'p_tag');}
 
     // propiedades de busqueda
-    public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+    public $perPage = 10;
 
     // mostrar variables en queryString
-    protected function queryString(){
-        return ['search' => [ 'as' => 'q' ],];
-    }
+    // protected function queryString(){
+    //     return ['search' => [ 'as' => 'q' ],];
+    // }
 
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
@@ -190,12 +190,7 @@ class TagIndex extends Component
     public function render()
     {
         $tags = Tag::select('id', 'name')->with('company')->where('company_id', auth()->user()->company_id)
-                        ->when( $this->search, function($query) {
-                            return $query->where(function( $query) {
-                                $query->where('name', 'like', '%'.$this->search . '%');
-                            });
-                        })
-                        ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
+                        ->orderBy( 'name', 'ASC')
                         ->paginate($this->perPage, pageName: 'p_tag');
                         
         return view('livewire.page.tag-index', compact('tags'));

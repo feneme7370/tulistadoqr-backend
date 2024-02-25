@@ -11,7 +11,7 @@
             wire:click="createActionModal" 
             wire:loading.attr="disabled">
             @slot('icon')
-                <x-sistem.icons.hi-plus-circle/>
+              <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
             @endslot
         </x-sistem.buttons.primary-btn>
 
@@ -211,7 +211,13 @@
                           </div>
                           <p class="mb-1">Imagen de portada actual:</p>
                           <div class="h-32 w-32 mx-auto relative">
-                            <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                            <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">
+                                <x-sistem.icons.for-icons-app icon="trash" class="h-3 w-3"/>
+                            </button>
+                            
+                            {{-- <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">
+                                <x-sistem.icons.for-icons-app icon="rotate" class="h-3 w-3"/>
+                            </button> --}}
                             <x-sistem.lightbox.img-tumb-lightbox 
                                 class="h-32 w-32 p-1 "
                                 :uri="$this->image_hero_uri" 
@@ -255,7 +261,13 @@
                           </div>
                           <p class="mb-1">Imagen de logo actual:</p>
                           <div class="h-32 w-32 mx-auto relative">
-                            <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                            <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">
+                                <x-sistem.icons.for-icons-app icon="trash" class="h-3 w-3"/>
+                            </button>
+                            
+                            {{-- <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">
+                                <x-sistem.icons.for-icons-app icon="rotate" class="h-3 w-3"/>
+                            </button> --}}
                             <x-sistem.lightbox.img-tumb-lightbox 
                                 class="h-32 w-32 p-1 "
                                 :uri="$this->image_logo_uri" 
@@ -299,7 +311,13 @@
                           </div>
                           <p class="mb-1">Imagen de QR actual:</p>
                           <div class="h-32 w-32 mx-auto relative">
-                            <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                            <button wire:click='deleteImageQrEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">
+                                <x-sistem.icons.for-icons-app icon="trash" class="h-3 w-3"/>
+                            </button>
+                            
+                            {{-- <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">
+                                <x-sistem.icons.for-icons-app icon="rotate" class="h-3 w-3"/>
+                            </button> --}}
                             <x-sistem.lightbox.img-tumb-lightbox 
                                 class="h-32 w-32 p-1 "
                                 :uri="$this->image_qr_uri" 

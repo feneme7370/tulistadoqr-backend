@@ -17,19 +17,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // $products = Product::where('company_id', auth()->user()->company_id)->count();   
-        // $suggested = Suggested::where('company_id', auth()->user()->company_id)->count();   
-        
-        $companies = Company::count();
-        $memberships = Membership::count();
-        $users = User::count();   
 
-        $categories = Category::where('company_id', auth()->user()->company_id)->count();   
-        $levels = Level::where('company_id', auth()->user()->company_id)->count();   
-        $products = Product::where('company_id', auth()->user()->company_id)->count();   
-        $suggestions = Suggestion::where('company_id', auth()->user()->company_id)->count();   
-        $tags = Tag::where('company_id', auth()->user()->company_id)->count();   
-
-        return view('Page.admin.dashboard', compact('companies', 'users', 'memberships', 'categories', 'levels', 'products', 'suggestions', 'tags'));
+        return view('Page.admin.dashboards.index');
     }
 }

@@ -155,7 +155,6 @@
             </div>
     
             <div class="flex justify-center items-center">
-        
                 @if ($image_hero_new)
                 <div class="">
     
@@ -176,8 +175,15 @@
                     </div>
                     <p class="mb-1">Imagen de portada actual:</p>
                     <div class="h-32 w-32 mx-auto relative">
-                        <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                        <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">Rotar</button>
+
+                        <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">
+                            <x-sistem.icons.for-icons-app icon="trash" class="h-3 w-3"/>
+                        </button>
+                        
+                        <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">
+                            <x-sistem.icons.for-icons-app icon="rotate" class="h-3 w-3"/>
+                        </button>
+                        
                         <x-sistem.lightbox.img-tumb-lightbox 
                             class="h-32 w-32 p-1 bg-primary-200"
                             :uri="$this->image_hero_uri" 
@@ -186,6 +192,7 @@
                     </div>
                 </div>
                 @endif
+
             </div>
         </div>
 
@@ -221,8 +228,13 @@
                     </div>
                     <p class="mb-1">Imagen de logo actual:</p>
                     <div class="h-32 w-32 mx-auto relative">
-                        <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                        <button wire:click="rotateImageLogo" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">Rotar</button>
+                        <button wire:click='deleteImageLogoEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white flex items-center justify-center">
+                            <x-sistem.icons.for-icons-app icon="trash" class="h-3 w-3"/>
+                        </button>
+                        
+                        <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">
+                            <x-sistem.icons.for-icons-app icon="rotate" class="h-3 w-3"/>
+                        </button>
                         <x-sistem.lightbox.img-lightbox 
                             class="h-32 w-32 p-1 bg-primary-200"
                             :uri="$this->image_logo_uri" 

@@ -176,7 +176,7 @@
             @foreach ($services as $service)
                 
             <a href="#" class="w-full max-w-sm p-2 flex justify-center items-center flex-col">
-                <span class="h-16 w-16 fill-primary-800 mb-5"><x-sistem.icons.for-icos-home :icon="$service['icon']" /> </span>
+                <span class="h-16 w-16 fill-primary-800 mb-5"><x-sistem.icons.for-icons-home :icon="$service['icon']" /> </span>
                 <h5 class="mb-2 text-lg text-center font-bold tracking-tight text-gray-900">{{ $service['title'] }}</h5>
                 <p class="font-sm italic text-gray-700">{{ $service['description'] }}</p>
             </a>

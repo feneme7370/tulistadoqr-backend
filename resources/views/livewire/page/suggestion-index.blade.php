@@ -35,7 +35,7 @@
             wire:loading.attr="disabled" 
             >
             @slot('icon')
-                <x-sistem.icons.hi-plus-circle/>
+            <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
             @endslot
         </x-sistem.buttons.primary-btn>
       </div>

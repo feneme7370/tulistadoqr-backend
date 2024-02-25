@@ -7,7 +7,7 @@
 
     <x-sistem.buttons.primary-btn title="Agregar" wire:click="createActionModal" wire:loading.attr="disabled">
       @slot('icon')
-      <x-sistem.icons.hi-plus-circle />
+      <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
       @endslot
     </x-sistem.buttons.primary-btn>
 
@@ -176,9 +176,15 @@
               </div>
               <p class="mb-1">Imagen de categoria general actual:</p>
               <div class="w-64 h-64 mx-auto relative">
-                <button wire:click='deleteImageEdit' type="button"
-                  class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
-                  <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">Rotar</button>
+
+                <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">
+                    <x-sistem.icons.for-icons-app icon="trash" class="h-3 w-3"/>
+                </button>
+                
+                <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">
+                    <x-sistem.icons.for-icons-app icon="rotate" class="h-3 w-3"/>
+                </button>
+
                 <x-sistem.lightbox.img-lightbox class="h-64 max-w-96 p-1 bg-primary-200" :uri="$this->image_hero_uri"
                   :name="$this->image_hero" />
               </div>

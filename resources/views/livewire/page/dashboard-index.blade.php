@@ -1,7 +1,7 @@
 <div>
     {{-- titulo y boton --}}
     <x-sistem.menus.title-and-btn title="Bienvenido {{auth()->user()->name}}">
-        <div></div>
+        <div>{{ auth()->user()->company->membership->name }}</div>
     </x-sistem.menus.title-and-btn>
 
     {{-- enlace a pagina web --}}

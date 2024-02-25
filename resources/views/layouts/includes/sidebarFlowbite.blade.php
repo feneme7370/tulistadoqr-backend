@@ -275,7 +275,7 @@
 
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300 dark:border-gray-700">
             <!-- Authentication -->
-            <form method="POST" action="{{ route('logout') }}" x-data>
+            <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <x-sistem.navlinks.navlink-sidebar-flowbite 
                     title="Cerrar Sesion"

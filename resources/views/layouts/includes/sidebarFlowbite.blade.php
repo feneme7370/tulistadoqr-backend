@@ -75,15 +75,14 @@
                                 </a>
                             </li>
                             <li>
-                                <form method="POST" action="{{ route('logout') }}" x-data>
+                                <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <a href="" @click.prevent="$root.submit();"
-                                    
-                                    class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    <button
+                                    class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 w-full"
                                     role="menuitem">
                                     <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6"/>
                                     Cerrar sesion
-                                </a>
+                                </button>
 
                                 </form>
                             </li>
@@ -273,7 +272,7 @@
         </ul>
 
 
-        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300 dark:border-gray-700">
+        {{-- <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300 dark:border-gray-700">
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -285,7 +284,7 @@
                     <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6"/>
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             </form>
-        </ul>
+        </ul> --}}
     </div>
 </aside>
 

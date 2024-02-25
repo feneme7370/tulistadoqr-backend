@@ -4,8 +4,8 @@ namespace App\Livewire\Page;
 
 use Livewire\Component;
 use App\Models\Page\Tag;
-use Illuminate\Support\Str;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class TagIndex extends Component
 {
@@ -13,16 +13,9 @@ class TagIndex extends Component
 
     // paginacion
     use WithPagination;
-    // public function updatingActive() {$this->resetPage(pageName: 'p_tag');}
-    // public function updatingSearch() {$this->resetPage(pageName: 'p_tag');}
 
     // propiedades de busqueda
     public $perPage = 10;
-
-    // mostrar variables en queryString
-    // protected function queryString(){
-    //     return ['search' => [ 'as' => 'q' ],];
-    // }
 
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
@@ -77,31 +70,6 @@ class TagIndex extends Component
         $this->reset(['name', 'slug', 'user_id', 'company_id']);
     }
 
-    ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
-
-    // abrir modal y recibir id
-    // public function openDeleteModal($id){
-    //     $this->resetProperties();
-
-    //     $this->tag = Tag::findOrFail($id);
-    //     $this->authorize('delete', $this->tag); 
-
-    //     $this->showDeleteModal = true;
-    // }
-    
-    // eliminar desde el modal de confirmacion
-    // public function deleteTag() {
-    //     $this->resetProperties();
-
-    //     $tag = Tag::findOrFail($this->tag->id);
-    //     $tag->delete();
-
-    //     session()->flash('messageSuccess', 'Registro eliminado');
-    //     $this->resetProperties();
-    //     $this->reset('tag');
-
-    //     $this->showDeleteModal = false;
-    // }
 
     // eliminar desde sweetalert
     protected $listeners = ['deleteTagId'];
@@ -189,9 +157,9 @@ class TagIndex extends Component
     // renderizar vista
     public function render()
     {
-        $tags = Tag::select('id', 'name')->with('company')->where('company_id', auth()->user()->company_id)
+        $tags = Tag::with('company')->where('company_id', auth()->user()->company_id)
                         ->orderBy( 'name', 'ASC')
-                        ->paginate($this->perPage, pageName: 'p_tag');
+                        ->get();
                         
         return view('livewire.page.tag-index', compact('tags'));
     }

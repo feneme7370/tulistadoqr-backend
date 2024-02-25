@@ -23,7 +23,7 @@
     </div>
     
     {{-- portada y logo --}}
-    <div class="flex justify-center items-center gap-3 mb-2">
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-2">
 
         <div class="relative">
             <x-sistem.lightbox.img-tumb-lightbox 
@@ -52,7 +52,7 @@
             <x-sistem.cards.mini-date 
             href="{{route('memberships.index')}}" 
             title="Membresias" 
-            :date="$memberships"
+            :date="$memberships->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="membership" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>            
@@ -62,7 +62,7 @@
             <x-sistem.cards.mini-date 
             href="{{route('companies.index')}}" 
                 title="Empresas"
-                :date="$companies"
+                :date="$companies->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="company" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>         
@@ -72,7 +72,7 @@
             <x-sistem.cards.mini-date 
             href="{{route('users.index')}}" 
             title="Usuarios" 
-            :date="$users"
+            :date="$users->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="user" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>           
@@ -83,7 +83,7 @@
                 href="{{route('levels.index')}}" 
                 title="Categorias Generales"
                 :date_total="auth()->user()->company->membership->level" 
-                :date="$levels"
+                :date="$levels->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="level" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
@@ -94,7 +94,7 @@
                 href="{{route('categories.index')}}"
                 title="Categorias" 
                 :date_total="auth()->user()->company->membership->category"
-                :date="$categories"
+                :date="$categories->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="category" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
@@ -105,7 +105,7 @@
                 href="{{route('products.index')}}" 
                 title="Productos" 
                 :date_total="auth()->user()->company->membership->product" 
-                :date="$products"
+                :date="$products->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="product" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
@@ -116,7 +116,7 @@
                 href="{{route('tags.index')}}" 
                 title="Etiquetas" 
                 :date_total="auth()->user()->company->membership->tag" 
-                :date="$tags"
+                :date="$tags->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="tag" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
@@ -127,7 +127,7 @@
                 href="{{route('suggestions.index')}}" 
                 title="Sugerencias" 
                 :date_total="auth()->user()->company->membership->suggestion" 
-                :date="$suggestions"
+                :date="$suggestions->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="suggestion" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>

@@ -24,25 +24,25 @@ class ProductController extends Controller
      */
     public function index(Company $company)
     {
-        $products = Product::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $products = Product::where('company_id', $company->id)->where('status', 1)->orderBy('name', 'ASC')->get();
         $responseProducts = ProductResource::collection($products);
 
-        $offers = Product::where('company_id', $company->id)->where('status', 1)->where('price_seller', '!=', 0)->orderBy('id', 'DESC')->get();
+        $offers = Product::where('company_id', $company->id)->where('status', 1)->where('price_seller', '!=', 0)->orderBy('name', 'ASC')->get();
         $responseOffers = ProductResource::collection($offers);
 
         $suggestions = Suggestion::where('company_id', $company->id)->orderBy('id', 'DESC')->get();
         $responseSuggestions = SuggestionResource::collection($suggestions);
 
-        $levels = Level::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $levels = Level::where('company_id', $company->id)->where('status', 1)->orderBy('name', 'ASC')->get();
         $responseLevels =  LevelResource::collection($levels);
 
-        $categories = Category::where('company_id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $categories = Category::where('company_id', $company->id)->where('status', 1)->orderBy('name', 'ASC')->get();
         $responseCategories = CategoryResource::collection($categories);
 
         $companies = Company::where('id', $company->id)->where('status', 1)->orderBy('id', 'DESC')->get();
         $responseCompany = CompanyResource::collection($companies);
 
-        $tags = Tag::where('id', $company->id)->orderBy('id', 'DESC')->get();
+        $tags = Tag::where('id', $company->id)->orderBy('name', 'ASC')->get();
         $responseTag = TagResource::collection($tags);
 
         $array_products = [

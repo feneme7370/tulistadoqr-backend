@@ -16,15 +16,15 @@ class DashboardIndex extends Component
 {
     public function render()
     {
-        $companies = Company::count();
-        $memberships = Membership::count();
-        $users = User::count();   
+        $companies = Company::orderBy('id', 'DESC')->get();
+        $memberships = Membership::orderBy('id', 'DESC')->get();
+        $users = User::orderBy('id', 'DESC')->get();   
 
-        $categories = Category::where('company_id', auth()->user()->company_id)->count();   
-        $levels = Level::where('company_id', auth()->user()->company_id)->count();   
-        $products = Product::where('company_id', auth()->user()->company_id)->count();   
-        $suggestions = Suggestion::where('company_id', auth()->user()->company_id)->count();   
-        $tags = Tag::where('company_id', auth()->user()->company_id)->count();   
+        $categories = Category::where('company_id', auth()->user()->company_id)->get();   
+        $levels = Level::where('company_id', auth()->user()->company_id)->get();   
+        $products = Product::where('company_id', auth()->user()->company_id)->get();   
+        $suggestions = Suggestion::where('company_id', auth()->user()->company_id)->get();   
+        $tags = Tag::where('company_id', auth()->user()->company_id)->get();   
         
         return view('livewire.page.dashboard-index', compact(
             'companies', 

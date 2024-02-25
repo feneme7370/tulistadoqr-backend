@@ -71,9 +71,9 @@
     </div>
 
     {{-- Paginacion --}}
-    <div class="mt-2">
+    {{-- <div class="mt-2">
         {{ $tags->onEachSide(1)->links() }}
-    </div>
+    </div> --}}
 
     <!-- Modal para borrar -->
     <x-sistem.modal.dialog-modal wire:model="showDeleteModal">

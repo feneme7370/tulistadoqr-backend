@@ -235,7 +235,7 @@
                 </div>
 
 
-                {{-- imagen de portada empresa --}}
+                {{-- imagen del producto --}}
                 <div class="bg-gray-100 p-1 rounded-md">
                     <h2 class="text-center text-gray-90 font-bold text-xl">Imagen del producto</h2>
             
@@ -269,6 +269,7 @@
                               <p class="mb-1">Imagen del producto actual:</p>
                               <div class="w-64 h-64 mx-auto relative">
                                 <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                                <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">Rotar</button>
                                 <x-sistem.lightbox.img-lightbox 
                                     class="h-64 max-w-96 p-1 bg-primary-200"
                                     :uri="$this->image_hero_uri" 
@@ -281,6 +282,9 @@
                   </div>
 
                 <x-sistem.notifications.alerts-input :messageErrorInput="session('messageErrorInput')" />
+                <div wire:loading class="mx-auto">
+                    <x-sistem.spinners.loading-spinner/>
+                </div>
             </form>
 
         </x-slot>

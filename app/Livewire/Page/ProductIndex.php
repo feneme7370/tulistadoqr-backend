@@ -12,6 +12,7 @@ use App\Models\Page\Category;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use App\helpers\sistem\CrudInterventionImage;
+use Illuminate\Support\Facades\Log;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ProductIndex extends Component
@@ -157,6 +158,15 @@ class ProductIndex extends Component
 
             $this->image_hero = $this->dataImage[0];
         }
+    }
+
+    // rotar imagen
+    public function rotateImage(){
+        $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/products/');
+        $this->image_hero = $imageRotated[0];
+        $this->product->update(
+            $this->only(['image_hero'])
+        );
     }
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////

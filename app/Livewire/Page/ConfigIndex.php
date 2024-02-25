@@ -198,6 +198,15 @@ class ConfigIndex extends Component
         }
     }
 
+    // rotar imagen
+    public function rotateImage(){
+        $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/heros/');
+        $this->image_hero = $imageRotated[0];
+        $this->company->update(
+            $this->only(['image_hero'])
+        );
+    }
+
     // eliminar imagen al reemplazarla
     public function deleteImageLogo(){
         CrudInterventionImage::deleteImage(
@@ -228,6 +237,15 @@ class ConfigIndex extends Component
 
             $this->image_logo = $this->dataImageLogo[0];
         }
+    }
+
+    // rotar imagen
+    public function rotateImageLogo(){
+        $imageRotated = CrudInterventionImage::rotateImage($this->image_logo, auth()->user()->company->id . '/logos/');
+        $this->image_logo = $imageRotated[0];
+        $this->company->update(
+            $this->only(['image_logo'])
+        );
     }
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////

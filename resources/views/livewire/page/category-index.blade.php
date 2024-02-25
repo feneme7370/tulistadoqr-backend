@@ -187,6 +187,7 @@
                         <p class="mb-1">Imagen de categoria actual:</p>
                         <div class="w-64 h-64 mx-auto relative">
                           <button wire:click='deleteImageEdit' type="button" class="absolute top-2 right-2 p-2 bg-red-600 rounded-lg text-sm text-white">Eliminar</button>
+                          <button wire:click="rotateImage" type="button" class="absolute top-2 left-2 p-2 bg-gray-100 rounded-lg text-sm text-gray-600">Rotar</button>
                           <x-sistem.lightbox.img-lightbox 
                               class="h-64 max-w-96 p-1"
                               :uri="$this->image_hero_uri" 
@@ -199,8 +200,10 @@
                 
               </div>
 
+              <div wire:loading class="mx-auto">
+                <x-sistem.spinners.loading-spinner/>
+            </div>
             </form>
-
         </x-slot>
 
         <x-slot name="footer">

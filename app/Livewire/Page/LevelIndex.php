@@ -135,6 +135,15 @@ class LevelIndex extends Component
         }
     }
 
+    // rotar imagen
+    public function rotateImage(){
+        $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/levels/');
+        $this->image_hero = $imageRotated[0];
+        $this->level->update(
+            $this->only(['image_hero'])
+        );
+    }
+
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
     // abrir modal y recibir id

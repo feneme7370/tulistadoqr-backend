@@ -43,10 +43,10 @@ class CrudInterventionImage
         $image_hero_tumb = Image::make($imageNew);
 
         // editar imagenes
-        $image_hero->resize(600, null, function ($constraint) {
+        $image_hero->resize(800, null, function ($constraint) {
             $constraint->aspectRatio();
         });
-        $image_hero_tumb->resize(128, null, function ($constraint) {
+        $image_hero_tumb->resize(256, null, function ($constraint) {
             $constraint->aspectRatio();
         });
 
@@ -55,6 +55,35 @@ class CrudInterventionImage
         $image_hero_tumb->save($path . $filename_tumb, 95);
         
         // retornar el nombre sin el tumb
+        return [$filename, $path];
+    }
+
+    public static function rotateImage($imageString, $pathFolder){
+
+        // crear nombres
+        $name = auth()->user()->company_id.'_'.auth()->user()->id.'_'.time().'_'.Str::random(7);
+        $extension = '.jpg';
+        $path = 'archives/images/' . $pathFolder;
+        $filename = $name.$extension;
+        $filename_tumb = 'tumb_' . $name . $extension;
+        
+        // imagen existente
+        $image_path = $path . $imageString;
+        $image_path_tumb = $path . 'tumb_' . $imageString;
+        
+        $image_hero = Image::make($image_path);
+        $image_hero_tumb = Image::make($image_path_tumb);
+
+        $image_hero->rotate(-90);
+        $image_hero_tumb->rotate(-90);
+        
+        // guardar imagen nueva con rotacion
+        $image_hero->save($path . $filename);
+        $image_hero_tumb->save($path . $filename_tumb);
+
+        // eliminar imagen vieja
+        CrudInterventionImage::deleteImage($imageString, $pathFolder);
+        // dd($filename, $path);
         return [$filename, $path];
     }
 }

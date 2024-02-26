@@ -25,18 +25,18 @@
     {{-- portada y logo --}}
     <div class="flex flex-col lg:flex-row justify-center items-center gap-3 mb-2">
 
-        <div class="relative">
+        <div class="relative w-full sm:w-auto">
             <x-sistem.lightbox.img-tumb-lightbox 
-                class="h-64 w-64 p-1 bg-primary-100"
+                class="h-64 w-full sm:w-64 p-1 bg-primary-100"
                 :uri="auth()->user()->company->image_hero_uri" 
                 :name="auth()->user()->company->image_hero"    
             />
             <p class="absolute top-0 right-0 p-2 rounded-bl-xl bg-primary-800 text-white">Portada</p>
         </div>
 
-        <div class="relative">
+        <div class="relative w-full sm:w-auto">
             <x-sistem.lightbox.img-lightbox 
-                class="h-64 max-w-96 p-1 bg-primary-100"
+                class="h-64 w-full sm:w-64 p-1 bg-primary-100"
                 :uri="auth()->user()->company->image_logo_uri" 
                 :name="auth()->user()->company->image_logo"    
             />

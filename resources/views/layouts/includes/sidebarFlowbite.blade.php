@@ -1,12 +1,12 @@
 
 {{-- navbar --}}
 <nav class="fixed top-0 z-50 w-full bg-primary-700 border-b border-primary-300">
-    <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="px-3 py-3 sm:px-5 sm:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
-                    class="inline-flex items-center p-2 text-sm bg-primary-300 text-primary-700 rounded-lg lg:hidden hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-primary-200 ">
+                    class="inline-flex items-center p-2 text-sm bg-primary-300 text-primary-700 rounded-lg sm:hidden hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-primary-200 ">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,7 @@
                     {{-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" /> --}}
                     <img src="{{asset('archives/sistem/img/TuMenuQR_favicon.png')}}" class="h-8 me-3" alt="FlowBite Logo" />
                     <span
-                        class="self-center text-gray-100 text-xl font-semibold lg:text-2xl whitespace-nowrap">TuListadoQR</span>
+                        class="self-center text-gray-100 text-xl font-semibold sm:text-2xl whitespace-nowrap">TuListadoQR</span>
                 </a>
 
             </div>
@@ -78,11 +78,11 @@
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button
-                                    class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 w-full"
-                                    role="menuitem">
-                                    <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6"/>
-                                    Cerrar sesion
-                                </button>
+                                        class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 w-full"
+                                        role="menuitem">
+                                        <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6"/>
+                                        Cerrar sesion
+                                    </button>
 
                                 </form>
                             </li>
@@ -96,7 +96,7 @@
 
 {{-- sidebar --}}
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary-100 border-r border-primary-300 lg:translate-x-0"
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary-100 border-r border-primary-300 sm:translate-x-0"
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto ">
 
@@ -212,17 +212,6 @@
                     <x-sistem.icons.for-icons-app icon="config" class="h-6 w-6"/>
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
-            
-            @can('tags.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                
-                    href="{{ route('tags.index') }}"
-                    :active="request()->routeIs('tags.index')"
-                    title="Etiquetas"
-                >
-                    <x-sistem.icons.for-icons-app icon="tag" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
-            @endcan
 
             @can('levels.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
@@ -256,7 +245,18 @@
                     <x-sistem.icons.for-icons-app icon="product" class="h-6 w-6"/>
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
-
+            
+            @can('tags.index')
+                <x-sistem.navlinks.navlink-sidebar-flowbite
+                
+                    href="{{ route('tags.index') }}"
+                    :active="request()->routeIs('tags.index')"
+                    title="Etiquetas"
+                >
+                    <x-sistem.icons.for-icons-app icon="tag" class="h-6 w-6"/>
+                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+            
             @can('suggestions.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
                     
@@ -272,24 +272,24 @@
         </ul>
 
 
-        {{-- <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <x-sistem.navlinks.navlink-sidebar-flowbite 
+                <x-sistem.navlinks.navbutton-sidebar-flowbite 
                     title="Cerrar Sesion"
-                    href="#"
-                    @click.prevent="$root.submit();"
+                    type="submit"
                 >
                     <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+                </x-sistem.navlinks.navbutton-sidebar-flowbite>
             </form>
-        </ul> --}}
+        </ul>
     </div>
 </aside>
 
-{{-- @push('scripts')
-<script>
+@push('scripts')
+
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         const html = document.getElementById('html');
         const darkModeToggle = document.getElementById('darkModeToggle');
@@ -311,5 +311,5 @@
         });
     });
 
-</script>
-@endpush --}}
+</script> --}}
+@endpush

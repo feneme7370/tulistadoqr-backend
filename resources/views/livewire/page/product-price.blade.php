@@ -5,7 +5,7 @@
     />
 
     {{-- titulo y boton --}}
-    <x-sistem.menus.title-and-btn title="Productos">
+    <x-sistem.menus.title-and-btn title="Precios masivos">
         <div></div>
     </x-sistem.menus.title-and-btn>
 
@@ -161,24 +161,14 @@
 
     @push('scripts')
 
+    <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
     <script>
-        Livewire.on('toastifyProduct', (mensaje) => {
-        Toastify({
-            text: mensaje,
-            duration: 4000,
-            // destination: "https://github.com/apvarun/toastify-js",
-            newWindow: true,
-            close: true,
-            gravity: "top", // `top` or `bottom`
-            position: "right", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            style: {
-            background: "#f0fdf4",
-            color: "#166534",
-            },
-            onClick: function(){} // Callback after click
-        }).showToast();
-        })
+         Livewire.on('toastifyError', (message) => {
+           toastifyError(message)
+         })
+         Livewire.on('toastifySuccess', (message) => {
+           toastifySuccess(message)
+         })
     </script>
     @endpush
 </div>

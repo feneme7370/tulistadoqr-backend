@@ -185,6 +185,28 @@
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
+            @can('roles.index')
+                <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
+                    href="{{ route('roles.index') }}"
+                    :active="request()->routeIs('roles.index')"
+                    title="Roles"
+                >
+                    <x-sistem.icons.for-icons-app icon="role" class="h-6 w-6"/>
+                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+
+            @can('roles.permission')
+                <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
+                    href="{{ route('roles.permission') }}"
+                    :active="request()->routeIs('roles.permission')"
+                    title="Permisos"
+                >
+                    <x-sistem.icons.for-icons-app icon="role" class="h-6 w-6"/>
+                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+
             @can('social_medias.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
                     
@@ -251,7 +273,7 @@
                     
                     href="{{ route('products.price') }}"
                     :active="request()->routeIs('products.price')"
-                    title="Precios"
+                    title="Precios Masivos"
                 >
                     <x-sistem.icons.for-icons-app icon="price" class="h-6 w-6"/>
                 </x-sistem.navlinks.navlink-sidebar-flowbite>

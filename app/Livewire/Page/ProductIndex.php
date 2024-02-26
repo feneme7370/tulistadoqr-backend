@@ -163,10 +163,14 @@ class ProductIndex extends Component
     // rotar imagen
     public function rotateImage(){
         $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/products/');
-        $this->image_hero = $imageRotated[0];
-        $this->product->update(
-            $this->only(['image_hero'])
-        );
+        if($imageRotated != false){
+            $this->image_hero = $imageRotated[0];
+            $this->product->update(
+                $this->only(['image_hero'])
+            );
+        }else{
+            return $this->dispatch('toastifyError', 'Error, cargar nuevamente la imagen');;
+        }
     }
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
@@ -215,7 +219,7 @@ class ProductIndex extends Component
         $this->resetProperties();
         $this->reset('product');
         // session()->flash('messageSuccess', 'Registro eliminado');
-        $this->dispatch('toastifyProduct', 'Eliminado con exito');
+        $this->dispatch('toastifySuccess', 'Eliminado con exito');
 
     }
 
@@ -288,7 +292,7 @@ class ProductIndex extends Component
             $this->resetProperties();
 
             // session()->flash('messageSuccess', 'Actualizado con exito');
-            $this->dispatch('toastifyProduct', 'Actualizado con exito');
+            $this->dispatch('toastifySuccess', 'Actualizado con exito');
 
         } else {
 
@@ -303,7 +307,7 @@ class ProductIndex extends Component
             $this->resetProperties();
 
             // session()->flash('messageSuccess', 'Guardado con exito');
-            $this->dispatch('toastifyProduct', 'Guardado con exito');
+            $this->dispatch('toastifySuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

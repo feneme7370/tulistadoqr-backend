@@ -24,8 +24,8 @@ class DashboardIndex extends Component
         $levels = Level::where('company_id', auth()->user()->company_id)->get();   
         $products = Product::where('company_id', auth()->user()->company_id)->get();   
         $suggestions = Suggestion::where('company_id', auth()->user()->company_id)->get();   
-        $tags = Tag::where('company_id', auth()->user()->company_id)->get();   
-        
+        $tags = Tag::where('company_id', auth()->user()->company_id)->get();
+
         return view('livewire.page.dashboard-index', compact(
             'companies', 
             'users', 

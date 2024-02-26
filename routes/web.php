@@ -11,6 +11,7 @@ use App\Http\Controllers\Page\ProductController;
 use App\Http\Controllers\Page\CategoryController;
 use App\Http\Controllers\Page\DashboardController;
 use App\Http\Controllers\Page\MembershipController;
+use App\Http\Controllers\Page\RoleController;
 use App\Http\Controllers\Page\SuggestionController;
 use App\Http\Controllers\Page\SocialMediaController;
 
@@ -24,7 +25,7 @@ use App\Http\Controllers\Page\SocialMediaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-\Debugbar::disable();
+// \Debugbar::disable();
 Route::get('/', [GuestController::class, 'index'])->name('guest.index');
 
 Route::middleware([
@@ -33,6 +34,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('can:dashboard.index')->name('dashboard.index');
+    Route::get('/roles', [RoleController::class, 'index'])->middleware('can:roles.index')->name('roles.index');
+    Route::get('/permission', [RoleController::class, 'permission'])->middleware('can:roles.permission')->name('roles.permission');
     Route::get('/companies', [CompanyController::class, 'index'])->middleware('can:companies.index')->name('companies.index');
     Route::get('/memberships', [MembershipController::class, 'index'])->middleware('can:memberships.index')->name('memberships.index');
     Route::get('/tags', [TagController::class, 'index'])->middleware('can:tags.index')->name('tags.index');

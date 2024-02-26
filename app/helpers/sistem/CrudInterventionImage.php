@@ -60,6 +60,7 @@ class CrudInterventionImage
 
     public static function rotateImage($imageString, $pathFolder){
 
+       
         // crear nombres
         $name = auth()->user()->company_id.'_'.auth()->user()->id.'_'.time().'_'.Str::random(7);
         $extension = '.jpg';
@@ -71,19 +72,24 @@ class CrudInterventionImage
         $image_path = $path . $imageString;
         $image_path_tumb = $path . 'tumb_' . $imageString;
         
-        $image_hero = Image::make($image_path);
-        $image_hero_tumb = Image::make($image_path_tumb);
+        if(File::exists($image_path) && File::exists($image_path_tumb)){
 
-        $image_hero->rotate(-90);
-        $image_hero_tumb->rotate(-90);
-        
-        // guardar imagen nueva con rotacion
-        $image_hero->save($path . $filename);
-        $image_hero_tumb->save($path . $filename_tumb);
-
-        // eliminar imagen vieja
-        CrudInterventionImage::deleteImage($imageString, $pathFolder);
-        // dd($filename, $path);
-        return [$filename, $path];
+            $image_hero = Image::make($image_path);
+            $image_hero_tumb = Image::make($image_path_tumb);
+    
+            $image_hero->rotate(-90);
+            $image_hero_tumb->rotate(-90);
+            
+            // guardar imagen nueva con rotacion
+            $image_hero->save($path . $filename);
+            $image_hero_tumb->save($path . $filename_tumb);
+    
+            // eliminar imagen vieja
+            CrudInterventionImage::deleteImage($imageString, $pathFolder);
+            // dd($filename, $path);
+            return [$filename, $path];
+        }else{
+            return false;
+        }
     }
 }

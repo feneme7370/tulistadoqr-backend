@@ -110,7 +110,7 @@ class ProductPrice extends Component
         $this->resetProperties();
 
         // session()->flash('messageSuccess', 'Actualizado con exito');
-        $this->dispatch('toastifyProduct', 'Actualizado con exito');
+        $this->dispatch('toastifySuccess', 'Actualizado con exito');
 
     }
     public function render()

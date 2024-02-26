@@ -138,10 +138,14 @@ class LevelIndex extends Component
     // rotar imagen
     public function rotateImage(){
         $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/levels/');
-        $this->image_hero = $imageRotated[0];
-        $this->level->update(
-            $this->only(['image_hero'])
-        );
+        if($imageRotated != false){
+            $this->image_hero = $imageRotated[0];
+            $this->level->update(
+                $this->only(['image_hero'])
+            );
+        }else{
+            return $this->dispatch('toastifyError', 'Error, cargar nuevamente la imagen');;
+        }
     }
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
@@ -201,7 +205,7 @@ class LevelIndex extends Component
             $this->resetProperties();
             $this->reset('level');
             // session()->flash('messageSuccess', 'Registro eliminado');
-            $this->dispatch('toastifyLevel', 'Eliminado con exito');
+            $this->dispatch('toastifySuccess', 'Eliminado con exito');
         }
     }
 
@@ -263,7 +267,7 @@ class LevelIndex extends Component
             $this->reset(['level']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Actualizado con exito');
-            $this->dispatch('toastifyLevel', 'Actualizado con exito');
+            $this->dispatch('toastifySuccess', 'Actualizado con exito');
 
         } else {
 
@@ -275,7 +279,7 @@ class LevelIndex extends Component
             $this->reset(['level']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Guardado con exito');
-            $this->dispatch('toastifyLevel', 'Guardado con exito');
+            $this->dispatch('toastifySuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

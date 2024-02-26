@@ -31,14 +31,13 @@
         </main>
 
     </div>
-
     @livewireScripts
 
     <!-- libs -->
-    <script defer src="{{asset('lib/flowbite/flowbite.min.js')}}"></script>
-    <script defer src="{{asset('lib/lightbox/js/lightbox-plus-jquery.min.js')}}"></script>
-    <script defer src="{{asset('lib/sweetalert2/sweetalert2.all.min.js')}}"></script>
-    <script defer src="{{asset('lib/toastify/toastify.js')}}"></script>
+    <script defer src="{{asset('lib/flowbite/flowbite.min.js')}}"  ></script>
+    <script defer src="{{asset('lib/lightbox/js/lightbox-plus-jquery.min.js')}}"  ></script>
+    <script defer src="{{asset('lib/sweetalert2/sweetalert2.all.min.js')}}"  ></script>
+    <script defer src="{{asset('lib/toastify/toastify.js')}}"  ></script>
     
     {{-- <script>
         document.addEventListener("livewire:navigated", () => {

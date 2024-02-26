@@ -6,7 +6,7 @@
             <div class="flex items-center justify-start rtl:justify-end">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
-                    class="inline-flex items-center p-2 text-sm bg-primary-300 text-primary-700 rounded-lg sm:hidden hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-primary-200 ">
+                    class="inline-flex items-center p-2 text-sm bg-primary-300 text-primary-700 rounded-lg lg:hidden hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-primary-200 ">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,7 @@
                     {{-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" /> --}}
                     <img src="{{asset('archives/sistem/img/TuMenuQR_favicon.png')}}" class="h-8 me-3" alt="FlowBite Logo" />
                     <span
-                        class="self-center text-gray-100 text-xl font-semibold sm:text-2xl whitespace-nowrap">TuListadoQR</span>
+                        class="self-center text-gray-100 text-xl font-semibold lg:text-2xl whitespace-nowrap">TuListadoQR</span>
                 </a>
 
             </div>
@@ -96,7 +96,7 @@
 
 {{-- sidebar --}}
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary-100 border-r border-primary-300 sm:translate-x-0"
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary-100 border-r border-primary-300 lg:translate-x-0"
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto ">
 

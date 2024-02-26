@@ -5,9 +5,9 @@
     </x-sistem.menus.title-and-btn>
 
     {{-- enlace a pagina web --}}
-    <div class="my-2 flex flex-col sm:flex-row justify-between items-center p-5 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 w-full">
+    <div class="my-2 flex flex-col lg:flex-row justify-between items-center p-5 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 w-full">
 
-        <span class="font-bold text-gray-600 text-xl mb-2 sm:mb-0">{{auth()->user()->company->name}}</span>
+        <span class="font-bold text-gray-600 text-xl mb-2 lg:mb-0">{{auth()->user()->company->name}}</span>
 
         <a href="https://{{ auth()->user()->company->url }}" target="_blank" class="flex items-center justify-center gap-1">
             <p class="flex items-center flex-col gap-1">
@@ -23,7 +23,7 @@
     </div>
     
     {{-- portada y logo --}}
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-2">
+    <div class="flex flex-col lg:flex-row justify-center items-center gap-3 mb-2">
 
         <div class="relative">
             <x-sistem.lightbox.img-tumb-lightbox 
@@ -46,7 +46,7 @@
     </div>
       
     {{-- mini datos --}}
-    <div class="grid gap-3 mb-8 sm:grid-cols-2 xl:grid-cols-4">
+    <div class="grid gap-3 mb-8 lg:grid-cols-2 xl:grid-cols-4">
        
         @can('memberships.index')
             <x-sistem.cards.mini-date 

@@ -10,7 +10,7 @@
     </x-sistem.menus.text-info>
 
     <div>
-        <x-sistem.buttons.primary-btn wire:click="downloadQR" class="sm:mx-auto sm:mr-2" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Descargar QR"/>
+        <x-sistem.buttons.primary-btn wire:click="downloadQR" class="lg:mx-auto lg:mr-2" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Descargar QR"/>
     </div>
 
 

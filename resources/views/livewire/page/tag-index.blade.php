@@ -61,6 +61,7 @@
     <!-- Agrega más tarjetas aquí -->
   </div>
 
+
   <!-- Modal para borrar -->
   <x-sistem.modal.dialog-modal wire:model="showDeleteModal">
     <x-slot name="title">

@@ -11,12 +11,6 @@ class TagIndex extends Component
 {
     ///////////////////////////// MODULO PAGINACION /////////////////////////////
 
-    // paginacion
-    use WithPagination;
-
-    // propiedades de busqueda
-    public $perPage = 10;
-
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades para el modal

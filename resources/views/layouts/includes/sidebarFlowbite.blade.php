@@ -245,6 +245,17 @@
                     <x-sistem.icons.for-icons-app icon="product" class="h-6 w-6"/>
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
+
+            {{-- @can('products.price') --}}
+                <x-sistem.navlinks.navlink-sidebar-flowbite
+                    
+                    href="{{ route('products.price') }}"
+                    :active="request()->routeIs('products.price')"
+                    title="Precios"
+                >
+                    <x-sistem.icons.for-icons-app icon="price" class="h-6 w-6"/>
+                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            {{-- @endcan --}}
             
             @can('tags.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite

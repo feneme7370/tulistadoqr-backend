@@ -40,6 +40,7 @@ Route::middleware([
     Route::get('/categories', [CategoryController::class, 'index'])->middleware('can:categories.index')->name('categories.index');
     Route::get('/levels', [LevelController::class, 'index'])->middleware('can:levels.index')->name('levels.index');
     Route::get('/products', [ProductController::class, 'index'])->middleware('can:products.index')->name('products.index');
+    Route::get('/products_price', [ProductController::class, 'price'])->name('products.price');
     Route::get('/config/{company}', [ConfigController::class, 'index'])->middleware('can:config.index')->name('config.index');
     Route::get('/suggestions', [SuggestionController::class, 'index'])->middleware('can:suggestions.index')->name('suggestions.index');
     Route::get('/social_medias', [SocialMediaController::class, 'index'])->middleware('can:social_medias.index')->name('social_medias.index');

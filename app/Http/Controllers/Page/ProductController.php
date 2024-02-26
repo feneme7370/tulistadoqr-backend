@@ -12,4 +12,8 @@ class ProductController extends Controller
         
         return view('Page.admin.products.index');
     }
+
+    public function price() {
+        return view('Page.admin.products.price');
+    }
 }

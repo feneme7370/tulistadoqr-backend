@@ -45,7 +45,7 @@
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 " role="none">
-                                {{ auth()->user()->lastname }}, {{ auth()->user()->name }}
+                                {{ auth()->user()->name }}
                             </p>
                             <p class="text-sm font-medium text-gray-900 truncate " role="none">
                                 {{ auth()->user()->email }}
@@ -63,6 +63,15 @@
                                     role="menuitem">
                                     <x-sistem.icons.for-icons-app icon="dashboard" class="h-6 w-6"/>
                                     Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('profile.show') }}"
+                                    
+                                    class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100   "
+                                    role="menuitem">
+                                    <x-sistem.icons.for-icons-app icon="user" class="h-6 w-6"/>
+                                    Perfil
                                 </a>
                             </li>
                             <li>
@@ -268,7 +277,7 @@
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
-            {{-- @can('products.price') --}}
+            @can('products.price')
                 <x-sistem.navlinks.navlink-sidebar-flowbite
                     
                     href="{{ route('products.price') }}"
@@ -277,7 +286,7 @@
                 >
                     <x-sistem.icons.for-icons-app icon="price" class="h-6 w-6"/>
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
-            {{-- @endcan --}}
+            @endcan
             
             @can('tags.index')
                 <x-sistem.navlinks.navlink-sidebar-flowbite

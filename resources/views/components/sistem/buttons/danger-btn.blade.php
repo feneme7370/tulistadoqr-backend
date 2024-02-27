@@ -7,19 +7,19 @@ px-2 py-1 text-sm font-medium text-white rounded-lg
 
 transition-colors duration-150 
 
-bg-gray-700 
+bg-red-700 
 
 border border-transparent  
 
-active:bg-gray-800 
+active:bg-red-800 
 
-hover:bg-gray-800 
+hover:bg-red-800 
 
-focus:border-gray-300 
+focus:border-red-300 
 focus:outline-none  
-focus:shadow-outline-gray 
+focus:shadow-outline-red 
 focus:ring 
-focus:ring-gray-700 
+focus:ring-red-700 
 focus:ring-offset-0
 ']) }}>
     {{$icon}}

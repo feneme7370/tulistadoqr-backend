@@ -77,19 +77,19 @@
   
                 <p class="mt-4">
                   <a
-                    class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                    class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline"
                     href="{{route('password.request')}}"
                   >
                     Olvidaste tu clave?
                   </a>
                 </p>
                 <p class="mt-1">
-                  {{-- <a
-                    class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                  <a
+                    class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline"
                     href="{{route('register')}}"
                   >
                     Crear cuenta
-                  </a> --}}
+                  </a>
                 </p>
               </div>
             </div>

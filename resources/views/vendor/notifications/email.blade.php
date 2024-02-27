@@ -11,10 +11,11 @@
 @endif
 
 {{-- Intro Lines --}}
-@foreach ($introLines as $line)
+{{-- @foreach ($introLines as $line)
 {{ $line }}
 
-@endforeach
+@endforeach --}}
+{{ 'Por favor, haga click en el boton para verificar su correo.' }}
 
 {{-- Action Button --}}
 @isset($actionText)
@@ -25,15 +26,17 @@
     };
 ?>
 <x-mail::button :url="$actionUrl" :color="$color">
-{{ $actionText }}
+{{-- {{ $actionText }} --}}
+{{ 'Verificar Correo' }}
 </x-mail::button>
 @endisset
 
 {{-- Outro Lines --}}
-@foreach ($outroLines as $line)
+{{-- @foreach ($outroLines as $line)
 {{ $line }}
 
-@endforeach
+@endforeach --}}
+{{ 'Si usted no creo una cuenta, omita este mensaje.' }}
 
 {{-- Salutation --}}
 @if (! empty($salutation))

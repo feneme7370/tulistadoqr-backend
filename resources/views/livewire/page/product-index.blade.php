@@ -1,4 +1,5 @@
 <div>
+    
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
         :messageError="session('messageError')" 
@@ -18,8 +19,7 @@
         <p>Agregue los productos que ofrece en su menu, puede agregar un precio de oferta, una imagen y si quiere una descripcion que quiera que el cliente vea del producto.</p>
     </x-sistem.menus.text-info>
 
-    {{-- input buscador y filtro de activos --}}
-    {{-- <div class="flex flex-row flex-1 justify-evenly items-center gap-2 p-2"> --}}
+    {{-- input buscador y cantidad a mostrar --}}
     <x-sistem.filter.bg-input class="flex-row flex-1">
     
         <div  class="w-full">
@@ -44,6 +44,7 @@
         </div>
     </x-sistem.filter.bg-input>
 
+    {{-- select y checkbox --}}
     <x-sistem.filter.bg-input class="flex-row flex-1">
     
         <div class="w-full">
@@ -61,11 +62,8 @@
         </div>
     </x-sistem.filter.bg-input>
 
-    {{-- </div> --}}
-
-    {{-- <x-sistem.filter.search-active placeholder="Buscar por nombre, nivel o categoria" /> --}}
-
-    <x-sistem.spinners.loading-spinner wire:loading wire:target="search, level_search, categorySearch"/>
+    {{-- logo de carga --}}
+    <x-sistem.spinners.loading-spinner wire:loading />
 
     {{-- listado --}}
     <div class="mx-auto">
@@ -141,25 +139,6 @@
         {{-- {{ $products->onEachSide(1)->links('pagination::windmill-pagination') }} --}}
         {{ $products->onEachSide(1)->links() }}
     </div>
-
-    <!-- Modal para borrar -->
-    <x-sistem.modal.dialog-modal wire:model="showDeleteModal">
-        <x-slot name="title">
-            {{ __('Borrar') }}
-        </x-slot>
-
-        <x-slot name="content">
-            {{ __('Desea eliminar el registro?') }}
-        </x-slot>
-
-        <x-slot name="footer">
-            <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled"
-                title="Cancelar" />
-
-            <x-sistem.buttons.delete-btn wire:click="deleteProduct" wire:loading.attr="disabled"
-                title="Borrar" />
-        </x-slot>
-    </x-sistem.modal.dialog-modal>
 
     <!-- Modal para crear y editar -->
     <x-sistem.modal.dialog-modal wire:model="showActionModal">
@@ -311,36 +290,22 @@
     </x-sistem.modal.dialog-modal>
 
     @push('scripts')
-    <script>
-          document.addEventListener('livewire:init', () => {
-            Livewire.on('deleteProduct', (event) => {
-            Swal.fire({
-                title: 'Quieres eliminar el registro',
-                text: "Se eliminara de forma definitiva",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#7e22ce',
-                cancelButtonText: 'Cancelar',
-                confirmButtonText: 'Si, eliminar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                    // eliminar dato
-                    Livewire.dispatch('deleteProductId', {id : event})
-                    }
-            })
-          });
-      })
-    </script>
+        <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
+        <script>
+        Livewire.on('deleteProduct', (event, nameDispatch) => {
+            sweetalert2Delete(event, 'deleteProductId')
+        });
+        </script>
 
-    <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
-    <script>
-        Livewire.on('toastifyError', (message) => {
-        toastifyError(message)
-        })
-        Livewire.on('toastifySuccess', (message) => {
-        toastifySuccess(message)
-        })
-    </script>
+        <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
+        <script>
+            Livewire.on('toastifyError', (message) => {
+            toastifyError(message)
+            })
+            Livewire.on('toastifySuccess', (message) => {
+            toastifySuccess(message)
+            })
+        </script>
     @endpush
+
 </div>

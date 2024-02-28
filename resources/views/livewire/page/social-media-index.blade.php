@@ -19,7 +19,9 @@
 
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.search-active />
-    <x-sistem.spinners.loading-spinner wire:loading wire:target="search"/>
+
+    {{-- logo de carga --}}
+    <x-sistem.spinners.loading-spinner wire:loading />
 
     {{-- listado --}}
     <div class="mx-auto">
@@ -113,6 +115,5 @@
             <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="{{$social_media ? 'Actualizar' : 'Guardar'}}"  />
         </x-slot>
     </x-sistem.modal.dialog-modal>
-
 
 </div>

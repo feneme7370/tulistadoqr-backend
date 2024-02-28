@@ -1,22 +1,25 @@
 <div>
-    {{-- mensaje de alerta --}}
-    <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
-        :messageError="session('messageError')" 
-    />
+  {{-- mensaje de alerta --}}
+  <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
+      :messageError="session('messageError')" 
+  />
 
-    {{-- titulo y boton --}}
-    <x-sistem.menus.title-and-btn title="Etiquetas">
-      <x-sistem.buttons.primary-btn title="Agregar" wire:click="createActionModal" wire:loading.attr="disabled">
-          @slot('icon')
-          <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
-          @endslot
-      </x-sistem.buttons.primary-btn>
+  {{-- titulo y boton --}}
+  <x-sistem.menus.title-and-btn title="Etiquetas">
+    <x-sistem.buttons.primary-btn title="Agregar" wire:click="createActionModal" wire:loading.attr="disabled">
+        @slot('icon')
+        <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
+        @endslot
+    </x-sistem.buttons.primary-btn>
   </x-sistem.menus.title-and-btn>
 
-      {{-- texto informativo --}}
-      <x-sistem.menus.text-info>
-        <p>Las etiquetas sirven reflejar una cualidad del producto, por ej. "Sin TACC", "Vegano", "Sin Sal", o si quiere aclarar algo como "Nuevo", "Oferta".</p>
-    </x-sistem.menus.text-info>
+  {{-- texto informativo --}}
+  <x-sistem.menus.text-info>
+    <p>Las etiquetas sirven reflejar una cualidad del producto, por ej. "Sin TACC", "Vegano", "Sin Sal", o si quiere aclarar algo como "Nuevo", "Oferta".</p>
+  </x-sistem.menus.text-info>
+
+  {{-- logo de carga --}}
+  <x-sistem.spinners.loading-spinner wire:loading />
 
   {{-- listado --}}
   <div class="mx-auto">
@@ -61,25 +64,6 @@
     <!-- Agrega más tarjetas aquí -->
   </div>
 
-
-  <!-- Modal para borrar -->
-  <x-sistem.modal.dialog-modal wire:model="showDeleteModal">
-    <x-slot name="title">
-      {{ __('Borrar') }}
-    </x-slot>
-
-    <x-slot name="content">
-      {{ __('Desea eliminar el registro?') }}
-    </x-slot>
-
-    <x-slot name="footer">
-      <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled"
-        title="Cancelar" />
-
-      <x-sistem.buttons.delete-btn wire:click="deleteTag" wire:loading.attr="disabled" title="Borrar" />
-    </x-slot>
-  </x-sistem.modal.dialog-modal>
-
   <!-- Modal para crear y editar -->
   <x-sistem.modal.dialog-modal wire:model="showActionModal">
     <x-slot name="title">
@@ -108,28 +92,12 @@
     </x-slot>
   </x-sistem.modal.dialog-modal>
 
-  <div>
-    @push('scripts')
+  @push('scripts')
+    <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
     <script>
-      document.addEventListener('livewire:init', () => {
-              Livewire.on('deleteTag', (event) => {
-                Swal.fire({
-                  title: 'Quieres eliminar el registro',
-                  text: "Se eliminara de forma definitiva",
-                  icon: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#d33',
-                  cancelButtonColor: '#7e22ce',
-                  cancelButtonText: 'Cancelar',
-                  confirmButtonText: 'Si, eliminar'
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      // eliminar dato
-                      Livewire.dispatch('deleteTagId', {id : event})
-                    }
-                  })
-            });
-        })
+      Livewire.on('deleteTag', (event, nameDispatch) => {
+        sweetalert2Delete(event, 'deleteTagId')
+      });
     </script>
 
     <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
@@ -141,6 +109,5 @@
           toastifySuccess(message)
         })
     </script>
-    @endpush
-  </div>
+  @endpush
 </div>

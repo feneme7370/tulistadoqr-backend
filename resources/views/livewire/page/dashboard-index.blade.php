@@ -44,7 +44,10 @@
         </div>
 
     </div>
-      
+    
+    {{-- logo de carga --}}
+    <x-sistem.spinners.loading-spinner wire:loading />
+
     {{-- mini datos --}}
     <div class="grid gap-3 mb-8 lg:grid-cols-2 xl:grid-cols-4">
        
@@ -134,4 +137,5 @@
         @endcan
  
     </div>
+
 </div>

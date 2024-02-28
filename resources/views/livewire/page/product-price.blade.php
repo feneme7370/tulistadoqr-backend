@@ -93,7 +93,7 @@
 
     {{-- <x-sistem.filter.search-active placeholder="Buscar por nombre, nivel o categoria" /> --}}
 
-    <x-sistem.spinners.loading-spinner wire:loading wire:target="search, level_search, categorySearch"/>
+    <x-sistem.spinners.loading-spinner wire:loading/>
 
     {{-- listado --}}
     <div class="mx-auto">

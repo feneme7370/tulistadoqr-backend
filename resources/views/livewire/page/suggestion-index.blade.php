@@ -1,4 +1,5 @@
 <div>
+  
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
         :messageError="session('messageError')" 
@@ -14,8 +15,11 @@
       <p>Agregue productos sugeridos, estos apareceran tambien en una seccion aparte del menu digital. Puede poner productos en oferta, platos del dia, etc.</p>
     </x-sistem.menus.text-info>
 
+    {{-- logo de carga --}}
+    <x-sistem.spinners.loading-spinner wire:loading />
+
     {{-- input buscador y filtro de activos --}}
-    <div class="p-2 mb-1 flex justify-between items-center flex-col md:flex-row bg-white rounded-lg shadow-md gap-1">
+    <x-sistem.filter.bg-input class="flex-row flex-1">
       
       {{-- barra de select --}}
       <div class="w-full">
@@ -40,7 +44,7 @@
         </x-sistem.buttons.primary-btn>
       </div>
 
-    </div>
+    </x-sistem.filter.bg-input>
 
     {{-- listado --}}
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -85,8 +89,6 @@
     </div>
 
     {{-- Paginacion --}}
-    <div class="mt-2">
-        {{ $suggestions->onEachSide(1)->links() }}
-    </div>
+    <div class="mt-2">{{ $suggestions->onEachSide(1)->links() }}</div>
 
 </div>

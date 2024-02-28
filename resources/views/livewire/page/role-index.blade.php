@@ -1,6 +1,6 @@
 <div>
 
-{{-- titulo y boton --}}
+  {{-- titulo y boton --}}
   <x-sistem.menus.title-and-btn title="Roles">
 
     <x-sistem.buttons.primary-btn title="Agregar" wire:click="createActionModal" wire:loading.attr="disabled">
@@ -16,7 +16,10 @@
     <p>Agregar o editar los tipos de roles.</p>
   </x-sistem.menus.text-info>
 
-      {{-- listado --}}
+  {{-- logo de carga --}}
+  <x-sistem.spinners.loading-spinner wire:loading />
+
+  {{-- listado --}}
   <div class="mx-auto">
     <!-- Ejemplo de una tarjeta -->
 
@@ -69,12 +72,12 @@
 
   </div>
 
-    {{-- Paginacion --}}
-    <div class="mt-2">
-        {{ $roles->onEachSide(1)->links() }}
-      </div>
+  {{-- Paginacion --}}
+  <div class="mt-2">
+    {{ $roles->onEachSide(1)->links() }}
+  </div>
 
-        <!-- Modal para crear y editar -->
+  <!-- Modal para crear y editar -->
   <x-sistem.modal.dialog-modal wire:model="showActionModal">
     <x-slot name="title">
       {{ __($role ? 'Editar' : 'Agregar') }}
@@ -126,37 +129,23 @@
     </x-slot>
   </x-sistem.modal.dialog-modal>
 
-      @push('scripts')
-      <script>
-            document.addEventListener('livewire:init', () => {
-              Livewire.on('deleteRole', (event) => {
-                Swal.fire({
-                  title: 'Quieres eliminar el registro',
-                  text: "Se eliminara de forma definitiva",
-                  icon: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#d33',
-                  cancelButtonColor: '#7e22ce',
-                  cancelButtonText: 'Cancelar',
-                  confirmButtonText: 'Si, eliminar'
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      // eliminar dato
-                      Livewire.dispatch('deleteRoleId', {id : event})
-                    }
-                  })
-            });
+  @push('scripts')
+    <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
+    <script>
+      Livewire.on('deleteRole', (event, nameDispatch) => {
+        sweetalert2Delete(event, 'deleteRoleId')
+      });
+    </script>
+
+    <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
+    <script>
+        Livewire.on('toastifyError', (message) => {
+          toastifyError(message)
         })
-      </script>
-    
-      <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
-     <script>
-          Livewire.on('toastifyError', (message) => {
-            toastifyError(message)
-          })
-          Livewire.on('toastifySuccess', (message) => {
-            toastifySuccess(message)
-          })
-     </script>
-      @endpush
+        Livewire.on('toastifySuccess', (message) => {
+          toastifySuccess(message)
+        })
+    </script>
+  @endpush
+  
 </div>

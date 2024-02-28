@@ -1,6 +1,9 @@
 <div>
   {{-- mensaje de alerta --}}
-  <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')" :messageError="session('messageError')" />
+  <x-sistem.notifications.alerts 
+    :messageSuccess="session('messageSuccess')" 
+    :messageError="session('messageError')" 
+  />
 
   {{-- titulo y boton --}}
   <x-sistem.menus.title-and-btn title="Categorias Generales">
@@ -21,7 +24,9 @@
 
   {{-- input buscador y filtro de activos --}}
   <x-sistem.filter.search-active />
-  <x-sistem.spinners.loading-spinner wire:loading wire:target="search" />
+
+  {{-- logo de carga --}}
+  <x-sistem.spinners.loading-spinner wire:loading />
 
   {{-- listado --}}
   <div class="mx-auto">
@@ -53,8 +58,6 @@
                 <div class="actions">
                   <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
                     wire:loading.attr="disabled" />
-                  {{-- <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
-                    wire:loading.attr="disabled" /> --}}
                   <x-sistem.buttons.delete-text wire:click="$dispatch('deleteLevel', {{$item->id}})"
                     wire:loading.attr="disabled" />
                 </div>
@@ -94,27 +97,7 @@
   </div>
 
   {{-- Paginacion --}}
-  <div class="mt-2">
-    {{ $levels->onEachSide(1)->links() }}
-  </div>
-
-  <!-- Modal para borrar -->
-  <x-sistem.modal.dialog-modal wire:model="showDeleteModal">
-    <x-slot name="title">
-      {{ __('Borrar') }}
-    </x-slot>
-
-    <x-slot name="content">
-      {{ __('Desea eliminar el registro?') }}
-    </x-slot>
-
-    <x-slot name="footer">
-      <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled"
-        title="Cancelar" />
-
-      <x-sistem.buttons.delete-btn wire:click="deleteLevel" wire:loading.attr="disabled" title="Borrar" />
-    </x-slot>
-  </x-sistem.modal.dialog-modal>
+  <div class="mt-2">{{ $levels->onEachSide(1)->links() }}</div>
 
   <!-- Modal para crear y editar -->
   <x-sistem.modal.dialog-modal wire:model="showActionModal">
@@ -212,36 +195,35 @@
   </x-sistem.modal.dialog-modal>
 
   @push('scripts')
-  <script>
-        document.addEventListener('livewire:init', () => {
-          Livewire.on('deleteLevel', (event) => {
-            Swal.fire({
-              title: 'Quieres eliminar el registro',
-              text: "Se eliminara de forma definitiva",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#d33',
-              cancelButtonColor: '#7e22ce',
-              cancelButtonText: 'Cancelar',
-              confirmButtonText: 'Si, eliminar'
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  // eliminar dato
-                  Livewire.dispatch('deleteLevelId', {id : event})
-                }
-              })
-        });
-    })
-  </script>
+    <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
+    <script>
+      Livewire.on('deleteLevel', (event, nameDispatch) => {
+        sweetalert2Delete(event, 'deleteLevelId')
+      });
+      // document.addEventListener('livewire:init', () => {
 
-  <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
- <script>
-      Livewire.on('toastifyError', (message) => {
-        toastifyError(message)
-      })
-      Livewire.on('toastifySuccess', (message) => {
-        toastifySuccess(message)
-      })
- </script>
+      // })
+    </script>
+
+    {{-- <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
+    <script>
+          Livewire.on('toastifyError', (message) => {
+            toastifyError(message)
+          })
+          Livewire.on('toastifySuccess', (message) => {
+            toastifySuccess(message)
+          })
+    </script> --}}
+
+    <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
+    <script>
+          Livewire.on('toastifyError', (message) => {
+            toastrError(message)
+          })
+          Livewire.on('toastifySuccess', (message) => {
+            toastrSuccess(message)
+          })
+    </script>
   @endpush
+  
 </div>

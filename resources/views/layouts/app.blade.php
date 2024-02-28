@@ -12,6 +12,7 @@
         <!-- libs -->
         <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
         <link rel="stylesheet" href="{{asset('lib/toastify/toastify.css')}}">
+        <link rel="stylesheet" href="{{asset('lib/toastr/toastr.min.css')}}">
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -38,6 +39,7 @@
     <script defer src="{{asset('lib/lightbox/js/lightbox-plus-jquery.min.js')}}"  ></script>
     <script defer src="{{asset('lib/sweetalert2/sweetalert2.all.min.js')}}"  ></script>
     <script defer src="{{asset('lib/toastify/toastify.js')}}"  ></script>
+    <script defer src="{{asset('lib/toastr/toastr.min.js')}}"  ></script>
     
     {{-- <script>
         document.addEventListener("livewire:navigated", () => {
@@ -47,6 +49,8 @@
     @stack('scripts')
     @stack('modals')
 
-    
+    {{-- <script>
+       () => toastr.info('Proceso correcto', '¡Gracias!')
+    </script> --}}
     </body>
 </html>

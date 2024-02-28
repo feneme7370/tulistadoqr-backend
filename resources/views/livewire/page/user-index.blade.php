@@ -19,7 +19,9 @@
 
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.search-active placeholder="Buscar por apellido, nombre, email o empresa" />
-    <x-sistem.spinners.loading-spinner wire:loading wire:target="search"/>
+    
+    {{-- logo de carga --}}
+    <x-sistem.spinners.loading-spinner wire:loading />
 
     {{-- listado --}}
     <div class="mx-auto">

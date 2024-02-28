@@ -50,21 +50,13 @@ class RolePermission extends Component
         $this->resetProperties();
 
         $this->permission = Permission::findOrFail($id);
-        // $this->authorize('delete', $this->permission); 
-
-        // comprobar si tiene productos asignados
-        // if($this->permission->users->count() > 0){
-        //     session()->flash('messageError', 'No se puede eliminar, tiene usuarios asignados');
-        //     $this->resetProperties();
-        // }else{
-        // dd($this->permission);
 
         $this->permission->delete();
 
         $this->resetProperties();
         $this->reset('permission');
         // session()->flash('messageSuccess', 'Registro eliminado');
-        $this->dispatch('toastifySuccess', 'Eliminado con exito');
+        $this->dispatch('toastrSuccess', 'Eliminado con exito');
         // }
     }
 
@@ -105,7 +97,7 @@ class RolePermission extends Component
             $this->reset(['permission']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Actualizado con exito');
-            $this->dispatch('toastifySuccess', 'Actualizado con exito');
+            $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
 
@@ -117,7 +109,7 @@ class RolePermission extends Component
             $this->reset(['permission']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Guardado con exito');
-            $this->dispatch('toastifySuccess', 'Guardado con exito');
+            $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

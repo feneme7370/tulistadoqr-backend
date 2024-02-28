@@ -47,7 +47,7 @@
                           <td class="with-actions-columns">
                             <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
-                              <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
+                              <x-sistem.buttons.delete-text wire:click="$dispatch('deleteSocialMedia', {{$item->id}})"
                                 wire:loading.attr="disabled" />
                             </div>
                           </td>
@@ -71,24 +71,6 @@
     <div class="mt-2">
         {{ $social_medias->onEachSide(1)->links() }}
     </div>
-
-    <!-- Modal para borrar -->
-    <x-sistem.modal.dialog-modal wire:model="showDeleteModal">
-        <x-slot name="title">
-            {{ __('Borrar') }}
-        </x-slot>
-
-        <x-slot name="content">
-            {{ __('Desea eliminar el registro?') }}
-        </x-slot>
-
-        <x-slot name="footer">
-            <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-
-            <x-sistem.buttons.delete-btn wire:click="deleteSocialMedia()" wire:loading.attr="disabled"
-            title="Borrar" />
-        </x-slot>
-    </x-sistem.modal.dialog-modal>
 
     <!-- Modal para crear y editar -->
     <x-sistem.modal.dialog-modal wire:model="showActionModal">
@@ -116,4 +98,22 @@
         </x-slot>
     </x-sistem.modal.dialog-modal>
 
+    @push('scripts')
+      <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
+      <script>
+        Livewire.on('deleteSocialMedia', (event, nameDispatch) => {
+          sweetalert2Delete(event, 'deleteSocialMediaId')
+        });
+      </script>
+    
+      <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
+      <script>
+            Livewire.on('toastrError', (message) => {
+              toastrError(message)
+            })
+            Livewire.on('toastrSuccess', (message) => {
+              toastrSuccess(message)
+            })
+      </script>
+    @endpush
 </div>

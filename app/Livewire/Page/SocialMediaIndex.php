@@ -68,30 +68,20 @@ class SocialMediaIndex extends Component
     }
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
-
-    // abrir modal y recibir id
-    public function openDeleteModal($id){
+    // eliminar desde sweetalert
+    protected $listeners = ['deleteSocialMediaId'];
+    public function deleteSocialMediaId($id){
         $this->resetProperties();
 
         $this->social_media = SocialMedia::findOrFail($id);
-        $this->authorize('delete', $this->social_media); 
 
-        $this->showDeleteModal = true;
-    }
-    
-    // eliminar desde el modal de confirmacion
-    public function deleteSocialMedia() {
-        $this->resetProperties();
-
-        $social_media = SocialMedia::findOrFail($this->social_media->id);
-
-        $social_media->delete();
-        session()->flash('messageSuccess', 'Registro eliminado');
+        $this->social_media->delete();
 
         $this->resetProperties();
         $this->reset('social_media');
-
-        $this->showDeleteModal = false;
+        // session()->flash('messageSuccess', 'Registro eliminado');
+        $this->dispatch('toastrSuccess', 'Eliminado con exito');
+        // }
     }
 
     // mostrar modal para confirmar crear

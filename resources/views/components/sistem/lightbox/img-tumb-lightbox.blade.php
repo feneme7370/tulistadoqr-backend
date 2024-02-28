@@ -2,7 +2,7 @@
 
 <div {{ $attributes->merge(['class' => '']) }}>       
 
-    @if($name && !$name == '' && !$name == null)
+    @if($name && !$name == '' && !$name == null && file_exists($uri .$name))
         <a href="{{asset( $uri .$name)}}" data-lightbox="{{$name}}">
             <img src="{{asset( $uri . 'tumb_' . $name)}}" alt="imagen portada" class="w-full h-full object-cover rounded-sm"/>
         </a>

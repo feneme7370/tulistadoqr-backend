@@ -150,7 +150,7 @@ class CategoryIndex extends Component
                 $this->only(['image_hero'])
             );
         }else{
-            return $this->dispatch('toastifyError', 'Error, cargar nuevamente la imagen');;
+            return $this->dispatch('toastrError', 'Error, cargar nuevamente la imagen');;
         }
     }
 
@@ -211,7 +211,7 @@ class CategoryIndex extends Component
             $this->resetProperties();
             $this->reset('category');
             // session()->flash('messageSuccess', 'Registro eliminado');
-            $this->dispatch('toastifySuccess', 'Eliminado con exito');
+            $this->dispatch('toastrSuccess', 'Eliminado con exito');
         }
     }
 
@@ -276,7 +276,7 @@ class CategoryIndex extends Component
             $this->reset(['category']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Actualizado con exito');
-            $this->dispatch('toastifySuccess', 'Actualizado con exito');
+            $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
 
@@ -288,7 +288,7 @@ class CategoryIndex extends Component
             $this->reset(['category']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Guardado con exito');
-            $this->dispatch('toastifySuccess', 'Guardado con exito');
+            $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

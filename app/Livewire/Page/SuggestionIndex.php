@@ -82,7 +82,8 @@ class SuggestionIndex extends Component
         $suggestion->delete();
 
         $this->resetProperties();
-        session()->flash('messageSuccess', 'Registro eliminado');
+        
+        $this->dispatch('toastrSuccess', 'Eliminado con exito');
     }
 
     // boton de guardar o editar
@@ -105,7 +106,7 @@ class SuggestionIndex extends Component
         );
 
         $this->resetProperties();
-        session()->flash('messageSuccess', 'Guardado con exito');
+        $this->dispatch('toastrSuccess', 'Guardado con exito');
 
     }
 
@@ -117,7 +118,7 @@ class SuggestionIndex extends Component
         $products = Product::where('company_id', auth()->user()->company_id)
                         ->orderBy('name', 'ASC')->get();
 
-        $suggestions = Suggestion::with('product')
+        $suggestions = Suggestion::with('product', 'company')
                         ->where('company_id', auth()->user()->company_id)
                         ->paginate($this->perPage, pageName: 'p_suggestion');
         

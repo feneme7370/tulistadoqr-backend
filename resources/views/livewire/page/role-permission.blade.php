@@ -46,9 +46,7 @@
                 <div class="actions">
                   <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
                     wire:loading.attr="disabled" />
-                  {{-- <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
-                    wire:loading.attr="disabled" /> --}}
-                  <x-sistem.buttons.delete-text wire:click="$dispatch('deleteRole', {{$item->id}})"
+                  <x-sistem.buttons.delete-text wire:click="$dispatch('deletePermission', {{$item->id}})"
                     wire:loading.attr="disabled" />
                 </div>
               </td>
@@ -122,13 +120,13 @@
       });
     </script>
   
-    <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
+    <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
     <script>
-          Livewire.on('toastifyError', (message) => {
-            toastifyError(message)
+          Livewire.on('toastrError', (message) => {
+            toastrError(message)
           })
-          Livewire.on('toastifySuccess', (message) => {
-            toastifySuccess(message)
+          Livewire.on('toastrSuccess', (message) => {
+            toastrSuccess(message)
           })
     </script>
   @endpush

@@ -91,4 +91,16 @@
     {{-- Paginacion --}}
     <div class="mt-2">{{ $suggestions->onEachSide(1)->links() }}</div>
 
+    @push('scripts')
+   
+      <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
+      <script>
+            Livewire.on('toastrError', (message) => {
+              toastrError(message)
+            })
+            Livewire.on('toastrSuccess', (message) => {
+              toastrSuccess(message)
+            })
+      </script>
+    @endpush
 </div>

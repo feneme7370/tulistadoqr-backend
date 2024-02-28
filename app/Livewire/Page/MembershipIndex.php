@@ -108,33 +108,20 @@ class MembershipIndex extends Component
         ]);
     }
 
-    // abrir modal y recibir id
-    public function openDeleteModal($id){
+    // eliminar desde sweetalert
+    protected $listeners = ['deleteMembershipId'];
+    public function deleteMembershipId($id){
         $this->resetProperties();
 
         $this->membership = Membership::findOrFail($id);
-        $this->authorize('delete', $this->membership); 
 
-        $this->showDeleteModal = true;
-    }
-    
-    // eliminar desde el modal de confirmacion
-    public function deleteMembership() {
+        $this->membership->delete();
+
         $this->resetProperties();
-
-        $membership = Membership::findOrFail($this->membership->id);
-
-        if($membership->companies->count() > 0){
-            session()->flash('messageError', 'No se puede eliminar, tiene empresas asignadas');
-            $this->resetProperties();
-        }else{
-            $membership->delete();
-            session()->flash('messageSuccess', 'Registro eliminado');
-            $this->resetProperties();
-            $this->reset('membership');
-        }
-        
-        $this->showDeleteModal = false;
+        $this->reset('membership');
+        // session()->flash('messageSuccess', 'Registro eliminado');
+        $this->dispatch('toastrSuccess', 'Eliminado con exito');
+        // }
     }
 
     // mostrar modal para confirmar crear

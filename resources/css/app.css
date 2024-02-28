@@ -6,6 +6,11 @@
     display: none;
 }
 
+@layer base{
+    .f-serif{
+        @apply font-sans;
+    }
+}
 @layer utilities{
 
     .t_table {

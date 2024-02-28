@@ -9,6 +9,8 @@
             class="w-full" />
     </div>
     <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
-        <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />Activos
+        <x-sistem.forms.label-form value="Activos">
+            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />
+        </x-sistem.forms.label-form>
     </div>
 </div>

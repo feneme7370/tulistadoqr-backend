@@ -289,6 +289,36 @@ class CompanyIndex extends Component
         }
     }
 
+    // eliminar desde sweetalert
+    protected $listeners = ['deleteCompanyId'];
+    public function deleteCompanyId($id){
+        $this->resetProperties();
+
+        $this->company = Company::findOrFail($id);
+        $this->authorize('delete', $this->company); 
+
+        // comprobar si tiene productos asignados
+        if($this->company->users->count() > 0){
+            session()->flash('messageError', 'No se puede eliminar, tiene usuarios asignados');
+            $this->resetProperties();
+        }else{
+            $this->image_hero = $this->company['image_hero'];
+            $this->image_logo = $this->company['image_logo'];
+            
+            $this->deleteImage();
+            $this->deleteImageLogo();
+            $this->deleteImageQr();
+            $this->company->delete();
+
+            $this->resetProperties();
+            $this->reset('company');
+
+
+            // session()->flash('messageSuccess', 'Registro eliminado');
+            $this->dispatch('toastrSuccess', 'Eliminado con exito');
+        }
+    }
+
     // mostrar modal para confirmar crear
     public function createActionModal() {
         $this->resetProperties();

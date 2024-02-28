@@ -22,7 +22,7 @@
 
 
     </head>
-    <body class="font-sans antialiased transition-all duration-300 ease-in-out dark:bg-gray-300" id="body">
+    <body class="f-serif antialiased transition-all duration-300 ease-in-out bg-gray-50" id="body">
 
         @include('layouts.includes.sidebarFlowbite')
 

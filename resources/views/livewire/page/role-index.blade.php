@@ -137,13 +137,13 @@
       });
     </script>
 
-    <script src="{{ asset('lib/toastify/toastify-message.js') }}"></script>
+    <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
     <script>
-        Livewire.on('toastifyError', (message) => {
-          toastifyError(message)
+        Livewire.on('toastrError', (message) => {
+          toastrError(message)
         })
-        Livewire.on('toastifySuccess', (message) => {
-          toastifySuccess(message)
+        Livewire.on('toastrSuccess', (message) => {
+          toastrSuccess(message)
         })
     </script>
   @endpush

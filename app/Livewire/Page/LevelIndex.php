@@ -144,7 +144,7 @@ class LevelIndex extends Component
                 $this->only(['image_hero'])
             );
         }else{
-            return $this->dispatch('toastifyError', 'Error, cargar nuevamente la imagen');;
+            return $this->dispatch('toastrError', 'Error, cargar nuevamente la imagen');;
         }
     }
 
@@ -207,7 +207,7 @@ class LevelIndex extends Component
 
 
             // session()->flash('messageSuccess', 'Registro eliminado');
-            $this->dispatch('toastifySuccess', 'Eliminado con exito');
+            $this->dispatch('toastrSuccess', 'Eliminado con exito');
         }
     }
 
@@ -269,7 +269,7 @@ class LevelIndex extends Component
             $this->reset(['level']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Actualizado con exito');
-            $this->dispatch('toastifySuccess', 'Actualizado con exito');
+            $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
 
@@ -281,7 +281,7 @@ class LevelIndex extends Component
             $this->reset(['level']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Guardado con exito');
-            $this->dispatch('toastifySuccess', 'Guardado con exito');
+            $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

@@ -5,6 +5,11 @@
         :messageError="session('messageError')" 
     />
 
+    {{-- titulo y boton --}}
+    <x-sistem.menus.title-and-btn title="Configuracion">
+        <div></div>
+    </x-sistem.menus.title-and-btn>
+
     {{-- texto informativo --}}
     <x-sistem.menus.text-info class="">
         <p>Ajuste todos los datos de la empresa, cargue la imagen de portada y su logo en caso que sea una imagen. Tambien puede descargar aqui su codigo QR que redirecciona al menu digital.</p>

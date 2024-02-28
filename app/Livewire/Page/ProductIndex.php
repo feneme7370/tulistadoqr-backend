@@ -169,7 +169,7 @@ class ProductIndex extends Component
                 $this->only(['image_hero'])
             );
         }else{
-            return $this->dispatch('toastifyError', 'Error, cargar nuevamente la imagen');;
+            return $this->dispatch('toastrError', 'Error, cargar nuevamente la imagen');;
         }
     }
 
@@ -219,7 +219,7 @@ class ProductIndex extends Component
         $this->resetProperties();
         $this->reset('product');
         // session()->flash('messageSuccess', 'Registro eliminado');
-        $this->dispatch('toastifySuccess', 'Eliminado con exito');
+        $this->dispatch('toastrSuccess', 'Eliminado con exito');
 
     }
 
@@ -292,7 +292,7 @@ class ProductIndex extends Component
             $this->resetProperties();
 
             // session()->flash('messageSuccess', 'Actualizado con exito');
-            $this->dispatch('toastifySuccess', 'Actualizado con exito');
+            $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
 
@@ -307,7 +307,7 @@ class ProductIndex extends Component
             $this->resetProperties();
 
             // session()->flash('messageSuccess', 'Guardado con exito');
-            $this->dispatch('toastifySuccess', 'Guardado con exito');
+            $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

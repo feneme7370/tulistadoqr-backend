@@ -67,7 +67,7 @@ class RoleIndex extends Component
         $this->resetProperties();
         $this->reset('role');
         // session()->flash('messageSuccess', 'Registro eliminado');
-        $this->dispatch('toastifySuccess', 'Eliminado con exito');
+        $this->dispatch('toastrSuccess', 'Eliminado con exito');
         // }
     }
 
@@ -112,7 +112,7 @@ class RoleIndex extends Component
             $this->reset(['role']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Actualizado con exito');
-            $this->dispatch('toastifySuccess', 'Actualizado con exito');
+            $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
 
@@ -126,7 +126,7 @@ class RoleIndex extends Component
             $this->reset(['role']);
             $this->resetProperties();
             // session()->flash('messageSuccess', 'Guardado con exito');
-            $this->dispatch('toastifySuccess', 'Guardado con exito');
+            $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

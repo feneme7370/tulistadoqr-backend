@@ -8,10 +8,14 @@
     </div>
     
     <div class="mr-2 flex gap-2 items-center md:justify-end w-full text-gray-900">
-        <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model="suggested" />Destacados
+        <x-sistem.forms.label-form value="Destacados">
+            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="suggested" />
+        </x-sistem.forms.label-form>
     </div>
 
     <div class="mr-2 flex gap-2 items-center md:justify-end w-full text-gray-900">
-        <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model="active" />Activos
+        <x-sistem.forms.label-form value="Activos">
+            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />
+        </x-sistem.forms.label-form>
     </div>
 </div>

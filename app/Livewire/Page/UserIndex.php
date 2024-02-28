@@ -116,36 +116,20 @@ class UserIndex extends Component
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
-    // abrir modal y recibir id
-    public function openDeleteModal($id){
+    // eliminar desde sweetalert
+    protected $listeners = ['deleteUserId'];
+    public function deleteUserId($id){
         $this->resetProperties();
 
         $this->user = User::findOrFail($id);
-        $this->authorize('delete', $this->user);
-        
-        $this->showDeleteModal = true;
-    }
-    
-    // eliminar desde el modal de confirmacion
-    public function deleteUser() {
+
+        $this->user->delete();
+
         $this->resetProperties();
-
-        $user = User::findOrFail($this->user->id);
-
-        if($user->id == 1){
-            session()->flash('messageError', 'No se puede eliminar el registro');
-            $this->resetProperties();
-
-        }else{
-
-            $user->delete();
-            
-            session()->flash('messageSuccess', 'Registro eliminado');
-            $this->resetProperties();
-            $this->reset('user');
-        }
-
-        $this->showDeleteModal = false;
+        $this->reset('user');
+        // session()->flash('messageSuccess', 'Registro eliminado');
+        $this->dispatch('toastrSuccess', 'Eliminado con exito');
+        // }
     }
 
     // mostrar modal para confirmar crear

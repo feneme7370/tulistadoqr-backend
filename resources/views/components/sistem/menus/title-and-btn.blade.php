@@ -6,7 +6,7 @@
     bg-primary-100 
     border border-primary-300 
 ">
-    <p class="text-lg font-bold sm:text-2xl text-gray-600">
+    <p class="text-lg font-bold sm:text-2xl text-gray-700">
         {{$title}}
     </p>
     {{$slot}}

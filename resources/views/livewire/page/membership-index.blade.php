@@ -58,8 +58,8 @@
                           <td class="with-actions-columns">
                             <div class="actions">
                               <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
-                              <x-sistem.buttons.delete-text wire:click="openDeleteModal({{$item->id}})"
-                                wire:loading.attr="disabled" />
+                                <x-sistem.buttons.delete-text wire:click="$dispatch('deleteMembership', {{$item->id}})"
+                                  wire:loading.attr="disabled" />
                             </div>
                           </td>
 
@@ -217,5 +217,24 @@
             <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="{{ __($membership ? 'Actualizar' : 'Guardar') }}"  />
         </x-slot>
     </x-sistem.modal.dialog-modal>
+
+    @push('scripts')
+      <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
+      <script>
+        Livewire.on('deleteMembership', (event, nameDispatch) => {
+          sweetalert2Delete(event, 'deleteMembershipId')
+        });
+      </script>
+    
+      <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
+      <script>
+            Livewire.on('toastrError', (message) => {
+              toastrError(message)
+            })
+            Livewire.on('toastrSuccess', (message) => {
+              toastrSuccess(message)
+            })
+      </script>
+    @endpush
 
 </div>

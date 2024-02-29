@@ -15,7 +15,6 @@
     </x-sistem.menus.text-info>
 
     {{-- input buscador y filtro de activos --}}
-    {{-- <div class="flex flex-row flex-1 justify-evenly items-center gap-2 p-2"> --}}
     <x-sistem.filter.bg-input class="flex-row flex-1">
     
         <div  class="w-full">
@@ -93,20 +92,14 @@
     </x-sistem.buttons.primary-btn> 
     </x-sistem.filter.bg-input>
 
-    {{-- </div> --}}
-
-    {{-- <x-sistem.filter.search-active placeholder="Buscar por nombre, nivel o categoria" /> --}}
-
-    <x-sistem.spinners.loading-spinner wire:loading/>
+    {{-- logo de carga --}}
+    <x-sistem.spinners.loading-spinner wire:loading />
 
     {{-- listado --}}
     @include('livewire.page.tables-layouts.product-price-table')
 
     {{-- Paginacion --}}
-    <div class="mt-2">
-        {{-- {{ $products->onEachSide(1)->links('pagination::windmill-pagination') }} --}}
-        {{ $products->onEachSide(1)->links() }}
-    </div>
+    <div class="mt-2">{{ $products->onEachSide(1)->links() }}</div>
 
     @push('scripts')
 

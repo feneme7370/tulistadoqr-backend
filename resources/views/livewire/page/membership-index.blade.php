@@ -27,27 +27,10 @@
     @include('livewire.page.tables-layouts.membership-table')
 
     {{-- Paginacion --}}
-    <div class="mt-2">
-        {{ $memberships->onEachSide(1)->links() }}
-    </div>
+    <div class="mt-2">{{ $memberships->onEachSide(1)->links() }}</div>
 
     <!-- Modal para borrar -->
-    <x-sistem.modal.dialog-modal wire:model="showDeleteModal">
-        <x-slot name="title">
-            {{ __('Borrar') }}
-        </x-slot>
-
-        <x-slot name="content">
-            {{ __('Desea eliminar el registro?') }}
-        </x-slot>
-
-        <x-slot name="footer">
-            <x-sistem.buttons.normal-btn wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-
-            <x-sistem.buttons.delete-btn wire:click="deleteMembership()" wire:loading.attr="disabled"
-            title="Borrar" />
-        </x-slot>
-    </x-sistem.modal.dialog-modal>
+    @include('livewire.page.forms-layouts.membership-form')
 
     <!-- Modal para crear y editar -->
     <x-sistem.modal.dialog-modal wire:model="showActionModal">

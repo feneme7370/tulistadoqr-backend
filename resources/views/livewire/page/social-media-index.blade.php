@@ -27,35 +27,10 @@
     @include('livewire.page.tables-layouts.social-media-table')
 
     {{-- Paginacion --}}
-    <div class="mt-2">
-        {{ $social_medias->onEachSide(1)->links() }}
-    </div>
+    <div class="mt-2">{{ $social_medias->onEachSide(1)->links() }}</div>
 
     <!-- Modal para crear y editar -->
-    <x-sistem.modal.dialog-modal wire:model="showActionModal">
-        <x-slot name="title">
-          {{ __($social_media ? 'Editar' : 'Agregar') }}
-        </x-slot>
-
-        <x-slot name="content">
-            <form class="grid gap-2 mt-2">
-
-              <div>
-                <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
-                <x-sistem.forms.input-form id="name" name="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
-                     />
-                <x-sistem.forms.input-error for="name" />
-              </div>
-
-            </form>
-
-        </x-slot>
-
-        <x-slot name="footer">
-            <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled" title="Cancelar" />
-            <x-sistem.buttons.primary-btn wire:click="save" wire:loading.attr="disabled" title="{{$social_media ? 'Actualizar' : 'Guardar'}}"  />
-        </x-slot>
-    </x-sistem.modal.dialog-modal>
+    @include('livewire.page.forms-layouts.social-media-form')
 
     @push('scripts')
       <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>

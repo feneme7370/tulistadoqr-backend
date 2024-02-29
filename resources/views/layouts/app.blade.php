@@ -49,8 +49,5 @@
     @stack('scripts')
     @stack('modals')
 
-    {{-- <script>
-       () => toastr.info('Proceso correcto', '¡Gracias!')
-    </script> --}}
     </body>
 </html>

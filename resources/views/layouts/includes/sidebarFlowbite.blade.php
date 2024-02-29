@@ -1,4 +1,3 @@
-
 {{-- navbar --}}
 <nav class="fixed top-0 z-50 w-full bg-primary-700 border-b border-primary-300">
     <div class="px-3 py-3 sm:px-5 sm:pl-3">
@@ -17,22 +16,23 @@
                 </button>
 
                 {{-- logo izquierda --}}
-                <a href="{{ route('dashboard.index') }}"  class="flex ms-2 md:me-24">
-                    {{-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" /> --}}
-                    <img src="{{asset('archives/sistem/img/TuMenuQR_favicon.png')}}" class="h-8 me-3" alt="FlowBite Logo" />
+                <a href="{{ route('dashboard.index') }}" class="flex ms-2 md:me-24">
+                    {{-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
+                    --}}
+                    <img src="{{asset('archives/sistem/img/TuMenuQR_favicon.png')}}" class="h-8 me-3"
+                        alt="FlowBite Logo" />
                     <span
                         class="self-center text-gray-100 text-xl font-semibold sm:text-2xl whitespace-nowrap">TuListadoQR</span>
                 </a>
 
             </div>
-            
+
             <div class="flex items-center">
                 <div class="flex items-center ms-3">
 
                     {{-- imagen en miniatura --}}
                     <div>
-                        <button type="button"
-                            class="flex text-sm rounded-full focus:ring-4 focus:ring-gray-300 "
+                        <button type="button" class="flex text-sm rounded-full focus:ring-4 focus:ring-gray-300 "
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full"
@@ -53,33 +53,32 @@
                         </div>
                         <ul class="py-1" role="none">
                             {{-- <li>
-                                <button id="darkModeToggle" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100   ">Modo Oscuro</button>
+                                <button id="darkModeToggle"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100   ">Modo
+                                    Oscuro</button>
 
                             </li> --}}
                             <li>
                                 <a href="{{ route('dashboard.index') }}"
-                                    
                                     class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100   "
                                     role="menuitem">
-                                    <x-sistem.icons.for-icons-app icon="dashboard" class="h-6 w-6"/>
+                                    <x-sistem.icons.for-icons-app icon="dashboard" class="h-6 w-6" />
                                     Dashboard
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('profile.show') }}"
-                                    
                                     class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100   "
                                     role="menuitem">
-                                    <x-sistem.icons.for-icons-app icon="user" class="h-6 w-6"/>
+                                    <x-sistem.icons.for-icons-app icon="user" class="h-6 w-6" />
                                     Perfil
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('config.index', auth()->user()->company->id ) }}"
-                                    
                                     class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100   "
                                     role="menuitem">
-                                    <x-sistem.icons.for-icons-app icon="config" class="h-6 w-6"/>
+                                    <x-sistem.icons.for-icons-app icon="config" class="h-6 w-6" />
                                     Configuracion
                                 </a>
                             </li>
@@ -89,7 +88,7 @@
                                     <button
                                         class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 w-full"
                                         role="menuitem">
-                                        <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6"/>
+                                        <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6" />
                                         Cerrar sesion
                                     </button>
 
@@ -112,13 +111,9 @@
         {{-- listado inicial --}}
         <ul class="space-y-2 font-medium">
             <li>
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('dashboard.index') }}"
-                    :active="request()->routeIs('dashboard.index')"
-                    title="Dashboard"
-                >
-                    <x-sistem.icons.for-icons-app icon="dashboard" class="h-6 w-6"/>
+                <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('dashboard.index') }}"
+                    :active="request()->routeIs('dashboard.index')" title="Dashboard">
+                    <x-sistem.icons.for-icons-app icon="dashboard" class="h-6 w-6" />
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             </li>
         </ul>
@@ -127,7 +122,7 @@
 
         @role('superadmin')
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
-            
+
             {{-- item desplegable --}}
             {{-- <li>
                 <button type="button"
@@ -162,69 +157,45 @@
             </li> --}}
 
             @can('memberships.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('memberships.index') }}"
-                    :active="request()->routeIs('memberships.index')"
-                    title="Membresias"
-                >
-                    <x-sistem.icons.for-icons-app icon="membership" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite> 
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('memberships.index') }}"
+                :active="request()->routeIs('memberships.index')" title="Membresias">
+                <x-sistem.icons.for-icons-app icon="membership" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
-            @can('companies.index') 
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('companies.index') }}"
-                    :active="request()->routeIs('companies.index')"
-                    title="Empresas"
-                >
-                    <x-sistem.icons.for-icons-app icon="company" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @can('companies.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('companies.index') }}"
+                :active="request()->routeIs('companies.index')" title="Empresas">
+                <x-sistem.icons.for-icons-app icon="company" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('users.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('users.index') }}"
-                    :active="request()->routeIs('users.index')"
-                    title="Usuarios"
-                >
-                    <x-sistem.icons.for-icons-app icon="user" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('users.index') }}"
+                :active="request()->routeIs('users.index')" title="Usuarios">
+                <x-sistem.icons.for-icons-app icon="user" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('roles.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('roles.index') }}"
-                    :active="request()->routeIs('roles.index')"
-                    title="Roles"
-                >
-                    <x-sistem.icons.for-icons-app icon="role" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('roles.index') }}"
+                :active="request()->routeIs('roles.index')" title="Roles">
+                <x-sistem.icons.for-icons-app icon="role" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('roles.permission')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('roles.permission') }}"
-                    :active="request()->routeIs('roles.permission')"
-                    title="Permisos"
-                >
-                    <x-sistem.icons.for-icons-app icon="role" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('roles.permission') }}"
+                :active="request()->routeIs('roles.permission')" title="Permisos">
+                <x-sistem.icons.for-icons-app icon="role" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('social_medias.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('social_medias.index') }}"
-                    :active="request()->routeIs('social_medias.index')"
-                    title="Redes Sociales"
-                >
-                    <x-sistem.icons.for-icons-app icon="social_media" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('social_medias.index') }}"
+                :active="request()->routeIs('social_medias.index')" title="Redes Sociales">
+                <x-sistem.icons.for-icons-app icon="social_media" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
         </ul>
@@ -232,82 +203,54 @@
 
         {{-- listado cliente --}}
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
-            
+
             @can('config.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('config.index', auth()->user()->company_id) }}"
-                    :active="request()->routeIs('config.index')"
-                    title="Configuracion"
-                >
-                    <x-sistem.icons.for-icons-app icon="config" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('config.index', auth()->user()->company_id) }}"
+                :active="request()->routeIs('config.index')" title="Configuracion">
+                <x-sistem.icons.for-icons-app icon="config" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('levels.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('levels.index') }}"
-                    :active="request()->routeIs('levels.index')"
-                    title="Categoria General"
-                >
-                    <x-sistem.icons.for-icons-app icon="level" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('levels.index') }}"
+                :active="request()->routeIs('levels.index')" title="Categoria General">
+                <x-sistem.icons.for-icons-app icon="level" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('categories.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('categories.index') }}"
-                    :active="request()->routeIs('categories.index')"
-                    title="Categorias"
-                >
-                    <x-sistem.icons.for-icons-app icon="category" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('categories.index') }}"
+                :active="request()->routeIs('categories.index')" title="Categorias">
+                <x-sistem.icons.for-icons-app icon="category" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('products.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('products.index') }}"
-                    :active="request()->routeIs('products.index')"
-                    title="Productos"
-                >
-                    <x-sistem.icons.for-icons-app icon="product" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('products.index') }}"
+                :active="request()->routeIs('products.index')" title="Productos">
+                <x-sistem.icons.for-icons-app icon="product" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('products.price')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('products.price') }}"
-                    :active="request()->routeIs('products.price')"
-                    title="Precios Masivos"
-                >
-                    <x-sistem.icons.for-icons-app icon="price" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('products.price') }}"
+                :active="request()->routeIs('products.price')" title="Precios Masivos">
+                <x-sistem.icons.for-icons-app icon="price" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
-            
+
             @can('tags.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                
-                    href="{{ route('tags.index') }}"
-                    :active="request()->routeIs('tags.index')"
-                    title="Etiquetas"
-                >
-                    <x-sistem.icons.for-icons-app icon="tag" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('tags.index') }}"
+                :active="request()->routeIs('tags.index')" title="Etiquetas">
+                <x-sistem.icons.for-icons-app icon="tag" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
-            
+
             @can('suggestions.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite
-                    
-                    href="{{ route('suggestions.index') }}"
-                    :active="request()->routeIs('suggestions.index')"
-                    title="Sugerencias"
-                >
-                    <x-sistem.icons.for-icons-app icon="suggestion" class="h-6 w-6"/>
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('suggestions.index') }}"
+                :active="request()->routeIs('suggestions.index')" title="Sugerencias">
+                <x-sistem.icons.for-icons-app icon="suggestion" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
 
@@ -318,11 +261,8 @@
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <x-sistem.navlinks.navbutton-sidebar-flowbite 
-                    title="Cerrar Sesion"
-                    type="submit"
-                >
-                    <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6"/>
+                <x-sistem.navlinks.navbutton-sidebar-flowbite title="Cerrar Sesion" type="submit">
+                    <x-sistem.icons.for-icons-app icon="logout" class="h-6 w-6" />
                 </x-sistem.navlinks.navbutton-sidebar-flowbite>
             </form>
         </ul>
@@ -331,27 +271,27 @@
 
 @push('scripts')
 
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const html = document.getElementById('html');
-        const darkModeToggle = document.getElementById('darkModeToggle');
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const html = document.getElementById('html');
+            const darkModeToggle = document.getElementById('darkModeToggle');
 
-        // Verifica el estado actual del modo oscuro en el almacenamiento local
-        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            // Verifica el estado actual del modo oscuro en el almacenamiento local
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
 
-        // Aplica la clase de modo oscuro si está activado
-        if (isDarkMode) {
-            html.classList.add('dark');
-        }
+            // Aplica la clase de modo oscuro si está activado
+            if (isDarkMode) {
+                html.classList.add('dark');
+            }
 
-        // Agrega un evento de clic al botón para cambiar el modo oscuro
-        darkModeToggle.addEventListener('click', function () {
-            // Cambia la clase del cuerpo y actualiza el estado en el almacenamiento local
-            html.classList.toggle('dark');
-            const updatedDarkModeState = html.classList.contains('dark');
-            localStorage.setItem('darkMode', updatedDarkModeState);
+            // Agrega un evento de clic al botón para cambiar el modo oscuro
+            darkModeToggle.addEventListener('click', function () {
+                // Cambia la clase del cuerpo y actualiza el estado en el almacenamiento local
+                html.classList.toggle('dark');
+                const updatedDarkModeState = html.classList.contains('dark');
+                localStorage.setItem('darkMode', updatedDarkModeState);
+            });
         });
-    });
 
-</script> --}}
+    </script> --}}
 @endpush

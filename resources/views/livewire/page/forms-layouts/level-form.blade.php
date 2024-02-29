@@ -1,7 +1,7 @@
 <x-sistem.modal.dialog-modal wire:model="showActionModal">
   <x-slot name="title">
       {{ __('Formulario para ' . ($level ? 'editar' : 'agregar') . ' datos') }}
-  </x-slot>
+  </x-slot> 
 
   <x-slot name="content">
 

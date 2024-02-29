@@ -6,7 +6,7 @@
   <x-slot name="content">
       <x-sistem.forms.form-section submit="save">
         <x-slot name="title">
-          {{ __($social_media ? 'Editar' : 'Agregar') }}
+          {{ __('Redes sociales') }}
         </x-slot>
 
         <x-slot name="description">

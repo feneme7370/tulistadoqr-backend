@@ -6,11 +6,11 @@
   <x-slot name="content">
       <x-sistem.forms.form-section submit="save">
         <x-slot name="title">
-          {{ __($user ? 'Editar' : 'Agregar') }}
+          {{ __('Datos') }}
         </x-slot>
 
         <x-slot name="description">
-          {{ __('Administre los usuarios, sus datos y a que empresa pertenecen.') }}
+          {{ __('Datos personales del usuario.') }}
         </x-slot>
 
         <x-slot name="form">
@@ -67,6 +67,35 @@
             </div>
             
             <div>
+              <label for="status" class="flex items-center">
+                  <x-sistem.forms.checkbox-form id="status" wire:model="status" />
+                  <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
+              </label>
+            </div>
+  
+          </div>
+        </x-slot>
+
+        <x-slot name="actions">
+        </x-slot>
+
+      </x-sistem.forms.form-section>
+
+      <x-sistem.menus.section-border />
+
+      <x-sistem.forms.form-section submit="save">
+        <x-slot name="title">
+          {{ __('Descripcion y Empresa') }}
+        </x-slot>
+
+        <x-slot name="description">
+          {{ __('Agregue una descripcion y asigne una empresa.') }}
+        </x-slot>
+
+        <x-slot name="form">
+          <div class="grid gap-2 w-full">
+            
+            <div>
               <x-sistem.forms.label-form for="company_id" value="{{ __('Empresa') }}" />
               <x-sistem.forms.select-form wire:model="company_id">
                   @foreach ($companies as $company)
@@ -82,13 +111,28 @@
                   wire:model="description" />
               <x-sistem.forms.input-error for="description" />
             </div>
-  
-            <div>
-              <label for="status" class="flex items-center">
-                  <x-sistem.forms.checkbox-form id="status" wire:model="status" />
-                  <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
-              </label>
-            </div>
+
+          </div>
+        </x-slot>
+
+        <x-slot name="actions">
+        </x-slot>
+
+      </x-sistem.forms.form-section>
+
+      <x-sistem.menus.section-border />
+
+      <x-sistem.forms.form-section submit="save">
+        <x-slot name="title">
+          {{ __('Clave') }}
+        </x-slot>
+
+        <x-slot name="description">
+          {{ __('Modifique su clave.') }}
+        </x-slot>
+
+        <x-slot name="form">
+          <div class="grid gap-2 w-full">
   
             <div>
               <x-sistem.forms.label-form for="password" value="{{ __('Clave') }}" />

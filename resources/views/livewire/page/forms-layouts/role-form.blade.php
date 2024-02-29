@@ -6,11 +6,11 @@
   <x-slot name="content">
       <x-sistem.forms.form-section submit="save">
         <x-slot name="title">
-          {{ __($role ? 'Editar' : 'Agregar') }}
+          {{ __('Datos') }}
         </x-slot>
 
         <x-slot name="description">
-          {{ __('Cree o edite roles, y agregue los permisos correspondiente a cada uno.') }}
+          {{ __('Agregar el nombre del rol y poner web en guard name.') }}
         </x-slot>
 
         <x-slot name="form">
@@ -26,6 +26,28 @@
               <x-sistem.forms.input-form id="guard_name" type="text" placeholder="{{ __('Guard Name') }}" wire:model="guard_name" />
               <x-sistem.forms.input-error for="guard_name" />
             </div>
+
+          </div>
+        </x-slot>
+
+        <x-slot name="actions">
+        </x-slot>
+
+      </x-sistem.forms.form-section>
+
+      <x-sistem.menus.section-border />
+
+      <x-sistem.forms.form-section submit="save">
+        <x-slot name="title">
+          {{ __('Permisos') }}
+        </x-slot>
+
+        <x-slot name="description">
+          {{ __('Seleccione los permisos que el rol va a tener.') }}
+        </x-slot>
+
+        <x-slot name="form">
+          <div class="grid gap-2 w-full">
 
             <div>
               <x-sistem.forms.label-form value="Permisos"/>

@@ -3,7 +3,7 @@
       {{ __('Formulario para ' . ($permission ? 'editar' : 'agregar') . ' datos') }}
   </x-slot>
 
-  <x-slot name="content">
+  <x-slot name="content"> 
       <x-sistem.forms.form-section submit="save">
         <x-slot name="title">
           {{ __($permission ? 'Editar' : 'Agregar') }}

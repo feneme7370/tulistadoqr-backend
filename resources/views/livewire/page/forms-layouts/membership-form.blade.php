@@ -1,51 +1,105 @@
+<div>
+
 <x-sistem.modal.dialog-modal wire:model="showActionModal">
     <x-slot name="title">
         {{ __('Formulario para ' . ($membership ? 'editar' : 'agregar') . ' datos') }}
     </x-slot>
   
     <x-slot name="content">
+        
+        <x-sistem.forms.validation-errors class="mb-4" />
+  
         <x-sistem.forms.form-section submit="save">
           <x-slot name="title">
-            {{ __($membership ? 'Editar' : 'Agregar') }}
+            {{ __('Datos') }}
+          </x-slot>
+
+          <x-slot name="description">
+            {{ __('Agregue los datos generales de la membresia.') }}
+          </x-slot>
+  
+          <x-slot name="form">
+            <div class="grid gap-2 w-full">
+        
+                <div>
+                    <x-sistem.forms.label-form for="name" value="{{ __('Nombre de la membresia') }}" />
+                    <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
+                        />
+                    <x-sistem.forms.input-error for="name" />
+                </div>
+                
+                <div>
+                    <x-sistem.forms.label-form for="price" value="{{ __('Precio') }}" />
+                    <x-sistem.forms.input-form id="price" type="text" placeholder="{{ __('Precio') }}" wire:model="price"
+                        />
+                    <x-sistem.forms.input-error for="price" />
+                </div>
+                    
+                <div>
+                <label for="status" class="flex items-center">
+                    <x-sistem.forms.checkbox-form id="status" wire:model="status" />
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
+                </label>
+                </div>
+
+            </div>
+          </x-slot>
+  
+          <x-slot name="actions">
+          </x-slot>
+  
+        </x-sistem.forms.form-section>
+
+        <x-sistem.menus.section-border />
+
+        <x-sistem.forms.form-section submit="save">
+          <x-slot name="title">
+            {{ __('Descripcion') }}
           </x-slot>
   
           <x-slot name="description">
-            {{ __('Administre las membresias, los limites de cada una, ponga un precio o si puede utilizar el menu.') }}
+            {{ __('Coloque las descripciones que se veran en la pagina principal.') }}
           </x-slot>
   
           <x-slot name="form">
             <div class="grid gap-2 w-full">
   
-                <x-sistem.forms.validation-errors class="mb-4" />
-        
                 <div>
-                <x-sistem.forms.label-form for="name" value="{{ __('Nombre de la membresia') }}" />
-                <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
-                    />
-                <x-sistem.forms.input-error for="name" />
-                </div>
-                
-                <div>
-                <x-sistem.forms.label-form for="price" value="{{ __('Precio') }}" />
-                <x-sistem.forms.input-form id="price" type="text" placeholder="{{ __('Precio') }}" wire:model="price"
-                    />
-                <x-sistem.forms.input-error for="price" />
+                    <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
+                    <x-sistem.forms.textarea-form id="short_description" type="text" placeholder="{{ __('Breve descripcion') }}" wire:model="short_description"
+                        />
+                    <x-sistem.forms.input-error for="short_description" />
                 </div>
 
                 <div>
-                <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
-                <x-sistem.forms.textarea-form id="short_description" type="text" placeholder="{{ __('Breve descripcion') }}" wire:model="short_description"
-                    />
-                <x-sistem.forms.input-error for="short_description" />
+                    <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
+                    <x-sistem.forms.textarea-form id="description" type="text" placeholder="{{ __('Descripcion') }}" wire:model="description"
+                        />
+                    <x-sistem.forms.input-error for="description" />
                 </div>
 
-                <div>
-                <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
-                <x-sistem.forms.textarea-form id="description" type="text" placeholder="{{ __('Descripcion') }}" wire:model="description"
-                    />
-                <x-sistem.forms.input-error for="description" />
-                </div>
-                    
+            </div>
+          </x-slot>
+  
+          <x-slot name="actions">
+          </x-slot>
+  
+        </x-sistem.forms.form-section>
+
+        <x-sistem.menus.section-border />
+
+        <x-sistem.forms.form-section submit="save">
+          <x-slot name="title">
+            {{ __('Restricciones') }}
+          </x-slot>
+  
+          <x-slot name="description">
+            {{ __('Edite las limitaciones que va a tener la membresia.') }}
+          </x-slot>
+  
+          <x-slot name="form">
+            <div class="grid gap-2 w-full">
+  
                 <div>
                 <x-sistem.forms.label-form for="category" value="{{ __('Categorias') }}" />
                 <x-sistem.forms.input-form id="category" type="text" placeholder="{{ __('Cantidad') }}" wire:model="category"
@@ -94,12 +148,6 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Lista de productos') }}</span>
                 </label>
                 </div>
-                <div>
-                <label for="status" class="flex items-center">
-                    <x-sistem.forms.checkbox-form id="status" wire:model="status" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
-                </label>
-                </div>
 
             </div>
           </x-slot>
@@ -121,3 +169,5 @@
     <x-slot name="footer">
     </x-slot>
 </x-sistem.modal.dialog-modal>
+
+</div>

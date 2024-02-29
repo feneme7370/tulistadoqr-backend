@@ -7,11 +7,11 @@
       <x-sistem.forms.form-section submit="save">
         
         <x-slot name="title">
-          {{ __($company ? 'Editar' : 'Agregar') }}
+          {{ __('Datos') }}
         </x-slot>
 
         <x-slot name="description">
-          {{ __('Modifique o agrege los datos de las empresas, su membresia o imagenes.') }}
+          {{ __('Modifique o agrege los datos de la empresa.') }}
         </x-slot>
 
         <x-slot name="form">
@@ -71,8 +71,85 @@
               <x-sistem.forms.input-error for="membership_id" />
             </div>
             
+            <div>
+              <label for="status" class="flex items-center">
+                  <x-sistem.forms.checkbox-form id="status" wire:model="status" />
+                  <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
+              </label>
+            </div>
+
+          </div>
+        </x-slot>
+
+        <x-slot name="actions">
+        </x-slot>
+
+      </x-sistem.forms.form-section>
+
+      <x-sistem.menus.section-border />
+
+      <x-sistem.forms.form-section submit="save">
+        
+        <x-slot name="title">
+          {{ __('Descripcion') }}
+        </x-slot>
+      
+        <x-slot name="description">
+          {{ __('Puede editar las descripciones de la empresa.') }}
+        </x-slot>
+      
+        <x-slot name="form">
+          <div class="grid gap-2 w-full">
+      
+          {{-- descripcion --}}
+            {{-- breve descripcion --}}
+            <div>
+                <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
+                <x-sistem.forms.textarea-form id="short_description" placeholder="{{ __('Ingrese una breve descripcion') }}"
+                    wire:model="short_description" />
+                <x-sistem.forms.input-error for="short_description" />
+            </div>
+      
+            <div>
+              <x-sistem.forms.label-form for="description" value="{{ __('Descripcion de la empresa') }}" />
+              <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Descripcion') }}"
+                  wire:model="description" />
+              <x-sistem.forms.input-error for="description" />
+            </div>
+      
+            {{-- descripcion de horarios --}}
+            <div>
+                <x-sistem.forms.label-form for="times_description" value="{{ __('Descripcion de horarios') }}" />
+                <x-sistem.forms.textarea-form id="times_description" placeholder="{{ __('Ej. Lunes a Jueves 10:00 a 22:00 - Viernes a Domingo 10:00 a 11:30') }}"
+                    wire:model="times_description" />
+                <x-sistem.forms.input-error for="times_description" />
+            </div>
+            
+          </div>
+    
+        </x-slot>
+      
+        <x-slot name="actions">
+        </x-slot>
+      
+      </x-sistem.forms.form-section>
+
+      <x-sistem.menus.section-border />
+
+      <x-sistem.forms.form-section submit="save">
+        
+        <x-slot name="title">
+          {{ __('Imagenes') }}
+        </x-slot>
+      
+        <x-slot name="description">
+          {{ __('Agregue o cambie las imagenes de la empresa, tambien su QR.') }}
+        </x-slot>
+      
+        <x-slot name="form">
+          <div class="grid gap-2 w-full">
+      
             @if ($this->company)
-              
             
             {{-- imagen de portada empresa --}}
             <div class="bg-gray-100 p-1 rounded-md">
@@ -124,7 +201,7 @@
                   @endif
                 </div>
             </div>
-  
+      
             {{-- logo de la empresa --}}
             <div class="bg-gray-100 p-1 rounded-md">
                 <h2 class="text-center text-gray-900 font-bold text-xl">Logo de la empresa</h2>
@@ -174,7 +251,7 @@
                   @endif
                 </div>
             </div>
-  
+      
             {{-- QR de la empresa --}}
             <div class="bg-gray-100 p-1 rounded-md">
                 <h2 class="text-center text-gray-900 font-bold text-xl">QR de la empresa</h2>
@@ -224,42 +301,13 @@
                   @endif
                 </div>
             </div>
-
+            
             @endif
-  
-          {{-- descripcion --}}
-            {{-- breve descripcion --}}
-            <div>
-                <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
-                <x-sistem.forms.textarea-form id="short_description" placeholder="{{ __('Ingrese una breve descripcion') }}"
-                    wire:model="short_description" />
-                <x-sistem.forms.input-error for="short_description" />
-            </div>
-  
-            <div>
-              <x-sistem.forms.label-form for="description" value="{{ __('Descripcion de la empresa') }}" />
-              <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Descripcion') }}"
-                  wire:model="description" />
-              <x-sistem.forms.input-error for="description" />
-            </div>
-  
-            {{-- descripcion de horarios --}}
-            <div>
-                <x-sistem.forms.label-form for="times_description" value="{{ __('Descripcion de horarios') }}" />
-                <x-sistem.forms.textarea-form id="times_description" placeholder="{{ __('Ej. Lunes a Jueves 10:00 a 22:00 - Viernes a Domingo 10:00 a 11:30') }}"
-                    wire:model="times_description" />
-                <x-sistem.forms.input-error for="times_description" />
-            </div>
-  
-            <div>
-              <label for="status" class="flex items-center">
-                  <x-sistem.forms.checkbox-form id="status" wire:model="status" />
-                  <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
-              </label>
-            </div>
-          </div>
-        </x-slot>
 
+          </div>
+    
+        </x-slot>
+      
         <x-slot name="actions">
           <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled"
           title="Cancelar" />
@@ -270,8 +318,9 @@
             </div>
           </x-sistem.buttons.primary-btn>
         </x-slot>
-
+      
       </x-sistem.forms.form-section>
+
   </x-slot>
 
   <x-slot name="footer">

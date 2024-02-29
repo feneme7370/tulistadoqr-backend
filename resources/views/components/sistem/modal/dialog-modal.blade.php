@@ -3,7 +3,7 @@
 <div>
     <x-sistem.modal.modal :id="$id" :maxWidth="$maxWidth" {{ $attributes }}>
         <div class="px-6 py-4">
-            <div class="text-lg font-medium text-gray-900 ">
+            <div class="font-bold uppercase text-xl text-gray-900 text-center">
                 {{ $title }}
             </div>
     

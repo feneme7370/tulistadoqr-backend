@@ -29,7 +29,7 @@ class SocialMediaPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->company->id === 1;
     }
 
     /**

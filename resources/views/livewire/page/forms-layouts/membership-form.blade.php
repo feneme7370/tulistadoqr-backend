@@ -81,7 +81,7 @@
             </div>
           </x-slot>
   
-          <x-slot name="actions">
+          <x-slot name="actions"> 
           </x-slot>
   
         </x-sistem.forms.form-section>

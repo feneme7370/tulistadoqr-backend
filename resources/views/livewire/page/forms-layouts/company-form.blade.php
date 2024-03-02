@@ -60,23 +60,6 @@
                    />
               <x-sistem.forms.input-error for="url" />
             </div>
-  
-            <div>
-              <x-sistem.forms.label-form for="membership_id" value="{{ __('Membresia') }}" />
-              <x-sistem.forms.select-form wire:model="membership_id">
-                  @foreach ($memberships as $membership)
-                      <option value="{{$membership->id}}">{{$membership->name}}</option>
-                  @endforeach
-              </x-sistem.forms.select-form>
-              <x-sistem.forms.input-error for="membership_id" />
-            </div>
-            
-            <div>
-              <label for="status" class="flex items-center">
-                  <x-sistem.forms.checkbox-form id="status" wire:model="status" />
-                  <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
-              </label>
-            </div>
 
           </div>
         </x-slot>
@@ -134,6 +117,8 @@
       
       </x-sistem.forms.form-section>
 
+      @if ($this->company)
+      
       <x-sistem.menus.section-border />
 
       <x-sistem.forms.form-section submit="save">
@@ -149,8 +134,6 @@
         <x-slot name="form">
           <div class="grid gap-2 w-full">
       
-            @if ($this->company)
-            
             {{-- imagen de portada empresa --}}
             <div class="bg-gray-100 p-1 rounded-md">
                 <h2 class="text-center text-gray-900 font-bold text-xl">Imagen principal de la empresa</h2>
@@ -301,13 +284,53 @@
                   @endif
                 </div>
             </div>
-            
-            @endif
 
           </div>
     
         </x-slot>
       
+        <x-slot name="actions">
+        </x-slot>
+      
+      </x-sistem.forms.form-section>
+      
+      @endif
+
+      <x-sistem.menus.section-border />
+
+      <x-sistem.forms.form-section submit="save">
+        
+        <x-slot name="title">
+          {{ __('Membresia') }}
+        </x-slot>
+
+        <x-slot name="description">
+          {{ __('Asigne la membresia de la empresa.') }}
+        </x-slot>
+
+        <x-slot name="form">
+          <div class="grid gap-2 w-full">
+  
+            <div>
+              <x-sistem.forms.label-form for="membership_id" value="{{ __('Membresia') }}" />
+              <x-sistem.forms.select-form wire:model="membership_id">
+                  @foreach ($memberships as $membership)
+                      <option value="{{$membership->id}}">{{$membership->name}}</option>
+                  @endforeach
+              </x-sistem.forms.select-form>
+              <x-sistem.forms.input-error for="membership_id" />
+            </div>
+            
+            <div>
+              <label for="status" class="flex items-center">
+                  <x-sistem.forms.checkbox-form id="status" wire:model="status" />
+                  <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
+              </label>
+            </div>
+
+          </div>
+        </x-slot>
+
         <x-slot name="actions">
           <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled"
           title="Cancelar" />
@@ -318,7 +341,7 @@
             </div>
           </x-sistem.buttons.primary-btn>
         </x-slot>
-      
+
       </x-sistem.forms.form-section>
 
   </x-slot>

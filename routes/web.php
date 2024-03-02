@@ -42,12 +42,20 @@ use App\Livewire\Page\UserIndex;
 // \Debugbar::disable();
 Route::get('/', [GuestController::class, 'index'])->name('guest.index');
 
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',
+])->group(function (){
+    Route::get('/user_status', [UserController::class, 'userIsStatus'])->name('user.status');
+});
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'userIsStatus',
     // 'password.confirm',
 ])->group(function () {
+    
     Route::get('/dashboard', DashboardIndex::class)->middleware('can:dashboard.index')->name('dashboard.index');
     Route::get('/roles', RoleIndex::class)->middleware('can:roles.index')->name('roles.index');
     Route::get('/permission', RolePermission::class)->middleware('can:roles.permission')->name('roles.permission');

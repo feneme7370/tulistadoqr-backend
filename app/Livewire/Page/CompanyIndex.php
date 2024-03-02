@@ -272,7 +272,7 @@ class CompanyIndex extends Component
 
         // validar company principal
         if($company->id == 1){
-            session()->flash('messageError', 'No se puede eliminar el registro');
+            $this->dispatch('toastrError', 'No se puede eliminar el registro');
             $this->showDeleteModal = false;
         }else{
 
@@ -283,7 +283,8 @@ class CompanyIndex extends Component
 
             $this->resetProperties();
             $this->reset('company');
-            session()->flash('messageSuccess', 'Registro eliminado');
+            
+            $this->dispatch('toastrSuccess', 'Eliminado con exito');
             
             $this->showDeleteModal = false;
         }
@@ -299,7 +300,7 @@ class CompanyIndex extends Component
 
         // comprobar si tiene productos asignados
         if($this->company->users->count() > 0){
-            session()->flash('messageError', 'No se puede eliminar, tiene usuarios asignados');
+            $this->dispatch('toastrError', 'No se puede eliminar, tiene usuarios asignados');
             $this->resetProperties();
         }else{
             $this->image_hero = $this->company['image_hero'];
@@ -313,8 +314,6 @@ class CompanyIndex extends Component
             $this->resetProperties();
             $this->reset('company');
 
-
-            // session()->flash('messageSuccess', 'Registro eliminado');
             $this->dispatch('toastrSuccess', 'Eliminado con exito');
         }
     }
@@ -323,6 +322,8 @@ class CompanyIndex extends Component
     public function createActionModal() {
         $this->resetProperties();
         $this->reset(['company']);
+
+        $this->authorize('create', Company::class); 
 
         $this->status = true;
         $this->showActionModal = true;
@@ -391,7 +392,8 @@ class CompanyIndex extends Component
 
             $this->reset(['company']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Actualizado con exito');
+
+            $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
 
@@ -401,7 +403,8 @@ class CompanyIndex extends Component
 
             $this->reset(['company']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Guardado con exito');
+            
+            $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

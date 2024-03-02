@@ -115,12 +115,22 @@ class MembershipIndex extends Component
 
         $this->membership = Membership::findOrFail($id);
 
-        $this->membership->delete();
+        $this->authorize('delete', $this->membership); 
 
-        $this->resetProperties();
-        $this->reset('membership');
-        // session()->flash('messageSuccess', 'Registro eliminado');
-        $this->dispatch('toastrSuccess', 'Eliminado con exito');
+        // comprobar si tiene productos asignados
+        if($this->membership->companies->count() > 0){
+            $this->dispatch('toastrError', 'No se puede eliminar, tiene empresas asignadas');
+            $this->resetProperties();
+        }else{
+
+            $this->membership->delete();
+
+            $this->resetProperties();
+            $this->reset('membership');
+
+            $this->dispatch('toastrSuccess', 'Eliminado con exito');
+        }
+
         // }
     }
 
@@ -128,6 +138,8 @@ class MembershipIndex extends Component
     public function createActionModal() {
         $this->resetProperties();
         $this->reset(['membership']);
+
+        $this->authorize('create', Membership::class); 
         
         $this->status = true;
         $this->showActionModal = true;

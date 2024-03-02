@@ -50,7 +50,9 @@ class RolePermission extends Component
         $this->resetProperties();
 
         $this->permission = Permission::findOrFail($id);
+        $this->authorize('delete', $this->permission); 
 
+        // $this->permission->roles();
         $this->permission->delete();
 
         $this->resetProperties();
@@ -65,6 +67,8 @@ class RolePermission extends Component
         $this->resetProperties();
         $this->reset(['permission']);
 
+        $this->authorize('create', Permission::class); 
+
         $this->showActionModal = true;
     }
 
@@ -73,7 +77,7 @@ class RolePermission extends Component
         $this->resetProperties();
 
         $this->permission = $permission;
-        // $this->authorize('update', $this->permission); 
+        $this->authorize('update', $this->permission); 
         
         $this->name = $permission['name'];
         $this->guard_name = $permission['guard_name'];

@@ -11,4 +11,8 @@ class UserController extends Controller
     { 
         return view('Page.admin.users.index');
     }
+    public function userIsStatus()
+    { 
+        return view('auth.user-status');
+    }
 }

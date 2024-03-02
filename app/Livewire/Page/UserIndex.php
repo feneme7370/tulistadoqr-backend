@@ -123,6 +123,8 @@ class UserIndex extends Component
 
         $this->user = User::findOrFail($id);
 
+        $this->authorize('delete', $this->user); 
+
         $this->user->delete();
 
         $this->resetProperties();
@@ -136,6 +138,8 @@ class UserIndex extends Component
     public function createActionModal() {
         $this->reset(['user']);
         $this->resetProperties();
+
+        $this->authorize('create', User::class); 
 
         $this->status = true;
         $this->showActionModal = true;
@@ -170,19 +174,18 @@ class UserIndex extends Component
         // poner datos automaticos
         $this->status = $this->status ? '1' : '0';
         $this->slug = Str::slug($this->name);
-        
+    
         // validar datos
         $this->validate();
 
-        // crear password nuevo o dejar el existente
-        if($this->password){
-            $this->password = Hash::make($this->password);
-        }else{
-            $this->password = $this->user->password;
-        }
-        
-
         if( isset( $this->user['id'])) {
+
+            // crear password nuevo o dejar el existente
+            if($this->password){
+                $this->password = Hash::make($this->password);
+            }else{
+                $this->password = $this->user->password;
+            }
 
             $this->user->update(
                 $this->only(['name', 'slug', 'email', 'password', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id'])
@@ -193,6 +196,14 @@ class UserIndex extends Component
             session()->flash('messageSuccess', 'Actualizado');
 
         } else {
+
+            // validar password no nulo para crear usuario
+            $this->validate(['password' => ['required', 'min:2', 'confirmed']]);
+
+            // crear password nuevo o dejar el existente
+            if($this->password){
+                $this->password = Hash::make($this->password);
+            }
 
             $userCreated = User::create(
                 $this->only(['name', 'slug', 'email', 'password', 'lastname', 'phone', 'adress', 'birthday', 'city', 'social', 'description', 'status', 'company_id'])

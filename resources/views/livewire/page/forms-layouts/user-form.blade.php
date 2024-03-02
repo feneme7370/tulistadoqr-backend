@@ -105,7 +105,7 @@
               <x-sistem.forms.input-error for="company_id" />
             </div>
               
-            <div>
+            <div> 
               <x-sistem.forms.label-form for="description" value="{{ __('Descripcion del usuario') }}" />
               <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Descripcion') }}"
                   wire:model="description" />
@@ -136,14 +136,14 @@
   
             <div>
               <x-sistem.forms.label-form for="password" value="{{ __('Clave') }}" />
-              <x-sistem.forms.input-form id="password" type="password" placeholder="{{ __('Clave') }}" wire:model="password"
+              <x-sistem.forms.input-form id="password" type="text" placeholder="{{ __('Clave') }}" wire:model="password"
                    />
               <x-sistem.forms.input-error for="password" />
             </div>
   
             <div>
               <x-sistem.forms.label-form for="password_confirmation" value="{{ __('Repetir clave') }}" />
-              <x-sistem.forms.input-form id="password_confirmation" type="password" placeholder="{{ __('Repetir clave') }}" wire:model="password_confirmation"
+              <x-sistem.forms.input-form id="password_confirmation" type="text" placeholder="{{ __('Repetir clave') }}" wire:model="password_confirmation"
                    />
               <x-sistem.forms.input-error for="password_confirmation" />
             </div>

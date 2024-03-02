@@ -53,28 +53,23 @@ class RoleIndex extends Component
         $this->resetProperties();
 
         $this->role = Role::findOrFail($id);
-        // $this->authorize('delete', $this->role); 
-
-        // comprobar si tiene productos asignados
-        // if($this->role->users->count() > 0){
-        //     session()->flash('messageError', 'No se puede eliminar, tiene usuarios asignados');
-        //     $this->resetProperties();
-        // }else{
-        // dd($this->role);
+        $this->authorize('delete', $this->role); 
 
         $this->role->delete();
 
         $this->resetProperties();
         $this->reset('role');
-        // session()->flash('messageSuccess', 'Registro eliminado');
         $this->dispatch('toastrSuccess', 'Eliminado con exito');
         // }
     }
 
     // mostrar modal para confirmar crear
     public function createActionModal() {
+
         $this->resetProperties();
         $this->reset(['role']);
+
+        $this->authorize('create', Role::class); 
 
         $this->showActionModal = true;
     }
@@ -84,7 +79,7 @@ class RoleIndex extends Component
         $this->resetProperties();
 
         $this->role = $role;
-        // $this->authorize('update', $this->role); 
+        $this->authorize('update', $this->role); 
         
         $this->name = $role['name'];
         $this->guard_name = $role['guard_name'];

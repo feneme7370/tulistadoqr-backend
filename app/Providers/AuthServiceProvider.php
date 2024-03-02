@@ -17,12 +17,16 @@ use App\Policies\Page\CategoryPolicy;
 use App\Policies\Page\CompanyPolicy;
 use App\Policies\Page\LevelPolicy;
 use App\Policies\Page\MembershipPolicy;
+use App\Policies\Page\PermissionPolicy;
 use App\Policies\Page\ProductPolicy;
+use App\Policies\Page\RolePolicy;
 use App\Policies\Page\SocialMediaPolicy;
 use App\Policies\Page\SuggestionPolicy;
 use App\Policies\Page\TagPolicy;
 use App\Policies\Page\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -41,6 +45,8 @@ class AuthServiceProvider extends ServiceProvider
         SocialMedia::class => SocialMediaPolicy::class,
         Membership::class => MembershipPolicy::class,
         User::class => UserPolicy::class,
+        Role::class => RolePolicy::class,
+        Permission::class => PermissionPolicy::class,
     ];
 
     /**

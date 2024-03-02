@@ -75,11 +75,13 @@ class SocialMediaIndex extends Component
 
         $this->social_media = SocialMedia::findOrFail($id);
 
+        $this->authorize('delete', $this->social_media); 
+
         $this->social_media->delete();
 
         $this->resetProperties();
         $this->reset('social_media');
-        // session()->flash('messageSuccess', 'Registro eliminado');
+        
         $this->dispatch('toastrSuccess', 'Eliminado con exito');
         // }
     }
@@ -88,6 +90,8 @@ class SocialMediaIndex extends Component
     public function createActionModal() {
         $this->reset(['social_media']);
         $this->resetProperties();
+
+        $this->authorize('create', SocialMedia::class); 
 
         $this->showActionModal = true;
     }
@@ -127,7 +131,8 @@ class SocialMediaIndex extends Component
 
             $this->reset(['social_media']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Actualizado');
+
+            $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
 
@@ -138,7 +143,8 @@ class SocialMediaIndex extends Component
 
             $this->reset(['social_media']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Guardado');
+            
+            $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

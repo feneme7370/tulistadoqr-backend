@@ -17,7 +17,7 @@
             <tbody>
     
                 @foreach ($companies as $item)
-                <tr>
+                <tr class="{{ $item->status == '1' ? '' : 't_tr-inactive' }}">
 
                   <td class="with-id-columns"><p>{{$item->id}}</p></td>
 
@@ -40,7 +40,7 @@
                   <td><p>{{$item->email}}</p></td>
 
                   <td class="with-status-columns">
-                    <span class="line-clamp-2 {{$item->status == '1' ? 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded' : 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded '}}">
+                    <span class="line-clamp-2 {{$item->status == '1' ? 't_badge-green' : 't_badge-red'}}">
                       {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
                     </span>
                   </td>

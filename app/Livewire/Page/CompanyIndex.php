@@ -78,7 +78,7 @@ class CompanyIndex extends Component
             'name' => ['required', 'string', 'min:2', Rule::unique('companies')->ignore($this->company)],
             'slug' => ['required', 'string', Rule::unique('companies')->ignore($this->company)],
             'email' => ['required', 'email', 'min:2', Rule::unique('companies')->ignore($this->company)],
-            'phone' => ['nullable', 'numeric', 'min:2'],
+            'phone' => ['nullable', 'string', 'min:2'],
             'adress' => ['nullable', 'string', 'min:2'],
             'city' => ['nullable', 'string', 'min:2'],
             'social' => ['nullable', 'string', 'min:2'],

@@ -82,7 +82,7 @@
               <div class="">
   
                 <p class="mb-1">Imagen de categoria general nueva:</p>
-                <x-sistem.lightbox.img-lightbox class="h-64 max-w-96 p-1 bg-primary-200"
+                <x-sistem.lightbox.img-lightbox class="h-64 max-w-96 p-1 bg-gray-200"
                   :name="$image_hero_new->temporaryUrl()" />
               </div>
               @else
@@ -98,7 +98,7 @@
                       <x-sistem.icons.for-icons-app icon="rotate" class="h-3 w-3"/>
                   </button>
   
-                  <x-sistem.lightbox.img-lightbox class="h-64 max-w-96 p-1 bg-primary-200" :uri="$this->image_hero_uri"
+                  <x-sistem.lightbox.img-lightbox class="h-64 max-w-96 p-1 bg-gray-200" :uri="$this->image_hero_uri"
                     :name="$this->image_hero" />
                 </div>
               </div>

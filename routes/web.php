@@ -18,6 +18,7 @@ use App\Livewire\Page\CategoryIndex;
 use App\Livewire\Page\CompanyIndex;
 use App\Livewire\Page\ConfigIndex;
 use App\Livewire\Page\DashboardIndex;
+use App\Livewire\Page\InformationIndex;
 use App\Livewire\Page\LevelIndex;
 use App\Livewire\Page\MembershipIndex;
 use App\Livewire\Page\ProductIndex;
@@ -70,6 +71,7 @@ Route::middleware([
     Route::get('/suggestions', SuggestionIndex::class)->middleware('can:suggestions.index')->name('suggestions.index');
     Route::get('/social_medias', SocialMediaIndex::class)->middleware('can:social_medias.index')->name('social_medias.index');
     Route::get('/config/{company}', ConfigIndex::class)->middleware('can:config.index')->name('config.index');
+    Route::get('/information', InformationIndex::class)->middleware('can:information.index')->name('information.index');
     // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('can:dashboard.index')->name('dashboard.index');
     // Route::get('/roles', [RoleController::class, 'index'])->middleware('can:roles.index')->name('roles.index');
     // Route::get('/permission', [RoleController::class, 'permission'])->middleware('can:roles.permission')->name('roles.permission');

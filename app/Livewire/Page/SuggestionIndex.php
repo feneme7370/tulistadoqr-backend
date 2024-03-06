@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Page;
 
+use App\Models\Page\Category;
 use Livewire\Component;
 use App\Models\Page\Product;
 use Livewire\WithPagination;
@@ -16,13 +17,14 @@ class SuggestionIndex extends Component
     
     // propiedades de busqueda
     public $perPage = 10;
+    public $categorySearch;
 
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades del form
     public $product_id;
     public $user_id;
-    public $company_id;
+    public $company_id;    
 
     ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
@@ -115,13 +117,20 @@ class SuggestionIndex extends Component
     // renderizar vista
     public function render()
     {
+        $categories = Category::with('level')
+                        ->where('company_id', auth()->user()->company_id)
+                        ->orderBy('name', 'ASC')->get();
+
         $products = Product::where('company_id', auth()->user()->company_id)
+                        ->when($this->categorySearch, function( $query) {
+                            return $query->where('category_id', $this->categorySearch);
+                        })
                         ->orderBy('name', 'ASC')->get();
 
         $suggestions = Suggestion::with('product', 'company')
                         ->where('company_id', auth()->user()->company_id)
                         ->paginate($this->perPage, pageName: 'p_suggestion');
         
-        return view('livewire.page.suggestion-index', compact('suggestions', 'products'));
+        return view('livewire.page.suggestion-index', compact('suggestions', 'products', 'categories'));
     }
 }

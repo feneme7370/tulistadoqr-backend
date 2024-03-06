@@ -44,8 +44,8 @@
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow "
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
-                            <p class="text-sm text-gray-900 " role="none">
-                                {{ auth()->user()->name }}
+                            <p class="text-sm text-gray-900 mb-1" role="none">
+                                {{ auth()->user()->lastname }}, {{ auth()->user()->name }}
                             </p>
                             <p class="text-sm font-medium text-gray-900 truncate " role="none">
                                 {{ auth()->user()->email }}
@@ -106,13 +106,13 @@
 <aside id="logo-sidebar"
     class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary-100 border-r border-primary-300 sm:translate-x-0"
     aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto ">
+    <div class="h-full px-3 pb-4 overflow-y-auto mb-10">
 
         {{-- listado inicial --}}
         <ul class="space-y-2 font-medium">
             <li>
                 <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('dashboard.index') }}"
-                    :active="request()->routeIs('dashboard.index')" title="Dashboard">
+                    :active="request()->routeIs('dashboard.index')" title="Panel Principal">
                     <x-sistem.icons.for-icons-app icon="dashboard" class="h-6 w-6" />
                 </x-sistem.navlinks.navlink-sidebar-flowbite>
             </li>
@@ -187,7 +187,7 @@
             @can('roles.permission')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('roles.permission') }}"
                 :active="request()->routeIs('roles.permission')" title="Permisos">
-                <x-sistem.icons.for-icons-app icon="role" class="h-6 w-6" />
+                <x-sistem.icons.for-icons-app icon="permission" class="h-6 w-6" />
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
@@ -256,7 +256,6 @@
 
         </ul>
 
-
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
@@ -266,6 +265,15 @@
                 </x-sistem.navlinks.navbutton-sidebar-flowbite>
             </form>
         </ul>
+
+        @can('information.index')
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('information.index', auth()->user()->company_id) }}"
+                :active="request()->routeIs('information.index')" title="Informacion">
+                <x-sistem.icons.for-icons-app icon="info" class="h-6 w-6" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+        </ul> 
+        @endcan
     </div>
 </aside>
 

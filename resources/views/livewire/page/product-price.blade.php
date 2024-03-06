@@ -39,7 +39,7 @@
         </div>
     </x-sistem.filter.bg-input>
 
-    <x-sistem.filter.bg-input class="flex-row flex-1">
+    <x-sistem.filter.bg-input class="flex-col md:flex-row">
     
         <div class="w-full">
             <x-sistem.forms.input-form 
@@ -48,37 +48,42 @@
                 placeholder="Buscar por nombre o categoria" 
                 class="w-full" />
         </div>
-        <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
-            <x-sistem.forms.label-form value="Solo activos">
-                <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />
-            </x-sistem.forms.label-form> 
-        </div>
-        <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
-        <x-sistem.forms.label-form value="En oferta">
-            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />
-        </x-sistem.forms.label-form>
+
+        <div class="flex flex-row">
+            <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
+                <x-sistem.forms.label-form value="Solo activos">
+                    <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />
+                </x-sistem.forms.label-form> 
+            </div>
+            <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
+            <x-sistem.forms.label-form value="En oferta">
+                <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />
+            </x-sistem.forms.label-form>
+            </div>
         </div>
     </x-sistem.filter.bg-input>
 
-    <x-sistem.filter.bg-input class="flex-row flex-1">
+    <x-sistem.filter.bg-input class="mt-5">
     
         <div class="w-full">
             <div>
+                <x-sistem.forms.label-form for="price_original" value="{{ __('Modificar precio original') }}" />
                 <x-sistem.forms.input-form 
                     wire:model="price_original"
                     placeholder="Precio original" 
                     class="w-full" />
+                <x-sistem.forms.input-error for="price_original" />
             </div>
-            <x-sistem.forms.input-error for="price_original" />
         </div>
         <div class="w-full">
             <div>
+                <x-sistem.forms.label-form for="price_seller" value="{{ __('Modificar precio de oferta') }}" />
                 <x-sistem.forms.input-form 
                     wire:model="price_seller" 
                     placeholder="Precio de oferta" 
                     class="w-full" />
+                <x-sistem.forms.input-error for="price_seller" />
             </div>
-            <x-sistem.forms.input-error for="price_seller" />
         </div>
         
         <x-sistem.buttons.primary-btn 

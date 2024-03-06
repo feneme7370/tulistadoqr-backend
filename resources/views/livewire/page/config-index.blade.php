@@ -25,4 +25,18 @@
     
     {{-- actualizar datos --}}
     @include('livewire.page.forms-layouts.config-form')
+
+    @push('scripts')
+
+    <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
+    <script>
+        Livewire.on('toastrError', (message) => {
+          toastrError(message)
+        })
+        Livewire.on('toastrSuccess', (message) => {
+          toastrSuccess(message)
+        })
+    </script>
+  
+  @endpush
 </div>

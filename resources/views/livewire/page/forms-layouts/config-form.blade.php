@@ -7,7 +7,7 @@
     </x-slot>
 
     <x-slot name="description">
-      {{ __('Ajuste los datos de su empresa.') }}
+      {{ __('Ajuste los datos de su empresa que se veran en la pagina principal.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -15,7 +15,7 @@
     
             <div>
                 <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
-                <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name"
+                <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre de la empresa') }}" wire:model="name"
                 />
                 <x-sistem.forms.input-error for="name" />
             </div>
@@ -29,21 +29,21 @@
             
             <div>
                 <x-sistem.forms.label-form for="phone" value="{{ __('Telefono') }}" />
-                <x-sistem.forms.input-form id="phone" type="text" placeholder="{{ __('Telefono') }}" wire:model="phone"
+                <x-sistem.forms.input-form id="phone" type="text" placeholder="{{ __('Numero que se vera en la pagina, ej. +54 9 2396 - 513953') }}" wire:model="phone"
                     />
                 <x-sistem.forms.input-error for="phone" />
             </div>
             
             <div>
                 <x-sistem.forms.label-form for="adress" value="{{ __('Direccion') }}" />
-                <x-sistem.forms.input-form id="adress" type="text" placeholder="{{ __('Direccion') }}" wire:model="adress"
+                <x-sistem.forms.input-form id="adress" type="text" placeholder="{{ __('Direccion fisica, ej. Arenales 356') }}" wire:model="adress"
                     />
                 <x-sistem.forms.input-error for="adress" />
             </div>
             
             <div>
                 <x-sistem.forms.label-form for="city" value="{{ __('Localidad') }}" />
-                <x-sistem.forms.input-form id="city" type="text" placeholder="{{ __('Localidad') }}" wire:model="city"
+                <x-sistem.forms.input-form id="city" type="text" placeholder="{{ __('Localidad, ej. Carlos Casares') }}" wire:model="city"
                     />
                 <x-sistem.forms.input-error for="city" />
             </div>
@@ -72,14 +72,14 @@
             {{-- breve descripcion --}}
             <div>
                 <x-sistem.forms.label-form for="short_description" value="{{ __('Breve descripcion') }}" />
-                <x-sistem.forms.textarea-form id="short_description" placeholder="{{ __('Ingrese una breve descripcion') }}"
+                <x-sistem.forms.textarea-form id="short_description" placeholder="{{ __('Breve descripcion que se vera en la portada principal') }}"
                     wire:model="short_description" />
                 <x-sistem.forms.input-error for="short_description" />
             </div>
             {{-- descripcion --}}
             <div>
                 <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
-                <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Ingrese una descripcion') }}"
+                <x-sistem.forms.textarea-form id="description" placeholder="{{ __('Descripcion que se vera a mitad de la pagina principal') }}"
                     wire:model="description" />
                 <x-sistem.forms.input-error for="description" />
             </div>
@@ -117,7 +117,7 @@
                 @foreach($socialMedia as $social)
                 <div>
                     <x-sistem.forms.label-form for="socialMediaData.{{$social->id }}" value=" {{ $social->name }}:" />
-                    <x-sistem.forms.input-form id="socialMediaData.{{$social->id }}" type="text" placeholder="URL de {{ $social->name }}" wire:model="socialMediaData.{{$social->id }}" 
+                    <x-sistem.forms.input-form id="socialMediaData.{{$social->id }}" type="text" placeholder="URL o Numero de {{ $social->name }}" wire:model="socialMediaData.{{$social->id }}" 
                     />
                     <x-sistem.forms.input-error for="socialMediaData.{{$social->id }}" />
                 </div>
@@ -193,7 +193,7 @@
             
                             <p class="mb-1">Nueva:</p>
                                 <x-sistem.lightbox.img-lightbox 
-                                    class="h-32 w-32 p-1 bg-primary-200"
+                                    class="h-32 w-32 p-1 bg-gray-200"
                                     :name="$image_hero_new->temporaryUrl()"    
                                 />
                         </div>
@@ -214,7 +214,7 @@
                                 </button>
                                 
                                 <x-sistem.lightbox.img-tumb-lightbox 
-                                    class="h-32 w-32 p-1 bg-primary-200"
+                                    class="h-32 w-32 p-1 bg-gray-200"
                                     :uri="$this->image_hero_uri" 
                                     :name="$this->image_hero"    
                                 />
@@ -251,7 +251,7 @@
             
                             <p class="mb-1">Nueva:</p>
                                 <x-sistem.lightbox.img-lightbox 
-                                    class="h-32 w-32 p-1 bg-primary-200"
+                                    class="h-32 w-32 p-1 bg-gray-200"
                                     :name="$image_logo_new->temporaryUrl()"    
                                 />
                         </div>
@@ -270,7 +270,7 @@
                                     <x-sistem.icons.for-icons-app icon="rotate" class="h-3 w-3"/>
                                 </button>
                                 <x-sistem.lightbox.img-lightbox 
-                                    class="h-32 w-32 p-1 bg-primary-200"
+                                    class="h-32 w-32 p-1 bg-gray-200"
                                     :uri="$this->image_logo_uri" 
                                     :name="$this->image_logo"    
                                 />

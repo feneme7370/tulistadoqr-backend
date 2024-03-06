@@ -13,6 +13,9 @@ class TagIndex extends Component
 
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
+    // paginacion
+    public $perPage = 20;
+
     // propiedades para el modal
     public $showActionModal = false;
     public $showDeleteModal = false;
@@ -153,7 +156,7 @@ class TagIndex extends Component
     {
         $tags = Tag::with('company')->where('company_id', auth()->user()->company_id)
                         ->orderBy( 'name', 'ASC')
-                        ->paginate(30);
+                        ->paginate($this->perPage);
                         
         return view('livewire.page.tag-index', compact('tags'));
     }

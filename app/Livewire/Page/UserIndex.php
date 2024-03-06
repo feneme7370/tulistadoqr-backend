@@ -129,7 +129,7 @@ class UserIndex extends Component
 
         $this->resetProperties();
         $this->reset('user');
-        // session()->flash('messageSuccess', 'Registro eliminado');
+        
         $this->dispatch('toastrSuccess', 'Eliminado con exito');
         // }
     }
@@ -193,7 +193,7 @@ class UserIndex extends Component
 
             $this->reset(['user']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Actualizado');
+            $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
 
@@ -213,7 +213,7 @@ class UserIndex extends Component
 
             $this->reset(['user']);
             $this->resetProperties();
-            session()->flash('messageSuccess', 'Guardado');
+            $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 
         $this->showActionModal = false;

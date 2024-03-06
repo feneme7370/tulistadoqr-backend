@@ -1,7 +1,10 @@
 <div>
     {{-- titulo y boton --}}
     <x-sistem.menus.title-and-btn title="Bienvenido {{auth()->user()->name}}">
-        <div>{{ auth()->user()->company->membership->name }}</div>
+        <div class="flex flex-row gap-3 items-center">
+            <span class="font-bold italic">{{ auth()->user()->company->membership->name }}</span>
+            <x-sistem.icons.for-icons-app icon="membership" class="w-6 h-6"/>
+        </div>
     </x-sistem.menus.title-and-btn>
 
     {{-- enlace a pagina web --}}
@@ -27,7 +30,7 @@
 
         <div class="relative w-full sm:w-auto">
             <x-sistem.lightbox.img-tumb-lightbox 
-                class="h-64 w-full sm:w-64 p-1 bg-primary-100"
+                class="h-64 w-full sm:w-64 p-1 bg-gray-200"
                 :uri="auth()->user()->company->image_hero_uri" 
                 :name="auth()->user()->company->image_hero"    
             />
@@ -36,7 +39,7 @@
 
         <div class="relative w-full sm:w-auto">
             <x-sistem.lightbox.img-lightbox 
-                class="h-64 w-full sm:w-64 p-1 bg-primary-100"
+                class="h-64 w-full sm:w-64 p-1 bg-gray-200"
                 :uri="auth()->user()->company->image_logo_uri" 
                 :name="auth()->user()->company->image_logo"    
             />
@@ -137,5 +140,19 @@
         @endcan
  
     </div>
+
+    @push('scripts')
+
+    <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
+    <script>
+        Livewire.on('toastrError', (message) => {
+          toastrError(message)
+        })
+        Livewire.on('toastrSuccess', (message) => {
+          toastrSuccess(message)
+        })
+    </script>
+  
+  @endpush
 
 </div>

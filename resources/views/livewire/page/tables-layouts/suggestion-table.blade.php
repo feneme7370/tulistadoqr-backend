@@ -13,7 +13,7 @@
 
             @foreach ($suggestions as $item)
             <tr>
-              <td class="with-id-columns"><p>{{$item->id}}</p></td>
+              <td class="with-id-columns"><p>{{ ($suggestions->currentPage() - 1) * $suggestions->perPage() + $loop->iteration }}</p></td>
               
               <td class="with-actions-columns">
                 <div class="actions">

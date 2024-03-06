@@ -20,7 +20,7 @@
             <tr class="{{ $item->status == '1' ? '' : 't_tr-inactive' }}">
 
               <td class="with-id-columns">
-                <p>{{$item->id}}</p>
+                <p>{{ ($levels->currentPage() - 1) * $levels->perPage() + $loop->iteration }}</p>
               </td>
               <td class="with-actions-columns">
                 <div class="actions">

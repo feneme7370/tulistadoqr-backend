@@ -24,6 +24,9 @@
   {{-- listado --}}
   @include('livewire.page.tables-layouts.tag-table')
 
+  {{-- Paginacion --}}
+  <div class="mt-2">{{ $tags->onEachSide(1)->links() }}</div>
+
   <!-- Modal para crear y editar -->
   @include('livewire.page.forms-layouts.tag-form')
 

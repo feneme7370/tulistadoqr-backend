@@ -153,7 +153,7 @@ class TagIndex extends Component
     {
         $tags = Tag::with('company')->where('company_id', auth()->user()->company_id)
                         ->orderBy( 'name', 'ASC')
-                        ->get();
+                        ->paginate(30);
                         
         return view('livewire.page.tag-index', compact('tags'));
     }

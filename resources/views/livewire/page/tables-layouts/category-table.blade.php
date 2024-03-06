@@ -21,7 +21,7 @@
                 @foreach ($categories as $item)
                 <tr class="{{ $item->status == '1' ? '' : 't_tr-inactive' }}">
 
-                  <td class="with-id-columns"><p>{{$item->id}}</p></td>
+                  <td class="with-id-columns"><p>{{ ($categories->currentPage() - 1) * $categories->perPage() + $loop->iteration }}</p></td>
 
                   <td class="with-actions-columns">
                     <div class="actions">

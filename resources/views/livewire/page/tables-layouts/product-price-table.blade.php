@@ -20,7 +20,7 @@
                     @foreach ($products as $item)
                     <tr class="{{ $item->status == '1' ? '' : 't_tr-inactive' }}">
                         
-                        <td class="with-id-columns"><p>{{$item->id}}</p></td>
+                        <td class="with-id-columns"><p>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->iteration }}</p></td>
 
                         <td><x-sistem.forms.checkbox-form type="checkbox" wire:model="productsChecked" value="{{ $item->id }}" /></td>
 

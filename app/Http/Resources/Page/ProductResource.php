@@ -35,6 +35,8 @@ class ProductResource extends JsonResource
             'tags' => $this->tags,
             'company' => $this->company,
             'user' => $this->user,
+            'suggestion' => $this->suggestion ? true : false,
+            'offer' => $this->price_original > $this->price_seller ? true : false,
         ];
     }
 }

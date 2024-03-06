@@ -16,7 +16,7 @@
             @foreach($tags as $item)
             <tr>
 
-              <td class="with-id-columns"><p>{{$item->id}}</p></td>
+              <td class="with-id-columns"><p>{{ ($tags->currentPage() - 1) * $tags->perPage() + $loop->iteration }}</p></td>
 
               <td class="with-actions-columns">
                 <div class="actions">

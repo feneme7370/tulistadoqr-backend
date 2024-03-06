@@ -55,10 +55,14 @@
                 class="w-full" />
         </div>
         <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
-            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />Solo activos
+            <x-sistem.forms.label-form value="Solo activos">
+                <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />
+            </x-sistem.forms.label-form> 
         </div>
         <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
-            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />En oferta
+        <x-sistem.forms.label-form value="En oferta">
+            <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />
+        </x-sistem.forms.label-form>
         </div>
     </x-sistem.filter.bg-input>
 

@@ -7,12 +7,13 @@ use App\Models\Page\Tag;
 use App\Models\Page\Level;
 use Illuminate\Support\Str;
 use App\Models\Page\Product;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use App\Models\Page\Category;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use App\helpers\sistem\CrudInterventionImage;
-use Illuminate\Support\Facades\Log;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ProductIndex extends Component
@@ -33,18 +34,23 @@ class ProductIndex extends Component
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
-    public $categorySearch, $offers = false;
+    
+    public $categorySearch;
+    public $offers = false;
 
     // mostrar variables en queryString
     protected function queryString(){
-        return ['search' => [ 'as' => 'q' ],];
+        return [
+        'search' => [ 'as' => 'q' ],
+        'categorySearch' => [ 'as' => 'c' ],
+        ];
     }
 
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades para el modal
     public $showActionModal = false;
-    public $showDeleteModal = false;
+    public $showViewModal = false;
 
     // propiedades del form
     public $name;
@@ -175,34 +181,6 @@ class ProductIndex extends Component
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
-    // abrir modal y recibir id
-    // public function openDeleteModal($id){
-    //     $this->resetProperties();
-
-    //     $this->product = Product::findOrFail($id);
-    //     $this->authorize('delete', $this->product); 
-        
-    //     $this->showDeleteModal = true;
-    // }
-    
-    // eliminar desde el modal de confirmacion
-    // public function deleteProduct() {
-    //     $this->resetProperties();
-
-    //     $product = Product::findOrFail($this->product->id);
-
-    //     $this->image_hero = $product['image_hero'];
-        
-    //     $this->deleteImage();
-    //     $product->delete();
-
-    //     session()->flash('messageSuccess', 'Registro eliminado');
-    //     $this->resetProperties();
-    //     $this->reset('product');
-
-    //     $this->showDeleteModal = false;
-    // }
-
     // eliminar desde sweetalert
     protected $listeners = ['deleteProductId'];
     public function deleteProductId($id){
@@ -234,29 +212,50 @@ class ProductIndex extends Component
         $this->showActionModal = true;
     }
 
-    // // mostrar modal para confirmar editar
+    // cargar datos a editar
+    public function preloadEditModal($item){
+        $this->name = $item['name'];
+        $this->slug = $item['slug'];
+        $this->price_original = $item['price_original'];
+        $this->price_seller = $item['price_seller'];
+        $this->quantity = $item['quantity'];
+        $this->description = $item['description'];
+        $this->status = $item['status'] == '1' ? true : false;
+        $this->image_hero_uri = $item['image_hero_uri'];
+        $this->image_hero = $item['image_hero'];
+        $this->category_id = $item['category_id'];
+        $this->user_id = $item['user_id'];
+        $this->company_id = $item['company_id'];
+
+        $this->product_tags = $this->product->tags->pluck('id')->toArray();
+
+    }
+
+    // mostrar modal para confirmar editar
     public function editActionModal(Product $product) {
         $this->resetProperties();
         
         $this->product = $product;
         $this->authorize('update', $this->product); 
         
-        $this->name = $product['name'];
-        $this->slug = $product['slug'];
-        $this->price_original = $product['price_original'];
-        $this->price_seller = $product['price_seller'];
-        $this->quantity = $product['quantity'];
-        $this->description = $product['description'];
-        $this->status = $product['status'] == '1' ? true : false;
-        $this->image_hero_uri = $product['image_hero_uri'];
-        $this->image_hero = $product['image_hero'];
-        $this->category_id = $product['category_id'];
-        $this->user_id = $product['user_id'];
-        $this->company_id = $product['company_id'];
+        $this->resetErrorBag();
 
-        $this->product_tags = $this->product->tags->pluck('id')->toArray();
+        $this->preloadEditModal($this->product);
 
         $this->showActionModal = true;
+    }
+
+    public function viewActionModal(Product $product){
+        $this->resetProperties();
+        $this->resetErrorBag();
+
+        $this->product = $product;
+        
+        $this->authorize('update', $this->product);         
+
+        $this->preloadEditModal($this->product);
+        
+        $this->showViewModal = true;
     }
 
     // boton de guardar o editar
@@ -349,9 +348,13 @@ class ProductIndex extends Component
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_product');
 
+        $product = $this->product;
+
         return view('livewire.page.product-index', compact(
             'categories', 
             'products', 
-            'tags'));
+            'tags',
+            'product'
+        ));
     }
 }

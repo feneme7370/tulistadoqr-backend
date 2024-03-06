@@ -24,6 +24,7 @@
                         
                         <td class="with-actions-columns">
                             <div class="actions">
+                                <x-sistem.buttons.view-text wire:click="viewActionModal({{ $item->id }})" wire:loading.attr="disabled" />
                                 <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
                                     wire:loading.attr="disabled" />
                                 <x-sistem.buttons.delete-text wire:click="$dispatch('deleteProduct', {{$item->id}})"
@@ -45,9 +46,15 @@
                         ><p class="{{$item->price_seller ? 'text-green-800 font-bold' : 'text-orange-800'}}" >${{$item->price_seller ? number_format($item->price_seller, 2,",",".") : number_format($item->price_original, 2,",",".") }}</p>
                         </td>
                         
-                        <td class="text-center"><p>{{$item->category->level->name}} / {{$item->category->name}}</p></td>
+                        <td class="text-center">
+                            <p>
+                                <a class="hover:underline" href="{{route('levels.index', ['q' => $item->category->level->name])}} " > {{$item->category->level->name}}</a> /
+                                <br>
+                                <a class="hover:underline" href="{{route('categories.index', ['q' => $item->category->name])}}">{{$item->category->name}}</a>
+                            </p>
+                        </td>
                         
-                        <td class="text-center"><p>{{$item->tags->count()}}</p></td>
+                        <td class="text-center"><p><a class="hover:underline" href="{{ route('tags.index') }}">{{$item->tags->count()}}</a></p></td>
 
                         <td class="with-status-columns">
                             <span class="line-clamp-2 {{$item->status == '1' ? 't_badge-green' : 't_badge-red'}}">

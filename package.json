@@ -17,6 +17,8 @@
     },
     "dependencies": {
         "flowbite": "^2.3.0",
+        "jquery": "^3.7.1",
+        "quill": "^2.0.0-rc.2",
         "sweetalert2": "^11.10.5",
         "toastify-js": "^1.12.0"
     }

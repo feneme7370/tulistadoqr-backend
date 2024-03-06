@@ -5,10 +5,9 @@ namespace App\Livewire\Page;
 use Livewire\Component;
 use App\Models\Page\Level;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use App\Models\Page\Category;
-use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
 use App\helpers\sistem\CrudInterventionImage;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -24,20 +23,27 @@ class CategoryIndex extends Component
     use WithPagination;
     public function updatingActive() {$this->resetPage(pageName: 'p_category');}
     public function updatingSearch() {$this->resetPage(pageName: 'p_category');}
+    public function updatingPerPage() {$this->resetPage(pageName: 'p_category');}
+    public function updatingCategoryGeneralSearch() {$this->resetPage(pageName: 'p_category');}
 
     // propiedades de busqueda
     public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
+    public $categoryGeneralSearch;
+
     // mostrar variables en queryString
     protected function queryString(){
-        return ['search' => [ 'as' => 'q' ],];
+        return [
+        'search' => [ 'as' => 'q' ],
+        'categoryGeneralSearch' => [ 'as' => 'l' ],
+        ];
     }
 
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades para el modal
     public $showActionModal = false;
-    public $showDeleteModal = false;
+    public $showViewModal = false;
 
     // propiedades del form
     public $name;
@@ -156,40 +162,6 @@ class CategoryIndex extends Component
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
-    // abrir modal y recibir id
-    // public function openDeleteModal($id){
-    //     $this->resetProperties();
-    //     $this->reset('category');
-
-    //     $this->category = Category::findOrFail($id);
-    //     $this->authorize('delete', $this->category); 
-        
-    //     $this->showDeleteModal = true; 
-    // }
-    
-    // eliminar desde el modal de confirmacion
-    // public function deleteCategory() {
-    //     $this->resetProperties();
-
-    //     $category = Category::findOrFail($this->category->id);
-
-    //     // comprobar si tiene productos asignados
-    //     if($category->products->count() > 0){
-    //         session()->flash('messageError', 'No se puede eliminar, tiene productos asignados');
-    //         $this->resetProperties();
-    //     }else{
-    //         $this->image_hero = $category['image_hero'];
-            
-    //         $this->deleteImage();
-    //         $category->delete();
-    //         session()->flash('messageSuccess', 'Registro eliminado');
-    //         $this->resetProperties();
-    //         $this->reset('category');
-    //     }
-        
-    //     $this->showDeleteModal = false;
-    // }
-
     // eliminar desde sweetalert
     protected $listeners = ['deleteCategoryId'];
     public function deleteCategoryId($id){
@@ -226,6 +198,18 @@ class CategoryIndex extends Component
         $this->showActionModal = true;
     }
 
+    // cargar datos a editar
+    public function preloadEditModal($item){
+        $this->name = $item['name'];
+        $this->slug = $item['slug'];
+        $this->description = $item['description'];
+        $this->status = $item['status'] == '1' ? true : false;
+        $this->image_hero = $item['image_hero'];
+        $this->image_hero_uri = $item['image_hero_uri'];
+        $this->level_id = $item['level_id'];
+        $this->user_id = $item['user_id'];
+        $this->company_id = $item['company_id'];
+    }
     // // mostrar modal para confirmar editar
     public function editActionModal(Category $category) {
         $this->resetProperties();
@@ -235,17 +219,23 @@ class CategoryIndex extends Component
 
         $this->resetErrorBag();
 
-        $this->name = $category['name'];
-        $this->slug = $category['slug'];
-        $this->description = $category['description'];
-        $this->status = $category['status'] == '1' ? true : false;
-        $this->image_hero = $category['image_hero'];
-        $this->image_hero_uri = $category['image_hero_uri'];
-        $this->level_id = $category['level_id'];
-        $this->user_id = $category['user_id'];
-        $this->company_id = $category['company_id'];
+        $this->preloadEditModal($this->category);
 
         $this->showActionModal = true;
+    }
+
+    public function viewActionModal(Category $category){
+        $this->resetProperties();
+        $this->resetErrorBag();
+        $this->category = $category;
+        // dd($this->category->level);
+        $this->authorize('update', $this->category); 
+
+        
+
+        $this->preloadEditModal($this->category);
+        
+        $this->showViewModal = true;
     }
 
     // boton de guardar o editar
@@ -311,9 +301,14 @@ class CategoryIndex extends Component
                         ->when($this->active, function( $query) {
                             return $query->where('status', 1);
                         })
+                        ->when($this->categoryGeneralSearch, function( $query) {
+                            return $query->where('level_id', $this->categoryGeneralSearch);
+                        })
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_category');
+
+        $category = $this->category;
                         
-        return view('livewire.page.category-index', compact('categories', 'levels'));
+        return view('livewire.page.category-index', compact('categories', 'levels', 'category'));
     }
 }

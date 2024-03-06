@@ -24,6 +24,31 @@
       <p>Agregue categorias especificas como "Pizzas", "Helados", "Cervezas" o "Caffes". Los que se agreguen se podran asociar a un producto y luego poder ser filtrados en la pagina por cada rubro.</p>
     </x-sistem.menus.text-info>
 
+    {{-- input buscador y cantidad a mostrar --}}
+    <x-sistem.filter.bg-input class="flex-row flex-1">
+
+      <div  class="w-full">
+          <x-sistem.forms.label-form for="categoryGeneralSearch" value="{{ __('Categoria General') }}" />
+          <x-sistem.forms.select-form wire:model.live="categoryGeneralSearch" id="categoryGeneralSearch">
+              <option value=""> Todos </option>
+              @foreach ($levels as $item)
+                  <option value="{{$item->id}}">{{$item->name}}</option>
+              @endforeach
+          </x-sistem.forms.select-form>
+          <x-sistem.forms.input-error for="categoryGeneralSearch" />
+      </div>
+
+      <div  class="w-1/4">
+          <x-sistem.forms.label-form for="perPage" value="{{ __('Mostrar') }}" />
+          <x-sistem.forms.select-form wire:model.live="perPage" id="perPage">
+              <option value="10"> 10 </option>
+              <option value="30"> 30 </option>
+              <option value="50"> 50 </option>
+              <option value="100"> 100 </option>
+          </x-sistem.forms.select-form>
+      </div>
+    </x-sistem.filter.bg-input>
+
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.search-active />
     
@@ -40,6 +65,7 @@
      @include('livewire.page.forms-layouts.category-form')
 
     @push('scripts')
+
       <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
       <script>
         Livewire.on('deleteCategory', (event, nameDispatch) => {

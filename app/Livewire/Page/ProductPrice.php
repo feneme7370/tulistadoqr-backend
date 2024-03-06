@@ -97,13 +97,15 @@ class ProductPrice extends Component
         // dd($this->productsChecked);
         // editar datos
         foreach($this->productsChecked as $productChecked){
-            $product = Product::findOrFail($productChecked);
+            $this->product = Product::findOrFail($productChecked);
+
+            $this->authorize('update', $this->product); 
             
             if($this->price_original){
-                $product->update($this->only(['price_original']));
+                $this->product->update($this->only(['price_original']));
             }
             if($this->price_seller){
-                $product->update($this->only(['price_seller']));
+                $this->product->update($this->only(['price_seller']));
             }
 
         }

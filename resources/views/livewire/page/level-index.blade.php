@@ -37,7 +37,29 @@
   <!-- Modal para crear y editar -->
   @include('livewire.page.forms-layouts.level-form')
 
-  @push('scripts')
+  @push('scripts')  
+  
+  {{-- <script>
+    document.addEventListener('livewire:init', () => {
+        // Runs after Livewire is loaded but before it's initialized
+        // on the page...
+        const quill = new Quill('#level-quill', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'], // Agrega los estilos que deseas
+                    ['clean']
+                ]
+            }
+        });
+    
+        quill.on('text-change', function () {
+            @this.set('description', quill.root.innerHTML);
+        });
+    })
+  </script> --}}
+
+
     <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
     <script>
       Livewire.on('deleteLevel', (event, nameDispatch) => {

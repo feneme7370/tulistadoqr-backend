@@ -41,7 +41,15 @@
                   wire:model="description" />
               <x-sistem.forms.input-error for="description" />
             </div>
-  
+
+            {{-- <div wire:ignore>
+              <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
+              <x-sistem.forms.textarea-summernote-form id="summernote-description" placeholder="{{ __('Ingresar una breve descripcion') }}"
+              wire:model="description"/>
+              <textarea id="description" wire:model="description"></textarea>
+              <x-sistem.forms.input-error for="description" />
+            </div> --}}
+
             <div>
               <label for="status" class="flex items-center">
                   <x-sistem.forms.checkbox-form id="status" wire:model="status" />
@@ -140,6 +148,78 @@
         </x-slot>
 
       </x-sistem.forms.form-section>
+
+    </x-slot>
+
+    <x-slot name="footer">
+    </x-slot>
+</x-sistem.modal.dialog-modal>
+
+@push('scripts')
+  <script>
+    // document.addEventListener('livewire:load', () => {
+      // Runs after Livewire is loaded but before it's initialized
+      // on the page...
+      // $(function(){
+      //   $('#description').summernote({
+      //     placeholder: 'Hello stand alone ui',
+      //     tabsize: 2,
+      //     height: 120,
+      //     toolbar: [
+      //       ['style', ['style']],
+      //       ['font', ['bold', 'underline', 'clear']],
+      //       ['color', ['color']],
+      //       ['para', ['ul', 'ol', 'paragraph']],
+      //       ['insert', ['link']],
+      //     ],
+      //     callbacks: {
+      //       onChange: function(contents, $editable) {
+      //         // console.log('onChange:', contents, $editable);
+      //         @this.set('description', contents)
+      //       },
+      //     }
+      //     })
+      //   });
+    // })
+  </script>
+@endpush
+
+<x-sistem.modal.dialog-modal wire:model="showViewModal">
+    <x-slot name="title">
+        {{ __('Ver datos') }}
+    </x-slot> 
+
+    <x-slot name="content">
+
+      <div class="grid gap-3 p-1">
+
+        <picture class="w-full mb-5">
+          <x-sistem.lightbox.img-lightbox class="mx-auto h-auto max-w-96 rounded-lg overflow-hidden" :uri="$category->image_hero_uri ?? ''"
+          :name="$category->image_hero ?? ''" />
+        </picture>
+  
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Nombre: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $category->name ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Slug: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $category->slug ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Descripcion: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $category->description ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Estado: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ ($category->status ?? '') ? 'Activo' : 'Inactivo'}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Categoria General: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $category->level->name ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Ultima modificacion por: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $category->user->lastname ?? ''}}, {{ $category->user->name ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Empresa: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $category->company->name ?? ''}}</span>
+        </p>
+      </div>
 
     </x-slot>
 

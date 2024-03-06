@@ -10,7 +10,7 @@
                 <th>Acciones</th>
                 <th>Imagen</th>
                 <th>Nombre</th>
-                <th>Descripcion</th>
+                {{-- <th>Descripcion</th> --}}
                 <th>Categoria General</th>
                 <th>Creado por</th>
                 <th>Estado</th>
@@ -25,6 +25,7 @@
 
                   <td class="with-actions-columns">
                     <div class="actions">
+                      <x-sistem.buttons.view-text wire:click="viewActionModal({{ $item->id }})" wire:loading.attr="disabled" />
                       <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})" wire:loading.attr="disabled" />
                       <x-sistem.buttons.delete-text wire:click="$dispatch('deleteCategory', {{$item->id}})"
                       wire:loading.attr="disabled" />
@@ -38,8 +39,10 @@
                     />
                   </td>
 
-                  <td><p>{{$item->name}}</p></td>
-                  <td><p>{{$item->description}}</p></td>
+                  <td><p><a class="hover:underline" href="{{ route('products.index', ['c' => $item->id]) }}"> {{$item->name}} </a> </p></td>
+
+                  {{-- <td><p>{{ $item->description }}</p></td> --}}
+                
                   <td><p>{{$item->level->name}}</p></td>
                   <td><p>{{$item->user->lastname}}, {{$item->user->name}}</p></td>
 

@@ -11,8 +11,11 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('archives/sistem/img/TuMenuQR_favicon.png') }}">
         <!-- libs -->
         <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
-        <link rel="stylesheet" href="{{asset('lib/toastify/toastify.css')}}">
         <link rel="stylesheet" href="{{asset('lib/toastr/toastr.min.css')}}">
+        <link rel="stylesheet" href="{{asset('lib/quill/quill.snow.css')}}">
+        {{-- <script src="{{asset('lib/Summernote/summernote-lite.js')}}"  ></script>
+        <link rel="stylesheet" href="{{asset('lib/Summernote/summernote-lite.css')}}"> --}}
+        
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -35,17 +38,19 @@
     @livewireScripts
 
     <!-- libs -->
+    <script defer src="{{asset('lib/jquery/jquery.min.js')}}"  ></script>
     <script defer src="{{asset('lib/flowbite/flowbite.min.js')}}"  ></script>
-    <script defer src="{{asset('lib/lightbox/js/lightbox-plus-jquery.min.js')}}"  ></script>
+    <script defer src="{{asset('lib/lightbox/js/lightbox.min.js')}}"  ></script>
     <script defer src="{{asset('lib/sweetalert2/sweetalert2.all.min.js')}}"  ></script>
-    <script defer src="{{asset('lib/toastify/toastify.js')}}"  ></script>
     <script defer src="{{asset('lib/toastr/toastr.min.js')}}"  ></script>
-    
+    <script defer src="{{asset('lib/quill/quill.js')}}"  ></script>
+
     {{-- <script>
         document.addEventListener("livewire:navigated", () => {
             initFlowbite();
         });
     </script> --}}
+
     @stack('scripts')
     @stack('modals')
 

@@ -34,7 +34,7 @@ class LevelIndex extends Component
 
     // propiedades para el modal
     public $showActionModal = false;
-    public $showDeleteModal = false;
+    public $showViewModal = false;
 
     // propiedades del form
     public $name;
@@ -150,40 +150,6 @@ class LevelIndex extends Component
 
     ///////////////////////////// MODULO CRUD CON MODALES /////////////////////////////
 
-    // abrir modal y recibir id
-    // public function openDeleteModal($id){
-    //     $this->resetProperties();
-
-    //     $this->level = Level::findOrFail($id);
-    //     $this->authorize('delete', $this->level); 
-
-    //     // $this->showDeleteModal = true;
-    // }
-    
-    // eliminar desde el modal de confirmacion
-    // public function deleteLevel() {
-    //     $this->resetProperties();
-
-    //     $level = Level::findOrFail($this->level->id);
-
-    //     // comprobar si tiene productos asignados
-    //     if($level->categories->count() > 0){
-    //         session()->flash('messageError', 'No se puede eliminar, tiene categorias asignados');
-    //         $this->resetProperties();
-    //     }else{
-    //         $this->image_hero = $level['image_hero'];
-            
-    //         $this->deleteImage();
-    //         $level->delete();
-
-    //         $this->resetProperties();
-    //         $this->reset('level');
-    //         session()->flash('messageSuccess', 'Registro eliminado');
-    //     }
-        
-    //     $this->showDeleteModal = false;
-    // }
-
     // eliminar desde sweetalert
     protected $listeners = ['deleteLevelId'];
     public function deleteLevelId($id){
@@ -222,6 +188,18 @@ class LevelIndex extends Component
         $this->showActionModal = true;
     }
 
+    // cargar datos a editar
+    public function preloadEditModal($item){
+        $this->name = $item['name'];
+        $this->slug = $item['slug'];
+        $this->description = $item['description'];
+        $this->status = $item['status'] == '1' ? true : false;
+        $this->image_hero = $item['image_hero'];
+        $this->image_hero_uri = $item['image_hero_uri'];
+        $this->user_id = $item['user_id'];
+        $this->company_id = $item['company_id'];
+    }
+
     // // mostrar modal para confirmar editar
     public function editActionModal(Level $level) {
         $this->resetProperties();
@@ -229,16 +207,24 @@ class LevelIndex extends Component
         $this->level = $level;
         $this->authorize('update', $this->level); 
         
-        $this->name = $level['name'];
-        $this->slug = $level['slug'];
-        $this->description = $level['description'];
-        $this->status = $level['status'] == '1' ? true : false;
-        $this->image_hero = $level['image_hero'];
-        $this->image_hero_uri = $level['image_hero_uri'];
-        $this->user_id = $level['user_id'];
-        $this->company_id = $level['company_id'];
+        $this->resetErrorBag();
+
+        $this->preloadEditModal($this->level);
 
         $this->showActionModal = true;
+    }
+
+    public function viewActionModal(Level $level){
+        $this->resetProperties();
+        $this->resetErrorBag();
+
+        $this->level = $level;
+        
+        $this->authorize('update', $this->level);         
+
+        $this->preloadEditModal($this->level);
+        
+        $this->showViewModal = true;
     }
 
     // boton de guardar o editar
@@ -306,6 +292,8 @@ class LevelIndex extends Component
                         ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_level');
 
-        return view('livewire.page.level-index', compact('levels'));
+        $level = $this->level;
+
+        return view('livewire.page.level-index', compact('levels', 'level'));
     }
 }

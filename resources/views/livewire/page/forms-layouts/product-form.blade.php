@@ -196,3 +196,60 @@
     <x-slot name="footer">
     </x-slot>
 </x-sistem.modal.dialog-modal>
+
+<x-sistem.modal.dialog-modal wire:model="showViewModal">
+    <x-slot name="title">
+        {{ __('Ver datos') }}
+    </x-slot> 
+  
+    <x-slot name="content">
+  
+      <div class="grid gap-3 p-1">
+  
+        <picture class="w-full mb-5">
+          <x-sistem.lightbox.img-lightbox class="mx-auto h-auto max-w-96 rounded-lg overflow-hidden" :uri="$product->image_hero_uri ?? ''"
+          :name="$product->image_hero ?? ''" />
+        </picture>
+  
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Nombre: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->name ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Slug: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->slug ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Precio: 
+          <br><span class="text-gray-700 italic text-sm normal-case">$ {{ number_format(($product->price_original ?? 0), 2,",",".") }}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Oferta: 
+          <br><span class="text-gray-700 italic text-sm normal-case">$ {{ number_format(($product->price_seller ?? 0), 2,",",".") }}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Descripcion: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->description ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Categoria: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->category->name ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Etiquetas: 
+          <br>
+          @foreach (($product->tags ?? []) as $item)
+              
+          <span class="text-gray-700 bg-gray-200 p-1 rounded-lg italic mt-2 mr-3 text-sm normal-case">{{ $item->name ?? ''}}</span>
+
+          @endforeach
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Estado: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ ($product->status ?? '') ? 'Activo' : 'Inactivo'}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Ultima modificacion por: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->user->lastname ?? ''}}, {{ $product->user->name ?? ''}}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Empresa: 
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->company->name ?? ''}}</span>
+        </p>
+      </div>
+  
+    </x-slot>
+  
+    <x-slot name="footer">
+    </x-slot>
+  </x-sistem.modal.dialog-modal>

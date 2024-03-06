@@ -30,11 +30,15 @@
               wire:model="description" />
             <x-sistem.forms.input-error for="description" />
           </div>
+
+          {{-- <div wire:ignore>
+            <div id="level-quill" wire:model="description" class="h-auto"></div>
+          </div> --}}
   
           <div>
             <label for="status" class="flex items-center">
               <x-sistem.forms.checkbox-form id="status" wire:model="status" />
-              <span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
+              <br><span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
             </label>
           </div>
 
@@ -122,6 +126,47 @@
       </x-slot>
 
     </x-sistem.forms.form-section>
+  </x-slot>
+
+  <x-slot name="footer">
+  </x-slot>
+</x-sistem.modal.dialog-modal>
+
+
+<x-sistem.modal.dialog-modal wire:model="showViewModal">
+  <x-slot name="title">
+      {{ __('Ver datos') }}
+  </x-slot> 
+
+  <x-slot name="content">
+
+    <div class="grid gap-3 p-1">
+
+      <picture class="w-full mb-5">
+        <x-sistem.lightbox.img-lightbox class="mx-auto h-auto max-w-96 rounded-lg overflow-hidden" :uri="$level->image_hero_uri ?? ''"
+        :name="$level->image_hero ?? ''" />
+      </picture>
+
+      <p class="text-gray-900 font-bold text-base uppercase mr-3">Nombre: 
+        <br><span class="text-gray-700 italic text-sm normal-case">{{ $level->name ?? ''}}</span>
+      </p>
+      <p class="text-gray-900 font-bold text-base uppercase mr-3">Slug: 
+        <br><span class="text-gray-700 italic text-sm normal-case">{{ $level->slug ?? ''}}</span>
+      </p>
+      <p class="text-gray-900 font-bold text-base uppercase mr-3">Descripcion: 
+        <br><span class="text-gray-700 italic text-sm normal-case">{{ $level->description ?? ''}}</span>
+      </p>
+      <p class="text-gray-900 font-bold text-base uppercase mr-3">Estado: 
+        <br><span class="text-gray-700 italic text-sm normal-case">{{ ($level->status ?? '') ? 'Activo' : 'Inactivo'}}</span>
+      </p>
+      <p class="text-gray-900 font-bold text-base uppercase mr-3">Ultima modificacion por: 
+        <br><span class="text-gray-700 italic text-sm normal-case">{{ $level->user->lastname ?? ''}}, {{ $level->user->name ?? ''}}</span>
+      </p>
+      <p class="text-gray-900 font-bold text-base uppercase mr-3">Empresa: 
+        <br><span class="text-gray-700 italic text-sm normal-case">{{ $level->company->name ?? ''}}</span>
+      </p>
+    </div>
+
   </x-slot>
 
   <x-slot name="footer">

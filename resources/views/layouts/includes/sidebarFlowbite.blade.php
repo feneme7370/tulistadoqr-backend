@@ -268,7 +268,7 @@
 
         @can('information.index')
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
-            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('information.index', auth()->user()->company_id) }}"
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('information.index') }}"
                 :active="request()->routeIs('information.index')" title="Informacion">
                 <x-sistem.icons.for-icons-app icon="info" class="h-6 w-6" />
             </x-sistem.navlinks.navlink-sidebar-flowbite>

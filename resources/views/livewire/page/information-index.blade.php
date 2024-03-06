@@ -40,9 +40,9 @@
     <div class="w-1/3 border-t border-gray-300"></div>
 
     <div class="w-full text-center">
-        <p><Span>Whatsapp: </Span>{{ $femaser->socialMedia->where('slug', 'whatsapp')->first()->pivot->url }}</p>
+        <p><Span>Whatsapp: </Span>{{ $femaserWsp }}</p>
 
-        <a href="https://api.whatsapp.com/send/?phone={{ $femaser->socialMedia->where('slug', 'whatsapp')->first()->pivot->url }}&amp;text=" target="_blank"
+        <a href="https://api.whatsapp.com/send/?phone={{ $femaserWsp }}&amp;text=" target="_blank"
             class="px-2 py-3 mt-5 text-base font-semibold text-center text-gray-100 bg-gray-900 rounded shadow-sm hover:bg-primary-600 flex flex-row gap-3 justify-center items-center w-auto">
 
             <x-sistem.icons.for-icons-social icon="whatsapp" class="fill-gray-100 h-6 w-6" />

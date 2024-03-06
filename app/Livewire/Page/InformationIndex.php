@@ -10,7 +10,7 @@ class InformationIndex extends Component
     public function render()
     {
         $femaser = Company::where('id', 1)->first();
-        $femaserWsp = $femaser->socialMedia->where('slug', 'whatsapp')->first()->pivot->url;
+        $femaserWsp = 5492396513953;
         return view('livewire.page.information-index', compact('femaser', 'femaserWsp'));
     }
 }

@@ -36,7 +36,7 @@ class ProductResource extends JsonResource
             'company' => $this->company,
             'user' => $this->user,
             'suggestion' => $this->suggestion ? true : false,
-            'offer' => $this->price_original > $this->price_seller ? true : false,
+            'offer' => (($this->price_original > $this->price_seller) && ($this->price_seller != 0)) ? true : false,
         ];
     }
 }

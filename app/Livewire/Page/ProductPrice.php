@@ -56,8 +56,8 @@ class ProductPrice extends Component
     // reglas de validacion
     public function rules(){
         return [
-            'price_original' => ['nullable', 'numeric', 'min:1'],
-            'price_seller' => ['nullable', 'numeric', 'min:1'],
+            'price_original' => ['nullable', 'numeric', 'min:0'],
+            'price_seller' => ['nullable', 'numeric', 'min:0'],
         ];
     }
 
@@ -101,10 +101,10 @@ class ProductPrice extends Component
 
             $this->authorize('update', $this->product); 
             
-            if($this->price_original){
+            if($this->price_original != null){
                 $this->product->update($this->only(['price_original']));
             }
-            if($this->price_seller){
+            if($this->price_seller != null){
                 $this->product->update($this->only(['price_seller']));
             }
 

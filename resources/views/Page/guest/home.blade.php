@@ -108,12 +108,13 @@
                 {{-- seccion de redes sociales propias --}}
                 <div class="flex-col hidden mt-3 sm:mt-12 sm:flex lg:mt-24">
                     <p class="mb-4 text-sm font-medium tracking-widest text-gray-500 uppercase">Redes sociales</p>
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center">
                         @foreach ($company->socialMedia as $item)
-                            
-                            <a href="https://{{$item->pivot->url}}" target="_blank" >
-                                <x-sistem.icons.for-icons-social :icon="$item->slug" />
-                            </a>
+                            @if ($item->pivot->url != '')
+                                <a href="{{$item->pivot->url}}" target="_blank" class="m-1">
+                                    <x-sistem.icons.for-icons-social :icon="$item->slug" class="hover:fill-primary-600" />
+                                </a>
+                            @endif
                             
                         @endforeach
                     </div>
@@ -433,13 +434,14 @@
                 <div class="flex flex-col w-full text-gray-700">
                     <div class="inline-block px-3 py-2 mt-5 mb-3 font-bold text-gray-800 uppercase md:mt-0">Redes Sociales</div>
 
-                    <div class="flex items-center justify-center sm:justify-start sm: px-3 gap-3">
+                    <div class="flex items-center justify-center sm:justify-start">
 
                         @foreach ($company->socialMedia as $item)
-                            
-                            <a href="{{$item->pivot->url}}" target="_blank" >
-                                <x-sistem.icons.for-icons-social :icon="$item->slug" class="hover:fill-primary-600" />
-                            </a>
+                            @if ($item->pivot->url != '')
+                                <a href="{{$item->pivot->url}}" target="_blank" class="m-1">
+                                    <x-sistem.icons.for-icons-social :icon="$item->slug" class="hover:fill-primary-600" />
+                                </a>
+                            @endif
                             
                         @endforeach
                     </div>

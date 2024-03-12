@@ -235,14 +235,14 @@
                 Simple, util y al acceso de todos</h3>
 
             <div class="max-w-full mx-auto md:max-w-6xl sm:px-8">
-                <div class="relative flex flex-col items-center sm:flex-row">
+                <div class="relative flex flex-col items-center md:flex-row w-full">
 
                     <!-- Pro Pricing -->
                     @foreach ($memberships as $membership)
                         
                     
                     <div
-                        class="relative z-10 w-full max-w-md my-8 bg-white rounded-lg shadow-lg sm:w-2/3 lg:w-1/3 sm:my-5">
+                        class="relative z-10 w-full max-w-md my-8 bg-white rounded-lg shadow-lg md:w-2/3 lg:w-1/4 sm:my-5">
                         @if ( $membership->id == 2 )
                         <div
                             class="py-4 text-sm font-semibold leading-none tracking-wide text-center text-white uppercase bg-primary-500 rounded-t">
@@ -437,7 +437,7 @@
 
                         @foreach ($company->socialMedia as $item)
                             
-                            <a href="https://{{$item->pivot->url}}" target="_blank" >
+                            <a href="{{$item->pivot->url}}" target="_blank" >
                                 <x-sistem.icons.for-icons-social :icon="$item->slug" class="hover:fill-primary-600" />
                             </a>
                             

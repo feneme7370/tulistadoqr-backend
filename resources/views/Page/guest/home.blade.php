@@ -104,33 +104,6 @@
                 <p class="pr-0 mb-8 text-base text-gray-600 sm:text-lg xl:text-xl lg:pr-20">{{$company->description}}</p>
                 {{-- <a href="{{route('register')}}"
                     class="relative self-start inline-block w-auto px-8 py-4 mx-auto mt-0 text-base font-bold text-white bg-indigo-600  rounded-md shadow-xl sm:mt-1 fold-bold lg:mx-0">Registrarme</a> --}}
-                               
-                {{-- <svg class="absolute left-0 max-w-md mt-24 -ml-64 left-svg" viewBox="0 0 423 423"
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <defs>
-                        <linearGradient x1="100%" y1="0%" x2="4.48%" y2="0%" id="linearGradient-1">
-                            <stop stop-color="#5C54DB" offset="0%" />
-                            <stop stop-color="#6A82E7" offset="100%" />
-                        </linearGradient>
-                        <filter x="-9.3%" y="-6.7%" width="118.7%" height="118.7%" filterUnits="objectBoundingBox"
-                            id="filter-3">
-                            <feOffset dy="8" in="SourceAlpha" result="shadowOffsetOuter1" />
-                            <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
-                            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" in="shadowBlurOuter1" />
-                        </filter>
-                        <rect id="path-2" x="63" y="504" width="300" height="300" rx="40" />
-                    </defs>
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity=".9">
-                        <g id="Desktop-HD" transform="translate(-39 -531)">
-                            <g id="Hero" transform="translate(43 83)">
-                                <g id="Rectangle-6" transform="rotate(45 213 654)">
-                                    <use fill="#000" filter="url(#filter-3)" xlink:href="#path-2" />
-                                    <use fill="url(#linearGradient-1)" xlink:href="#path-2" />
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-                </svg> --}}
 
                 {{-- seccion de redes sociales propias --}}
                 <div class="flex-col hidden mt-3 sm:mt-12 sm:flex lg:mt-24">
@@ -164,8 +137,9 @@
     <div id="features" class="relative w-full px-8 py-2 md:py-8 lg:py-16 xl:py-24 xl:px-0">
         <div class="container flex flex-col items-center justify-between h-full max-w-6xl mx-auto">
             
-            <h2 class="mt-5 mb-1 text-base font-medium tracking-tight text-primary-500 uppercase">Nuestros servicios</h2>
+            <h2 class="mt-5 mb-10 text-base font-medium tracking-tight text-primary-500 uppercase">Nuestros servicios</h2>
             <hr class="border border-primary-900 w-full">
+            
             {{-- titulo de nuestros servicios --}}
             <h3
                 class="max-w-2xl px-5 mt-2 text-3xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl">
@@ -183,68 +157,68 @@
 
             @endforeach
     
-                {{-- <div class="w-full max-w-md p-4 mx-auto mb-3 lg:mb-0 lg:w-1/3">
-                    <div class="relative flex flex-col items-center justify-center w-full h-full p-2 sm:mr-5 rounded-lg">
-                        <svg class="absolute w-full h-full text-primary-100 fill-current" viewBox="0 0 377 340"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g>
-                                <g>
-                                    <path
-                                        d="M342.8 3.7c24.7 14 18.1 75 22.1 124s18.6 85.8 8.7 114.2c-9.9 28.4-44.4 48.3-76.4 62.4-32 14.1-61.6 22.4-95.9 28.9-34.3 6.5-73.3 11.1-95.5-6.2-22.2-17.2-27.6-56.5-47.2-96C38.9 191.4 5 151.5.9 108.2-3.1 64.8 22.7 18 61.8 8.7c39.2-9.2 91.7 19 146 16.6 54.2-2.4 110.3-35.6 135-21.6z" />
-                                </g>
-                            </g>
-                        </svg>
+           </div>
+        </div>
+    </div>
+    <!-- FEATURES SECTION END -->
+    
+    <!-- PICTURE SECTION -->
+    <div id="pictures" class="relative w-full px-8 py-2 md:py-8 lg:py-16 xl:py-24 xl:px-0">
+        <div class="container flex flex-col items-center justify-between h-full max-w-6xl mx-auto">
+            <h2 class="mt-5 mb-10 text-base font-medium tracking-tight text-primary-500 uppercase">Imagenes</h2>
+            <hr class="border border-primary-900 w-full mb-5">
+            <div class="w-full my-4 flex flex-col items-center gap-3 justify-around sm:flex-row">
 
-                        <!-- FEATURE Icon 1 -->
-                        <h4 class="relative mt-3 text-lg font-bold">Facil gestion</h4>
-                        <p class="relative mt-2 text-sm text-center text-gray-600 italic">Sistema facil de usar, intuitivo y rapido.</p>
+
+
+                <div class="grid md:grid-cols-2 gap-2">
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (1).png') }}" alt="">
                     </div>
-                </div> --}}
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (2).png') }}" alt="">
+                    </div>
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (3).png') }}" alt="">
+                    </div>
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (5).png') }}" alt="">
+                    </div>
+                </div>
+
 
 
             </div>
         </div>
     </div>
-    <!-- FEATURES SECTION END -->
-    
+    <!-- PICTURE SECTION END -->
+
     <!-- DEMO SECTION -->
     <div id="demos" class="relative w-full px-8 py-2 md:py-8 lg:py-16 xl:py-24 xl:px-0">
         <div class="container flex flex-col items-center justify-between h-full max-w-6xl mx-auto">
-            <h2 class="mt-5 mb-1 text-base font-medium tracking-tight text-primary-500 uppercase">Mira nuestras demos</h2>
+            <h2 class="mt-5 mb-10 text-base font-medium tracking-tight text-primary-500 uppercase">Mira nuestras demos</h2>
             <hr class="border border-primary-900 w-full mb-5">
             <div class="w-full my-4 flex flex-col items-center gap-3 justify-around sm:flex-row">
 
-<div class="w-full md:w-auto flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
-    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-56 md:rounded-none md:rounded-s-lg" lazy="loading" src="{{ asset('archives/sistem/img/demo1.jpg') }}" alt="">
-    <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Meriendalunas</h5>
-        <p class="mb-3 font-normal text-gray-700">Menu para merendar.</p>
-        <a href="https://tulistadoqr-demo1.femaser.com/" target="_blank"
-        class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 1</a>
-    </div>
-</div>
-<div class="w-full md:w-auto flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
-    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-56 md:rounded-none md:rounded-s-lg" lazy="loading" src="{{ asset('archives/sistem/img/demo2.jpg') }}" alt="">
-    <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">El Favorito</h5>
-        <p class="mb-3 font-normal text-gray-700">Rotiseria.</p>
-        <a href="https://tulistadoqr-demo2.femaser.com/" target="_blank"
-        class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 2</a>
-    </div>
-</div>
-
-                {{-- <div class="w-full max-w-48 flex flex-col items-center gap-3 border border-primary-900 bg-gray-100 p-3 rounded-3xl">
-                    <h3 class="font-bold text-primary-900 text-center">Meriendalunas</h3>
-                    <p class="font-light text-gray-700 text-center italic">Menu para merendar</p>
-                    <a href="https://tulistadoqr-demo1.femaser.com/" target="_blank"
-                    class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 1</a>
+                <div class="w-full md:w-auto flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
+                    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-56 md:rounded-none md:rounded-s-lg" lazy="loading" src="{{ asset('archives/sistem/img/demo1.jpg') }}" alt="">
+                    <div class="flex flex-col justify-between p-4 leading-normal">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Meriendalunas</h5>
+                        <p class="mb-3 font-normal text-gray-700">Menu para merendar.</p>
+                        <a href="https://tulistadoqr-demo1.femaser.com/" target="_blank"
+                        class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 1</a>
+                    </div>
                 </div>
-                <div class="w-full max-w-48 flex flex-col items-center gap-3 border border-primary-900 bg-gray-100 p-3 rounded-3xl">
-                    <h3 class="font-bold text-primary-900 text-center">El Favorito</h3>
-                    <p class="font-light text-gray-700 text-center italic">Rotiseria</p>
-                    <a href="https://tulistadoqr-demo2.femaser.com/" target="_blank"
-                    class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 2</a>
-                </div> --}}
+                <div class="w-full md:w-auto flex flex-col items-center bg-gray-50 border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100">
+                    <img class="object-cover w-full rounded-t-lg h-80 md:h-auto md:w-56 md:rounded-none md:rounded-s-lg" lazy="loading" src="{{ asset('archives/sistem/img/demo2.jpg') }}" alt="">
+                    <div class="flex flex-col justify-between p-4 leading-normal">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">El Favorito</h5>
+                        <p class="mb-3 font-normal text-gray-700">Rotiseria.</p>
+                        <a href="https://tulistadoqr-demo2.femaser.com/" target="_blank"
+                        class="relative inline-block w-full p-2 text-sm rounded-2xl text-center text-gray-100 bg-primary-900 hover:bg-primary-700 fold-bold">Demo 2</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -254,7 +228,7 @@
     <div class="relative px-8 py-10 bg-white md:py-16 lg:py-24 xl:py-40 xl:px-0">
 
         <div id="pricing" class="container flex flex-col items-center h-full max-w-6xl mx-auto">
-            <h2 class="mt-5 mb-1 text-base font-medium tracking-tight text-primary-500 uppercase">Nuestros precios</h2>
+            <h2 class="mt-5 mb-10 text-base font-medium tracking-tight text-primary-500 uppercase">Nuestros precios</h2>
             <hr class="border border-primary-900 w-full">
             <h3
                 class="w-full max-w-2xl px-8 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">

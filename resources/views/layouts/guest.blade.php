@@ -11,8 +11,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <script defer src="{{asset('lib/flowbite/flowbite.min.js')}}"  ></script>
-        <script defer src="{{asset('lib/lightbox/js/lightbox.min.js')}}"  ></script>
-        <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}">
+        {{-- <script defer src="{{asset('lib/lightbox/js/lightbox.min.js')}}"  ></script>
+        <link rel="stylesheet" href="{{asset('lib/lightbox/css/lightbox.min.css')}}"> --}}
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 

@@ -173,10 +173,10 @@
 
                 <div class="grid md:grid-cols-2 gap-2">
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (1).png') }}" alt="">
+                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (2).png') }}" alt="">
                     </div>
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (2).png') }}" alt="">
+                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (1).png') }}" alt="">
                     </div>
                     <div>
                         <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (3).png') }}" alt="">
@@ -253,7 +253,7 @@
                             <h3 class="p-3 pb-1 text-lg font-bold tracking-wide text-center uppercase">{{$membership->short_description}}</h3>
                             <h4
                                 class="flex items-center justify-center pb-6 text-5xl font-bold text-center text-gray-900">
-                                <span class="mr-1 -ml-2 text-lg text-gray-700">$</span>{{$membership->price}}</h4>
+                                <span class="mr-1 -ml-2 text-lg text-gray-700">$</span>{{number_format($membership->price, 0,",",".")}}</h4>
                             <p class="text-sm text-gray-600 text-center">{{$membership->description}}</p>
                         </div>
                         <div class="flex justify-start pl-12 mt-8 sm:justify-start">

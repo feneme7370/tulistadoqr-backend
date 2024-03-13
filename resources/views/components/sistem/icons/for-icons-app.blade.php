@@ -1,6 +1,6 @@
 @props(['icon' => ''])
 
-<div {{ $attributes->merge(['class' => 'w-6 h-6']) }}>       
+<div {!! $attributes->merge(['class' => 'h-6 w-6']) !!}>       
 
     @if ($icon === 'rotate')
     <div>

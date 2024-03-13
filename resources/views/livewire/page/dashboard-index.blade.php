@@ -1,6 +1,6 @@
 <div>
     {{-- titulo y boton --}}
-    <x-sistem.menus.title-and-btn title="Bienvenido {{auth()->user()->name}}">
+    <x-sistem.menus.title-and-btn title="Bienvenido">
         <div class="flex flex-row gap-3 items-center">
             <span class="font-bold italic">{{ auth()->user()->company->membership->name }}</span>
             <x-sistem.icons.for-icons-app icon="membership" class="w-6 h-6"/>
@@ -12,7 +12,7 @@
 
         <span class="font-bold text-gray-600 text-xl mb-2 lg:mb-0">{{auth()->user()->company->name}}</span>
 
-        <a href="https://{{ auth()->user()->company->url }}" target="_blank" class="flex items-center justify-center gap-1">
+        <a href="{{ auth()->user()->company->url }}" target="_blank" class="flex items-center justify-center gap-1">
             <p class="flex items-center flex-col gap-1">
                 <x-sistem.icons.for-icons-app icon="social_media" class="w-6 h-6"/>
                 <span class="">{{ auth()->user()->company->url }}</span>

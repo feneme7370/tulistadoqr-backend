@@ -21,7 +21,7 @@
                 <td class="with-actions-columns">
                   <div class="actions">
                     <button class="text-xs hover:text-blue-500 text-blue-400" wire:click="editActionModal({{$item->id}})">Editar</button>
-                    <button class="text-xs hover:text-red-500 text-red-400" wire:click="$dispatch('deleteTag', {{$item->id}})">Borrar</button>
+                    <button class="text-xs hover:text-red-500 text-red-400 bg" wire:click="$dispatch('deleteTag', {{$item->id}})">Borrar</button>
                     {{-- <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
                       wire:loading.attr="disabled"></x-sistem.buttons.edit-text>
                     <x-sistem.buttons.delete-text wire:click="$dispatch('deleteTag', {{$item->id}})"

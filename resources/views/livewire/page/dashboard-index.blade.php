@@ -55,37 +55,44 @@
     <div class="grid gap-3 mb-8 lg:grid-cols-2 xl:grid-cols-4">
        
         @can('memberships.index')
-            <x-sistem.cards.mini-date 
+    <div>
+    <x-sistem.cards.mini-date 
             href="{{route('memberships.index')}}" 
             title="Membresias" 
             :date="$memberships->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="membership" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>            
-        @endcan
+    </div>
+    @endcan
 
         @can('companies.index')
-            <x-sistem.cards.mini-date 
+    <div>
+    <x-sistem.cards.mini-date 
             href="{{route('companies.index')}}" 
                 title="Empresas"
                 :date="$companies->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="company" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>         
-        @endcan
+    </div>
+    @endcan
 
         @can('users.index')
-            <x-sistem.cards.mini-date 
+    <div>
+    <x-sistem.cards.mini-date 
             href="{{route('users.index')}}" 
             title="Usuarios" 
             :date="$users->count()"
                 >
                 <x-sistem.icons.for-icons-app icon="user" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>           
-        @endcan
+    </div>
+    @endcan
 
         @can('levels.index')
-            <x-sistem.cards.mini-date 
+    <div>
+    <x-sistem.cards.mini-date 
                 href="{{route('levels.index')}}" 
                 title="Categorias Generales"
                 :date_total="auth()->user()->company->membership->level" 
@@ -93,10 +100,12 @@
                 >
                 <x-sistem.icons.for-icons-app icon="level" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
-        @endcan
+    </div>
+    @endcan
         
         @can('categories.index')
-            <x-sistem.cards.mini-date                     
+    <div>
+    <x-sistem.cards.mini-date                     
                 href="{{route('categories.index')}}"
                 title="Categorias" 
                 :date_total="auth()->user()->company->membership->category"
@@ -104,10 +113,12 @@
                 >
                 <x-sistem.icons.for-icons-app icon="category" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
-        @endcan
+    </div>
+    @endcan
 
         @can('products.index')
-            <x-sistem.cards.mini-date 
+    <div>
+    <x-sistem.cards.mini-date 
                 href="{{route('products.index')}}" 
                 title="Productos" 
                 :date_total="auth()->user()->company->membership->product" 
@@ -115,10 +126,12 @@
                 >
                 <x-sistem.icons.for-icons-app icon="product" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
-        @endcan
+    </div>
+    @endcan
 
         @can('tags.index')
-            <x-sistem.cards.mini-date 
+    <div>
+    <x-sistem.cards.mini-date 
                 href="{{route('tags.index')}}" 
                 title="Etiquetas" 
                 :date_total="auth()->user()->company->membership->tag" 
@@ -126,10 +139,12 @@
                 >
                 <x-sistem.icons.for-icons-app icon="tag" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
-        @endcan
+    </div>
+    @endcan
 
         @can('suggestions.index')
-            <x-sistem.cards.mini-date 
+    <div>
+    <x-sistem.cards.mini-date 
                 href="{{route('suggestions.index')}}" 
                 title="Sugerencias" 
                 :date_total="auth()->user()->company->membership->suggestion" 
@@ -137,7 +152,8 @@
                 >
                 <x-sistem.icons.for-icons-app icon="suggestion" class="w-6 h-6"/>
             </x-sistem.cards.mini-date>
-        @endcan
+    </div>
+    @endcan
  
     </div>
 

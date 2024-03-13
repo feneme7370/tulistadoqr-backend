@@ -17,7 +17,7 @@
               
               <td class="with-actions-columns">
                 <div class="actions">
-                    <button class="text-xs font-bold hover:text-red-100 text-red-200 bg-red-800 p-1 rounded-lg" wire:click="$dispatch('deleteSuggestion', {{$item->id}})">Borrar</button>
+                  <button type="button" class="text-xs font-bold hover:text-red-100 text-red-200 bg-red-800 p-1 rounded-lg" wire:click="deleteSuggestion({{$item->id}})">Borrar</button>
                 </div>
               </td>
 

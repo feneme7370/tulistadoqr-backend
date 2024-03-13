@@ -76,6 +76,7 @@ class SuggestionIndex extends Component
 
     // eliminar desde el modal de confirmacion
     public function deleteSuggestion($id) {
+
         $this->resetProperties();
         
         $suggestion = Suggestion::findOrFail($id);

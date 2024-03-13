@@ -68,33 +68,13 @@ class ProductPrice extends Component
     ];
 
     ///////////////////////////// MODULO CRUD /////////////////////////////
-    // mostrar modal para confirmar editar
-    // public function editActionModal(Product $product) {
-    //     $this->resetProperties();
-        
-    //     $this->product = $product;
-    //     $this->authorize('update', $this->product); 
-        
-    //     $this->name = $product['name'];
-    //     $this->price_original = $product['price_original'];
-    //     $this->price_seller = $product['price_seller'];
-    //     $this->image_hero_uri = $product['image_hero_uri'];
-    //     $this->image_hero = $product['image_hero'];
-    //     $this->category_id = $product['category_id'];
-    //     $this->user_id = $product['user_id'];
-    //     $this->company_id = $product['company_id'];
-    // }
 
     // boton de guardar o editar
     public function save() {
-    
-        // poner datos automaticos
-        // $this->price_seller = $this->price_seller == '' ? '0' : $this->price_seller ;
 
         // validar form
         $this->validate();
 
-        // dd($this->productsChecked);
         // editar datos
         foreach($this->productsChecked as $productChecked){
             $this->product = Product::findOrFail($productChecked);
@@ -111,7 +91,6 @@ class ProductPrice extends Component
         }
         $this->resetProperties();
 
-        // session()->flash('messageSuccess', 'Actualizado con exito');
         $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
     }

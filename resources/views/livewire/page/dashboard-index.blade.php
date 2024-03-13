@@ -1,6 +1,6 @@
 <div>
     {{-- titulo y boton --}}
-    <x-sistem.menus.title-and-btn title="Bienvenido">
+    <x-sistem.menus.title-and-btn title="Bienvenido {{auth()->user()->name}}">
         <div class="flex flex-row gap-3 items-center">
             <span class="font-bold italic">{{ auth()->user()->company->membership->name }}</span>
             <x-sistem.icons.for-icons-app icon="membership" class="w-6 h-6"/>
@@ -49,7 +49,7 @@
     </div>
     
     {{-- logo de carga --}}
-    <x-sistem.spinners.loading-spinner wire:loading class="my-2"/>
+    <x-sistem.spinners.loading-spinner wire:loading />
 
     {{-- mini datos --}}
     <div class="grid gap-3 mb-8 lg:grid-cols-2 xl:grid-cols-4">

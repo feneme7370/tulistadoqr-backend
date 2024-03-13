@@ -14,18 +14,18 @@
   </x-sistem.menus.title-and-btn>
 
   {{-- texto informativo --}}
-  <x-sistem.menus.text-info class="my-2">
+  <x-sistem.menus.text-info>
     <p>Las etiquetas sirven reflejar una cualidad del producto, por ej. "Sin TACC", "Vegano", "Sin Sal", o si quiere aclarar algo como "Nuevo", "Oferta".</p>
   </x-sistem.menus.text-info>
 
   {{-- logo de carga --}}
-  <x-sistem.spinners.loading-spinner wire:loading class="my-2" />
+  <x-sistem.spinners.loading-spinner wire:loading />
 
   {{-- listado --}}
   @include('livewire.page.tables-layouts.tag-table')
 
   {{-- Paginacion --}}
-  <div class="mt-5 mb-40">{{ $tags->onEachSide(1)->links() }}</div>
+  <div class="mt-2">{{ $tags->onEachSide(1)->links() }}</div>
 
   <!-- Modal para crear y editar -->
   @include('livewire.page.forms-layouts.tag-form')

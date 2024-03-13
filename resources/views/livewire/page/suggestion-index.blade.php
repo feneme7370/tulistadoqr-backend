@@ -16,7 +16,7 @@
     </x-sistem.menus.text-info>
 
     {{-- logo de carga --}}
-    <x-sistem.spinners.loading-spinner wire:loading class="my-2" />
+    <x-sistem.spinners.loading-spinner wire:loading />
 
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.bg-input class="flex-col md:flex-row">
@@ -62,7 +62,7 @@
     @include('livewire.page.tables-layouts.suggestion-table')
 
     {{-- Paginacion --}}
-    <div class="mt-5 mb-40">{{ $suggestions->onEachSide(1)->links() }}</div>
+    <div class="mt-2">{{ $suggestions->onEachSide(1)->links() }}</div>
 
     @push('scripts')
    

@@ -42,7 +42,7 @@
                         
                         <td 
                             class="text-center"                                
-                        ><p class="{{($item->price_original > $item->price_seller && $item->price_seller > 0) ? 'text-green-800 font-bold' : 'text-orange-800'}}" >${{$item->price_seller ? number_format($item->price_seller, 2,",",".") : number_format($item->price_original, 2,",",".") }}</p>
+                        ><p class="{{($item->price_original > $item->price_seller && $item->price_seller > 0) ? 'text-green-800 font-bold' : 'text-orange-800'}}" >${{($item->price_original > $item->price_seller && $item->price_seller > 0) ? number_format($item->price_seller, 2,",",".") : number_format($item->price_original, 2,",",".") }}</p>
                         </td>
                         
                         <td class="text-center">

@@ -104,6 +104,8 @@ class TagIndex extends Component
         $this->tag = $tag;
         $this->authorize('update', $this->tag); 
 
+        $this->resetErrorBag();
+
         $this->name = $tag['name'];
         $this->slug = $tag['slug'];
         $this->user_id = $tag['user_id'];

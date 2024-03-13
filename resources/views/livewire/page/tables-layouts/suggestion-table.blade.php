@@ -18,7 +18,8 @@
               <td class="with-actions-columns">
                 <div class="actions">
                   <x-sistem.buttons.delete-text wire:click="deleteSuggestion({{$item->id}})"
-                    wire:loading.attr="disabled" />
+                    wire:loading.attr="disabled"></x-sistem.buttons.delete-text>
+                    
                 </div>
               </td>
 

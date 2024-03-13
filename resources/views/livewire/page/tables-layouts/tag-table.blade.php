@@ -21,9 +21,9 @@
                 <td class="with-actions-columns">
                   <div class="actions">
                     <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
-                      wire:loading.attr="disabled" />
+                      wire:loading.attr="disabled"></x-sistem.buttons.edit-text>
                     <x-sistem.buttons.delete-text wire:click="$dispatch('deleteTag', {{$item->id}})"
-                      wire:loading.attr="disabled" />
+                      wire:loading.attr="disabled" ></x-sistem.buttons.delete-text>
                   </div>
                 </td>
 

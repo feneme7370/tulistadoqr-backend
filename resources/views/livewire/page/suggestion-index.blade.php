@@ -62,7 +62,7 @@
     @include('livewire.page.tables-layouts.suggestion-table')
 
     {{-- Paginacion --}}
-    <div class="mt-2">{{ $suggestions->onEachSide(1)->links() }}</div>
+    <div class="mt-5 mb-40">{{ $suggestions->onEachSide(1)->links() }}</div>
 
     @push('scripts')
    

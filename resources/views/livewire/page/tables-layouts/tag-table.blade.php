@@ -14,22 +14,22 @@
           <tbody>
 
             @foreach($tags as $item)
-            <tr>
+              <tr>
 
-              <td class="with-id-columns"><p>{{ ($tags->currentPage() - 1) * $tags->perPage() + $loop->iteration }}</p></td>
+                <td class="with-id-columns"><p>{{ ($tags->currentPage() - 1) * $tags->perPage() + $loop->iteration }}</p></td>
 
-              <td class="with-actions-columns">
-                <div class="actions">
-                  <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
-                    wire:loading.attr="disabled" />
-                  <x-sistem.buttons.delete-text wire:click="$dispatch('deleteTag', {{$item->id}})"
-                    wire:loading.attr="disabled" />
-                </div>
-              </td>
+                <td class="with-actions-columns">
+                  <div class="actions">
+                    <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
+                      wire:loading.attr="disabled" />
+                    <x-sistem.buttons.delete-text wire:click="$dispatch('deleteTag', {{$item->id}})"
+                      wire:loading.attr="disabled" />
+                  </div>
+                </td>
 
-              <td><p>{{$item->name}}</p></td>
+                <td><p>{{$item->name}}</p></td>
 
-            </tr>
+              </tr>
             @endforeach
 
           </tbody>
@@ -38,4 +38,4 @@
     </div>
 
     <!-- Agrega más tarjetas aquí -->
-  </div>
+</div>

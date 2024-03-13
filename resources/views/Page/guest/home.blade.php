@@ -244,7 +244,7 @@
                     
                     <div
                         class="relative z-10 w-full max-w-md my-8 bg-white rounded-lg shadow-lg md:w-2/3 lg:w-1/4 sm:my-5">
-                        @if ( $membership->id == 2 )
+                        @if ( $membership->id == 3 )
                         <div
                             class="py-4 text-sm font-semibold leading-none tracking-wide text-center text-white uppercase bg-primary-500 rounded-t">
                             Mas adquirido

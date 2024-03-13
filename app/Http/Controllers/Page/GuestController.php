@@ -34,7 +34,7 @@ class GuestController extends Controller
             ],
         ];
         $company = Company::with('socialMedia')->where('id', 1)->first();
-        $memberships = Membership::all();
+        $memberships = Membership::where('status', '1')->get();
         // dd($company->socialMedia[0]->pivot->url);
         return view('Page.guest.home', compact(
             'company',

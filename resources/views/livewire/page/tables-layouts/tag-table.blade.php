@@ -14,17 +14,15 @@
         <tbody>
 
           @foreach ($tags as $item)
-          <tr class="{{ $item->status == '1' ? '' : 't_tr-inactive' }}">
+          <tr>
 
             <td class="with-id-columns">
               <p>{{ ($tags->currentPage() - 1) * $tags->perPage() + $loop->iteration }}</p>
             </td>
             <td class="with-actions-columns">
               <div class="actions">
-                <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
-                  wire:loading.attr="disabled" />
-                <x-sistem.buttons.delete-text wire:click="$dispatch('deleteTag', {{$item->id}})"
-                  wire:loading.attr="disabled" />
+                  <button class="text-xs font-bold hover:text-blue-100 text-blue-200 bg-blue-800 p-1 rounded-lg" wire:click="editActionModal({{$item->id}})">Editar</button>
+                  <button class="text-xs font-bold hover:text-red-100 text-red-200 bg-red-800 p-1 rounded-lg" wire:click="$dispatch('deleteTag', {{$item->id}})">Borrar</button>
               </div>
             </td>
 

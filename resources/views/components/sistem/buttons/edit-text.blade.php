@@ -13,7 +13,7 @@ active:text-blue-500
 ']) }}>
     <div class="flex flex-row gap-1 items-center">
         
-        <x-sistem.icons.for-icons-app icon="edit"/>
-        {{ $title }}
+        <x-sistem.icons.for-icons-app icon="edit" class="w-6 h-6"/>
+        {{ $title }}{{$slot}}
     </div>
 </button>

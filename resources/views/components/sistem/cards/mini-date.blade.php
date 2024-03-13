@@ -1,8 +1,7 @@
-@props(['title', 'href', 'date', 'icon', 'date_total' => false])
+@props(['title' => '', 'href' => '', 'date' => '', 'date_total' => false])
 
 <div class="flex items-center m-1 p-4 border-2 rounded-lg shadow-xs border-primary-700 bg-primary-100 ">
     <div class="p-3 mr-4 text-primary-700 bg-primary-200 rounded-full ">
-
       {{$slot}}
     </div>
 
@@ -17,4 +16,4 @@
         </p>
     </div>
 
-  </div>
+</div>

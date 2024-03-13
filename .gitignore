@@ -16,5 +16,5 @@ yarn-error.log
 /.vscode
 .env.local
 # /public/build
-# /public/hot
+/public/hot
 # /storage/*.key

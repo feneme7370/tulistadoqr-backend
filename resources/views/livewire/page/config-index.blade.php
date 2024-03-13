@@ -1,4 +1,4 @@
-<div class="p-2 rounded-lg mx-auto my-1 ">
+<div>
     
     {{-- mensaje de alerta --}}
     <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"

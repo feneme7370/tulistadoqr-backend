@@ -83,14 +83,14 @@
                     Olvidaste tu clave?
                   </a>
                 </p>
-                <p class="mt-1">
+                {{-- <p class="mt-1">
                   <a
                     class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline"
                     href="{{route('register')}}"
                   >
                     Crear cuenta
                   </a>
-                </p>
+                </p> --}}
               </div>
             </div>
           </div>

@@ -110,64 +110,99 @@
 
         {{-- listado inicial --}}
         <ul class="space-y-2 font-medium">
-            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('dashboard.index') }}"
-                :active="request()->routeIs('dashboard.index')" title="Panel Principal">
-                <x-sistem.icons.for-icons-app icon="dashboard" />
+            <li>
+                <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('dashboard.index') }}"
+                    :active="request()->routeIs('dashboard.index')" title="Panel Principal">
+                    <x-sistem.icons.for-icons-app icon="dashboard" />
+                </x-sistem.navlinks.navlink-sidebar-flowbite>
+            </li>
+        </ul>
+
+        {{-- listado superadmin --}}
+
+        @role('superadmin')
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
+
+            {{-- item desplegable --}}
+            {{-- <li>
+                <button type="button"
+                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  "
+                    aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                        <path
+                            d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
+                    </svg>
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">E-commerce</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+                <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="#"
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100  ">Products</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100  ">Billing</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100  ">Invoice</a>
+                    </li>
+                </ul>
+            </li> --}}
+
+            @can('memberships.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('memberships.index') }}"
+                :active="request()->routeIs('memberships.index')" title="Membresias">
+                <x-sistem.icons.for-icons-app icon="membership" />
             </x-sistem.navlinks.navlink-sidebar-flowbite>
-        
-            
-            {{-- listado superadmin --}}
+            @endcan
 
-            @role('superadmin')
-                <li class="border-t border-primary-300"></li>
+            @can('companies.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('companies.index') }}"
+                :active="request()->routeIs('companies.index')" title="Empresas">
+                <x-sistem.icons.for-icons-app icon="company" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
 
-                @can('memberships.index')
-                    <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('memberships.index') }}"
-                        :active="request()->routeIs('memberships.index')" title="Membresias">
-                        <x-sistem.icons.for-icons-app icon="membership" />
-                    </x-sistem.navlinks.navlink-sidebar-flowbite>
-                @endcan
+            @can('users.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('users.index') }}"
+                :active="request()->routeIs('users.index')" title="Usuarios">
+                <x-sistem.icons.for-icons-app icon="user" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
 
-                @can('companies.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('companies.index') }}"
-                    :active="request()->routeIs('companies.index')" title="Empresas">
-                    <x-sistem.icons.for-icons-app icon="company" />
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
-                @endcan
+            @can('roles.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('roles.index') }}"
+                :active="request()->routeIs('roles.index')" title="Roles">
+                <x-sistem.icons.for-icons-app icon="role" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
 
-                @can('users.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('users.index') }}"
-                    :active="request()->routeIs('users.index')" title="Usuarios">
-                    <x-sistem.icons.for-icons-app icon="user" />
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
-                @endcan
+            @can('roles.permission')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('roles.permission') }}"
+                :active="request()->routeIs('roles.permission')" title="Permisos">
+                <x-sistem.icons.for-icons-app icon="permission" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
 
-                @can('roles.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('roles.index') }}"
-                    :active="request()->routeIs('roles.index')" title="Roles">
-                    <x-sistem.icons.for-icons-app icon="role" />
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
-                @endcan
+            @can('social_medias.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('social_medias.index') }}"
+                :active="request()->routeIs('social_medias.index')" title="Redes Sociales">
+                <x-sistem.icons.for-icons-app icon="social_media" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
 
-                @can('roles.permission')
-                <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('roles.permission') }}"
-                    :active="request()->routeIs('roles.permission')" title="Permisos">
-                    <x-sistem.icons.for-icons-app icon="permission" />
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
-                @endcan
+        </ul>
+        @endrole
 
-                @can('social_medias.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('social_medias.index') }}"
-                    :active="request()->routeIs('social_medias.index')" title="Redes Sociales">
-                    <x-sistem.icons.for-icons-app icon="social_media" />
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
-                @endcan
-
-            @endrole
-
-            <li class="border-t border-primary-300"></li>
-    
-            {{-- listado cliente --}}
+        {{-- listado cliente --}}
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
 
             @can('config.index')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('config.index', auth()->user()->company_id) }}"
@@ -218,8 +253,10 @@
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
-            <li class="border-t border-primary-300"></li>
 
+        </ul>
+
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -227,17 +264,16 @@
                     <x-sistem.icons.for-icons-app icon="logout" />
                 </x-sistem.navlinks.navbutton-sidebar-flowbite>
             </form>
-
-            <li class="border-t border-primary-300"></li>
-
-            @can('information.index')
-                <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('information.index') }}"
-                    :active="request()->routeIs('information.index')" title="Informacion">
-                    <x-sistem.icons.for-icons-app icon="info" />
-                </x-sistem.navlinks.navlink-sidebar-flowbite>
-            @endcan
         </ul>
-        
+
+        @can('information.index')
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-primary-300">
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('information.index') }}"
+                :active="request()->routeIs('information.index')" title="Informacion">
+                <x-sistem.icons.for-icons-app icon="info" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+        </ul> 
+        @endcan
     </div>
 </aside>
 

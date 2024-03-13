@@ -12,8 +12,8 @@ hover:text-red-500
 active:text-red-500
 ']) }}>
 
-        <x-sistem.icons.for-icons-app icon="trash" class="w-6 h-6"/>
+        <x-sistem.icons.for-icons-app icon="trash"/>
           
-        {{$slot}}{{ $title }}
+        {{ $title }}
 
 </button>

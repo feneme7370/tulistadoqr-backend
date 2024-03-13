@@ -16,7 +16,7 @@
     </x-sistem.menus.text-info>
 
     {{-- logo de carga --}}
-    <x-sistem.spinners.loading-spinner wire:loading />
+    <x-sistem.spinners.loading-spinner wire:loading class="my-2" />
 
     {{-- input buscador y filtro de activos --}}
     <x-sistem.filter.bg-input class="flex-col md:flex-row">

@@ -14,12 +14,12 @@
   </x-sistem.menus.title-and-btn>
 
   {{-- texto informativo --}}
-  <x-sistem.menus.text-info>
+  <x-sistem.menus.text-info class="my-2">
     <p>Las etiquetas sirven reflejar una cualidad del producto, por ej. "Sin TACC", "Vegano", "Sin Sal", o si quiere aclarar algo como "Nuevo", "Oferta".</p>
   </x-sistem.menus.text-info>
 
   {{-- logo de carga --}}
-  <x-sistem.spinners.loading-spinner wire:loading />
+  <x-sistem.spinners.loading-spinner wire:loading class="my-2" />
 
   {{-- listado --}}
   @include('livewire.page.tables-layouts.tag-table')

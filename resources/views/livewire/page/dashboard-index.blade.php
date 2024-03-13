@@ -49,7 +49,7 @@
     </div>
     
     {{-- logo de carga --}}
-    <x-sistem.spinners.loading-spinner wire:loading />
+    <x-sistem.spinners.loading-spinner wire:loading class="my-2"/>
 
     {{-- mini datos --}}
     <div class="grid gap-3 mb-8 lg:grid-cols-2 xl:grid-cols-4">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="transition-all ease-in-out light" lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
+<html class="light" lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -30,7 +30,7 @@
         @include('layouts.includes.sidebarFlowbite')
 
         <!-- Page Content -->
-        <main class="p-4 sm:ml-64 pt-20 ">
+        <main class="p-4 sm:ml-64 pt-20 min-h-full mb-20">
             {{ $slot }}
         </main>
 
@@ -51,8 +51,8 @@
         });
     </script> --}}
 
-    @stack('scripts')
     @stack('modals')
+    @stack('scripts')
 
     </body>
 </html>

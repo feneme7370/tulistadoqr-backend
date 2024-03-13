@@ -12,7 +12,7 @@
 
         <span class="font-bold text-gray-600 text-xl mb-2 lg:mb-0">{{auth()->user()->company->name}}</span>
 
-        <a href="{{ auth()->user()->company->url }}" target="_blank" class="flex items-center justify-center gap-1">
+        <a href="https://{{ auth()->user()->company->url }}" target="_blank" class="flex items-center justify-center gap-1">
             <p class="flex items-center flex-col gap-1">
                 <x-sistem.icons.for-icons-app icon="social_media" class="w-6 h-6"/>
                 <span class="">{{ auth()->user()->company->url }}</span>

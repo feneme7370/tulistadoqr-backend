@@ -52,7 +52,7 @@
     <x-sistem.spinners.loading-spinner wire:loading />
 
     {{-- mini datos --}}
-    <div class="grid gap-3 mb-8 lg:grid-cols-2 xl:grid-cols-4">
+    <div class="grid grid-cols-1 gap-3 mb-8 lg:grid-cols-2">
        
         @can('memberships.index')
             <div>
@@ -129,7 +129,7 @@
             </div>
         @endcan
 
-        {{-- @can('tags.index')
+        @can('tags.index')
             <div>
                 <x-sistem.cards.mini-date 
                     href="{{route('tags.index')}}" 
@@ -140,7 +140,7 @@
                     <x-sistem.icons.for-icons-app icon="tag"/>
                 </x-sistem.cards.mini-date>
             </div>
-        @endcan --}}
+        @endcan
 
         {{-- @can('suggestions.index')
             <div>

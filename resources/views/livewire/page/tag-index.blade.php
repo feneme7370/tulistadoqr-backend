@@ -1,16 +1,19 @@
 <div>
   {{-- mensaje de alerta --}}
-  <x-sistem.notifications.alerts :messageSuccess="session('messageSuccess')"
-      :messageError="session('messageError')" 
+  <x-sistem.notifications.alerts 
+    :messageSuccess="session('messageSuccess')" 
+    :messageError="session('messageError')" 
   />
 
   {{-- titulo y boton --}}
   <x-sistem.menus.title-and-btn title="Etiquetas">
+
     <x-sistem.buttons.primary-btn title="Agregar" wire:click="createActionModal" wire:loading.attr="disabled">
-        @slot('icon')
-        <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
-        @endslot
+      @slot('icon')
+      <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
+      @endslot
     </x-sistem.buttons.primary-btn>
+
   </x-sistem.menus.title-and-btn>
 
   {{-- texto informativo --}}
@@ -30,7 +33,29 @@
   <!-- Modal para crear y editar -->
   @include('livewire.page.forms-layouts.tag-form')
 
-  @push('scripts')
+  @push('scripts')  
+  
+  {{-- <script>
+    document.addEventListener('livewire:init', () => {
+        // Runs after Livewire is loaded but before it's initialized
+        // on the page...
+        const quill = new Quill('#Tag-quill', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'], // Agrega los estilos que deseas
+                    ['clean']
+                ]
+            }
+        });
+    
+        quill.on('text-change', function () {
+            @this.set('description', quill.root.innerHTML);
+        });
+    })
+  </script> --}}
+
+
     <script src="{{ asset('lib/sweetalert2/sweetalert2-delete.js') }}"></script>
     <script>
       Livewire.on('deleteTag', (event, nameDispatch) => {
@@ -40,12 +65,13 @@
 
     <script src="{{ asset('lib/toastr/toastr-message.js') }}"></script>
     <script>
-        Livewire.on('toastrError', (message) => {
-          toastrError(message)
-        })
-        Livewire.on('toastrSuccess', (message) => {
-          toastrSuccess(message)
-        })
+          Livewire.on('toastrError', (message) => {
+            toastrError(message)
+          })
+          Livewire.on('toastrSuccess', (message) => {
+            toastrSuccess(message)
+          })
     </script>
   @endpush
+  
 </div>

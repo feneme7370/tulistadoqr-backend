@@ -88,7 +88,7 @@ class LevelIndex extends Component
     // contar elementos de niveles
     public function countLevels() {
         $amount = count(Level::where('company_id', auth()->user()->company_id)->get());
-        $membershipNumber = auth()->user()->company->membership->category;
+        $membershipNumber = auth()->user()->company->membership->level;
         if($amount >= $membershipNumber){
             session()->flash('messageError', 'Excede la cantidad permitida');
             return true;

@@ -110,7 +110,7 @@
                     <p class="mb-4 text-sm font-medium tracking-widest text-gray-500 uppercase">Redes sociales</p>
                     <div class="flex items-center">
                         @foreach ($company->socialMedia as $item)
-                            @if ($item->pivot->url != '')
+                            @if ($item->pivot->url != null && Str::contains($item->pivot->url, 'www'))
                                 <a href="{{$item->pivot->url}}" target="_blank" class="m-1">
                                     <x-sistem.icons.for-icons-social :icon="$item->slug" class="hover:fill-primary-600" />
                                 </a>
@@ -124,10 +124,8 @@
             {{-- imagen de pc derecha --}}
             <div class="relative z-10 flex flex-col items-end justify-center w-full h-full lg:w-1/2 ms:pl-10 mt-40 mb-5">
                 <div class="container relative left-0 w-full max-w-4xl lg:absolute xl:max-w-6xl lg:w-screen">
-                    <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/226962964/original/55e325403da145a8a5cb816db41ee2a8bed41f3f/design-professional-creative-digital-food-menu-restaurant-menu-card-cafe-menu.png"
+                    <img src="{{ asset('archives/sistem/img/image_hero.jpg') }}"
                         class="w-full rounded-xl h-auto  ml-0 lg:mt-24 xl:mt-40 lg:mb-0 lg:h-full lg:-ml-12">
-                    {{-- <img src="https://cdn.devdojo.com/images/september2020/macbook-mockup.png"
-                        class="w-full h-auto mt-20 mb-20 ml-0 lg:mt-24 xl:mt-40 lg:mb-0 lg:h-full lg:-ml-12"> --}}
                 </div>
             </div>
         </div>
@@ -153,7 +151,7 @@
             <a href="#" class="w-full max-w-sm p-2 flex justify-center items-center flex-col">
                 <span class="h-16 w-16 fill-primary-800 mb-5"><x-sistem.icons.for-icons-home :icon="$service['icon']" /> </span>
                 <h5 class="mb-2 text-lg text-center font-bold tracking-tight text-gray-900">{{ $service['title'] }}</h5>
-                <p class="font-sm italic text-gray-700">{{ $service['description'] }}</p>
+                <p class="font-sm italic text-center text-gray-700">{{ $service['description'] }}</p>
             </a>
 
             @endforeach
@@ -174,16 +172,16 @@
 
                 <div class="grid md:grid-cols-2 gap-2">
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (2).png') }}" alt="">
+                        <img class="h-auto max-w-96 md:h-96 md:w-96 rounded-lg" src="{{ asset('archives/sistem/img/social (2).png') }}" alt="">
                     </div>
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (1).png') }}" alt="">
+                        <img class="h-auto max-w-96 md:h-96 md:w-96 rounded-lg" src="{{ asset('archives/sistem/img/social (1).png') }}" alt="">
                     </div>
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (3).png') }}" alt="">
+                        <img class="h-auto max-w-96 md:h-96 md:w-96 rounded-lg" src="{{ asset('archives/sistem/img/social (3).png') }}" alt="">
                     </div>
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src="{{ asset('archives/sistem/img/social (5).png') }}" alt="">
+                        <img class="h-auto max-w-96 md:h-96 md:w-96 rounded-lg" src="{{ asset('archives/sistem/img/social (5).png') }}" alt="">
                     </div>
                 </div>
 
@@ -399,47 +397,47 @@
     <!-- TESTIMONIALS END-->
 
 
-    <footer class="px-2 py-5 text-gray-100 bg-primary-50 border-t border-primary-300">
+    <footer class="px-2 py-5 text-gray-100 bg-gray-900 border-t border-gray-300">
         <div class="container flex flex-col justify-between max-w-6xl px-1 mx-auto overflow-hidden lg:flex-row">
             <div class="w-full flex items-center justify-center gap-5 sm:text-left lg:w-1/4 text-center lg:text-left">
                 <a href="/"
                     class="flex sm:justify-start text-center sm:text-left justify-center">
                         <img class="h-12 w-12 object-cover rounded-2xl" src="{{asset($company->image_logo_uri.$company->image_logo)}}" alt="">
                 </a>
-                <p class="text-lg font-bold text-primary-700">{{$company->name}}</p>
+                <p class="text-lg md:text-2xl font-bold text-primary-600">{{$company->name}}</p>
             </div>
 
             <div class="block w-full pl-10 mt-6 text-sm lg:w-3/4 sm:flex lg:mt-0">
-                <ul class="flex flex-col w-full p-0 font-medium text-left text-gray-700 list-none">
-                    <li class="inline-block px-3 py-2 mt-5 font-bold tracking-wide text-gray-800 uppercase md:mt-0">
+                <ul class="flex flex-col w-full p-0 font-medium text-left list-none">
+                    <li class="inline-block px-3 py-2 mt-5 font-bold tracking-wide text-gray-200 uppercase md:mt-0">
                         Datos</li>
                     <li><a href="#_"
-                            class="inline-block px-3 py-2 text-gray-500 no-underline hover:text-primary-600">{{$company->adress}}</a>
+                            class="inline-block px-3 py-2 text-gray-400 no-underline hover:text-primary-600">{{$company->adress}}</a>
                     </li>
                     <li><a href="#_"
-                            class="inline-block px-3 py-2 text-gray-500 no-underline hover:text-primary-600">{{$company->phone}}</a>
+                            class="inline-block px-3 py-2 text-gray-400 no-underline hover:text-primary-600">{{$company->phone}}</a>
                     </li>
                     <li><a href="#_"
-                            class="inline-block px-3 py-2 text-gray-500 no-underline hover:text-primary-600">{{$company->city}}</a>
+                            class="inline-block px-3 py-2 text-gray-400 no-underline hover:text-primary-600">{{$company->city}}</a>
                     </li>
                 </ul>
 
-                <ul class="flex flex-col w-full p-0 font-medium text-left text-gray-700 list-none">
-                    <li class="inline-block px-3 py-2 mt-5 font-bold tracking-wide text-gray-800 uppercase md:mt-0">
+                <ul class="flex flex-col w-full p-0 font-medium text-left list-none">
+                    <li class="inline-block px-3 py-2 mt-5 font-bold tracking-wide text-gray-200 uppercase md:mt-0">
                         Contacto</li>
                     <li><a href="#_"
-                            class="inline-block px-3 py-2 text-gray-500 no-underline hover:text-primary-600">{{$company->email}}</a>
+                            class="inline-block px-3 py-2 text-gray-400 no-underline hover:text-primary-600">{{$company->email}}</a>
                     </li>
-                    <li><a href="#_" class="inline-block px-3 py-2 text-gray-500 no-underline hover:text-primary-600">{{$company->url}}</a></li>
+                    <li><a href="#_" class="inline-block px-3 py-2 text-gray-400 no-underline hover:text-primary-600">{{$company->url}}</a></li>
                 </ul>
 
-                <div class="flex flex-col w-full text-gray-700">
-                    <div class="inline-block px-3 py-2 mt-5 mb-3 font-bold text-gray-800 uppercase md:mt-0">Redes Sociales</div>
+                <div class="flex flex-col w-full ">
+                    <div class="inline-block px-3 py-2 mt-5 mb-3 font-bold text-gray-200 uppercase md:mt-0">Redes Sociales</div>
 
-                    <div class="flex items-center justify-center sm:justify-start">
+                    <div class="flex items-center justify-center sm:justify-start text-gray-400">
 
                         @foreach ($company->socialMedia as $item)
-                            @if ($item->pivot->url != '')
+                            @if ($item->pivot->url != null && Str::contains($item->pivot->url, 'www'))
                                 <a href="{{$item->pivot->url}}" target="_blank" class="m-1">
                                     <x-sistem.icons.for-icons-social :icon="$item->slug" class="hover:fill-primary-600" />
                                 </a>

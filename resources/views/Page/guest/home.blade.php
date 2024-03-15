@@ -253,8 +253,12 @@
                         <div class="block max-w-sm px-8 mx-auto mt-5 text-sm text-left text-black sm:text-md lg:px-6">
                             <h3 class="p-3 pb-1 text-lg font-bold tracking-wide text-center uppercase">{{$membership->short_description}}</h3>
                             <h4
-                                class="flex items-center justify-center pb-6 text-5xl font-bold text-center text-gray-900">
-                                <span class="mr-1 -ml-2 text-lg text-gray-700">$</span>{{number_format($membership->price, 0,",",".")}}</h4>
+                                class="flex flex-col items-center justify-center pb-6 text-5xl font-bold text-center text-gray-900">
+                                <span>
+                                    <span class="mr-1 -ml-2 text-lg text-gray-700">$</span>{{number_format($membership->price, 0,",",".")}}
+                                </span>
+                                <span class="text-sm italic">/ mes</span>
+                            </h4>
                             <p class="text-sm text-gray-600 text-center">{{$membership->description}}</p>
                         </div>
                         <div class="flex justify-start pl-12 mt-8 sm:justify-start">

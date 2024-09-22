@@ -19,6 +19,8 @@ class Product extends Model
         'price_seller',
         'quantity',
         'description',
+        'description2',
+        'description3',
         'status',
         'image_hero_uri',
         'image_hero',

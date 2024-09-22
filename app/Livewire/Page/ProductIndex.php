@@ -59,6 +59,8 @@ class ProductIndex extends Component
     public $price_seller;
     public $quantity;
     public $description;
+    public $description2;
+    public $description3;
     public $status;
     public $image_hero;
     public $image_hero_uri;
@@ -86,6 +88,8 @@ class ProductIndex extends Component
             'price_seller' => ['nullable', 'numeric', 'min:0'],
             'quantity' => ['nullable', 'numeric'],
             'description' => ['nullable', 'string', 'max:255'],
+            'description2' => ['nullable', 'string', 'max:255'],
+            'description3' => ['nullable', 'string', 'max:255'],
             'status' => ['numeric'],
             'image_hero_uri' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
@@ -105,6 +109,8 @@ class ProductIndex extends Component
         'price_seller' => 'precio de oferta',
         'quantity' => 'cantidad',
         'description' => 'descripcion',
+        'description2' => 'descripcion2',
+        'description3' => 'descripcion3',
         'status' => 'estado',
         'image_hero_uri' => 'uri imagen de portada',
         'image_hero' => 'imagen de portada',
@@ -129,7 +135,7 @@ class ProductIndex extends Component
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags']);
     }
 
     ///////////////////////////// MODULO IMAGENES /////////////////////////////
@@ -220,6 +226,8 @@ class ProductIndex extends Component
         $this->price_seller = $item['price_seller'];
         $this->quantity = $item['quantity'];
         $this->description = $item['description'];
+        $this->description2 = $item['description2'];
+        $this->description3 = $item['description3'];
         $this->status = $item['status'] == '1' ? true : false;
         $this->image_hero_uri = $item['image_hero_uri'];
         $this->image_hero = $item['image_hero'];
@@ -282,7 +290,7 @@ class ProductIndex extends Component
 
             // editar datos
             $this->product->update(
-                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
+                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
             );
 
             $this->product->tags()->sync($this->product_tags);
@@ -297,7 +305,7 @@ class ProductIndex extends Component
 
             // crear datos
             $product = Product::create(
-                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
+                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
             );
 
             $product->tags()->sync($this->product_tags);
@@ -325,7 +333,7 @@ class ProductIndex extends Component
 
         $levels = Level::where('company_id', auth()->user()->company_id)->get();
 
-        $products = Product::select('id', 'name', 'price_original', 'price_seller', 'image_hero_uri', 'image_hero', 'description', 'status', 'category_id')
+        $products = Product::select('id', 'name', 'price_original', 'price_seller', 'image_hero_uri', 'image_hero', 'description', 'description2', 'description3', 'status', 'category_id')
                         ->with('category', 'category.level', 'tags')
                         ->where('company_id', auth()->user()->company_id)
                         ->when( $this->search, function($query) {

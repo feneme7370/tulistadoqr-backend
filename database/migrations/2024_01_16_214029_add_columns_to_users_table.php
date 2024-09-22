@@ -31,7 +31,14 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('phone')->after('password')->nullable();
+            $table->dropColumn('birthday')->after('password')->nullable();
+            $table->dropColumn('adress')->after('password')->nullable();
+            $table->dropColumn('city')->after('password')->nullable();
+            $table->dropColumn('social')->after('password')->nullable();
+            $table->dropColumn('description')->after('password')->nullable();
+            $table->dropColumn('status')->after('password')->nullable()->default(1);
+            $table->dropColumn('company_id')->after('password')->constrained()->onUpdate('cascade')->restrictOnDelete();
         });
     }
 };

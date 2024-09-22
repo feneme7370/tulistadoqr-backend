@@ -96,8 +96,22 @@
                 <div>
                     <x-sistem.forms.label-form for="description" value="{{ __('Descripcion') }}" />
                     <x-sistem.forms.textarea-form id="description"
-                        placeholder="{{ __('Ingresar una breve descripcion') }}" wire:model="description" />
+                        placeholder="{{ __('Ingresar una breve descripcion para el 1º parrafo') }}" wire:model="description" />
                     <x-sistem.forms.input-error for="description" />
+                </div>
+
+                <div>
+                    <x-sistem.forms.label-form for="description2" value="{{ __('Descripcion 2º parrafo') }}" />
+                    <x-sistem.forms.textarea-form id="description2"
+                        placeholder="{{ __('Ingresar una breve descripcion para el 2º parrafo') }}" wire:model="description2" />
+                    <x-sistem.forms.input-error for="description2" />
+                </div>
+
+                <div>
+                    <x-sistem.forms.label-form for="description3" value="{{ __('Descripcion 3º parrafo') }}" />
+                    <x-sistem.forms.textarea-form id="description3"
+                        placeholder="{{ __('Ingresar una breve descripcion para el 3º parrafo') }}" wire:model="description3" />
+                    <x-sistem.forms.input-error for="description3" />
                 </div>
                 
                 <x-sistem.notifications.alerts-input :messageErrorInput="session('messageErrorInput')" />
@@ -225,6 +239,8 @@
         </p>
         <p class="text-gray-900 font-bold text-base uppercase mr-3">Descripcion: 
           <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->description ?? ''}}</span>
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->description2 ?? ''}}</span>
+          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->description3 ?? ''}}</span>
         </p>
         <p class="text-gray-900 font-bold text-base uppercase mr-3">Categoria: 
           <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->category->name ?? ''}}</span>

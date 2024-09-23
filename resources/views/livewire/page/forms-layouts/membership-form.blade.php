@@ -136,6 +136,13 @@
                 </div>
                     
                 <div>
+                <x-sistem.forms.label-form for="product_pictures" value="{{ __('Imagenes de producto') }}" />
+                <x-sistem.forms.input-form id="product_pictures" type="text" placeholder="{{ __('Cantidad') }}" wire:model="product_pictures"
+                    />
+                <x-sistem.forms.input-error for="product_pictures" />
+                </div>
+                    
+                <div>
                 <x-sistem.forms.label-form for="suggestion" value="{{ __('Sugerencias') }}" />
                 <x-sistem.forms.input-form id="suggestion" type="text" placeholder="{{ __('Cantidad') }}" wire:model="suggestion"
                     />

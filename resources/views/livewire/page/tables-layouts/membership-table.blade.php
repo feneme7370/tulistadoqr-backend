@@ -15,6 +15,7 @@
                 <th>Productos</th>
                 <th>Usuarios</th>
                 <th>Etiquetas</th>
+                <th>Imagenes</th>
                 <th>Sugerencias</th>
                 <th>Lista</th>
                 <th>Estado</th>
@@ -44,6 +45,7 @@
                   <td><p>{{$item->product}}</p></td>
                   <td><p>{{$item->user}}</p></td>
                   <td><p>{{$item->tag}}</p></td>
+                  <td><p>{{$item->product_pictures}}</p></td>
                   <td><p>{{$item->suggestion}}</p></td>
                   <td><p>{{$item->list_product ? 'Si' : 'No'}}</p></td>
 

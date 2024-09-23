@@ -42,6 +42,7 @@ class MembershipIndex extends Component
     public $user;
     public $suggestion;
     public $tag;
+    public $product_pictures;
     public $list_product;
     public $status;
 
@@ -64,6 +65,7 @@ class MembershipIndex extends Component
             'user' => ['required', 'numeric'],
             'suggestion' => ['required', 'numeric'],
             'tag' => ['required', 'numeric'],
+            'product_pictures' => ['required', 'numeric'],
             'list_product' => ['numeric'],
             'status' => ['numeric'],
         ];
@@ -82,6 +84,7 @@ class MembershipIndex extends Component
         'user' => 'usuario',
         'suggestion' => 'sugerencia',
         'tag' => 'etiqueta',
+        'product_pictures' => 'imagenes',
         'list_product' => 'lista de productos',
         'status' => 'estado',
     ];
@@ -103,6 +106,7 @@ class MembershipIndex extends Component
             'user',
             'suggestion',
             'tag',
+            'product_pictures',
             'list_product',
             'status',
         ]);
@@ -163,6 +167,7 @@ class MembershipIndex extends Component
         $this->user = $membership['user'];
         $this->suggestion = $membership['suggestion'];
         $this->tag = $membership['tag'];
+        $this->product_pictures = $membership['product_pictures'];
         $this->list_product = $membership['list_product'] == '1' ? true : false;
         $this->status = $membership['status'] == '1' ? true : false;
 
@@ -183,7 +188,7 @@ class MembershipIndex extends Component
         if( isset( $this->membership['id'])) {
 
             $this->membership->update(
-                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'tag', 'list_product', 'status'])
+                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'tag', 'product_pictures', 'list_product', 'status'])
             );
 
             $this->reset(['membership']);
@@ -193,7 +198,7 @@ class MembershipIndex extends Component
         } else {
 
             Membership::create(
-                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'tag', 'list_product', 'status'])
+                $this->only(['name', 'slug', 'price', 'short_description', 'description', 'category', 'level', 'product', 'user', 'suggestion', 'tag', 'product_pictures', 'list_product', 'status'])
             );
 
             $this->reset(['membership']);

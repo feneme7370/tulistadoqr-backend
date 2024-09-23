@@ -35,6 +35,7 @@ class ProductResource extends JsonResource
             'user_id' => $this->user_id,
             'category' => $this->category->name,
             'tags' => $this->tags,
+            'pictures' => $this->pictures,
             'company' => $this->company,
             'user' => $this->user,
             'suggestion' => $this->suggestion ? true : false,

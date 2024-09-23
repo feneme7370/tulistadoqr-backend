@@ -53,6 +53,11 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
+    // Relación muchos a muchos con imágenes
+    public function pictures()
+    {
+        return $this->belongsToMany(Picture::class, 'product_pictures');
+    }
     
 
 }

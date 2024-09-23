@@ -13,7 +13,10 @@ use App\Models\Page\Category;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use App\helpers\sistem\CrudInterventionImage;
+use App\Models\Page\Picture;
+use App\Models\page\ProductPicture;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ProductIndex extends Component
@@ -77,6 +80,9 @@ class ProductIndex extends Component
     // propiedades para editar
     public $product_tags = [];
 
+    public $product_pictures = [];
+    public $product_new_pictures = [];
+
     ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
     // reglas de validacion
@@ -98,6 +104,7 @@ class ProductIndex extends Component
             'company_id' => ['required', 'numeric'],
 
             'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
+            'product_new_pictures.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
         ];
     }
 
@@ -119,6 +126,8 @@ class ProductIndex extends Component
         'company_id' => 'empresa',
 
         'image_hero_new' => 'archivo de imagen',
+        'product_new_pictures' => 'archivo de imagen',
+        'product_new_pictures.*' => 'archivo de imagen',
     ];
 
     ///////////////////////////// MODULO UTILIDADES /////////////////////////////
@@ -132,10 +141,29 @@ class ProductIndex extends Component
             return true;
         }
     }
+
+    // contar pictures de membresia
+    public function countPictures() {
+        if($this->product_new_pictures){
+            $amountExist = count($this->product->pictures);
+
+            $amount = count($this->product_new_pictures);
+            $membershipNumber = auth()->user()->company->membership->product_pictures;
+            // dd($membershipNumber);
+
+            $amountTotal = $amount + $amountExist;
+            if($amountTotal > $membershipNumber){
+                session()->flash('messageError', 'Excede la cantidad permitida');
+                $this->dispatch('toastrError', 'Excede la cantidad permitida de imagenes');
+                return true;
+            }
+        }
+    }
+
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags', 'product_pictures', 'product_new_pictures', 'product_new_pictures.*']);
     }
 
     ///////////////////////////// MODULO IMAGENES /////////////////////////////
@@ -172,6 +200,26 @@ class ProductIndex extends Component
         }
     }
 
+    // subir imagenes del producto
+    public function uploadProductPictures(){
+        if($this->product_new_pictures){
+
+            if(!$this->countPictures()){
+                foreach($this->product_new_pictures as $item){
+                    $data = CrudInterventionImage::uploadProductPictures(
+                        auth()->user()->company->id . '/product_pictures/', 
+                        $item,
+                        'App\Models\Page\Picture',
+    
+                    );
+                    array_push($this->product_pictures, $data[2]['id']);
+                }
+            }
+            
+        }
+    }
+
+
     // rotar imagen
     public function rotateImage(){
         $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/products/');
@@ -189,6 +237,8 @@ class ProductIndex extends Component
 
     // eliminar desde sweetalert
     protected $listeners = ['deleteProductId'];
+
+    // eliminar producto con imagenes asociadas
     public function deleteProductId($id){
         $this->resetProperties();
 
@@ -198,13 +248,26 @@ class ProductIndex extends Component
         $this->image_hero = $this->product['image_hero'];
         
         $this->deleteImage();
+
+        foreach($this->product->pictures as $item){
+            $this->deleteProductPicture($item);
+        }
+
         $this->product->delete();
 
         $this->resetProperties();
         $this->reset('product');
-        // session()->flash('messageSuccess', 'Registro eliminado');
         $this->dispatch('toastrSuccess', 'Eliminado con exito');
 
+    }
+
+    // eliminar fotos del producto asociado
+    public function deleteProductPicture(Picture $picture){
+        CrudInterventionImage::deleteImage(
+            $picture->name, 
+            auth()->user()->company->id . '/product_pictures/',
+        );
+        $this->product->pictures()->detach($picture->id);
     }
 
     // mostrar modal para confirmar crear
@@ -236,6 +299,7 @@ class ProductIndex extends Component
         $this->company_id = $item['company_id'];
 
         $this->product_tags = $this->product->tags->pluck('id')->toArray();
+        $this->product_pictures = $this->product->pictures->pluck('id')->toArray();
 
     }
 
@@ -284,6 +348,9 @@ class ProductIndex extends Component
         if($this->dataImage){
             $this->image_hero_uri = $this->dataImage[1];
         }
+
+        // subir imagenes del producto
+        $this->uploadProductPictures();
         
         // crear o editar segun id
         if( isset( $this->product['id'])) {
@@ -294,6 +361,7 @@ class ProductIndex extends Component
             );
 
             $this->product->tags()->sync($this->product_tags);
+            $this->product->pictures()->sync($this->product_pictures);
 
             $this->reset(['product']);
             $this->resetProperties();
@@ -309,6 +377,7 @@ class ProductIndex extends Component
             );
 
             $product->tags()->sync($this->product_tags);
+            $product->pictures()->sync($this->product_pictures);
 
             $this->reset(['product']);
             $this->resetProperties();

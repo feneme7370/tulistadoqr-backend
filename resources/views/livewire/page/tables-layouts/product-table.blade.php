@@ -11,6 +11,7 @@
                         <th>Productos</th>
                         <th>Precio</th>
                         <th>Categoria</th>
+                        <th>Imagenes</th>
                         <th>Tags</th>
                         <th>Estado</th>
                     </tr>
@@ -52,6 +53,8 @@
                                 <a class="hover:underline" href="{{route('categories.index', ['q' => $item->category->name])}}">{{$item->category->name}}</a>
                             </p>
                         </td>
+                        
+                        <td class="text-center"><p><a class="hover:underline" href="">{{$item->pictures->count()}}</a></p></td>
                         
                         <td class="text-center"><p><a class="hover:underline" href="{{ route('tags.index') }}">{{$item->tags->count()}}</a></p></td>
 

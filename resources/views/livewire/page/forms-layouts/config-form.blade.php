@@ -28,7 +28,7 @@
             </div>
             
             <div>
-                <x-sistem.forms.label-form for="phone" value="{{ __('Telefono') }}" />
+                <x-sistem.forms.label-form for="phone" value="{{ __('Telefono como se vera en la pagina') }}" />
                 <x-sistem.forms.input-form id="phone" type="text" placeholder="{{ __('Numero que se vera en la pagina, ej. +54 9 2396 - 513953') }}" wire:model="phone"
                     />
                 <x-sistem.forms.input-error for="phone" />
@@ -117,7 +117,7 @@
                 @foreach($socialMedia as $social)
                 <div>
                     <x-sistem.forms.label-form for="socialMediaData.{{$social->id }}" value=" {{ $social->name }}:" />
-                    <x-sistem.forms.input-form id="socialMediaData.{{$social->id }}" type="text" placeholder="URL o Numero de {{ $social->name }}" wire:model="socialMediaData.{{$social->id }}" 
+                    <x-sistem.forms.input-form id="socialMediaData.{{$social->id }}" type="text" placeholder="URL o Numero sin guiones y con caracteristica de {{ $social->name }}" wire:model="socialMediaData.{{$social->id }}" 
                     />
                     <x-sistem.forms.input-error for="socialMediaData.{{$social->id }}" />
                 </div>

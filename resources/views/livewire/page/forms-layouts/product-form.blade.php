@@ -183,6 +183,48 @@
                     </div>
                 </div>
 
+                {{-- imagenes adicionales --}}
+                <div>
+                  <x-sistem.forms.label-form value="Imagenes de productos"/>
+                  <div class="grid md:grid-cols-1">
+                    <div>
+                      <x-sistem.forms.label-form for="product_new_pictures" value="{{ __('Imagenes del producto') }}" />
+                      <x-sistem.forms.input-file-form id="product_new_pictures" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="product_new_pictures" multiple accept="image/*"
+                          />
+                      <x-sistem.forms.input-error for="product_new_pictures" />
+                      <x-sistem.forms.input-error for="product_new_pictures.*" />
+                  </div>
+                  </div>
+
+                  <div>
+                    @if ($product)
+                      
+                    @foreach ($product->pictures as $item)
+                        <div class="flex gap-1 items-center">
+                            
+                            <div class="w-full mx-auto flex justify-between items-center">
+                                    <x-sistem.lightbox.img-lightbox 
+                                        class="w-16 h-16 p-1 bg-gray-200"
+                                        :uri="$item->route" 
+                                        :name="$item->name"    
+                                    />
+                                    <div>
+
+                                      <button wire:click="" type="button" class="p-1 bg-gray-100 rounded-lg text-sm text-gray-600">
+                                        <x-sistem.icons.for-icons-app icon="rotate" class="h-2 w-2"/>
+                                      </button>
+                                      <button wire:click='deleteProductPicture({{ $item->id }})' type="button" class="p-1 bg-red-600 rounded-lg text-sm text-white">
+                                          <x-sistem.icons.for-icons-app icon="trash" class="h-2 w-2"/>
+                                      </button>
+                                    </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    @endif
+                  </div>
+
+              </div>
+
                 <x-sistem.notifications.alerts-input :messageErrorInput="session('messageErrorInput')" />
                 
                 <div wire:loading class="mx-auto">

@@ -102,7 +102,8 @@ class CategoryIndex extends Component
         $amount = count(Category::where('company_id', auth()->user()->company_id)->get());
         $membershipNumber = auth()->user()->company->membership->category;
         if($amount >= $membershipNumber){
-            session()->flash('messageError', 'Excede la cantidad permitida');
+            session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' categorias');
+            $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' categorias');
             return true;
         }
     }
@@ -110,7 +111,7 @@ class CategoryIndex extends Component
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['name', 'slug', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'level_id', 'user_id', 'company_id']);
+        $this->reset(['name', 'slug', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'level_id', 'user_id', 'company_id', 'dataImage']);
     }
 
     ///////////////////////////// MODULO IMAGENES /////////////////////////////

@@ -68,5 +68,29 @@
         @apply block h-10 w-10 sm:h-16 sm:w-16 object-cover rounded-lg;
     }
 
+        /* Estilo de la barra de progreso */
+        progress {
+
+            -webkit-appearance: none;
+            appearance: none;
+        }
+    
+        /* Estilo específico para navegadores WebKit (Safari, Chrome) */
+        progress::-webkit-progress-bar {
+            background-color: #f3f3f3; /* Fondo de la barra */
+            border-radius: 5px;
+        }
+    
+        progress::-webkit-progress-value {
+            background-color: #609162; /* Color de la barra de progreso */
+            border-radius: 5px;
+        }
+    
+        /* Estilo para navegadores Firefox */
+        progress::-moz-progress-bar {
+            background-color: #609162; /* Color de la barra de progreso */
+            border-radius: 5px;
+        }
+
 }
   

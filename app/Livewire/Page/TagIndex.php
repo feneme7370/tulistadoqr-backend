@@ -58,7 +58,8 @@ class TagIndex extends Component
         $amount = count(Tag::where('company_id', auth()->user()->company_id)->get());
         $membershipNumber = auth()->user()->company->membership->tag;
         if($amount >= $membershipNumber){
-            session()->flash('messageError', 'Excede la cantidad permitida');
+            session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' etiquetas');
+            $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' etiquetas');
             return true;
         }
     }

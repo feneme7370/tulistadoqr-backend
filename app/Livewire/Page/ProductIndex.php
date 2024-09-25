@@ -7,16 +7,10 @@ use App\Models\Page\Tag;
 use App\Models\Page\Level;
 use Illuminate\Support\Str;
 use App\Models\Page\Product;
-use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use App\Models\Page\Category;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
 use App\helpers\sistem\CrudInterventionImage;
 use App\Models\Page\Picture;
-use App\Models\page\ProductPicture;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ProductIndex extends Component
@@ -136,8 +130,10 @@ class ProductIndex extends Component
     public function countProducts() {
         $amount = count(Product::where('company_id', auth()->user()->company_id)->get());
         $membershipNumber = auth()->user()->company->membership->product;
+
         if($amount >= $membershipNumber){
-            session()->flash('messageError', 'Excede la cantidad permitida');
+            session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' productos');
+            $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' productos');
             return true;
         }
     }
@@ -145,16 +141,17 @@ class ProductIndex extends Component
     // contar pictures de membresia
     public function countPictures() {
         if($this->product_new_pictures){
-            $amountExist = count($this->product->pictures);
 
+            // existentes + nuevos = total
+            $amountExist = count($this->product->pictures);
             $amount = count($this->product_new_pictures);
             $membershipNumber = auth()->user()->company->membership->product_pictures;
-            // dd($membershipNumber);
 
             $amountTotal = $amount + $amountExist;
+
             if($amountTotal > $membershipNumber){
-                session()->flash('messageError', 'Excede la cantidad permitida');
-                $this->dispatch('toastrError', 'Excede la cantidad permitida de imagenes');
+                session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' imagenes');
+                $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' imagenes');
                 return true;
             }
         }
@@ -163,12 +160,12 @@ class ProductIndex extends Component
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags', 'product_pictures', 'product_new_pictures', 'product_new_pictures.*']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags', 'product_pictures', 'product_new_pictures', 'dataImage']);
     }
 
     ///////////////////////////// MODULO IMAGENES /////////////////////////////
 
-    // eliminar imagen al reemplazarla
+    // eliminar imagen de portada al reemplazarla
     public function deleteImage(){
         CrudInterventionImage::deleteImage(
             $this->image_hero, 
@@ -202,6 +199,8 @@ class ProductIndex extends Component
 
     // subir imagenes del producto
     public function uploadProductPictures(){
+
+        // si hay nuevas imagenes, realizar accion
         if($this->product_new_pictures){
 
             if(!$this->countPictures()){
@@ -210,24 +209,43 @@ class ProductIndex extends Component
                         auth()->user()->company->id . '/product_pictures/', 
                         $item,
                         'App\Models\Page\Picture',
-    
                     );
-                    array_push($this->product_pictures, $data[2]['id']);
+                    
+                    // agregar registro en BD
+                    $this->product->pictures()->attach($data[2]['id']);
                 }
             }
             
         }
     }
 
-
-    // rotar imagen
+    // rotar imagen de portada
     public function rotateImage(){
         $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/products/');
+
         if($imageRotated != false){
             $this->image_hero = $imageRotated[0];
             $this->product->update(
                 $this->only(['image_hero'])
             );
+        }else{
+            return $this->dispatch('toastrError', 'Error, cargar nuevamente la imagen');;
+        }
+    }
+
+    // rotar imagenes asociadas
+    public function rotateProductPicture(Picture $picture){
+        // pasar nombre y ruta
+        $imageRotated = CrudInterventionImage::rotateImage($picture->name, auth()->user()->company->id . '/product_pictures/');
+
+        // si se edita realizar accion
+        if($imageRotated != false){
+            
+            $imageToRotate = Picture::find($picture->id);
+            $imageToRotate->update([
+                'name' => $imageRotated[0],
+                'route' => $imageRotated[1],
+            ]);
         }else{
             return $this->dispatch('toastrError', 'Error, cargar nuevamente la imagen');;
         }
@@ -245,10 +263,11 @@ class ProductIndex extends Component
         $this->product = Product::findOrFail($id);
         $this->authorize('delete', $this->product); 
 
+        // eliminar portada
         $this->image_hero = $this->product['image_hero'];
-        
         $this->deleteImage();
-
+        
+        // eliminar imagenes asociadas
         foreach($this->product->pictures as $item){
             $this->deleteProductPicture($item);
         }
@@ -267,6 +286,7 @@ class ProductIndex extends Component
             $picture->name, 
             auth()->user()->company->id . '/product_pictures/',
         );
+
         $this->product->pictures()->detach($picture->id);
     }
 
@@ -354,19 +374,17 @@ class ProductIndex extends Component
         
         // crear o editar segun id
         if( isset( $this->product['id'])) {
-
+            // dd($this->product->pictures);
             // editar datos
             $this->product->update(
                 $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
             );
 
             $this->product->tags()->sync($this->product_tags);
-            $this->product->pictures()->sync($this->product_pictures);
 
             $this->reset(['product']);
             $this->resetProperties();
 
-            // session()->flash('messageSuccess', 'Actualizado con exito');
             $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
@@ -377,12 +395,10 @@ class ProductIndex extends Component
             );
 
             $product->tags()->sync($this->product_tags);
-            $product->pictures()->sync($this->product_pictures);
 
             $this->reset(['product']);
             $this->resetProperties();
 
-            // session()->flash('messageSuccess', 'Guardado con exito');
             $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 

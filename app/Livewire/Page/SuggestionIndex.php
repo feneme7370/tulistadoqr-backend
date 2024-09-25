@@ -51,7 +51,8 @@ class SuggestionIndex extends Component
         $amount = count(Suggestion::where('company_id', auth()->user()->company_id)->get());
         $membershipNumber = auth()->user()->company->membership->suggestion;
         if($amount >= $membershipNumber){
-            session()->flash('messageError', 'Excede la cantidad permitida');
+            session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' sugerencias');
+            $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' sugerencias');
             return true;
         }
     }

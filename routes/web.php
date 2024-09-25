@@ -1,19 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Page\TagController;
 use App\Http\Controllers\Page\UserController;
 use App\Http\Controllers\Page\GuestController;
-use App\Http\Controllers\Page\LevelController;
-use App\Http\Controllers\Page\ConfigController;
-use App\Http\Controllers\Page\CompanyController;
-use App\Http\Controllers\Page\ProductController;
-use App\Http\Controllers\Page\CategoryController;
-use App\Http\Controllers\Page\DashboardController;
-use App\Http\Controllers\Page\MembershipController;
-use App\Http\Controllers\Page\RoleController;
-use App\Http\Controllers\Page\SuggestionController;
-use App\Http\Controllers\Page\SocialMediaController;
 use App\Livewire\Page\CategoryIndex;
 use App\Livewire\Page\CompanyIndex;
 use App\Livewire\Page\ConfigIndex;

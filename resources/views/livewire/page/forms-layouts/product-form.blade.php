@@ -188,11 +188,26 @@
                   <x-sistem.forms.label-form value="Imagenes de productos"/>
                   <div class="grid md:grid-cols-1">
                     <div>
-                      <x-sistem.forms.label-form for="product_new_pictures" value="{{ __('Imagenes del producto') }}" />
-                      <x-sistem.forms.input-file-form id="product_new_pictures" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="product_new_pictures" multiple accept="image/*"
-                          />
-                      <x-sistem.forms.input-error for="product_new_pictures" />
-                      <x-sistem.forms.input-error for="product_new_pictures.*" />
+                      <x-sistem.forms.label-form for="product_new_pictures" value="{{ __('Cargar imagenes') }}" />
+
+                      @if ($product)
+                        <x-sistem.forms.input-file-form id="product_new_pictures" type="file" description="JPG, JPEG, PNG o GIF (Max. 5 mb)" wire:model="product_new_pictures" multiple accept="image/*"
+                            />
+                        <x-sistem.forms.input-error for="product_new_pictures" />
+                        <x-sistem.forms.input-error for="product_new_pictures.*" />
+
+                        <div class="grid grid-cols-6 gap-2 mb-5">
+                          @foreach ($product_new_pictures as $item_new)
+                            <x-sistem.lightbox.img-lightbox 
+                                class="h-16 w-16 p-1 "
+                                :name="$item_new->temporaryUrl()"    
+                            />
+                          @endforeach
+                        </div>
+                        
+                      @else
+                        <p class="mt-3">Cree el producto solo con la portada y luego entre a editarlo para poder agregarle mas imagenes</p>
+                      @endif
                   </div>
                   </div>
 
@@ -210,7 +225,7 @@
                                     />
                                     <div>
 
-                                      <button wire:click="" type="button" class="p-1 bg-gray-100 rounded-lg text-sm text-gray-600">
+                                      <button wire:click='rotateProductPicture({{ $item->id }})' type="button" class="p-1 bg-gray-100 rounded-lg text-sm text-gray-600">
                                         <x-sistem.icons.for-icons-app icon="rotate" class="h-2 w-2"/>
                                       </button>
                                       <button wire:click='deleteProductPicture({{ $item->id }})' type="button" class="p-1 bg-red-600 rounded-lg text-sm text-white">

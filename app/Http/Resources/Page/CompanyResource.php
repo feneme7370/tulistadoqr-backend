@@ -24,20 +24,25 @@ class CompanyResource extends JsonResource
             'city' => $this->city,
             'social' => $this->social,
             'url' => $this->url,
+
             'times_description' => $this->times_description,
             'short_description' => $this->short_description,
             'description' => $this->description,
+
             'status' => $this->status,
             'type_menu' => $this->type_menu,
             'list_product' => $this->membership->list_product,
+            
             'image_qr' => $this->image_qr,
             'image_qr_uri' => $this->image_qr_uri,
             'image_logo' => $this->image_logo,
             'image_logo_uri' => $this->image_logo_uri,
             'image_hero' => $this->image_hero,
             'image_hero_uri' => $this->image_hero_uri,
+            
             'membership_id' => $this->membership_id,
             'membership' => $this->membership,
+            
             'socialMedia' => $this->socialMedia,
         ];
 

@@ -17,10 +17,12 @@ class SuggestionResource extends JsonResource
         return [
             'id' => $this->id,
             'product_id' => $this->product_id,
-            'company_id' => $this->company_id,
-            'user_id' => $this->user_id,
             'product' => $this->product,
             'tags' => $this->product->tags,
+
+            'company_id' => $this->company_id,
+            'user_id' => $this->user_id,
+            
             'company' => $this->company,
             'user' => $this->user,
         ];

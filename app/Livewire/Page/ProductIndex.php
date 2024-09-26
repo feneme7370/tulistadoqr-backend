@@ -74,6 +74,7 @@ class ProductIndex extends Component
     // propiedades para editar
     public $product_tags = [];
 
+    // propiedad de existentes y nuevas imagenes asociadas
     public $product_pictures = [];
     public $product_new_pictures = [];
 
@@ -193,7 +194,7 @@ class ProductIndex extends Component
                 $this->image_hero_new
             );
 
-            $this->image_hero = $this->dataImage[0];
+            $this->image_hero = $this->dataImage['filename'];
         }
     }
 
@@ -212,7 +213,7 @@ class ProductIndex extends Component
                     );
                     
                     // agregar registro en BD
-                    $this->product->pictures()->attach($data[2]['id']);
+                    $this->product->pictures()->attach($data['dataImage']['id']);
                 }
             }
             
@@ -221,10 +222,13 @@ class ProductIndex extends Component
 
     // rotar imagen de portada
     public function rotateImage(){
-        $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/products/');
+        $imageRotated = CrudInterventionImage::rotateImage(
+            $this->image_hero, 
+            auth()->user()->company->id . '/products/'
+        );
 
         if($imageRotated != false){
-            $this->image_hero = $imageRotated[0];
+            $this->image_hero = $imageRotated['filename'];
             $this->product->update(
                 $this->only(['image_hero'])
             );
@@ -236,15 +240,18 @@ class ProductIndex extends Component
     // rotar imagenes asociadas
     public function rotateProductPicture(Picture $picture){
         // pasar nombre y ruta
-        $imageRotated = CrudInterventionImage::rotateImage($picture->name, auth()->user()->company->id . '/product_pictures/');
+        $imageRotated = CrudInterventionImage::rotateImage(
+            $picture->name, 
+            auth()->user()->company->id . '/product_pictures/'
+        );
 
         // si se edita realizar accion
         if($imageRotated != false){
             
             $imageToRotate = Picture::find($picture->id);
             $imageToRotate->update([
-                'name' => $imageRotated[0],
-                'route' => $imageRotated[1],
+                'name' => $imageRotated['filename'],
+                'route' => $imageRotated['uri'],
             ]);
         }else{
             return $this->dispatch('toastrError', 'Error, cargar nuevamente la imagen');;
@@ -366,7 +373,7 @@ class ProductIndex extends Component
         // subir imagen de portada
         $this->uploadImage();
         if($this->dataImage){
-            $this->image_hero_uri = $this->dataImage[1];
+            $this->image_hero_uri = $this->dataImage['uri'];
         }
 
         // subir imagenes del producto
@@ -374,7 +381,7 @@ class ProductIndex extends Component
         
         // crear o editar segun id
         if( isset( $this->product['id'])) {
-            // dd($this->product->pictures);
+            
             // editar datos
             $this->product->update(
                 $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])

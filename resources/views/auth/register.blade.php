@@ -28,7 +28,7 @@
                 <x-sistem.forms.label-form for="company_id" value="{{ __('Empresa') }}" />
                 <x-sistem.forms.select-form name="company_id">
                     @foreach ($companies as $company)
-                        <option value="{{$company->id}}">{{$company->name}}</option>
+                        <option value="{{$company->id}}">{{$company->id}} - {{$company->name}}</option>
                     @endforeach
                 </x-sistem.forms.select-form>
                 <x-sistem.forms.input-error for="company_id" />

@@ -9,6 +9,8 @@ use Intervention\Image\Facades\Image;
 
 class CrudInterventionImage
 {
+    // borrar imagen, pasando nombre y ruta
+    // multiuso
     public static function deleteImage($imageString, $pathFolder){
         if($imageString != ''){
             $path = 'archives/images/' . $pathFolder;
@@ -19,12 +21,14 @@ class CrudInterventionImage
             }
         }
     }
+
+    // agregar imagenes asociadas a un modelo, pasando ruta, imagen, modelo
+    // retorna nombre, ruta, registro de imagen creada
     public static function uploadProductPictures($pathFolder, $imageNew, $modelSelected) {
         $path = 'archives/images/' . $pathFolder;
         
         // Verificar si la carpeta existe, si no, crearla
         if (!file_exists($path)) {
-            // Crear la carpeta con permisos 0755 (puedes ajustar esto según tus necesidades)
             mkdir($path, 0755, true);
         }
 
@@ -60,15 +64,15 @@ class CrudInterventionImage
         ]);
         
         // retornar el nombre sin el tumb
-        return [$filename, $path, $dataImage];
+        return ['filename' => $filename, 'uri' => $path, 'dataImage' => $dataImage];
     }
 
+    // subir imagen pasando nombre, ruta e imagen. necesita boton de form para crear registro
     public static function uploadImage($imageString, $pathFolder, $imageNew){
         $path = 'archives/images/' . $pathFolder;
 
         // Verificar si la carpeta existe, si no, crearla
         if (!file_exists($path)) {
-            // Crear la carpeta con permisos 0755 (puedes ajustar esto según tus necesidades)
             mkdir($path, 0755, true);
         }
 
@@ -98,16 +102,19 @@ class CrudInterventionImage
         $image_hero->save($path . $filename, 80);
         $image_hero_tumb->save($path . $filename_tumb, 95);
         
-        // retornar el nombre sin el tumb
-        return [$filename, $path, $image_hero];
+        // retornar el nombre sin el tumb, ruta y datos de la imagen
+        // return [$filename, $path, $image_hero, 'filename' => $filename, 'uri' => $path, 'image_data' => $image_hero];
+        return ['filename' => $filename, 'uri' => $path, 'image_data' => $image_hero];
     }
 
+    // rotar imagen
+    // la rota, crea una nueva, elimina la vieja, y devuelve el nombre y ruta para reemplazar en el registro
     public static function rotateImage($imageString, $pathFolder){
 
-       
         // crear nombres
         $name = auth()->user()->company_id.'_'.auth()->user()->id.'_'.time().'_'.Str::random(7);
         $extension = '.jpg';
+
         $path = 'archives/images/' . $pathFolder;
         $filename = $name.$extension;
         $filename_tumb = 'tumb_' . $name . $extension;
@@ -130,8 +137,10 @@ class CrudInterventionImage
     
             // eliminar imagen vieja
             CrudInterventionImage::deleteImage($imageString, $pathFolder);
+
             // dd($filename, $path);
-            return [$filename, $path];
+            // return [$filename, $path];
+            return ['filename' => $filename, 'uri' => $path];
         }else{
             return false;
         }

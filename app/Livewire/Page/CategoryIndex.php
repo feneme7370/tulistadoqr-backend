@@ -99,8 +99,10 @@ class CategoryIndex extends Component
 
     // contar elementos de membresia
     public function countCategories() {
+
         $amount = count(Category::where('company_id', auth()->user()->company_id)->get());
         $membershipNumber = auth()->user()->company->membership->category;
+
         if($amount >= $membershipNumber){
             session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' categorias');
             $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' categorias');
@@ -126,7 +128,9 @@ class CategoryIndex extends Component
 
     // eliminar solo imagen del producto en editar
     public function deleteImageEdit() {
+
         $this->deleteImage();
+
         $this->image_hero = '';
         $this->category->update(
             $this->only(['image_hero'])
@@ -144,15 +148,19 @@ class CategoryIndex extends Component
                 $this->image_hero_new
             );
 
-            $this->image_hero = $this->dataImage[0];
+            $this->image_hero = $this->dataImage['filename'];
         }
     }
 
     // rotar imagen
     public function rotateImage(){
-        $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/categories/');
+        $imageRotated = CrudInterventionImage::rotateImage(
+            $this->image_hero, 
+            auth()->user()->company->id . '/categories/'
+        );
+
         if($imageRotated != false){
-            $this->image_hero = $imageRotated[0];
+            $this->image_hero = $imageRotated['filename'];
             $this->category->update(
                 $this->only(['image_hero'])
             );
@@ -183,7 +191,7 @@ class CategoryIndex extends Component
 
             $this->resetProperties();
             $this->reset('category');
-            // session()->flash('messageSuccess', 'Registro eliminado');
+            
             $this->dispatch('toastrSuccess', 'Eliminado con exito');
         }
     }
@@ -229,10 +237,8 @@ class CategoryIndex extends Component
         $this->resetProperties();
         $this->resetErrorBag();
         $this->category = $category;
-        // dd($this->category->level);
-        $this->authorize('update', $this->category); 
-
         
+        $this->authorize('update', $this->category);      
 
         $this->preloadEditModal($this->category);
         
@@ -254,7 +260,7 @@ class CategoryIndex extends Component
         // subir imagen de portada
         $this->uploadImage();
         if($this->dataImage){
-            $this->image_hero_uri = $this->dataImage[1];
+            $this->image_hero_uri = $this->dataImage['uri'];
         }
         
         if( isset( $this->category['id'])) {
@@ -266,7 +272,7 @@ class CategoryIndex extends Component
 
             $this->reset(['category']);
             $this->resetProperties();
-            // session()->flash('messageSuccess', 'Actualizado con exito');
+            
             $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
@@ -278,7 +284,7 @@ class CategoryIndex extends Component
 
             $this->reset(['category']);
             $this->resetProperties();
-            // session()->flash('messageSuccess', 'Guardado con exito');
+            
             $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 

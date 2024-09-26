@@ -29,28 +29,15 @@
                     autofocus />
     
                     <!-- You should  use a button here, as the anchor is only used for the example  -->
+                    @if (session('status'))
+                      <div class="mb-4 font-medium text-sm text-green-600">
+                          {{-- {{ session('status') }} --}}
+                          <p>Revise su email, e ingrese para poder cambiar su clave</p>
+                      </div>
+                  @endif
 
                 
                     <x-sistem.buttons.primary-btn type="submit" class="w-full mt-4" wire:loading.attr="disabled" title="Recuperar"/>      
-                    {{-- <a href="https://api.whatsapp.com/send/?phone=5492396513953&amp;text=Quiero recuperar mi cuenta" target="_blank" class="flex items-center justify-center gap-1
-                    px-2 py-1 text-sm font-medium text-white rounded-lg
-                    
-                    transition-colors duration-150 
-                    
-                    bg-primary-700 
-                    
-                    border border-transparent  
-                    
-                    active:bg-primary-800 
-                    
-                    hover:bg-primary-800 
-                    
-                    focus:border-primary-300 
-                    focus:outline-none  
-                    focus:shadow-outline-primary 
-                    focus:ring 
-                    focus:ring-primary-700 
-                    focus:ring-offset-0">Recuperar</a> --}}
 
                 </form>
 

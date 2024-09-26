@@ -28,16 +28,21 @@ class ProductResource extends JsonResource
             'description2' => $this->description2,
             'description3' => $this->description3,
             'status' => $this->status,
+
             'image_hero' => $this->image_hero,
             'image_hero_uri' => $this->image_hero_uri,
+
             'category_id' => $this->category_id,
             'company_id' => $this->company_id,
             'user_id' => $this->user_id,
+
             'category' => $this->category->name,
-            'tags' => $this->tags,
-            'pictures' => $this->pictures,
             'company' => $this->company,
             'user' => $this->user,
+
+            'tags' => $this->tags,
+            'pictures' => $this->pictures,
+            
             'suggestion' => $this->suggestion ? true : false,
             'offer' => (($this->price_original > $this->price_seller) && ($this->price_seller != 0)) ? true : false,
         ];

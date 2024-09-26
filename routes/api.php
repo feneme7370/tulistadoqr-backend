@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// datos de los productos de una empresa
 Route::get('/products/{company}', [ProductController::class, 'index']);

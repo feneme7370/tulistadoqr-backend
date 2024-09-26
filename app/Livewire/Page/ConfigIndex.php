@@ -6,11 +6,8 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Page\Company;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Locked;
 use App\Models\Page\SocialMedia;
 use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
 use App\helpers\sistem\CrudInterventionImage;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -70,6 +67,7 @@ class ConfigIndex extends Component
             'short_description' => ['nullable', 'string', 'min:2'],
             'description' => ['nullable', 'string', 'min:2'],
             'type_menu' => ['nullable', 'numeric'],
+
             'image_logo' => ['nullable', 'string'],
             'image_logo_uri' => ['nullable', 'string'],
             'image_hero' => ['nullable', 'string'],
@@ -92,6 +90,7 @@ class ConfigIndex extends Component
         'short_description' => 'breve descripcion',
         'description' => 'descripcion',
         'type_menu' => 'tipo de menu',
+
         'image_logo' => 'imagen del logo',
         'image_logo_uri' => 'uri imagen del logo',
         'image_hero' => 'imagen de portada',
@@ -113,6 +112,11 @@ class ConfigIndex extends Component
 
     }
 
+    // resetear variables
+    public function resetProperties() {
+        $this->resetErrorBag();
+        $this->reset(['dataImage', 'dataImageLogo']);
+    }
     ///////////////////////////// MODULO CARGA DE DATOS /////////////////////////////
 
     // precargar datos a editar de la empresa
@@ -194,14 +198,18 @@ class ConfigIndex extends Component
                 $this->image_hero_new
             );
 
-            $this->image_hero = $this->dataImage[0];
+            $this->image_hero = $this->dataImage['filename'];
         }
     }
 
     // rotar imagen
     public function rotateImage(){
-        $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/heros/');
-        $this->image_hero = $imageRotated[0];
+        $imageRotated = CrudInterventionImage::rotateImage(
+            $this->image_hero, 
+            auth()->user()->company->id . '/heros/'
+        );
+
+        $this->image_hero = $imageRotated['filename'];
         $this->company->update(
             $this->only(['image_hero'])
         );
@@ -235,14 +243,18 @@ class ConfigIndex extends Component
                 $this->image_logo_new
             );
 
-            $this->image_logo = $this->dataImageLogo[0];
+            $this->image_logo = $this->dataImageLogo['filename'];
         }
     }
 
     // rotar imagen
     public function rotateImageLogo(){
-        $imageRotated = CrudInterventionImage::rotateImage($this->image_logo, auth()->user()->company->id . '/logos/');
-        $this->image_logo = $imageRotated[0];
+        $imageRotated = CrudInterventionImage::rotateImage(
+            $this->image_logo, 
+            auth()->user()->company->id . '/logos/'
+        );
+
+        $this->image_logo = $imageRotated['filename'];
         $this->company->update(
             $this->only(['image_logo'])
         );
@@ -261,13 +273,15 @@ class ConfigIndex extends Component
         // subir imagen de portada
         $this->uploadImage();
         if($this->dataImage){
-            $this->image_hero_uri = $this->dataImage[1];
+            $this->image_hero_uri = $this->dataImage['uri'];
         }
         // subir imagen de portada
         $this->uploadImageLogo();
         if($this->dataImageLogo){
-            $this->image_logo_uri = $this->dataImageLogo[1];
+            $this->image_logo_uri = $this->dataImageLogo['uri'];
         }
+
+        $this->resetProperties();
 
         $this->company->update(
             $this->only(['name', 'slug', 'email', 'phone', 'adress', 'city', 'social', 'times_description', 'short_description', 'description', 'type_menu', 'image_logo', 'image_logo_uri', 'image_hero', 'image_hero_uri'])

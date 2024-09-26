@@ -20,10 +20,13 @@ class LevelResource extends JsonResource
             'slug' => $this->slug,
             'description' => $this->description,
             'status' => $this->status,
+
             'image_hero' => $this->image_hero,
             'image_hero_uri' => $this->image_hero_uri,
+
             'company_id' => $this->company_id,
             'user_id' => $this->user_id,
+            
             'company' => $this->company,
             'user' => $this->user,
         ];

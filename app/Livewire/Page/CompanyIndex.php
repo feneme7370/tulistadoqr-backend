@@ -9,8 +9,6 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Page\Membership;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
 use App\helpers\sistem\CrudInterventionImage;
 
 class CompanyIndex extends Component
@@ -53,6 +51,7 @@ class CompanyIndex extends Component
     public $short_description;
     public $description;
     public $status;
+
     public $image_qr;
     public $image_qr_uri;
     public $image_logo;
@@ -62,10 +61,12 @@ class CompanyIndex extends Component
     public $image_qr_new;
     public $image_logo_new;
     public $image_hero_new;
+
     public $membership_id;
 
     // propiedades para editar
     public $company;
+
     public $dataImage;
     public $dataImageLogo;
     public $dataImageQr;
@@ -86,6 +87,7 @@ class CompanyIndex extends Component
             'times_description' => ['nullable', 'string', 'min:2'],
             'short_description' => ['nullable', 'string', 'min:2'],
             'description' => ['nullable', 'string', 'min:2'],
+
             'image_qr' => ['nullable', 'string'],
             'image_qr_uri' => ['nullable', 'string'],
             'image_logo' => ['nullable', 'string'],
@@ -95,6 +97,7 @@ class CompanyIndex extends Component
             'image_qr_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
             'image_logo_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
             'image_hero_new' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
+
             'status' => ['numeric'],
             'membership_id' => ['required', 'numeric'],
         ];
@@ -113,12 +116,14 @@ class CompanyIndex extends Component
         'times_description' => 'breve descripcion de los horarios',
         'short_description' => 'breve descripcion',
         'description' => 'descripcion',
+
         'image_qr' => 'imagen del qr',
         'image_qr_uri' => 'uri imagen del qr',
         'image_logo' => 'imagen del logo',
         'image_logo_uri' => 'uri imagen del logo',
         'image_hero' => 'imagen de portada',
         'image_hero_uri' => 'uri imagen de portada',
+
         'status' => 'estado',
         'membership_id' => 'membresia',
     ];
@@ -151,6 +156,10 @@ class CompanyIndex extends Component
             'image_logo_new',
             'image_hero_new',
             'membership_id',
+
+            'dataImage',
+            'dataImageLogo',
+            'dataImageQr',
         ]);
     }
     
@@ -184,7 +193,7 @@ class CompanyIndex extends Component
                 $this->image_hero_new
             );
 
-            $this->image_hero = $this->dataImage[0];
+            $this->image_hero = $this->dataImage['filename'];
         }
     }
 
@@ -216,7 +225,7 @@ class CompanyIndex extends Component
                 $this->image_logo_new
             );
 
-            $this->image_logo = $this->dataImageLogo[0];
+            $this->image_logo = $this->dataImageLogo['filename'];
         }
     }
 
@@ -248,7 +257,7 @@ class CompanyIndex extends Component
                 $this->image_qr_new
             );
 
-            $this->image_qr = $this->dataImageQr[0];
+            $this->image_qr = $this->dataImageQr['filename'];
         }
     }
 
@@ -309,6 +318,7 @@ class CompanyIndex extends Component
             $this->deleteImage();
             $this->deleteImageLogo();
             $this->deleteImageQr();
+
             $this->company->delete();
 
             $this->resetProperties();
@@ -347,14 +357,17 @@ class CompanyIndex extends Component
         $this->times_description = $company['times_description'];
         $this->short_description = $company['short_description'];
         $this->description = $company['description'];
+
         $this->image_qr = $company['image_qr'];
         $this->image_qr_uri = $company['image_qr_uri'];
         $this->image_logo = $company['image_logo'];
         $this->image_logo_uri = $company['image_logo_uri'];
         $this->image_hero = $company['image_hero'];
         $this->image_hero_uri = $company['image_hero_uri'];
+
         $this->status = $company['status'] == '1' ? true : false;
         $this->membership_id = $company['membership_id'];
+
         $this->showActionModal = true;
     }
 
@@ -371,17 +384,17 @@ class CompanyIndex extends Component
         // subir imagen de portada
         $this->uploadImage();
         if($this->dataImage){
-            $this->image_hero_uri = $this->dataImage[1];
+            $this->image_hero_uri = $this->dataImage['uri'];
         }
         // subir imagen de portada
         $this->uploadImageLogo();
         if($this->dataImageLogo){
-            $this->image_logo_uri = $this->dataImageLogo[1];
+            $this->image_logo_uri = $this->dataImageLogo['uri'];
         }
         // subir imagen de portada
         $this->uploadImageQr();
         if($this->dataImageQr){
-            $this->image_qr_uri = $this->dataImageQr[1];
+            $this->image_qr_uri = $this->dataImageQr['uri'];
         }
         
         if( isset( $this->company['id'])) {

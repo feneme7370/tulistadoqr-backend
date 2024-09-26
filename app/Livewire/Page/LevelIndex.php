@@ -115,6 +115,7 @@ class LevelIndex extends Component
     // eliminar solo imagen del producto en editar
     public function deleteImageEdit() {
         $this->deleteImage();
+
         $this->image_hero = '';
         $this->level->update(
             $this->only(['image_hero'])
@@ -132,15 +133,20 @@ class LevelIndex extends Component
                 $this->image_hero_new
             );
 
-            $this->image_hero = $this->dataImage[0];
+            $this->image_hero = $this->dataImage['filename'];
         }
     }
 
     // rotar imagen
     public function rotateImage(){
-        $imageRotated = CrudInterventionImage::rotateImage($this->image_hero, auth()->user()->company->id . '/levels/');
+
+        $imageRotated = CrudInterventionImage::rotateImage(
+            $this->image_hero, 
+            auth()->user()->company->id . '/levels/'
+        );
+
         if($imageRotated != false){
-            $this->image_hero = $imageRotated[0];
+            $this->image_hero = $imageRotated['filename'];
             $this->level->update(
                 $this->only(['image_hero'])
             );
@@ -243,7 +249,7 @@ class LevelIndex extends Component
         // subir imagen de portada
         $this->uploadImage();
         if($this->dataImage){
-            $this->image_hero_uri = $this->dataImage[1];
+            $this->image_hero_uri = $this->dataImage['uri'];
         }
 
         if( isset( $this->level['id'])) {
@@ -255,7 +261,7 @@ class LevelIndex extends Component
 
             $this->reset(['level']);
             $this->resetProperties();
-            // session()->flash('messageSuccess', 'Actualizado con exito');
+            
             $this->dispatch('toastrSuccess', 'Actualizado con exito');
 
         } else {
@@ -267,7 +273,7 @@ class LevelIndex extends Component
 
             $this->reset(['level']);
             $this->resetProperties();
-            // session()->flash('messageSuccess', 'Guardado con exito');
+            
             $this->dispatch('toastrSuccess', 'Guardado con exito');
         }
 

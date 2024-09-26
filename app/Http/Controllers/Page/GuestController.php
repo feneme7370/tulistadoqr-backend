@@ -11,6 +11,7 @@ class GuestController extends Controller
 {
     public function index()
     {
+        // datos de los 4 planes vigentes
         $services = [
             'one' => [
                 'title' => 'Facil gestion', 
@@ -33,9 +34,13 @@ class GuestController extends Controller
                 'icon' => 'images'
             ],
         ];
+
+        // datos de la firma propia, con ID 1
         $company = Company::with('socialMedia')->where('id', 1)->first();
+
+        // membresias activas
         $memberships = Membership::where('status', '1')->get();
-        // dd($company->socialMedia[0]->pivot->url);
+
         return view('Page.guest.home', compact(
             'company',
             'memberships',

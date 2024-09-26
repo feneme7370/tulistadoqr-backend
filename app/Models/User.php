@@ -8,7 +8,6 @@ use App\Models\Page\Company;
 use App\Models\Page\Product;
 use App\Models\Page\Category;
 use App\Models\Page\Suggestion;
-use App\Models\Page\SocialMedia;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
@@ -18,7 +17,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable implements MustVerifyEmail
+// class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;

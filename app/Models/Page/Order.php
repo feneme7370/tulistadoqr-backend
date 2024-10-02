@@ -7,22 +7,34 @@ use App\Models\Page\Company;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Level extends Model
+class Order extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'slug',
+        'date',
+        'client',
+        'adress',
+        'type_send',
         'description',
+        'is_maked',
+        'is_paid',
+        'is_delivered',
         'status',
-        'image_hero',
-        'image_hero_uri',
+        'total_price',
+        'total_products',
+      
         'user_id',
         'company_id',
-        'new_image',
     ];
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'order_products')
+            ->withPivot('quantity', 'discount', 'price', 'total_price') // Campos adicionales en la tabla pivote
+            ->withTimestamps(); // Si tienes timestamps en la tabla pivote;
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -30,13 +42,5 @@ class Level extends Model
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id', 'id');
-    }
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'level_id', 'id');
-    }
-    public function categories()
-    {
-        return $this->hasMany(Category::class, 'level_id', 'id');
     }
 }

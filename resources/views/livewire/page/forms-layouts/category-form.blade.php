@@ -205,7 +205,7 @@
           <br><span class="text-gray-700 italic text-sm normal-case">{{ $category->slug ?? ''}}</span>
         </p>
         <p class="text-gray-900 font-bold text-base uppercase mr-3">Descripcion: 
-          <br><span class="text-gray-700 italic text-sm normal-case">{{ $category->description ?? ''}}</span>
+          <br><span class="text-gray-700 italic text-sm normal-case whitespace-pre-wrap">{{ $category->description ?? ''}}</span>
         </p>
         <p class="text-gray-900 font-bold text-base uppercase mr-3">Estado: 
           <br><span class="text-gray-700 italic text-sm normal-case">{{ ($category->status ?? '') ? 'Activo' : 'Inactivo'}}</span>

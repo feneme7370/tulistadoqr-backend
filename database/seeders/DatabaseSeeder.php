@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
 
             ProductTagSeeder::class,
             CompanySocialMediaSeeder::class,
+            // ShippingMethodsSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

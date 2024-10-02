@@ -8,6 +8,7 @@ use App\Models\Page\Category;
 use App\Models\Page\Company;
 use App\Models\Page\Level;
 use App\Models\Page\Membership;
+use App\Models\Page\Order;
 use App\Models\Page\Product;
 use App\Models\Page\SocialMedia;
 use App\Models\Page\Suggestion;
@@ -17,6 +18,7 @@ use App\Policies\Page\CategoryPolicy;
 use App\Policies\Page\CompanyPolicy;
 use App\Policies\Page\LevelPolicy;
 use App\Policies\Page\MembershipPolicy;
+use App\Policies\Page\OrderPolicy;
 use App\Policies\Page\PermissionPolicy;
 use App\Policies\Page\ProductPolicy;
 use App\Policies\Page\RolePolicy;
@@ -47,6 +49,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Role::class => RolePolicy::class,
         Permission::class => PermissionPolicy::class,
+        Order::class => OrderPolicy::class,
     ];
 
     /**

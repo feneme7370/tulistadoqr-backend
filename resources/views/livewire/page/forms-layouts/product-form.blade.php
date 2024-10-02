@@ -295,9 +295,9 @@
           <br><span class="text-gray-700 italic text-sm normal-case">$ {{ number_format(($product->price_seller ?? 0), 2,",",".") }}</span>
         </p>
         <p class="text-gray-900 font-bold text-base uppercase mr-3">Descripcion: 
-          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->description ?? ''}}</span>
-          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->description2 ?? ''}}</span>
-          <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->description3 ?? ''}}</span>
+          <br><span class="text-gray-700 italic text-sm normal-case whitespace-pre-wrap">{{ $product->description ?? ''}}</span>
+          <br><span class="text-gray-700 italic text-sm normal-case whitespace-pre-wrap">{{ $product->description2 ?? ''}}</span>
+          <br><span class="text-gray-700 italic text-sm normal-case whitespace-pre-wrap">{{ $product->description3 ?? ''}}</span>
         </p>
         <p class="text-gray-900 font-bold text-base uppercase mr-3">Categoria: 
           <br><span class="text-gray-700 italic text-sm normal-case">{{ $product->category->name ?? ''}}</span>

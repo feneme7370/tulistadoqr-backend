@@ -176,6 +176,13 @@
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
+            @can('orders.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('orders.index') }}"
+                :active="request()->routeIs('orders.index')" title="Ordenes">
+                <x-sistem.icons.for-icons-app icon="order" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+
             @can('levels.index')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('levels.index') }}"
                 :active="request()->routeIs('levels.index')" title="Categoria General">

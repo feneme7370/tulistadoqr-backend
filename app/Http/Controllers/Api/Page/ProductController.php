@@ -7,13 +7,11 @@ use App\Models\Page\Company;
 use App\Models\Page\Product;
 use Illuminate\Http\Request;
 use App\Models\Page\Category;
-use App\Models\Page\Suggestion;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Page\LevelResource;
 use App\Http\Resources\Page\CompanyResource;
 use App\Http\Resources\Page\ProductResource;
 use App\Http\Resources\Page\CategoryResource;
-use App\Http\Resources\Page\SuggestionResource;
 use App\Http\Resources\Page\TagResource;
 use App\Models\Page\Tag;
 

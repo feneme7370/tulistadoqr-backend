@@ -58,6 +58,12 @@ class Product extends Model
     {
         return $this->belongsToMany(Picture::class, 'product_pictures');
     }
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_products')
+            ->withPivot('quantity', 'discount', 'price', 'total_price') // Campos adicionales en la tabla pivote
+            ->withTimestamps(); // Si tienes timestamps en la tabla pivote;
+    }
     
 
 }

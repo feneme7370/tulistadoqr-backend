@@ -154,7 +154,7 @@
         <br><span class="text-gray-700 italic text-sm normal-case">{{ $level->slug ?? ''}}</span>
       </p>
       <p class="text-gray-900 font-bold text-base uppercase mr-3">Descripcion: 
-        <br><span class="text-gray-700 italic text-sm normal-case">{{ $level->description ?? ''}}</span>
+        <br><span class="text-gray-700 italic text-sm normal-case whitespace-pre-wrap">{{ $level->description ?? ''}}</span>
       </p>
       <p class="text-gray-900 font-bold text-base uppercase mr-3">Estado: 
         <br><span class="text-gray-700 italic text-sm normal-case">{{ ($level->status ?? '') ? 'Activo' : 'Inactivo'}}</span>

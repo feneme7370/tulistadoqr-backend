@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Page\UserController;
 use App\Http\Controllers\Page\GuestController;
@@ -10,6 +11,7 @@ use App\Livewire\Page\DashboardIndex;
 use App\Livewire\Page\InformationIndex;
 use App\Livewire\Page\LevelIndex;
 use App\Livewire\Page\MembershipIndex;
+use App\Livewire\Page\OrderIndex;
 use App\Livewire\Page\ProductIndex;
 use App\Livewire\Page\ProductPrice;
 use App\Livewire\Page\RoleIndex;
@@ -41,6 +43,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',
 });
 
 
+
 // userIsStatus es si esta inhabilitado el usuario o la empresa
 Route::middleware([
     'auth:sanctum',
@@ -49,7 +52,7 @@ Route::middleware([
     'userIsStatus',
     // 'password.confirm',
 ])->group(function () {
-    
+
     // vistas de livewire
     Route::get('/dashboard', DashboardIndex::class)->middleware('can:dashboard.index')->name('dashboard.index');
     Route::get('/roles', RoleIndex::class)->middleware('can:roles.index')->name('roles.index');
@@ -63,6 +66,7 @@ Route::middleware([
     Route::get('/products', ProductIndex::class)->middleware('can:products.index')->name('products.index');
     Route::get('/products_price', ProductPrice::class)->middleware('can:products.price')->name('products.price');
     Route::get('/suggestions', SuggestionIndex::class)->middleware('can:suggestions.index')->name('suggestions.index');
+    Route::get('/orders', OrderIndex::class)->middleware('can:orders.index')->name('orders.index');
     Route::get('/social_medias', SocialMediaIndex::class)->middleware('can:social_medias.index')->name('social_medias.index');
     Route::get('/config/{company}', ConfigIndex::class)->middleware('can:config.index')->name('config.index');
     Route::get('/information', InformationIndex::class)->middleware('can:information.index')->name('information.index');

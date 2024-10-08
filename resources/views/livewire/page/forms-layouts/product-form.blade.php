@@ -39,11 +39,26 @@
                 </div>
 
                 <div>
+                    <x-sistem.forms.label-form for="cost" value="{{ __('Costo del producto') }}" />
+                    <x-sistem.forms.input-form id="cost" type="number"
+                        placeholder="{{ __('Costo del producto') }}" wire:model="cost" />
+                    <x-sistem.forms.input-error for="cost" />
+                </div>
+
+                <div>
                     <x-sistem.forms.label-form for="category_id" value="{{ __('Categoria') }}" />
                     <x-sistem.forms.select-form wire:model="category_id" id="category_id">
+                      @foreach ($levels as $level)
+                      <optgroup label="{{$level->name}}">
+      
                         @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
+                          @if ($category->level->name == $level->name)
+                          <option value="{{$category->id}}">{{$category->name}}</option>
+                          @endif
                         @endforeach
+                        
+                      </optgroup>
+                    @endforeach
                     </x-sistem.forms.select-form>
                     <x-sistem.forms.input-error for="category_id" />
                 </div>
@@ -293,6 +308,9 @@
         </p>
         <p class="text-gray-900 font-bold text-base uppercase mr-3">Oferta: 
           <br><span class="text-gray-700 italic text-sm normal-case">$ {{ number_format(($product->price_seller ?? 0), 2,",",".") }}</span>
+        </p>
+        <p class="text-gray-900 font-bold text-base uppercase mr-3">Costo: 
+          <br><span class="text-gray-700 italic text-sm normal-case">$ {{ number_format(($product->cost ?? 0), 2,",",".") }}</span>
         </p>
         <p class="text-gray-900 font-bold text-base uppercase mr-3">Descripcion: 
           <br><span class="text-gray-700 italic text-sm normal-case whitespace-pre-wrap">{{ $product->description ?? ''}}</span>

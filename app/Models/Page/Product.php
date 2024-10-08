@@ -17,6 +17,7 @@ class Product extends Model
         'slug',
         'price_original',
         'price_seller',
+        'cost',
         'quantity',
         'description',
         'description2',
@@ -61,9 +62,12 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class, 'order_products')
-            ->withPivot('quantity', 'discount', 'price', 'total_price') // Campos adicionales en la tabla pivote
+            ->withPivot('quantity', 'discount', 'price', 'total_price', 'cost', 'total_cost') // Campos adicionales en la tabla pivote
             ->withTimestamps(); // Si tienes timestamps en la tabla pivote;
+    }    
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class, 'product_id', 'id');
     }
-    
 
 }

@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Page\Product;
 use Livewire\WithPagination;
 use App\Models\Page\Category;
+use App\Models\Page\Level;
 
 class ProductPrice extends Component
 {
@@ -20,7 +21,7 @@ class ProductPrice extends Component
     public function updatingCategorySearch() {$this->resetPage(pageName: 'p_product');}
 
     // propiedades de busqueda
-    public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+    public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
     public $categorySearch, $offers = false;
 
     // mostrar variables en queryString
@@ -32,7 +33,7 @@ class ProductPrice extends Component
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['price_original', 'price_seller', 'productsChecked']);
+        $this->reset(['price_original', 'price_seller', 'cost', 'productsChecked']);
     }
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
@@ -40,6 +41,7 @@ class ProductPrice extends Component
     public $name;
     public $price_original;
     public $price_seller;
+    public $cost;
     public $image_hero;
     public $image_hero_uri;
     public $category_id;
@@ -58,6 +60,7 @@ class ProductPrice extends Component
         return [
             'price_original' => ['nullable', 'numeric', 'min:0'],
             'price_seller' => ['nullable', 'numeric', 'min:0'],
+            'cost' => ['nullable', 'numeric', 'min:0'],
         ];
     }
 
@@ -65,6 +68,7 @@ class ProductPrice extends Component
     protected $validationAttributes = [
         'price_original' => 'precio original',
         'price_seller' => 'precio de oferta',
+        'cost' => 'costo',
     ];
 
     ///////////////////////////// MODULO CRUD /////////////////////////////
@@ -87,6 +91,9 @@ class ProductPrice extends Component
             if($this->price_seller != null){
                 $this->product->update($this->only(['price_seller']));
             }
+            if($this->cost != null){
+                $this->product->update($this->only(['cost']));
+            }
 
         }
         $this->resetProperties();
@@ -100,7 +107,10 @@ class ProductPrice extends Component
         ->where('company_id', auth()->user()->company_id)
         ->orderBy('level_id', 'DESC')->get();
         
-        $products = Product::select('id', 'name', 'price_original', 'price_seller', 'image_hero_uri', 'image_hero', 'status', 'category_id')
+        $levels = Level::where('company_id', auth()->user()->company_id)
+        ->orderBy('id', 'ASC')->get();
+        
+        $products = Product::select('id', 'name', 'price_original', 'price_seller', 'cost', 'image_hero_uri', 'image_hero', 'status', 'category_id')
         ->with('category', 'category.level', 'tags')
         ->where('company_id', auth()->user()->company_id)
         ->when( $this->search, function($query) {
@@ -123,6 +133,7 @@ class ProductPrice extends Component
         return view('livewire.page.product-price', compact(
             'categories',
             'products',
+            'levels',
         ));
     }
 }

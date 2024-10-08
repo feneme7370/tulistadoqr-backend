@@ -141,19 +141,6 @@
                 </x-sistem.cards.mini-date>
             </div>
         @endcan
-
-        {{-- @can('suggestions.index')
-            <div>
-                <x-sistem.cards.mini-date 
-                    href="{{route('suggestions.index')}}" 
-                    title="Sugerencias" 
-                    date_total="{{ auth()->user()->company->membership->suggestion }}" 
-                    date="{{ $suggestions->count() }}"
-                    >
-                    <x-sistem.icons.for-icons-app icon="suggestion"/>
-                </x-sistem.cards.mini-date>
-            </div>
-        @endcan --}}
  
     </div>
 

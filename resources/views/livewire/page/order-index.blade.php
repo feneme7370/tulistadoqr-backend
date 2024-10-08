@@ -22,10 +22,24 @@
     </x-sistem.menus.text-info>
 
     {{-- input buscador y filtro de activos --}}
-    <x-sistem.filter.search-active />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
+        <x-sistem.filter.search-only />
+        <x-sistem.filter.search-dates />
+        
+    </div>
+    <x-sistem.filter.search-checkbox 
+        placeholder_box_1="Sin stock"
+        property_box_1="is_maked"
+        placeholder_box_2="Sin pagar"
+        property_box_2="is_paid"
+        placeholder_box_3="Sin entregar"
+        property_box_3="is_delivered"
+        placeholder_box_4="Solo pendientes"
+        property_box_4="active"
+    />
 
     {{-- logo de carga --}}
-    <x-sistem.spinners.loading-spinner wire:loading />
+    {{-- <x-sistem.spinners.loading-spinner wire:loading /> --}}
     
     {{-- listado --}}
     @include('livewire.page.tables-layouts.order-table')

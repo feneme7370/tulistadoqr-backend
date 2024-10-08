@@ -16,11 +16,17 @@
     .t_badge-green {
         @apply bg-green-200 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded;
     }
+    .t_badge-blue {
+        @apply bg-blue-200 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded;
+    }
     .t_badge-red {
         @apply bg-red-200 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded;
     }
     .t_tr-inactive {
         @apply bg-red-100 text-red-900;
+    }
+    .t_tr-active {
+        @apply bg-green-100 text-green-900;
     }
     .t_table {
         @apply w-full;
@@ -60,6 +66,12 @@
     }
     .t_table tbody tr td.with-status-columns{
         @apply w-8 text-center;
+    }
+    .t_table tbody tr td.with-conditions-columns{
+        @apply my-1 p-1 space-y-1 text-center text-sm;
+    }
+    .t_table tbody tr td.with-conditions-columns span{
+        @apply cursor-pointer;
     }
     .t_table tbody tr td.with-image-columns{
         @apply h-10 sm:w-16;

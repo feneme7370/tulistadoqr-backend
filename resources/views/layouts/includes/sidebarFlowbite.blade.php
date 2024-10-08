@@ -176,12 +176,46 @@
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
+            <li class="border-t border-primary-300"></li>
+
             @can('orders.index')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('orders.index') }}"
                 :active="request()->routeIs('orders.index')" title="Ordenes">
                 <x-sistem.icons.for-icons-app icon="order" />
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
+
+            @can('orders.detail')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('orders.detail') }}"
+                :active="request()->routeIs('orders.detail')" title="Ordenes a elaborar">
+                <x-sistem.icons.for-icons-app icon="order" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+
+            @can('orders.sale')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('orders.sale') }}"
+                :active="request()->routeIs('orders.sale')" title="Ventas">
+                <x-sistem.icons.for-icons-app icon="order" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+
+            <li class="border-t border-primary-300"></li>
+
+            @can('stocks.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('stocks.index') }}"
+                :active="request()->routeIs('stocks.index')" title="Stock">
+                <x-sistem.icons.for-icons-app icon="stock" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+
+            @can('clients.index')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('clients.index') }}"
+                :active="request()->routeIs('clients.index')" title="Clientes">
+                <x-sistem.icons.for-icons-app icon="client" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+
+
 
             @can('levels.index')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('levels.index') }}"

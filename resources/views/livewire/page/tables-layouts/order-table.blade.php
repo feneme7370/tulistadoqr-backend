@@ -8,17 +8,16 @@
             <tr>
               <th>ID</th>
               <th>Acciones</th>
-              <th>Orden</th>
-              <th>Precio</th>
-              <th>Productos</th>
-              <th>Creado por</th>
+              <th>Datos</th>
+              <th>Condicion</th>
+              {{-- <th>Creado por</th> --}}
               <th>Estado</th>
             </tr>
           </thead>
           <tbody>
 
             @foreach ($orders as $item)
-            <tr class="{{ $item->status == '1' ? '' : 't_tr-inactive' }}">
+            <tr class="{{ $item->status == '0' ? '' : 't_tr-active' }}">
 
               <td class="with-id-columns">
                 <p>{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}</p>
@@ -34,26 +33,43 @@
                 </div>
               </td>
 
-              <td>
-                <p><a class="hover:underline" href="{{ route('orders.index', ['l' => $item->id]) }}"> {{$item->name}} </a> </p>
+              <td class="flex flex-col">
+                <p class="font-bold text-lg">{{$item->customer->lastname}}, {{$item->customer->name}} <span class="text-xs italic">({{ $item->client }})</span></p>
+                <p class="font-bold text-sm">Entrega: <span class="font-normal italic">{{$item->date}}</span> </p>
+                
+                <div>
+                  <p>{{$item->total_products}} Un. | $ {{number_format($item->total_price, 0,",",".")}}</p>
+                </div>
               </td>
 
-              <td class="text-center">
-                <p>$ {{number_format($item->total_price, 0,",",".")}}</p>
-              </td>
-              
-              <td class="text-center">
-                <p>{{$item->total_products}}</p>
-              </td>
 
-              <td>
-                <p>{{$item->user->lastname}}, {{$item->user->name}}</p>
-              </td>
-
-              <td class="with-status-columns">
+              <td class="with-conditions-columns">
                 <span
+                  wire:click='toggleOrderConditions({{ $item->id }}, "is_maked")'
+                  class="line-clamp-2 {{$item->is_maked == '1' ? 't_badge-green' : 't_badge-red'}}">
+                  {{$item->is_maked == '1' ? 'En Stock' : 'Sin Stock'}}
+                </span>
+                <span
+                wire:click='toggleOrderConditions({{ $item->id }}, "is_paid")'
+                  class="line-clamp-2 {{$item->is_paid == '1' ? 't_badge-green' : 't_badge-red'}}">
+                  {{$item->is_paid == '1' ? 'Pagado' : 'Sin pagar'}}
+                </span>
+                <span
+                wire:click='toggleOrderConditions({{ $item->id }}, "is_delivered")'
+                  class="line-clamp-2 {{$item->is_delivered == '1' ? 't_badge-green' : 't_badge-red'}}">
+                  {{$item->is_delivered == '1' ? 'Entregado' : 'Sin entregar'}}
+                </span>
+              </td>
+
+              {{-- <td>
+                <p>{{$item->user->lastname}}, {{$item->user->name}}</p>
+              </td> --}}
+
+              <td class="with-conditions-columns">
+                <span
+                wire:click='toggleOrderStatus({{ $item->id }})'
                   class="line-clamp-2 {{$item->status == '1' ? 't_badge-green' : 't_badge-red'}}">
-                  {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
+                  {{$item->status == '1' ? 'Completado' : 'Incompleto'}}
                 </span>
               </td>
 

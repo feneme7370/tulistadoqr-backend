@@ -8,43 +8,36 @@
             <tr>
               <th>ID</th>
               <th>Acciones</th>
-              <th>Imagen</th>
               <th>Nombre</th>
-              <th>Estado</th>
+              <th>Direccion</th>
             </tr>
           </thead>
           <tbody>
 
-            @foreach ($levels as $item)
+            @foreach ($clients as $item)
             <tr class="{{ $item->status == '1' ? '' : 't_tr-inactive' }}">
 
               <td class="with-id-columns">
-                <p>{{ ($levels->currentPage() - 1) * $levels->perPage() + $loop->iteration }}</p>
+                <p>{{ ($clients->currentPage() - 1) * $clients->perPage() + $loop->iteration }}</p>
               </td>
+
               <td class="with-actions-columns">
                 <div class="actions">
                   <x-sistem.buttons.view-text wire:click="viewActionModal({{ $item->id }})" wire:loading.attr="disabled" />
                   <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
                     wire:loading.attr="disabled" />
-                  <x-sistem.buttons.delete-text wire:click="$dispatch('deleteLevel', {{$item->id}})"
+                  <x-sistem.buttons.delete-text wire:click="$dispatch('deleteClient', {{$item->id}})"
                     wire:loading.attr="disabled" />
                 </div>
               </td>
 
-              <td class="with-image-columns">
-                <x-sistem.lightbox.img-tumb-lightbox :uri="$item->image_hero_uri" :name="$item->image_hero" />
-              </td>
-
               <td>
-                <p><a class="hover:underline" href="{{ route('categories.index', ['l' => $item->id]) }}"> {{$item->name}} </a> </p>
+                <p> {{$item->lastname}}, {{$item->name}} </p>
+              </td>
+              <td>
+                <p> {{$item->adress}} </p>
               </td>
 
-              <td class="with-status-columns">
-                <span
-                  class="line-clamp-2 {{$item->status == '1' ? 't_badge-green' : 't_badge-red'}}">
-                  {{$item->status == '1' ? 'Activo' : 'Inactivo'}}
-                </span>
-              </td>
 
             </tr>
             @endforeach

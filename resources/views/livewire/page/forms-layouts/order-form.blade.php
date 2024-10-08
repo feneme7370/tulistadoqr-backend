@@ -23,10 +23,20 @@
             <x-sistem.forms.input-form id="date" type="date" placeholder="{{ __('Fecha de vencimiento') }}" wire:model="date" />
             <x-sistem.forms.input-error for="date" />
           </div>
+  
+          <div>
+            <x-sistem.forms.label-form for="client_id" value="{{ __('Cliente') }}" />
+            <x-sistem.forms.select-form wire:model="client_id" id="client_id">
+                @foreach ($clients as $client)
+                    <option value="{{$client->id}}">{{$client->lastname}}, {{$client->name}}</option>
+                @endforeach
+            </x-sistem.forms.select-form>
+            <x-sistem.forms.input-error for="client_id" />
+          </div>
 
           <div>
-            <x-sistem.forms.label-form for="client" value="{{ __('Nombre del cliente') }}" />
-            <x-sistem.forms.input-form id="client" type="text" placeholder="{{ __('Nombre') }}" wire:model="client" />
+            <x-sistem.forms.label-form for="client" value="{{ __('Apodo') }}" />
+            <x-sistem.forms.input-form id="client" type="text" placeholder="{{ __('Apodo') }}" wire:model="client" />
             <x-sistem.forms.input-error for="client" />
           </div>
 
@@ -37,13 +47,13 @@
           </div>
   
           <div>
-            <x-sistem.forms.label-form for="type_send" value="{{ __('Tipo de pedido') }}" />
-            <x-sistem.forms.select-form wire:model="type_send" id="type_send">
+            <x-sistem.forms.label-form for="shipping_methods_id" value="{{ __('Tipo de pedido') }}" />
+            <x-sistem.forms.select-form wire:model="shipping_methods_id" id="shipping_methods_id">
                 @foreach ($shipped_methods as $shipped_method)
                     <option value="{{$shipped_method->id}}">{{$shipped_method->name}}</option>
                 @endforeach
             </x-sistem.forms.select-form>
-            <x-sistem.forms.input-error for="type_send" />
+            <x-sistem.forms.input-error for="shipping_methods_id" />
           </div>
 
           <div>
@@ -130,23 +140,36 @@
           <div>
             <x-sistem.forms.label-form for="product_selected.product_id" value="{{ __('Seleccionar producto') }}" />
             <x-sistem.forms.select-form wire:model="product_selected.product_id" id="product_selected.product_id">
-              @foreach ($available_products as $available_product)
-              <option value="{{$available_product->id}}">{{$available_product->name}}</option>
-                @endforeach
+              
+              @foreach ($categories as $category)
+                <optgroup label="{{$category->name}}">
+
+                  @foreach ($available_products as $available_product)
+                    @if ($available_product->category->name == $category->name)
+                    <option value="{{$available_product->id}}">{{$available_product->name}}</option>
+                    @endif
+                  @endforeach
+                  
+                </optgroup>
+              @endforeach
+            
             </x-sistem.forms.select-form>
             <x-sistem.forms.input-error for="product_selected.product_id" />
           </div>
 
-          <div>
-            <x-sistem.forms.label-form for="product_selected.quantity" value="{{ __('Cantidad') }}" />
-            <x-sistem.forms.input-form id="product_selected.quantity" type="text" placeholder="{{ __('Cantidad') }}" wire:model="product_selected.quantity" />
-            <x-sistem.forms.input-error for="product_selected.quantity" />
-          </div>
+          <div class="flex justify-between items-center gap-1">
 
-          <div>
-            <x-sistem.forms.label-form for="product_selected.discount" value="{{ __('Descuento') }}" />
-            <x-sistem.forms.input-form id="product_selected.discount" type="text" placeholder="{{ __('Descuento') }}" wire:model="product_selected.discount" />
-            <x-sistem.forms.input-error for="product_selected.discount" />
+            <div>
+              <x-sistem.forms.label-form for="product_selected.quantity" value="{{ __('Cantidad') }}" />
+              <x-sistem.forms.input-form id="product_selected.quantity" type="text" placeholder="{{ __('Cantidad') }}" wire:model="product_selected.quantity" />
+              <x-sistem.forms.input-error for="product_selected.quantity" />
+            </div>
+  
+            <div>
+              <x-sistem.forms.label-form for="product_selected.discount" value="{{ __('Descuento') }}" />
+              <x-sistem.forms.input-form id="product_selected.discount" type="text" placeholder="{{ __('Descuento') }}" wire:model="product_selected.discount" />
+              <x-sistem.forms.input-error for="product_selected.discount" />
+            </div>
           </div>
 
             
@@ -156,66 +179,49 @@
           <div class="w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div class="flex items-center justify-between mb-4">
                 <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white p-2">Productos</h5>
+                <span class="font-bold text-sm">
+                  ${{ number_format($temporalTotalPrice, 0,",",".") }}
+                </span>
             </div>
-            <div class="flow-root">
-                  <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                    @foreach ($products_selected as $index => $product)
-                      <li class="py-3 sm:py-4">
-                          <div class="flex flex-col md:flex-row gap-3 items-center">
-                              <div class="flex-shrink-0">
-                                <x-sistem.buttons.normal-btn wire:click="removeProduct({{ $index }})" wire:loading.attr="disabled"
-                                title="">
-                                <x-sistem.icons.for-icons-app icon="trash" class="h-2 w-2"/>
-                                </x-sistem.buttons.normal-btn>
-                                  {{-- <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image"> --}}
-                              </div>
-                              <div class="flex-1 min-w-0 ms-4">
-                                  <p class="text-base text-center font-bold text-gray-900 dark:text-white">
-                                    {{ $product['dates']['name'] }}
-                                  </p>
-                                  <p class="text-sm text-gray-500  dark:text-gray-400">
-                                    Precio Unitario: $ {{ number_format($product['price'], 0,",",".") }}
-                                  </p>
-                                  <p class="text-sm text-gray-500  dark:text-gray-400">
-                                    Cantidad: {{ $product['quantity'] }} | Descuento: {{ $product['discount'] }} %
-                                  </p>
-                              </div>
-                              <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                ${{ number_format($product['total_price'], 0,",",".") }}
-                              </div>
-                          </div>
-                      </li>
-                    @endforeach
-                  </ul>
-            </div>
-          </div>
-          {{-- @foreach ($products_selected as $index => $product)
+
+            <hr class="border-primary-300 mt-1 w-10/12 mx-auto">
+
+            <!-- listado de productos a comprar -->
+            @foreach ($products_selected as $index => $product)
             
+              <div class="flex items-center justify-between gap-1 my-2 p-1">
+
+                  <!-- cantidad de producto y nombres -->
+                  <div>
+                      <div class="flex items-center gap-2">
+                          <span class="text-gray-700 text-base font-bold">({{ $product['quantity'] }})</span>
+                          <span class="text-gray-800 text-sm font-bold">{{ $product['dates']['name'] }}</span>
+                      </div>
+                      <div class="flex items-center justify-start gap-2">
+                  
+                          <span class="text-gray-700 text-xs font-medium">c/u:${{ number_format($product['price'], 0,",",".") }}</span>
+                          <span class="text-gray-700 text-xs font-medium">Descuento: {{ $product['discount'] }} %</span>
+
+                      </div>
+                  </div>
           
-            <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-              <div class="flex justify-between items-center">
-                <h5 class="mb-2 text-base font-bold text-center tracking-tight text-gray-900 dark:text-white">{{ $product['dates']['name'] }}</h5>
-              
-              </div>
-              <div class="grid grid-cols-2 gap-2">
-                <p class="font-bold text-sm text-gray-700 dark:text-gray-400">Cantidad: <span class="font-normal">{{ $product['quantity'] }}</span></p>
-                <p class="font-bold text-sm text-gray-700 dark:text-gray-400">Descuento: <span  class="font-normal">{{ $product['discount'] }}</span></p>
-                
-                <p class="font-bold text-sm text-gray-700 dark:text-gray-400">Precio Unitario: <span  class="font-normal"> ${{ $product['price'] }}</span></p>
-  
-                <p class="font-bold text-sm text-gray-700 dark:text-gray-400">Precio con descuento: <span  class="font-normal"> ${{ $product['total_price'] }}</span></p>
+                  <!-- ver precio total del producto y botones de sumar y restar -->
+                  <div class="flex items-center justify-center flex-col gap-1">
+                      <x-sistem.buttons.normal-btn wire:click="removeProduct({{ $index }})" wire:loading.attr="disabled"
+                      title="X" class="text-center">
+                      {{-- <x-sistem.icons.for-icons-app icon="trash" class="h-2 w-2"/> --}}
+                      </x-sistem.buttons.normal-btn>
+                      <span class="text-gray-700 text-sm font-bold">${{ number_format($product['total_price'], 0,",",".") }}</span>
+                  </div>
               </div>
 
-              <div class="flex justify-end items-center">
-                <x-sistem.buttons.normal-btn wire:click="removeProduct({{ $index }})" wire:loading.attr="disabled"
-                title="">
-                <x-sistem.icons.for-icons-app icon="trash" class="h-2 w-2"/>
-                </x-sistem.buttons.normal-btn>  
-              </div>
-            </a>
-  
-          @endforeach --}}
+              <hr class="border-primary-300 mb-1 w-10/12 mx-auto">
+            
+            @endforeach
+            
+
+
+          </div>
 
         </div>
 
@@ -252,108 +258,133 @@
 
   <x-slot name="content">
 
-    <div class="grid gap-3 p-1">
+    <div class="grid gap-3 p-1 w-full">
 
 
-      <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
-        <div class="flex flex-col pb-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Nombre de pedido:</dt>
-            <dd class="text-lg font-semibold">{{ $order->name ?? ''}}</dd>
+      <dl class="w-full text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+        <div class="flex flex-col pb-1">
+            <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Nombre de pedido:</dt>
+            <dd class="text-xs font-semibold">{{ $order->name ?? ''}}</dd>
         </div>
-        <div class="flex flex-col py-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Fecha</dt>
-            <dd class="text-lg font-semibold">{{ $order->date ?? ''}}</dd>
+
+
+        <div class="grid grid-cols-2 gap-1">
+          <div class="flex flex-col py-1">
+              <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Productos:</dt>
+              <dd class="text-xs font-semibold">{{ $order->total_products ?? ''}}</dd>
+          </div>
+          <div class="flex flex-col py-1">
+              <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Monto:</dt>
+              <dd class="text-xs font-semibold">$ {{ number_format($order->total_price ?? 0, 0,",",".") }}</dd>
+          </div>
         </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Total de productos:</dt>
-            <dd class="text-lg font-semibold">{{ $order->total_products ?? ''}}</dd>
+
+        <div class="grid grid-cols-2 gap-1">
+
+          <div>
+            <div class="flex flex-col py-1">
+                <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Nombre del cliente:</dt>
+                <dd class="text-xs font-semibold">{{ $order->client->name ?? ''}}</dd>
+            </div>
+
+            <div class="flex flex-col py-1">
+                <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Apodo:</dt>
+                <dd class="text-xs font-semibold">{{ $order->client ?? ''}}</dd>
+            </div>
+
+            <div class="flex flex-col py-1">
+                <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Direccion:</dt>
+                <dd class="text-xs font-semibold">{{ $order->adress ?? ''}}</dd>
+            </div>
+          </div>
+          
+          <div>
+            <div class="flex flex-col py-1">
+              <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Fecha</dt>
+              <dd class="text-xs font-semibold">{{ $order->date ?? ''}}</dd>
+            </div>
+
+            <div class="flex flex-col py-1">
+              <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Forma de envio:</dt>
+              <dd class="text-xs font-semibold">{{ $order->shipping_method->name ?? ''}}</dd>
+            </div>
+          </div>
+
         </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Monto total:</dt>
-            <dd class="text-lg font-semibold">$ {{ number_format($order->total_price ?? 0, 0,",",".") }}</dd>
+
+        <div class="flex flex-col py-1">
+          <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Descripcion:</dt>
+          <dd class="text-xs font-semibold whitespace-pre-wrap">{{ $order->description ?? ''}}</dd>
         </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Cliente:</dt>
-            <dd class="text-lg font-semibold">{{ $order->client ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Direccion:</dt>
-            <dd class="text-lg font-semibold">{{ $order->adress ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Forma de envio:</dt>
-            <dd class="text-lg font-semibold">{{ $order->type_send ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Descripcion:</dt>
-            <dd class="text-lg font-semibold whitespace-pre-wrap">{{ $order->description ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Estado:</dt>
-            <dd class="text-lg font-semibold whitespace-pre-wrap">{{ $order->status ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Hecho:</dt>
-            <dd class="text-lg font-semibold whitespace-pre-wrap">{{ $order->is_maked ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Pagado:</dt>
-            <dd class="text-lg font-semibold whitespace-pre-wrap">{{ $order->is_paid ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Entregado:</dt>
-            <dd class="text-lg font-semibold whitespace-pre-wrap">{{ $order->is_delivered ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Ultima modificacion por:</dt>
-            <dd class="text-lg font-semibold whitespace-pre-wrap">{{ $order->user->lastname ?? ''}}, {{ $order->user->name ?? ''}}</dd>
-        </div>
-        <div class="flex flex-col pt-3">
-            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Empresa:</dt>
-            <dd class="text-lg font-semibold whitespace-pre-wrap">{{ $order->company->name ?? ''}}</dd>
-        </div>
+
       </dl>
 
 
 
-      <div class="w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex items-center justify-between mb-4">
+      <div class="w-full bg-white border border-gray-200 rounded-lg p-1 shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+
+        <div class="flex items-center justify-between mb-1">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white p-2">Productos</h5>
+            <span class="font-bold text-sm">
+              ${{ number_format($temporalTotalPrice, 0,",",".") }}
+            </span>
         </div>
-        <div class="flow-root">
-              <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                @foreach ($products_selected as $index => $product)
-                  <li class="py-3 sm:py-4">
-                      <div class="flex flex-col md:flex-row gap-3 items-center">
-                          {{-- <div class="flex-shrink-0">
-                            <x-sistem.buttons.normal-btn wire:click="removeProduct({{ $index }})" wire:loading.attr="disabled"
-                            title="">
-                            <x-sistem.icons.for-icons-app icon="trash" class="h-2 w-2"/>
-                            </x-sistem.buttons.normal-btn>
-                              <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
-                          </div> --}}
-                          <div class="flex-1 min-w-0 ms-4">
-                              <p class="text-base text-center font-bold text-gray-900 dark:text-white">
-                                {{ $product['dates']['name'] }}
-                              </p>
-                              <p class="text-sm text-gray-500  dark:text-gray-400">
-                                Precio Unitario: $ {{ number_format($product['price'], 0,",",".") }}
-                              </p>
-                              <p class="text-sm text-gray-500  dark:text-gray-400">
-                                Cantidad: {{ $product['quantity'] }} | Descuento: {{ $product['discount'] }} %
-                              </p>
-                          </div>
-                          <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                            ${{ number_format($product['total_price'], 0,",",".") }}
-                          </div>
-                      </div>
-                  </li>
-                @endforeach
-              </ul>
+        {{-- <hr class="border-primary-300 mt-1 w-10/12 mx-auto"> --}}
+
+        <!-- listado de productos a comprar -->
+        @foreach ($products_selected as $index => $product)
+
+          <hr class="border-primary-300 mb-1 w-10/12 mx-auto">
+        
+          <div class="flex items-center justify-between gap-1 my-2">
+
+              <!-- cantidad de producto y nombres -->
+              <div>
+                  <div class="flex items-center gap-2">
+                      <span class="text-gray-700 text-base font-bold">({{ $product['quantity'] }})</span>
+                      <span class="text-gray-800 text-sm font-bold">{{ $product['dates']['name'] }}</span>
+                  </div>
+                  <div class="flex items-center justify-start gap-2">
+              
+                      <span class="text-gray-700 text-xs font-medium">c/u:${{ number_format($product['price'], 0,",",".") }}</span>
+                      <span class="text-gray-700 text-xs font-medium"> | Descuento: {{ $product['discount'] }} %</span>
+
+                  </div>
+              </div>
+
+              <div class="flex items-center justify-center flex-col gap-1">
+                <span class="text-gray-700 text-sm font-bold">${{ number_format($product['total_price'], 0,",",".") }}</span>
+            </div>
+      
+          </div>
+
+        
+        @endforeach
+      </div>
+
+      <div  class="grid grid-cols-2 gap-1">
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Estado:</dt>
+            <dd class="text-xs font-semibold whitespace-pre-wrap">{{ ($order->status ?? '') ? 'Activo' : 'Inactivo'}}</dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Hecho:</dt>
+            <dd class="text-xs font-semibold whitespace-pre-wrap">{{ ($order->is_maked ?? '') ? 'En stock' : 'Sin Stock'}}</dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Pagado:</dt>
+            <dd class="text-xs font-semibold whitespace-pre-wrap">{{ ($order->is_paid ?? '') ? 'Pagado' : 'Sin pagar'}}</dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Entregado:</dt>
+            <dd class="text-xs font-semibold whitespace-pre-wrap">{{ ($order->is_delivered ?? '') ? 'Entregado' : 'Sin entregar'}}</dd>
         </div>
       </div>
 
-
+      <div class="flex flex-col pt-3">
+        <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Ultima modificacion por:</dt>
+        <dd class="text-xs font-semibold whitespace-pre-wrap">{{ $order->user->lastname ?? ''}}, {{ $order->user->name ?? ''}}</dd>
+      </div>
     </div>
 
   </x-slot>

@@ -27,7 +27,7 @@ class CategoryIndex extends Component
     public function updatingCategoryGeneralSearch() {$this->resetPage(pageName: 'p_category');}
 
     // propiedades de busqueda
-    public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+    public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
     public $categoryGeneralSearch;
 

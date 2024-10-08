@@ -30,7 +30,7 @@ class ProductIndex extends Component
     public function updatingCategorySearch() {$this->resetPage(pageName: 'p_product');}
 
     // propiedades de busqueda
-    public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+    public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
     
     public $categorySearch;
     public $offers = false;
@@ -54,6 +54,7 @@ class ProductIndex extends Component
     public $slug;
     public $price_original;
     public $price_seller;
+    public $cost;
     public $quantity;
     public $description;
     public $description2;
@@ -87,6 +88,7 @@ class ProductIndex extends Component
             'slug' => ['required', 'string', 'min:3'],
             'price_original' => ['required', 'numeric', 'min:1'],
             'price_seller' => ['nullable', 'numeric', 'min:0'],
+            'cost' => ['nullable', 'numeric', 'min:0'],
             'quantity' => ['nullable', 'numeric'],
             'description' => ['nullable', 'string', 'max:255'],
             'description2' => ['nullable', 'string', 'max:255'],
@@ -109,6 +111,7 @@ class ProductIndex extends Component
         'slug' => 'slug',
         'price_original' => 'precio original',
         'price_seller' => 'precio de oferta',
+        'cost' => 'costo',
         'quantity' => 'cantidad',
         'description' => 'descripcion',
         'description2' => 'descripcion2',
@@ -161,7 +164,7 @@ class ProductIndex extends Component
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags', 'product_pictures', 'product_new_pictures', 'dataImage']);
+        $this->reset(['name', 'slug', 'price_original', 'price_seller', 'cost', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags', 'product_pictures', 'product_new_pictures', 'dataImage']);
     }
 
     ///////////////////////////// MODULO IMAGENES /////////////////////////////
@@ -314,6 +317,7 @@ class ProductIndex extends Component
         $this->slug = $item['slug'];
         $this->price_original = $item['price_original'];
         $this->price_seller = $item['price_seller'];
+        $this->cost = $item['cost'];
         $this->quantity = $item['quantity'];
         $this->description = $item['description'];
         $this->description2 = $item['description2'];
@@ -384,7 +388,7 @@ class ProductIndex extends Component
             
             // editar datos
             $this->product->update(
-                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
+                $this->only(['name', 'slug', 'price_original', 'price_seller', 'cost', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
             );
 
             $this->product->tags()->sync($this->product_tags);
@@ -398,7 +402,7 @@ class ProductIndex extends Component
 
             // crear datos
             $product = Product::create(
-                $this->only(['name', 'slug', 'price_original', 'price_seller', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
+                $this->only(['name', 'slug', 'price_original', 'price_seller', 'cost', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'category_id', 'user_id', 'company_id'])
             );
 
             $product->tags()->sync($this->product_tags);
@@ -454,7 +458,8 @@ class ProductIndex extends Component
             'categories', 
             'products', 
             'tags',
-            'product'
+            'product',
+            'levels',
         ));
     }
 }

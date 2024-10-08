@@ -23,7 +23,7 @@ class LevelIndex extends Component
     public function updatingSearch() {$this->resetPage(pageName: 'p_level');}
 
     // propiedades de busqueda
-    public $active = false, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
+    public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
     // mostrar variables en queryString
     protected function queryString(){

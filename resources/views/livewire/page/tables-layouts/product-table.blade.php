@@ -10,9 +10,10 @@
                         <th>Imagen</th>
                         <th>Productos</th>
                         <th>Precio</th>
-                        <th>Categoria</th>
-                        <th>Imagenes</th>
-                        <th>Tags</th>
+                        {{-- <th>Categoria</th> --}}
+                        {{-- <th>Datos</th> --}}
+                        {{-- <th>Imagenes</th>
+                        <th>Tags</th> --}}
                         <th>Estado</th>
                     </tr>
                 </thead>
@@ -39,24 +40,34 @@
                             />
                           </td>
 
-                        <td class="text-center"><p>{{$item->name}}</p></td>
+                        <td class="text-center">
+                            <p class="font-bold">{{$item->name}}</p>
+                            <div class="flex justify-center items-center gap-2">
+                                <p><a class="italic text-xs" href="">{{$item->pictures->count()}} Imag.</a></p>
+                                <p><a class="italic hover:underline text-xs" href="{{ route('tags.index') }}">{{$item->tags->count()}} Tags.</a></p>
+                            </div>
+                        </td>
                         
                         <td 
                             class="text-center"                                
                         ><p class="{{($item->price_original > $item->price_seller && $item->price_seller > 0) ? 'text-green-800 font-bold' : 'text-orange-800'}}" >${{($item->price_original > $item->price_seller && $item->price_seller > 0) ? number_format($item->price_seller, 2,",",".") : number_format($item->price_original, 2,",",".") }}</p>
                         </td>
                         
-                        <td class="text-center">
+                        {{-- <td class="text-center">
                             <p>
                                 <a class="hover:underline" href="{{route('levels.index', ['q' => $item->category->level->name])}} " > {{$item->category->level->name}}</a> /
                                 <br>
                                 <a class="hover:underline" href="{{route('categories.index', ['q' => $item->category->name])}}">{{$item->category->name}}</a>
                             </p>
-                        </td>
+                        </td> --}}
                         
-                        <td class="text-center"><p><a class="hover:underline" href="">{{$item->pictures->count()}}</a></p></td>
+                        {{-- <td>
+                            <p><a class="hover:underline" href="">{{$item->pictures->count()}} Imag.</a></p>
+                            <p><a class="hover:underline" href="{{ route('tags.index') }}">{{$item->tags->count()}} Tags.</a></p>
+                        </td> --}}
+                        {{-- <td class="text-center"><p><a class="hover:underline" href="">{{$item->pictures->count()}}</a></p></td> --}}
                         
-                        <td class="text-center"><p><a class="hover:underline" href="{{ route('tags.index') }}">{{$item->tags->count()}}</a></p></td>
+                        {{-- <td class="text-center"><p><a class="hover:underline" href="{{ route('tags.index') }}">{{$item->tags->count()}}</a></p></td> --}}
 
                         <td class="with-status-columns">
                             <span class="line-clamp-2 {{$item->status == '1' ? 't_badge-green' : 't_badge-red'}}">

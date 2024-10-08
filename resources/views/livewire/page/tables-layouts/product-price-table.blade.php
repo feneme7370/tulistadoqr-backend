@@ -11,6 +11,7 @@
                         <th>Productos</th>
                         <th>Precio</th>
                         <th>Precio Oferta</th>
+                        <th>Costo</th>
                         <th>Categoria</th>
                         <th>Estado</th>
                     </tr>
@@ -35,6 +36,7 @@
 
                         <td class="text-center text-orange-800"><p>{{number_format($item->price_original, 2,",",".")}}</p></td>
                         <td class="text-center text-green-800 font-bold"><p>{{number_format($item->price_seller, 2,",",".")}}</p></td>
+                        <td class="text-center text-blue-800 font-bold"><p>{{number_format($item->cost, 2,",",".")}}</p></td>
 
                         <td class="text-center"><p>{{$item->category->level->name}} / {{$item->category->name}}</p></td>                            
 

@@ -20,10 +20,17 @@
         <div  class="w-full">
             <x-sistem.forms.label-form for="categorySearch" value="{{ __('Categoria') }}" />
             <x-sistem.forms.select-form wire:model.live="categorySearch" id="categorySearch">
-                <option value=""> Todos </option>
-                @foreach ($categories as $category)
-                    <option value="{{$category->id}}">{{$category->level->name}} - {{$category->name}}</option>
-                @endforeach
+                @foreach ($levels as $level)
+                <optgroup label="{{$level->name}}">
+
+                  @foreach ($categories as $category)
+                    @if ($category->level->name == $level->name)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endif
+                  @endforeach
+                  
+                </optgroup>
+              @endforeach
             </x-sistem.forms.select-form>
             <x-sistem.forms.input-error for="categorySearch" />
         </div>
@@ -83,6 +90,16 @@
                     placeholder="Precio de oferta" 
                     class="w-full" />
                 <x-sistem.forms.input-error for="price_seller" />
+            </div>
+        </div>
+        <div class="w-full">
+            <div>
+                <x-sistem.forms.label-form for="cost" value="{{ __('Costo del producto') }}" />
+                <x-sistem.forms.input-form 
+                    wire:model="cost" 
+                    placeholder="Costo del producto" 
+                    class="w-full" />
+                <x-sistem.forms.input-error for="cost" />
             </div>
         </div>
         

@@ -10,9 +10,7 @@
                 <th>Acciones</th>
                 <th>Imagen</th>
                 <th>Nombre</th>
-                {{-- <th>Descripcion</th> --}}
                 <th>Categoria General</th>
-                <th>Creado por</th>
                 <th>Estado</th>
               </tr>
             </thead>
@@ -44,7 +42,6 @@
                   {{-- <td><p>{{ $item->description }}</p></td> --}}
                 
                   <td><p>{{$item->level->name}}</p></td>
-                  <td><p>{{$item->user->lastname}}, {{$item->user->name}}</p></td>
 
                   <td class="with-status-columns">
                     <span class="line-clamp-2 {{$item->status == '1' ? 't_badge-green' : 't_badge-red'}}">

@@ -35,8 +35,8 @@ use App\Livewire\Page\StockIndex;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// \Debugbar::disable();
-Debugbar::enable();
+\Debugbar::disable();
+// Debugbar::enable();
 
 // vista de pagina publica
 Route::get('/', [GuestController::class, 'index'])->name('guest.index');

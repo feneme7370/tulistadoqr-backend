@@ -5,23 +5,44 @@
         :messageError="session('messageError')" 
     />
 
-    {{-- titulo y boton --}}
-    <x-sistem.menus.title-and-btn title="Configuracion">
-        <div></div>
-    </x-sistem.menus.title-and-btn>
+    {{-- breadcrum, title y button --}}
+      <x-pages.breadcrums.breadcrum 
+      title_1="Inicio"
+      link_1="{{ route('dashboard.index') }}"
+      title_2="Configuracion"
+      link_2="#"
+      />
+
+      <x-pages.menus.title-and-btn>
+
+      @slot('title')
+          <x-pages.titles.title-pages title="Configuracion"/>
+      @endslot
+
+      @slot('button')
+        <x-pages.buttons.primary-btn 
+        title="Descargar QR" 
+        wire:click="downloadQR" 
+        >
+        
+        @slot('icon')
+            <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
+        @endslot
+
+        </x-pages.buttons.primary-btn>
+      @endslot
+      </x-pages.menus.title-and-btn>
+    {{-- end breadcrum, title y button --}}
 
     {{-- texto informativo --}}
-    <x-sistem.menus.text-info class="">
-        <p>Ajuste todos los datos de la empresa, cargue la imagen de portada y su logo en caso que sea una imagen. Tambien puede descargar aqui su codigo QR que redirecciona al menu digital.</p>
-    </x-sistem.menus.text-info>
-
-    {{-- descargar QR --}}
-    <div>
-        <x-sistem.buttons.primary-btn wire:click="downloadQR" class="lg:mx-auto lg:mr-2" wire:loading.attr="disabled" wire:loading.class="opacity-50" title="Descargar QR"/>
-    </div>
+      <x-pages.menus.text-info class="">
+          <p>Ajuste todos los datos de la empresa, cargue la imagen de portada y su logo en caso que sea una imagen. Tambien puede descargar aqui su codigo QR que redirecciona al menu digital.</p>
+      </x-pages.menus.text-info>
+    {{-- end texto informativo --}}
 
     {{-- logo de carga --}}
-    <x-sistem.spinners.loading-spinner wire:loading />
+      <x-pages.spinners.loading-spinner wire:loading.delay />
+    {{-- end logo de carga --}}
     
     {{-- actualizar datos --}}
     @include('livewire.page.forms-layouts.config-form')

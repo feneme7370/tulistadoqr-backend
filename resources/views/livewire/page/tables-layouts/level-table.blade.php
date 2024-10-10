@@ -6,11 +6,11 @@
         <table class="t_table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Acciones</th>
-              <th>Imagen</th>
-              <th>Nombre</th>
-              <th>Estado</th>
+              <th wire:click="orderTable('id')">{{ $sortBy === 'id' ? ($sortAsc === true ? '↑' : '↓') : '' }} ID</th>
+              <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Acciones</th>
+              <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Imagen</th>
+              <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Nombre</th>
+              <th wire:click="orderTable('status')">{{ $sortBy === 'status' ? ($sortAsc === true ? '↑' : '↓') : '' }} Estado</th>
             </tr>
           </thead>
           <tbody>

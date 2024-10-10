@@ -51,6 +51,8 @@ class OrderDetail extends Component
     public $is_maked;
     public $is_paid;
     public $is_delivered;
+    public $is_completed;
+    public $status;
 
     // propiedades para editar
     public $order;
@@ -63,6 +65,7 @@ class OrderDetail extends Component
             'is_maked' => ['nullable', 'numeric'],
             'is_paid' => ['nullable', 'numeric'],
             'is_delivered' => ['nullable', 'numeric'],
+            'is_completed' => ['nullable', 'numeric'],
             'status' => ['nullable', 'numeric'],
         ];
     }
@@ -71,6 +74,7 @@ class OrderDetail extends Component
         'is_maked' => 'hecho',
         'is_paid' => 'pagado',
         'is_delivered' => 'enviado',
+        'is_completed' => 'completado',
         'status' => 'estado',
     ];
 
@@ -79,7 +83,7 @@ class OrderDetail extends Component
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['quantity', 'discount', 'is_maked', 'is_paid', 'is_delivered', 'status', 'total_cost','total_price', 'price', 'cost']);
+        $this->reset(['quantity', 'discount', 'is_completed', 'is_maked', 'is_paid', 'is_delivered', 'status', 'total_cost','total_price', 'price', 'cost']);
     }
 
     // toggle
@@ -113,13 +117,13 @@ class OrderDetail extends Component
         $products = Product::join('order_products', 'products.id', '=', 'order_products.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
             ->join('orders', 'order_products.order_id', 'orders.id')
-            ->select('products.id', 'products.name', 'orders.is_maked as order_is_maked', 'categories.name as category_name', DB::raw('SUM(order_products.quantity) as total_quantity'))
+            ->select('products.id', 'products.name', 'products.quantity', 'orders.status as order_status', 'orders.is_maked as order_is_maked', 'categories.name as category_name', DB::raw('SUM(order_products.quantity) as total_quantity'))
 
             ->where('products.company_id', auth()->user()->company_id)
             ->where('orders.is_maked', '0')
             ->with('category', 'user', 'company') 
 
-            ->groupBy('products.id', 'products.name', 'categories.name', 'order_is_maked') // Agrupa por ID y nombre del producto
+            ->groupBy('products.id', 'products.name', 'products.quantity', 'orders.status', 'categories.name', 'order_is_maked') // Agrupa por ID y nombre del producto
             ->orderBy('category_name') // Opcional: ordenar por nombre
             ->when( $this->search, function($query) {
                 return $query->where(function( $query) {
@@ -129,24 +133,27 @@ class OrderDetail extends Component
                     });
                 });
             })
+            ->when($this->active, function( $query) {
+                return $query->where('orders.status', 1);
+            })
             ->when($this->date_start, function( $query) {
-                return $query->where('orders.date', '>', $this->date_start);
+                return $query->where('orders.date', '>=', $this->date_start);
             })
             ->when($this->date_finish, function( $query) {
-                return $query->where('orders.date', '<', $this->date_finish);
+                return $query->where('orders.date', '<=', $this->date_finish);
             })
             ->paginate($this->perPage, pageName: 'p_order_detail');
 
         $products_with_date = Product::join('order_products', 'products.id', '=', 'order_products.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
             ->join('orders', 'order_products.order_id', 'orders.id')
-            ->select('products.id', 'products.name', 'orders.date as order_date', 'orders.is_maked as order_is_maked', 'categories.name as category_name', DB::raw('SUM(order_products.quantity) as total_quantity'))
+            ->select('products.id', 'products.name', 'products.quantity', 'orders.status as order_status', 'orders.date as order_date', 'orders.is_maked as order_is_maked', 'categories.name as category_name', DB::raw('SUM(order_products.quantity) as total_quantity'))
 
             ->where('products.company_id', auth()->user()->company_id)
             ->where('orders.is_maked', '0')
             ->with('category', 'user', 'company') 
 
-            ->groupBy('products.id', 'products.name', 'categories.name', 'orders.date', 'order_is_maked') // Agrupa por ID y nombre del producto
+            ->groupBy('products.id', 'products.name', 'products.quantity', 'orders.status', 'categories.name', 'orders.date', 'order_is_maked') // Agrupa por ID y nombre del producto
             ->orderBy('orders.date') // Opcional: ordenar por nombre
             ->when( $this->search, function($query) {
                 return $query->where(function( $query) {
@@ -156,11 +163,14 @@ class OrderDetail extends Component
                     });
                 });
             })
+            ->when($this->active, function( $query) {
+                return $query->where('orders.status', 1);
+            })
             ->when($this->date_start, function( $query) {
-                return $query->where('orders.date', '>', $this->date_start);
+                return $query->where('orders.date', '>=', $this->date_start);
             })
             ->when($this->date_finish, function( $query) {
-                return $query->where('orders.date', '<', $this->date_finish);
+                return $query->where('orders.date', '<=', $this->date_finish);
             })
             ->paginate($this->perPage, pageName: 'p_order_detail');
 

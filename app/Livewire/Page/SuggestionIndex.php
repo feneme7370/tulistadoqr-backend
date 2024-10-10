@@ -3,6 +3,7 @@
 namespace App\Livewire\Page;
 
 use App\Models\Page\Category;
+use App\Models\Page\Level;
 use Livewire\Component;
 use App\Models\Page\Product;
 use Livewire\WithPagination;
@@ -16,7 +17,7 @@ class SuggestionIndex extends Component
     use WithPagination;
     
     // propiedades de busqueda
-    public $perPage = 10;
+    public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
     public $categorySearch;
 
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
@@ -43,6 +44,15 @@ class SuggestionIndex extends Component
         'user_id' => 'usuario',
         'company_id' => 'empresa',
     ];
+
+    // ordenar la tabla
+    public function orderTable($column){
+        if($this->sortBy != $column){
+            $this->sortBy = $column;
+        }else{
+            $this->sortAsc = !$this->sortAsc;
+        }
+    }
 
     ///////////////////////////// MODULO UTILIDADES /////////////////////////////
 
@@ -119,6 +129,9 @@ class SuggestionIndex extends Component
     // renderizar vista
     public function render()
     {
+        $levels = Level::where('company_id', auth()->user()->company_id)
+                        ->orderBy('name', 'ASC')->get();
+
         $categories = Category::with('level')
                         ->where('company_id', auth()->user()->company_id)
                         ->orderBy('name', 'ASC')->get();
@@ -131,8 +144,9 @@ class SuggestionIndex extends Component
 
         $suggestions = Suggestion::with('product', 'company')
                         ->where('company_id', auth()->user()->company_id)
+                        ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_suggestion');
         
-        return view('livewire.page.suggestion-index', compact('suggestions', 'products', 'categories'));
+        return view('livewire.page.suggestion-index', compact('suggestions', 'products', 'categories', 'levels'));
     }
 }

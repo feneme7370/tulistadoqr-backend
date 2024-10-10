@@ -35,6 +35,16 @@ class ProductPrice extends Component
         $this->resetErrorBag();
         $this->reset(['price_original', 'price_seller', 'cost', 'productsChecked']);
     }
+
+    // ordenar la tabla
+    public function orderTable($column){
+        if($this->sortBy != $column){
+            $this->sortBy = $column;
+        }else{
+            $this->sortAsc = !$this->sortAsc;
+        }
+    }
+    
     ///////////////////////////// MODULO PROPIEDADES /////////////////////////////
 
     // propiedades del form

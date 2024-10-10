@@ -45,6 +45,8 @@ class StockIndex extends Component
 
     // propiedades para editar
     public $stock;
+    public $product;
+    public $product_quantity;
 
     ///////////////////////////// MODULO VALIDACION /////////////////////////////
 
@@ -82,8 +84,20 @@ class StockIndex extends Component
 
         $this->stock = Stock::findOrFail($id);
         $this->authorize('delete', $this->stock); 
-
-   
+        $this->preloadEditModal($this->stock);
+        
+        if($this->type_stock_id == 1){
+            $this->subtractQuantity($this->product_id);
+            $this->product->update([
+                'quantity' => $this->product_quantity,
+            ]);
+        }else{
+            $this->addQuantity($this->product_id);
+            $this->product->update([
+                'quantity' => $this->product_quantity,
+            ]);
+        }
+        
         $this->stock->delete();
 
         $this->resetProperties();
@@ -148,6 +162,15 @@ class StockIndex extends Component
         $this->showViewModal = true;
     }
 
+    public function addQuantity($id){
+        $this->product = Product::find($id);
+        $this->product_quantity = $this->product->quantity + $this->quantity;
+    }
+    public function subtractQuantity($id){
+        $this->product = Product::find($id);
+        $this->product_quantity = $this->product->quantity - $this->quantity;
+    }
+
     // boton de guardar o editar
     public function save() {
     
@@ -177,6 +200,18 @@ class StockIndex extends Component
             Stock::create(
                 $this->only(['date', 'name', 'quantity', 'type_stock_id', 'product_id', 'user_id', 'company_id'])
             );
+
+            if($this->type_stock_id == 1){
+                $this->addQuantity($this->product_id);
+                $this->product->update([
+                    'quantity' => $this->product_quantity,
+                ]);
+            }else{
+                $this->subtractQuantity($this->product_id);
+                $this->product->update([
+                    'quantity' => $this->product_quantity,
+                ]);
+            }
 
             $this->reset(['stock']);
             $this->resetProperties();

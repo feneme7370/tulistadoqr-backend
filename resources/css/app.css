@@ -28,35 +28,37 @@
     .t_tr-active {
         @apply bg-green-100 text-green-900;
     }
+
+    
     .t_table {
-        @apply w-full;
+        @apply w-full my-2;
     }
     .t_table thead{
         /* @apply; */
     }
     .t_table thead {
-        @apply uppercase;
+        /* @apply p-4; */
     }
     .t_table thead tr{
-        @apply text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800;
+        @apply tracking-wide text-left text-gray-100 border-b dark:border-gray-700 bg-yellow-700 dark:text-gray-400 dark:bg-gray-800;
     }
     .t_table thead tr th{
-        @apply py-3 px-2 text-center;
+        @apply text-sm py-3 px-1 text-center truncate;
     }
     .t_table tbody {
-        @apply bg-white divide-y dark:divide-gray-700 dark:bg-gray-800;
+        @apply bg-gray-50 divide-y divide-dotted divide-opacity-40 divide-yellow-700 dark:divide-yellow-700 dark:bg-gray-800;
     }
     .t_table tbody tr{
-        @apply text-gray-700 dark:text-gray-400;
+        /* @apply ; */
     }
     .t_table tbody tr td{
-        @apply py-3 px-2 text-sm;
+        @apply text-gray-700 dark:text-gray-400 py-3 px-1 text-sm text-center;
     }
     .t_table tbody tr td p{
         @apply line-clamp-2;
     }
     .t_table tbody tr td .actions{
-        @apply flex justify-center items-center gap-2 text-sm;
+        @apply flex justify-center items-center gap-1 text-xs;
     }
     .t_table tbody tr td.with-actions-columns{
         @apply w-5;
@@ -65,7 +67,7 @@
         @apply w-5 text-center;
     }
     .t_table tbody tr td.with-status-columns{
-        @apply w-8 text-center;
+        @apply w-6 text-center;
     }
     .t_table tbody tr td.with-conditions-columns{
         @apply my-1 p-1 space-y-1 text-center text-sm;
@@ -74,10 +76,10 @@
         @apply cursor-pointer;
     }
     .t_table tbody tr td.with-image-columns{
-        @apply h-10 sm:w-16;
+        @apply h-8 w-8 sm:h-16 sm:w-16;
     }
     .t_table tbody tr td.with-image-columns img{
-        @apply block h-10 w-10 sm:h-16 sm:w-16 object-cover rounded-lg;
+        @apply block mx-auto h-8 w-8 sm:h-16 sm:w-16 object-cover rounded-lg;
     }
 
         /* Estilo de la barra de progreso */

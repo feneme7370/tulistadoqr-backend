@@ -4,124 +4,143 @@
         :messageError="session('messageError')" 
     />
 
-    {{-- titulo y boton --}}
-    <x-sistem.menus.title-and-btn title="Precios masivos">
-        <div></div>
-    </x-sistem.menus.title-and-btn>
+    {{-- breadcrum, title y button --}}
+        <x-pages.breadcrums.breadcrum 
+        title_1="Inicio"
+        link_1="{{ route('dashboard.index') }}"
+        title_2="Precios masivos"
+        link_2="{{ route('products.price') }}"
+        />
+
+        <x-pages.menus.title-and-btn>
+
+        @slot('title')
+            <x-pages.titles.title-pages title="Precios masivos"/>
+        @endslot
+
+        @slot('button')
+    
+        @endslot
+        </x-pages.menus.title-and-btn>
+    {{-- end breadcrum, title y button --}}
 
     {{-- texto informativo --}}
-    <x-sistem.menus.text-info>
-        <p>Puede cambiar el precio y precio de oferta de forma masiva por categoria.</p>
-    </x-sistem.menus.text-info>
+        <x-pages.menus.text-info>
+            <p>Puede cambiar el precio y precio de oferta de forma masiva por categoria.</p>
+        </x-pages.menus.text-info>
+    {{-- end texto informativo --}}
 
-    {{-- input buscador y filtro de activos --}}
-    <x-sistem.filter.bg-input class="flex-row flex-1">
-    
-        <div  class="w-full">
-            <x-sistem.forms.label-form for="categorySearch" value="{{ __('Categoria') }}" />
-            <x-sistem.forms.select-form wire:model.live="categorySearch" id="categorySearch">
-                @foreach ($levels as $level)
-                <optgroup label="{{$level->name}}">
+    {{-- filters --}}
 
-                  @foreach ($categories as $category)
-                    @if ($category->level->name == $level->name)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
-                    @endif
-                  @endforeach
-                  
-                </optgroup>
-              @endforeach
-            </x-sistem.forms.select-form>
-            <x-sistem.forms.input-error for="categorySearch" />
-        </div>
-
-        <div  class="w-1/4">
-            <x-sistem.forms.label-form for="perPage" value="{{ __('Mostrar') }}" />
-            <x-sistem.forms.select-form wire:model.live="perPage" id="perPage">
-                <option value="10"> 10 </option>
-                <option value="30"> 30 </option>
-                <option value="50"> 50 </option>
-                <option value="100"> 100 </option>
-            </x-sistem.forms.select-form>
-        </div>
-    </x-sistem.filter.bg-input>
-
-    <x-sistem.filter.bg-input class="flex-col md:flex-row">
-    
-        <div class="w-full">
-            <x-sistem.forms.input-form 
+        <div class="grid grid-cols-12 items-center gap-1">
+            <div class="col-span-10">
+                <x-pages.forms.input-form 
                 wire:model.live.debounce.600ms="search" 
-                type="search" 
-                placeholder="Buscar por nombre o categoria" 
-                class="w-full" />
-        </div>
-
-        <div class="flex flex-row">
-            <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
-                <x-sistem.forms.label-form value="Solo activos">
-                    <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="active" />
-                </x-sistem.forms.label-form> 
+                placeholder="Buscar" 
+                />
             </div>
-            <div class="mr-2 flex gap-2 justify-center items-center md:justify-end w-full text-gray-900">
-            <x-sistem.forms.label-form value="En oferta">
-                <x-sistem.forms.checkbox-form type="checkbox" class="" wire:model.live="offers" />
-            </x-sistem.forms.label-form>
+            <div class="col-span-2">
+                <x-pages.forms.select-form wire:model.live.debounce.600ms="perPage" value_empty="{{ false }}" class="text-center">
+                    <option value="10"> 10 </option>
+                    <option value="30"> 30 </option>
+                    <option value="50"> 50 </option>
+                    <option value="100"> 100 </option>
+                </x-pages.forms.select-form>
             </div>
-        </div>
-    </x-sistem.filter.bg-input>
 
-    <x-sistem.filter.bg-input class="mt-5">
+            </div>
+          
+            <x-pages.menus.checkboxs-group 
+                placeholder_box_1="Activos"
+                property_box_1="active"
+                placeholder_box_2="Ofertas"
+                property_box_2="offers"
+            />
+
+            <div class="flex justify-between items-center gap-5">
+
+                <x-pages.forms.select-form wire:model.live.debounce.600ms="categorySearch" value_placeholder="-- Seleccionar Categorias --">
+
+                    @foreach ($levels as $level)
+                    <optgroup label="{{$level->name}}">
     
-        <div class="w-full">
-            <div>
-                <x-sistem.forms.label-form for="price_original" value="{{ __('Modificar precio original') }}" />
-                <x-sistem.forms.input-form 
-                    wire:model="price_original"
-                    placeholder="Precio original" 
-                    class="w-full" />
-                <x-sistem.forms.input-error for="price_original" />
+                    @foreach ($categories as $category)
+                        @if ($category->level->name == $level->name)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endif
+                    @endforeach
+                    
+                    </optgroup>
+                @endforeach
+                </x-pages.forms.select-form>
+
+                <div class="">
+                    <x-pages.buttons.primary-btn 
+                    title="Actualizar" 
+                    wire:click="save" 
+                    class="p-1"
+                    wire:loading.class="opacity-50"  
+                    wire:loading.attr="disabled">
+                    
+                    @slot('icon')
+                    <x-sistem.icons.for-icons-app icon="plus" class="w-6 h-6"/>
+                    @endslot
+    
+                    </x-pages.buttons.primary-btn>
+                </div>
             </div>
-        </div>
-        <div class="w-full">
+
+
+
             <div>
-                <x-sistem.forms.label-form for="price_seller" value="{{ __('Modificar precio de oferta') }}" />
-                <x-sistem.forms.input-form 
-                    wire:model="price_seller" 
-                    placeholder="Precio de oferta" 
-                    class="w-full" />
-                <x-sistem.forms.input-error for="price_seller" />
-            </div>
+
         </div>
-        <div class="w-full">
+
+    {{-- end filters --}}
+
+    {{-- update prices --}}
+        <div class="mt-5 grid grid-cols-3 justify-center items-center gap-1">
+
             <div>
-                <x-sistem.forms.label-form for="cost" value="{{ __('Costo del producto') }}" />
-                <x-sistem.forms.input-form 
-                    wire:model="cost" 
-                    placeholder="Costo del producto" 
-                    class="w-full" />
-                <x-sistem.forms.input-error for="cost" />
+                <x-pages.forms.label-form for="price_original" value="Precio original" />
+                <x-pages.forms.input-form 
+                wire:model="price_original" 
+                placeholder="Precio original" 
+                />
+                <x-pages.forms.input-error for="price_original" />
             </div>
+            
+            <div>
+                <x-pages.forms.label-form for="price_seller" value="Precio oferta" />
+                <x-pages.forms.input-form 
+                wire:model="price_seller" 
+                placeholder="Precio oferta" 
+                />
+                <x-pages.forms.input-error for="price_seller" />
+            </div>
+            
+            <div>
+                <x-pages.forms.label-form for="cost" value="Costo" />
+                <x-pages.forms.input-form 
+                wire:model="cost" 
+                placeholder="Costo" 
+                />
+                <x-pages.forms.input-error for="cost" />
+            </div>
+
         </div>
-        
-        <x-sistem.buttons.primary-btn 
-        wire:click="save"
-        wire:loading.class="opacity-50"  
-        wire:loading.attr="disabled"
-        title="Actualizar" >
-        <div wire:loading>
-            <x-sistem.spinners.loading-spinner-btn/>
-        </div>
-    </x-sistem.buttons.primary-btn> 
-    </x-sistem.filter.bg-input>
+    {{-- end update prices --}}
 
     {{-- logo de carga --}}
-    <x-sistem.spinners.loading-spinner wire:loading />
+        <x-pages.spinners.loading-spinner wire:loading.delay />
+    {{-- end logo de carga --}}
 
     {{-- listado --}}
     @include('livewire.page.tables-layouts.product-price-table')
 
     {{-- Paginacion --}}
-    <div class="mt-2">{{ $products->onEachSide(1)->links() }}</div>
+        <div class="mt-2">{{ $products->onEachSide(1)->links() }}</div>
+    {{-- end Paginacion --}}
 
     @push('scripts')
 

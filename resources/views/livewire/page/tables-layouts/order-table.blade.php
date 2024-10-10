@@ -68,8 +68,8 @@
               <td class="with-conditions-columns">
                 <span
                 wire:click='toggleOrderStatus({{ $item->id }})'
-                  class="line-clamp-2 {{$item->status == '1' ? 't_badge-green' : 't_badge-red'}}">
-                  {{$item->status == '1' ? 'Completado' : 'Incompleto'}}
+                  class="line-clamp-2 {{$item->is_completed == '1' ? 't_badge-green' : 't_badge-red'}}">
+                  {{$item->is_completed == '1' ? 'Completado' : 'Incompleto'}}
                 </span>
               </td>
 

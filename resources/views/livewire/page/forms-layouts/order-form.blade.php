@@ -85,6 +85,13 @@
           </div>
 
           <div>
+            <label for="is_completed" class="flex items-center">
+              <x-sistem.forms.checkbox-form id="is_completed" wire:model="is_completed" />
+              <br><span class="ml-2 text-sm text-gray-600">{{ __('Completado') }}</span>
+            </label>
+          </div>
+
+          <div>
             <label for="status" class="flex items-center">
               <x-sistem.forms.checkbox-form id="status" wire:model="status" />
               <br><span class="ml-2 text-sm text-gray-600">{{ __('Estado') }}</span>
@@ -378,6 +385,10 @@
         <div class="flex flex-col pt-3">
             <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Entregado:</dt>
             <dd class="text-xs font-semibold whitespace-pre-wrap">{{ ($order->is_delivered ?? '') ? 'Entregado' : 'Sin entregar'}}</dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">Completado:</dt>
+            <dd class="text-xs font-semibold whitespace-pre-wrap">{{ ($order->is_completed ?? '') ? 'Completado' : 'Sin completar'}}</dd>
         </div>
       </div>
 

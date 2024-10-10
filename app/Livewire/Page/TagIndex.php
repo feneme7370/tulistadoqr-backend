@@ -16,7 +16,8 @@ class TagIndex extends Component
     
     // paginacion
     use WithPagination;
-    public $perPage = 20;
+    // propiedades de busqueda
+    public $active = true, $search = '', $sortBy = 'id', $sortAsc = false, $perPage = 10;
 
     // propiedades para el modal
     public $showActionModal = false;
@@ -50,6 +51,16 @@ class TagIndex extends Component
         'user_id' => 'usuario',
         'company_id' => 'empresa',
     ];
+
+    
+    // ordenar la tabla
+    public function orderTable($column){
+        if($this->sortBy != $column){
+            $this->sortBy = $column;
+        }else{
+            $this->sortAsc = !$this->sortAsc;
+        }
+    }
 
     ///////////////////////////// MODULO UTILIDADES /////////////////////////////
 
@@ -160,7 +171,7 @@ class TagIndex extends Component
     public function render()
     {
         $tags = Tag::with('company')->where('company_id', auth()->user()->company_id)
-                        ->orderBy( 'name', 'ASC')
+                        ->orderBy( $this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                         ->paginate($this->perPage, pageName: 'p_category');
                         
         return view('livewire.page.tag-index', compact('tags'));

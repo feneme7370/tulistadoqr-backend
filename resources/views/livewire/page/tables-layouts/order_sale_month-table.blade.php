@@ -24,6 +24,7 @@
 
                 <td class="with-id-columns">
                   <p class="text-sm t_badge-green">${{ number_format($data['sum_sales'], 2,",",".") }} </p>
+                  <p class="text-sm">${{ $$data }} </p>
                 </td>
 
                 <td class="with-id-columns">

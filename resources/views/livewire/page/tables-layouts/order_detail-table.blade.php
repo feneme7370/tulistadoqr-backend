@@ -12,7 +12,9 @@
               <th>Fecha</th>
               @endif
               <th>Categoria</th>
-              <th>Cantidad</th>
+              <th>Pedidos</th>
+              <th>Stock</th>
+              <th>Elaborar</th>
               <th>Producto</th>
             </tr>
           </thead>
@@ -21,7 +23,7 @@
             @if($is_date ? $products = $products_with_date : $products)
             
               @foreach ($products as $product)
-              <tr>
+              <tr class="{{ $product->order_status == '1' ? '' : 't_tr-inactive' }}">
                 
                 <td class="with-id-columns">
                   <p>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->iteration }}</p>
@@ -42,9 +44,16 @@
                   <p class="text-sm">{{$product->total_quantity}} </p>
                 </td>
 
+                <td class="with-id-columns">
+                  <p class="text-sm">{{$product->quantity ? $product->quantity : 0}}</p>
+                </td>
+
+                <td class="with-id-columns">
+                  <p class="text-sm">{{($product->total_quantity - $product->quantity) > 0 ? ($product->total_quantity - $product->quantity) : 0}}</p>
+                </td>
+
                 <td class="flex flex-col">
                   <p class="font-bold text-sm">{{$product->name}} </p>
-                  {{-- <p class="italic text-xs">{{$order_product->order->client}} </p> --}}
                 </td>
             
 

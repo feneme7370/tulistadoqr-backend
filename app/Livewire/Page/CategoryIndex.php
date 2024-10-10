@@ -116,6 +116,15 @@ class CategoryIndex extends Component
         $this->reset(['name', 'slug', 'description', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'level_id', 'user_id', 'company_id', 'dataImage']);
     }
 
+    // ordenar la tabla
+    public function orderTable($column){
+        if($this->sortBy != $column){
+            $this->sortBy = $column;
+        }else{
+            $this->sortAsc = !$this->sortAsc;
+        }
+    }
+
     ///////////////////////////// MODULO IMAGENES /////////////////////////////
 
     // eliminar imagen al reemplazarla

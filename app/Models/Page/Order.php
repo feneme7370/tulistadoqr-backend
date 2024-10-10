@@ -22,6 +22,7 @@ class Order extends Model
         'is_maked',
         'is_paid',
         'is_delivered',
+        'is_completed',
         'status',
         'total_price',
         'total_cost',

@@ -1,4 +1,6 @@
-<x-sistem.modal.dialog-modal wire:model="showActionModal">
+{{-- form actions --}}
+
+  <x-pages.modals.jetstream.dialog-modal wire:model="showActionModal">
   <x-slot name="title">
       {{ __('Formulario para ' . ($tag ? 'editar' : 'agregar') . ' datos') }}
   </x-slot>
@@ -6,7 +8,7 @@
   <x-slot name="content">
 
     {{-- form datos --}}
-    <x-sistem.forms.form-section submit="save">
+    <x-pages.forms.jetstream.form-section submit="save">
       <x-slot name="title">
         {{ __('Datos') }}
       </x-slot>
@@ -18,28 +20,35 @@
       <x-slot name="form">
         <div class="grid gap-2 w-full">
           <div>
-            <x-sistem.forms.label-form for="name" value="{{ __('Nombre') }}" />
-            <x-sistem.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name" />
-            <x-sistem.forms.input-error for="name" />
+            <x-pages.forms.label-form for="name" value="{{ __('Nombre') }}" />
+            <x-pages.forms.input-form id="name" type="text" placeholder="{{ __('Nombre') }}" wire:model="name" />
+            <x-pages.forms.input-error for="name" />
           </div>
         </div>
+        <x-pages.spinners.loading-spinner wire:loading.delay />
       </x-slot>
 
       <x-slot name="actions">
-        <x-sistem.buttons.normal-btn wire:click="$set('showActionModal', false)" wire:loading.attr="disabled"
-        title="Cancelar" />
-        <x-sistem.buttons.primary-btn wire:click="save" wire:loading.class="opacity-50" wire:loading.attr="disabled"
-          title="{{$tag ? 'Actualizar' : 'Guardar'}}">
-          <div wire:loading>
-            <x-sistem.spinners.loading-spinner-btn />
-          </div>
-        </x-sistem.buttons.primary-btn>
+        <x-pages.buttons.normal-btn 
+        title="Cancelar" 
+        wire:click="$set('showActionModal', false)" 
+      >
+      </x-pages.buttons.primary-btn>
+
+      <x-pages.buttons.primary-btn 
+        title="{{$tag ? 'Actualizar' : 'Guardar'}}" 
+        wire:click="save" 
+      >
+      </x-pages.buttons.primary-btn>
+
+
       </x-slot>
 
-    </x-sistem.forms.form-section>
+    </x-pages.forms.jetstream.form-section>
 
   </x-slot>
 
   <x-slot name="footer">
   </x-slot>
-</x-sistem.modal.dialog-modal>
+  </x-pages.modals.jetstream.dialog-modal>
+{{-- form actions --}}

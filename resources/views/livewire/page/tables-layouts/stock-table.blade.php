@@ -27,8 +27,8 @@
               <td class="with-actions-columns">
                 <div class="actions">
                   <x-sistem.buttons.view-text wire:click="viewActionModal({{ $item->id }})" wire:loading.attr="disabled" />
-                  <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
-                    wire:loading.attr="disabled" />
+                  {{-- <x-sistem.buttons.edit-text wire:click="editActionModal({{$item->id}})"
+                    wire:loading.attr="disabled" /> --}}
                   <x-sistem.buttons.delete-text wire:click="$dispatch('deleteStock', {{$item->id}})"
                     wire:loading.attr="disabled" />
                 </div>

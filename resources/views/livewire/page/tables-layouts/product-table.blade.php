@@ -5,16 +5,12 @@
             <table class="t_table">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Acciones</th>
-                        <th>Imagen</th>
-                        <th>Productos</th>
-                        <th>Precio</th>
-                        {{-- <th>Categoria</th> --}}
-                        {{-- <th>Datos</th> --}}
-                        {{-- <th>Imagenes</th>
-                        <th>Tags</th> --}}
-                        <th>Estado</th>
+                        <th wire:click="orderTable('id')">{{ $sortBy === 'id' ? ($sortAsc === true ? '↑' : '↓') : '' }} ID</th>
+                        <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Acciones</th>
+                        <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Imagen</th>
+                        <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Productos</th>
+                        <th wire:click="orderTable('price_original')">{{ $sortBy === 'price_original' ? ($sortAsc === true ? '↑' : '↓') : '' }} Precio</th>
+                        <th wire:click="orderTable('status')">{{ $sortBy === 'status' ? ($sortAsc === true ? '↑' : '↓') : '' }} Estado</th>
                     </tr>
                 </thead>
                 <tbody>

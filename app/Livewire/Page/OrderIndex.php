@@ -53,6 +53,7 @@ class OrderIndex extends Component
     public $shipping_methods_id;
     public $type_send;
     public $description;
+    public $is_completed = true;
     public $is_maked;
     public $is_paid;
     public $is_delivered;
@@ -88,6 +89,7 @@ class OrderIndex extends Component
             'shipping_methods_id' => ['required', 'numeric'],
             'description' => ['nullable', 'string', 'min:1', 'max:255'],
             
+            'is_completed' => ['nullable', 'numeric'],
             'is_maked' => ['nullable', 'numeric'],
             'is_paid' => ['nullable', 'numeric'],
             'is_delivered' => ['nullable', 'numeric'],
@@ -109,6 +111,7 @@ class OrderIndex extends Component
         'adress' => 'direccion',
         'shipping_methods_id' => 'forma de envio',
         'description' => 'descripcion',
+        'is_completed' => 'completado',
         'is_maked' => 'hecho',
         'is_paid' => 'pagado',
         'is_delivered' => 'enviado',
@@ -128,7 +131,7 @@ class OrderIndex extends Component
     // resetear variables
     public function resetProperties() {
         $this->resetErrorBag();
-        $this->reset(['date', 'client', 'adress', 'shipping_methods_id', 'description', 'is_maked', 'is_paid', 'is_delivered', 'status', 'client_id', 'user_id', 'company_id', 'product_selected', 'products_selected', 'total_cost','total_price', 'total_products', 'temporalTotalPrice']);
+        $this->reset(['date', 'client', 'adress', 'shipping_methods_id', 'description', 'is_completed', 'is_maked', 'is_paid', 'is_delivered', 'status', 'client_id', 'user_id', 'company_id', 'product_selected', 'products_selected', 'total_cost','total_price', 'total_products', 'temporalTotalPrice']);
     }
 
     // eliminar producto de la orden, en una posicion determinada
@@ -200,19 +203,19 @@ class OrderIndex extends Component
     public function toggleOrderStatus($id){
         $this->order = Order::find($id);
 
+        $this->is_completed = $this->order['is_completed'];
         $this->is_maked = $this->order['is_maked'];
         $this->is_paid = $this->order['is_paid'];
         $this->is_delivered = $this->order['is_delivered'];
-        $this->status = $this->order['status'];
 
-        $this->status = !$this->status;
+        $this->is_completed = !$this->is_completed;
         
-        if($this->status == '1' || $this->status == true){
+        if($this->is_completed == '1' || $this->is_completed == true){
             $this->is_maked = '1';
             $this->is_paid = '1';
             $this->is_delivered = '1';
         }
-        $this->order->update($this->only(['is_maked', 'is_paid', 'is_delivered', 'status']));
+        $this->order->update($this->only(['is_maked', 'is_paid', 'is_delivered', 'is_completed']));
         
         $this->reset(['order']);
         $this->resetProperties();       
@@ -252,6 +255,7 @@ class OrderIndex extends Component
         $this->adress = $item['adress'];
         $this->shipping_methods_id = $item['shipping_methods_id'];
         $this->description = $item['description'];
+        $this->is_completed = $item['is_completed'] == '1' ? true : false;
         $this->is_maked = $item['is_maked'] == '1' ? true : false;
         $this->is_paid = $item['is_paid'] == '1' ? true : false;
         $this->is_delivered = $item['is_delivered'] == '1' ? true : false;
@@ -318,8 +322,9 @@ class OrderIndex extends Component
 
     // boton de guardar o editar
     public function save() {
-        // dd($this->client_id);
+        
         // poner datos automaticos
+        $this->is_completed = $this->is_completed ? '1' : '0';
         $this->is_maked = $this->is_maked ? '1' : '0';
         $this->is_paid = $this->is_paid ? '1' : '0';
         $this->is_delivered = $this->is_delivered ? '1' : '0';
@@ -339,7 +344,7 @@ class OrderIndex extends Component
 
             // editar datos de la orden
             $this->order->update(
-                $this->only(['name', 'date', 'client', 'adress', 'shipping_methods_id', 'description', 'is_maked', 'is_paid', 'is_delivered', 'status', 'client_id', 'user_id', 'company_id'])
+                $this->only(['name', 'date', 'client', 'adress', 'shipping_methods_id', 'description', 'is_completed', 'is_maked', 'is_paid', 'is_delivered', 'status', 'client_id', 'user_id', 'company_id'])
             );
             // si existen productos asociados
             if($this->products_selected){
@@ -390,7 +395,7 @@ class OrderIndex extends Component
             $this->status = '0';
             // crear datos
             $this->order = Order::create(
-                $this->only(['name', 'date', 'client', 'adress', 'shipping_methods_id', 'description', 'is_maked', 'is_paid', 'is_delivered', 'status', 'client_id', 'user_id', 'company_id'])
+                $this->only(['name', 'date', 'client', 'adress', 'shipping_methods_id', 'description', 'is_completed', 'is_maked', 'is_paid', 'is_delivered', 'status', 'client_id', 'user_id', 'company_id'])
             );
 
             // crear en cada ID los datos de cada producto
@@ -443,7 +448,7 @@ class OrderIndex extends Component
     public function render()
     {
 
-        $orders = Order::select('id', 'name', 'date', 'client', 'adress', 'shipping_methods_id', 'description', 'is_maked', 'is_paid', 'is_delivered', 'status', 'client_id', 'user_id', 'company_id', 'total_price', 'total_products')
+        $orders = Order::select('id', 'name', 'date', 'client', 'adress', 'shipping_methods_id', 'description', 'is_completed', 'is_maked', 'is_paid', 'is_delivered', 'status', 'client_id', 'user_id', 'company_id', 'total_price', 'total_products')
         ->with('products', 'shipping_method', 'user', 'company')
         ->where('company_id', auth()->user()->company_id)
         ->when( $this->search, function($query) {
@@ -454,6 +459,9 @@ class OrderIndex extends Component
         })
         ->when($this->active, function( $query) {
             return $query->where('status', 0);
+        })
+        ->when($this->is_completed, function( $query) {
+            return $query->where('is_completed', 0);
         })
         ->when($this->is_maked, function( $query) {
             return $query->where('is_maked', 0);

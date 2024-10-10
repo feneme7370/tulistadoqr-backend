@@ -3,10 +3,10 @@
       <table class="t_table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Acciones</th>
-            <th>Imagen</th>
-            <th>Producto</th>
+            <th wire:click="orderTable('id')">{{ $sortBy === 'id' ? ($sortAsc === true ? '↑' : '↓') : '' }} ID</th>
+            <th wire:click="orderTable('id')">{{ $sortBy === 'id' ? ($sortAsc === true ? '↑' : '↓') : '' }} Acciones</th>
+            <th wire:click="orderTable('id')">{{ $sortBy === 'id' ? ($sortAsc === true ? '↑' : '↓') : '' }} Imagen</th>
+            <th wire:click="orderTable('id')">{{ $sortBy === 'id' ? ($sortAsc === true ? '↑' : '↓') : '' }} Producto</th>
           </tr>
         </thead>
         <tbody>

@@ -167,6 +167,15 @@ class ProductIndex extends Component
         $this->reset(['name', 'slug', 'price_original', 'price_seller', 'cost', 'quantity', 'description', 'description2', 'description3', 'status', 'image_hero', 'image_hero_uri', 'image_hero_new', 'category_id', 'user_id', 'company_id', 'product_tags', 'product_pictures', 'product_new_pictures', 'dataImage']);
     }
 
+    // ordenar la tabla
+    public function orderTable($column){
+        if($this->sortBy != $column){
+            $this->sortBy = $column;
+        }else{
+            $this->sortAsc = !$this->sortAsc;
+        }
+    }
+
     ///////////////////////////// MODULO IMAGENES /////////////////////////////
 
     // eliminar imagen de portada al reemplazarla

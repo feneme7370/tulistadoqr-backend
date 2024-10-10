@@ -6,9 +6,9 @@
       <table class="t_table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Acciones</th>
-            <th>Nombre</th>
+            <th wire:click="orderTable('id')">{{ $sortBy === 'id' ? ($sortAsc === true ? '↑' : '↓') : '' }} ID</th>
+            <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Acciones</th>
+            <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Nombre</th>
           </tr>
         </thead>
         <tbody>

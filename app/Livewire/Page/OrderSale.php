@@ -126,13 +126,14 @@ class OrderSale extends Component
         $products = Product::join('order_products', 'products.id', '=', 'order_products.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
             ->join('orders', 'order_products.order_id', 'orders.id')
-            ->select('products.id', 'products.name', 'orders.name as order_name', 'orders.date as order_date', 'orders.is_maked as order_is_maked', 'categories.name as category_name', DB::raw('SUM(order_products.total_price) as amount_price'), DB::raw('SUM(order_products.total_cost) as amount_cost'))
+            ->select('products.id', 'products.name', 'orders.name as order_name', 'orders.status as order_status', 'orders.date as order_date', 'orders.is_paid as order_is_paid', 'categories.name as category_name', DB::raw('SUM(order_products.total_price) as amount_price'), DB::raw('SUM(order_products.total_cost) as amount_cost'))
 
             ->where('products.company_id', auth()->user()->company_id)
             ->where('orders.is_paid', '1')
+            ->where('orders.status', '1')
             ->with('category', 'user', 'company') 
 
-            ->groupBy('products.id', 'products.name', 'categories.name', 'orders.date', 'order_is_maked', 'orders.name') // Agrupa por ID y nombre del producto
+            ->groupBy('products.id', 'products.name', 'categories.name', 'orders.status', 'orders.date', 'order_is_paid', 'orders.name') // Agrupa por ID y nombre del producto
             ->orderBy('order_date', 'desc') // Opcional: ordenar por nombre
             ->when( $this->search, function($query) {
                 return $query->where(function( $query) {
@@ -151,9 +152,10 @@ class OrderSale extends Component
         ->paginate($this->perPage, pageName: 'p_order_sale');
 
 
-        $sale_for_orders = Order::select('id', 'name', 'client', 'date', 'total_price', 'total_cost', 'client_id')
+        $sale_for_orders = Order::select('id', 'name', 'client', 'date', 'total_price', 'total_cost', 'client_id', 'status')
                     ->where('company_id', auth()->user()->company_id)
             ->where('is_paid', '1')
+            ->where('status', '1')
             ->with('user', 'company', 'customer') 
             ->orderBy('date', 'desc') // Opcional: ordenar por nombre
             ->when( $this->search, function($query) {
@@ -181,6 +183,7 @@ class OrderSale extends Component
         $orders_by_year = Order::whereYear('date', $this->years_sales)
             ->where('company_id', auth()->user()->company_id)
             ->where('is_paid', '1')
+            ->where('status', '1')
             ->get();
 
         // Filtra por mes

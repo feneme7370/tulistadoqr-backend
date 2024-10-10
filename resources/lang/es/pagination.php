@@ -20,4 +20,11 @@ return [
     'of'     => 'de',
     'results'     => 'resultados',
 
+    'pagination.previous' => '&laquo; Anterior',
+    'pagination.next'     => 'Siguiente &raquo;',
+    'pagination.showing'     => 'mostrando',
+    'pagination.to'     => 'a',
+    'pagination.of'     => 'de',
+    'pagination.results'     => 'resultados',
+
 ];

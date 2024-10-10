@@ -176,7 +176,10 @@
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
+            @can('orders.index')
+                
             <li class="border-t border-primary-300"></li>
+            @endcan
 
             @can('orders.index')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('orders.index') }}"
@@ -188,18 +191,16 @@
             @can('orders.detail')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('orders.detail') }}"
                 :active="request()->routeIs('orders.detail')" title="Ordenes a elaborar">
-                <x-sistem.icons.for-icons-app icon="order" />
+                <x-sistem.icons.for-icons-app icon="order_detail" />
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
             @can('orders.sale')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('orders.sale') }}"
                 :active="request()->routeIs('orders.sale')" title="Ventas">
-                <x-sistem.icons.for-icons-app icon="order" />
+                <x-sistem.icons.for-icons-app icon="sale" />
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
-
-            <li class="border-t border-primary-300"></li>
 
             @can('stocks.index')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('stocks.index') }}"
@@ -215,7 +216,7 @@
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
-
+            <li class="border-t border-primary-300"></li>
 
             @can('levels.index')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('levels.index') }}"

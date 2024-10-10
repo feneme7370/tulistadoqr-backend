@@ -12,7 +12,7 @@
 
     {{-- texto informativo --}}
     <x-sistem.menus.text-info>
-        <p>Puede ver la ganancia que se produce de la cantidad de ventas, con su costo estandar registrado. Aqui se encuentran todas las ordenes que fueron marcadas como pagadas.</p>
+        <p>Puede ver la ganancia que se produce de la cantidad de ventas, con su costo estandar registrado. Aqui se encuentran todas las ordenes que fueron marcadas como pagadas y estan confirmadas.</p>
     </x-sistem.menus.text-info>
 
 

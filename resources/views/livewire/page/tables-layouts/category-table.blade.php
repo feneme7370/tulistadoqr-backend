@@ -1,17 +1,17 @@
 <div class="mx-auto">
     <!-- Ejemplo de una tarjeta -->
 
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
-        <div class="w-full overflow-x-auto">
+    <div class="overflow-hidden rounded-sm shadow-xs">
+        <div class="overflow-x-auto">
           <table class="t_table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Acciones</th>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Categoria General</th>
-                <th>Estado</th>
+                <th wire:click="orderTable('id')">{{ $sortBy === 'id' ? ($sortAsc === true ? '↑' : '↓') : '' }} ID</th>
+                <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Acciones</th>
+                <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Imagen</th>
+                <th wire:click="orderTable('name')">{{ $sortBy === 'name' ? ($sortAsc === true ? '↑' : '↓') : '' }} Nombre</th>
+                <th wire:click="orderTable('level_id')">{{ $sortBy === 'level_id' ? ($sortAsc === true ? '↑' : '↓') : '' }} Categoria General</th>
+                <th wire:click="orderTable('status')">{{ $sortBy === 'level_id' ? ($sortAsc === true ? '↑' : '↓') : '' }} Estado</th>
               </tr>
             </thead>
             <tbody>

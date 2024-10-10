@@ -24,7 +24,7 @@
     <x-sistem.filter.search-checkbox 
         placeholder_box_1="Por dia"
         property_box_1="is_date"
-        placeholder_box_2="Solo activos"
+        placeholder_box_2="Solo confirmados"
         property_box_2="active"
     />
     

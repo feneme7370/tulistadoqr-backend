@@ -34,8 +34,10 @@
         property_box_2="is_paid"
         placeholder_box_3="Sin entregar"
         property_box_3="is_delivered"
-        placeholder_box_4="Solo pendientes"
-        property_box_4="active"
+        placeholder_box_4="Incompletos"
+        property_box_4="is_completed"
+        placeholder_box_5="Solo confirmados"
+        property_box_5="active"
     />
 
     {{-- logo de carga --}}

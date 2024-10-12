@@ -39,16 +39,16 @@
                       <x-pages.forms.input-error for="price_seller" />
                   </div>
 
-                  <div>
+                  {{-- <div>
                       <x-pages.forms.label-form for="cost" value="{{ __('Costo del producto') }}" />
                       <x-pages.forms.input-form id="cost" type="number"
                           placeholder="{{ __('Costo del producto') }}" wire:model="cost" />
                       <x-pages.forms.input-error for="cost" />
-                  </div>
+                  </div> --}}
 
                   <div>
                       <x-pages.forms.label-form for="category_id" value="{{ __('Categoria') }}" />
-                      <x-pages.forms.select-form wire:model.live="category_id" id="category_id" value_placeholder="-- Seleccionar Categorias --">
+                      <x-pages.forms.select-form wire:model="category_id" id="category_id" value_placeholder="-- Seleccionar Categorias --">
                         @foreach ($levels as $level)
                           <optgroup label="{{$level->name}}">
           

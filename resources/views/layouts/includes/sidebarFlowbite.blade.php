@@ -239,6 +239,13 @@
             </x-sistem.navlinks.navlink-sidebar-flowbite>
             @endcan
 
+            @can('products.masive')
+            <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('products.masive') }}"
+                :active="request()->routeIs('products.masive')" title="Productos Masivos">
+                <x-sistem.icons.for-icons-app icon="product" />
+            </x-sistem.navlinks.navlink-sidebar-flowbite>
+            @endcan
+
             @can('products.price')
             <x-sistem.navlinks.navlink-sidebar-flowbite href="{{ route('products.price') }}"
                 :active="request()->routeIs('products.price')" title="Precios Masivos">

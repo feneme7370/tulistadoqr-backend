@@ -28,7 +28,7 @@
     
               <div>
                 <x-pages.forms.label-form for="level_id" value="{{ __('Categoria General') }}" />
-                <x-pages.forms.select-form wire:model.live="level_id" id="level_id" value_placeholder="-- Seleccionar Categorias --">
+                <x-pages.forms.select-form wire:model="level_id" id="level_id" value_placeholder="-- Seleccionar Categorias --">
                   @foreach ($levels as $item)
                       <option value="{{$item->id}}">{{$item->name}}</option>
                   @endforeach

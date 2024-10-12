@@ -72,6 +72,7 @@ Route::middleware([
     Route::get('/levels', LevelIndex::class)->middleware('can:levels.index')->name('levels.index');
     Route::get('/stocks', StockIndex::class)->middleware('can:stocks.index')->name('stocks.index');
 
+    Route::get('/products_masive', ProductCreateMasive::class)->middleware('can:products.masive')->name('products.masive');
     Route::get('/products', ProductIndex::class)->middleware('can:products.index')->name('products.index');
     Route::get('/products_price', ProductPrice::class)->middleware('can:products.price')->name('products.price');
     Route::get('/suggestions', SuggestionIndex::class)->middleware('can:suggestions.index')->name('suggestions.index');

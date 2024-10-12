@@ -92,6 +92,7 @@ class ProductCreateMasive extends Component
                 'slug' => $this->slug,
                 'price_original' => $this->price_original,
                 'description' => $this->description,
+                'status' => $this->status,
                 'category_id' => $this->category_id,
                 'user_id' => $this->user_id,
                 'company_id' => $this->company_id,

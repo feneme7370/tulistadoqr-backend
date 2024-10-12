@@ -104,7 +104,6 @@ class CategoryIndex extends Component
         $membershipNumber = auth()->user()->company->membership->category;
 
         if($amount >= $membershipNumber){
-            session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' categorias');
             $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' categorias');
             return true;
         }

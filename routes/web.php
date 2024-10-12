@@ -23,6 +23,7 @@ use App\Http\Controllers\Page\GuestController;
 use App\Livewire\Page\ClientIndex;
 use App\Livewire\Page\OrderDetail;
 use App\Livewire\Page\OrderSale;
+use App\Livewire\Page\ProductCreateMasive;
 use App\Livewire\Page\StockIndex;
 
 /*
@@ -70,6 +71,7 @@ Route::middleware([
     Route::get('/categories', CategoryIndex::class)->middleware('can:categories.index')->name('categories.index');
     Route::get('/levels', LevelIndex::class)->middleware('can:levels.index')->name('levels.index');
     Route::get('/stocks', StockIndex::class)->middleware('can:stocks.index')->name('stocks.index');
+
     Route::get('/products', ProductIndex::class)->middleware('can:products.index')->name('products.index');
     Route::get('/products_price', ProductPrice::class)->middleware('can:products.price')->name('products.price');
     Route::get('/suggestions', SuggestionIndex::class)->middleware('can:suggestions.index')->name('suggestions.index');

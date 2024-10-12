@@ -90,7 +90,6 @@ class LevelIndex extends Component
         $amount = count(Level::where('company_id', auth()->user()->company_id)->get());
         $membershipNumber = auth()->user()->company->membership->level;
         if($amount >= $membershipNumber){
-            session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' categorias');
             $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' categorias');
             return true;
         }

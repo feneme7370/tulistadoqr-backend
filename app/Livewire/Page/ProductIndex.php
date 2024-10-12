@@ -136,7 +136,6 @@ class ProductIndex extends Component
         $membershipNumber = auth()->user()->company->membership->product;
 
         if($amount >= $membershipNumber){
-            session()->flash('messageError', 'Excede la cantidad permitida de '.$membershipNumber.' productos');
             $this->dispatch('toastrError', 'Excede la cantidad permitida de '.$membershipNumber.' productos');
             return true;
         }

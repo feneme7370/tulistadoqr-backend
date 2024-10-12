@@ -151,7 +151,7 @@
                         <option value="1">Menu Acordion</option>
                         <option value="2">Listado</option>
                         <option value="3">Secciones</option>
-                        {{-- <option value="4">Tabla</option> --}}
+                        <option value="4">Carta</option>
                     </x-pages.forms.select-form>
                     <x-pages.forms.input-error for="type_menu" />
                 </div>
